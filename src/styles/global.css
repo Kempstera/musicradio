@@ -63,14 +63,11 @@
 
 /* 区域强调色 */
 [data-region='europe'] { --region: var(--gold); }
-[data-region='east-asia'] { --region: var(--wine); }
+[data-region='asia'] { --region: var(--wine); }
 [data-region='north-america'] { --region: var(--indigo); }
 [data-region='south-america'] { --region: var(--verde); }
 [data-region='oceania'] { --region: #2f7d8f; }
 [data-region='africa'] { --region: var(--terra); }
-[data-region='west-asia'] { --region: #b06f1f; }
-[data-region='south-asia'] { --region: #8a6a3a; }
-[data-region='southeast-asia'] { --region: #4f8a5f; }
 
 /* --------------------------------------------------------------------------
    基础
@@ -215,6 +212,45 @@ p {
 .site-nav a.is-active {
   color: var(--ink);
   background: var(--gold-pale);
+}
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem 0.55rem 0.28rem 0.7rem;
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: color-mix(in srgb, var(--paper) 60%, transparent);
+}
+.lang-switcher:hover {
+  border-color: var(--gold);
+  color: var(--ink);
+}
+.lang-switcher svg {
+  flex: none;
+  opacity: 0.75;
+}
+.lang-switcher select {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+  padding: 0.1rem 0.1rem 0.1rem 0;
+  max-width: 96px;
+}
+.lang-switcher select:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* --------------------------------------------------------------------------
@@ -417,6 +453,41 @@ p {
   font-size: 0.75rem;
   color: var(--region, var(--gold-deep));
   letter-spacing: 0.05em;
+}
+
+/* --------------------------------------------------------------------------
+   子区域分组
+   -------------------------------------------------------------------------- */
+.subregion {
+  padding-top: 0.2rem;
+}
+.subregion__head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  padding-bottom: 0.7rem;
+  margin-bottom: 0.9rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+.subregion__title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.subregion__en {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+}
+.subregion__count {
+  margin-left: auto;
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  background: var(--surface-deep);
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
 }
 
 /* --------------------------------------------------------------------------
@@ -624,6 +695,20 @@ p {
   font-size: 1.15rem;
   margin-bottom: 0.15rem;
 }
+.musician__name--link {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px dashed transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.musician__name--link:hover {
+  color: var(--gold-deep);
+  border-bottom-color: var(--gold-deep);
+}
+.musician__ext {
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+}
 .musician__en {
   font-family: var(--font-display);
   font-style: italic;
@@ -702,6 +787,17 @@ p {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.radio-card__name--link {
+  display: inline-block;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px dashed transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.radio-card__name--link:hover {
+  color: var(--gold-deep);
+  border-bottom-color: var(--gold-deep);
+}
 .radio-card__meta {
   display: flex;
   flex-wrap: wrap;
@@ -716,6 +812,13 @@ p {
   background: var(--gold-pale);
   color: var(--gold-deep);
   font-size: 0.72rem;
+}
+.radio-tag--muted {
+  background: var(--surface-deep);
+  color: var(--ink-faint);
+}
+.radio-card--descriptive {
+  opacity: 0.88;
 }
 .radio-card__live {
   display: inline-flex;
@@ -1044,6 +1147,23 @@ p {
   flex-wrap: wrap;
   font-size: 0.8rem;
   color: var(--ink-faint);
+}
+.visitor-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--ink-faint);
+}
+.visitor-counter b {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.visitor-counter__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--verde);
+  box-shadow: 0 0 0 3px rgba(61, 148, 110, 0.15);
 }
 
 /* --------------------------------------------------------------------------

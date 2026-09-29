@@ -1,6 +1,7 @@
 ---
 import { SITE_NAME, SITE_SLOGAN, SITE_DESCRIPTION } from '../lib/config';
 import { allCountries } from '../data';
+import VisitorCounter from './VisitorCounter.tsx';
 ---
 
 <footer class="site-footer">
@@ -14,23 +15,24 @@ import { allCountries } from '../data';
         </p>
       </div>
       <div>
-        <h4>巡礼</h4>
+        <h4 data-i18n="footerExplore">巡礼</h4>
         <ul>
-          <li><a href="/#regions">按大洲浏览</a></li>
-          <li><a href="/message-board">留言板</a></li>
+          <li><a href="/#regions" data-i18n="footerBrowse">按大洲浏览</a></li>
+          <li><a href="/message-board" data-i18n="navGuestbook">留言板</a></li>
         </ul>
       </div>
       <div>
-        <h4>关于</h4>
+        <h4 data-i18n="footerAbout">关于</h4>
         <ul>
-          <li><a href="/#regions">音乐电台索引</a></li>
-          <li><a href="/">返回首页</a></li>
+          <li><a href="/#regions" data-i18n="footerIndex">音乐电台索引</a></li>
+          <li><a href="/" data-i18n="footerHome">返回首页</a></li>
         </ul>
       </div>
     </div>
     <div class="site-footer__fine">
       <span>© {new Date().getFullYear()} {SITE_NAME} · {SITE_SLOGAN}</span>
-      <span>电台流地址来自公开的 radio-browser 数据库，版权归各电台所有。</span>
+      <span data-i18n="footerRadioNote">电台流地址来自公开的 radio-browser 数据库，版权归各电台所有。</span>
+      <VisitorCounter client:load />
     </div>
   </div>
 </footer>

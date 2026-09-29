@@ -1,10 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
-import { REGIONS } from '../lib/country';
-import { allCountries, getRegionCounts } from '../data';
-import { SITE_SLOGAN } from '../lib/config';
-
-const counts = getRegionCounts();
+import { CONTINENTS, SUBREGIONS, CONTINENT_MAP } from '../lib/country';
+import { allCountries, countriesByContinent, countriesBySubregion } from '../data';
 ---
 
 <Base>
@@ -13,38 +10,39 @@ const counts = getRegionCounts();
       <div class="wave" aria-hidden="true">
         <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
       </div>
-      <div class="hero__eyebrow">{SITE_SLOGAN}</div>
-      <h1 class="hero__title">如听仙乐耳暂明</h1>
-      <div class="hero__subtitle">World Music Radio · 一场横跨七大洲的耳朵之旅</div>
-      <p class="hero__desc">
-        我们搜罗世界各国的音乐电台，以国别为纲，带你巡礼古典的庄严、爵士的自由、流行的炽热与民族音乐的千年回响。
+      <div class="hero__eyebrow" data-i18n="sloganAttr">白居易《琵琶行》</div>
+      <h1 class="hero__title" data-i18n="slogan">如听仙乐耳暂明</h1>
+      <div class="hero__subtitle" data-i18n="subtitle">World Music Radio · 一场横跨六大洲的耳朵之旅</div>
+      <p class="hero__desc" data-i18n="heroDesc">
+        我们搜罗世界各国的音乐电台，以大洲为纲、子区域为目，带你巡礼古典的庄严、爵士的自由、流行的炽热与民族音乐的千年回响。
         点开一个国家，让它的历史人文、音乐家与电台流，在同一片声景里与你相遇。
       </p>
       <div class="hero__actions">
-        <a class="btn btn--primary" href="#regions">开始巡礼</a>
-        <a class="btn btn--ghost" href="/message-board">去留言板</a>
+        <a class="btn btn--primary" href="#continents" data-i18n="start">开始巡礼</a>
+        <a class="btn btn--ghost" href="/message-board" data-i18n="guestbookBtn">去留言板</a>
       </div>
     </div>
   </section>
 
-  <section class="section" id="regions">
+  <section class="section" id="continents">
     <div class="container">
       <div class="section__head">
         <div>
-          <div class="section__kicker">Explore</div>
-          <h2 class="section__title">按大洲巡礼</h2>
+          <div class="section__kicker" data-i18n="exploreKicker">Explore</div>
+          <h2 class="section__title" data-i18n="exploreTitle">按大洲巡礼</h2>
         </div>
-        <p style="color: var(--ink-faint);">共 {allCountries.length} 个国家与地区</p>
+        <p style="color: var(--ink-faint);">共 {allCountries.length} <span data-i18n="exploreCount">个国家与地区</span></p>
       </div>
       <div class="regions">
         {
-          REGIONS.map((r) => {
-            const n = counts.find((c) => c.region === r.id)?.count ?? 0;
+          CONTINENTS.map((c) => {
+            const n = countriesByContinent(c.id).length;
+            const subs = SUBREGIONS.filter((s) => s.continent === c.id);
             return (
-              <a class="region-card" href={`#${r.id}`} data-region={r.id}>
-                <span class="region-card__name">{r.label}</span>
-                <span class="region-card__en">{r.en}</span>
-                <span class="region-card__count">{n} 个国家/地区{r.note ? ` · ${r.note}` : ''}</span>
+              <a class="region-card" href={`#${c.id}`} data-region={c.id}>
+                <span class="region-card__name">{c.label}</span>
+                <span class="region-card__en">{c.en}</span>
+                <span class="region-card__count">{n} 个国家/地区 · {subs.length} 个分区</span>
               </a>
             );
           })
@@ -54,32 +52,49 @@ const counts = getRegionCounts();
   </section>
 
   {
-    REGIONS.map((r) => {
-      const list = allCountries.filter((c) => c.region === r.id);
-      if (!list.length) return null;
+    CONTINENTS.map((c) => {
+      const continentCountries = countriesByContinent(c.id);
+      if (!continentCountries.length) return null;
+      const subs = SUBREGIONS.filter((s) => s.continent === c.id);
       return (
-        <section class="section" id={r.id} data-region={r.id} style="padding-top: 2rem;">
+        <section class="section" id={c.id} data-region={c.id} style="padding-top: 1.6rem;">
           <div class="container">
             <div class="section__head">
               <div>
-                <div class="section__kicker">{r.en}</div>
-                <h2 class="section__title">{r.label}</h2>
+                <div class="section__kicker">{c.en}</div>
+                <h2 class="section__title">{c.label}</h2>
               </div>
-              <a href={`/countries/${list[0].slug}`} class="btn btn--ghost btn--sm">探索 →</a>
+              <span style="color: var(--ink-faint);">{continentCountries.length} 个国家/地区</span>
             </div>
-            <div class="country-grid">
-              {
-                list.map((c) => (
-                  <a class="country-card" href={`/countries/${c.slug}`} data-region={r.id}>
-                    <span class="country-card__flag" aria-hidden="true">{c.flag}</span>
-                    <div class="country-card__name">{c.name}</div>
-                    <div class="country-card__en">{c.nameEn}</div>
-                    <p class="country-card__intro">{c.intro}</p>
-                    <span class="country-card__more">收听电台 →</span>
-                  </a>
-                ))
-              }
-            </div>
+
+            {
+              subs.map((s) => {
+                const list = countriesBySubregion(s.id);
+                if (!list.length) return null;
+                return (
+                  <div class="subregion" style="margin-top: 1.6rem;">
+                    <div class="subregion__head">
+                      <h3 class="subregion__title">{s.label}</h3>
+                      <span class="subregion__en">{s.en}</span>
+                      <span class="subregion__count">{list.length} 国</span>
+                    </div>
+                    <div class="country-grid">
+                      {
+                        list.map((country) => (
+                          <a class="country-card" href={`/countries/${country.slug}`} data-region={c.id}>
+                            <span class="country-card__flag" aria-hidden="true">{country.flag}</span>
+                            <div class="country-card__name">{country.name}</div>
+                            <div class="country-card__en">{country.nameEn}</div>
+                            <p class="country-card__intro">{country.intro}</p>
+                            <span class="country-card__more">收听电台 →</span>
+                          </a>
+                        ))
+                      }
+                    </div>
+                  </div>
+                );
+              })
+            }
           </div>
         </section>
       );

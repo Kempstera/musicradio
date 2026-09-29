@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import RadioPlayer from '../../components/RadioPlayer.tsx';
 import type { Station } from '../../components/RadioPlayer.tsx';
 import { allCountries } from '../../data';
-import { REGION_MAP } from '../../lib/country';
+import { CONTINENT_MAP, SUBREGION_MAP } from '../../lib/country';
 import type { Country } from '../../lib/country';
 import radiosData from '../../data/radios.json';
 
@@ -12,7 +12,8 @@ export function getStaticPaths() {
 }
 
 const { country } = Astro.props as { country: Country };
-const region = REGION_MAP[country.region];
+const continent = CONTINENT_MAP[country.continent];
+const subregion = SUBREGION_MAP[country.subregion];
 const radios = radiosData as Record<string, any[]>;
 
 const fetchedStations: Station[] = (radios[country.iso] || []).map((s, i) => ({
@@ -23,6 +24,7 @@ const fetchedStations: Station[] = (radios[country.iso] || []).map((s, i) => ({
   codec: s.codec,
   bitrate: s.bitrate,
   tags: s.tags,
+  homepage: s.homepage,
 }));
 
 const notablePlayable: Station[] = (country.notableRadios || [])
@@ -34,20 +36,29 @@ const notablePlayable: Station[] = (country.notableRadios || [])
     hls: !!r.hls,
     codec: r.hls ? 'HLS' : 'MP3',
     tags: r.genre,
+    homepage: r.homepage,
   }));
 
 const notableDescriptive = (country.notableRadios || []).filter((r) => !r.url);
 
 const playable = country.radioMode === 'notable-only' ? notablePlayable : [...notablePlayable, ...fetchedStations];
+
+// 音乐家维基百科链接：优先使用手动指定，否则用英文名自动生成英文维基链接
+const musicians = country.musicians.map((m) => ({
+  ...m,
+  wikiUrl:
+    m.wikiUrl || (m.nameEn ? `https://en.wikipedia.org/wiki/${encodeURIComponent(m.nameEn.replace(/\s+/g, '_'))}` : undefined),
+}));
 ---
 
 <Base title={`${country.name} · ${country.nameEn}`} description={country.intro}>
-  <article data-region={country.region}>
+  <article data-region={country.continent}>
     <header class="country-hero">
       <div class="container container--narrow">
         <nav class="breadcrumb" aria-label="面包屑">
           <a href="/">首页</a><span class="sep">/</span>
-          <a href={`/#${country.region}`}>{region.label}</a><span class="sep">/</span>
+          <a href={`/#${country.continent}`}>{continent.label}</a><span class="sep">/</span>
+          <a href={`/#${country.continent}`}>{subregion.label}</a><span class="sep">/</span>
           <span>{country.name}</span>
         </nav>
         <div class="country-hero__flag" aria-hidden="true">{country.flag}</div>
@@ -58,7 +69,7 @@ const playable = country.radioMode === 'notable-only' ? notablePlayable : [...no
           <span class="chip">🗣️ {country.languages.join(' / ')}</span>
           {country.isGroup
             ? <span class="chip">🌍 {country.groupCountries?.join('、')}</span>
-            : <span class="chip">{region.label}</span>}
+            : <span class="chip">{subregion.label}</span>}
         </div>
         <p class="country-hero__intro" style="max-width: 62ch; margin-top: 1.4rem; font-size: 1.05rem; color: var(--ink-soft);">
           {country.intro}
@@ -77,9 +88,15 @@ const playable = country.radioMode === 'notable-only' ? notablePlayable : [...no
 
       <h2 class="section__title" style="margin-top: 2.4rem; font-size: 1.7rem;">音乐家及主要作品</h2>
       <div class="musician-list">
-        {country.musicians.map((m) => (
+        {musicians.map((m) => (
           <div class="musician">
-            <div class="musician__name">{m.name}</div>
+            {m.wikiUrl ? (
+              <a class="musician__name musician__name--link" href={m.wikiUrl} target="_blank" rel="noopener noreferrer" title={`${m.name} · 维基百科`}>
+                {m.name} <span class="musician__ext" aria-hidden="true">↗</span>
+              </a>
+            ) : (
+              <div class="musician__name">{m.name}</div>
+            )}
             {m.nameEn && <div class="musician__en">{m.nameEn}</div>}
             <div class="musician__role">{m.role}</div>
             <div class="musician__desc">{m.desc}</div>
@@ -89,24 +106,31 @@ const playable = country.radioMode === 'notable-only' ? notablePlayable : [...no
 
       <h2 class="section__title" style="margin-top: 2.8rem; font-size: 1.7rem;">主要音乐电台</h2>
 
-      {notableDescriptive.length > 0 && (
-        <div class="radio-grid" style="margin-bottom: 0.6rem;">
-          {notableDescriptive.map((r) => (
-            <div class="radio-card" style="cursor: default;">
-              <div class="radio-card__play" aria-hidden="true" style="background: var(--surface-deep); color: var(--ink-faint); border-color: var(--line);">♪</div>
-              <div class="radio-card__body">
-                <div class="radio-card__name">{r.name}</div>
-                <div class="radio-card__meta">
-                  <span class="radio-tag">{r.genre}</span>
-                </div>
-                {r.note && <div style="font-size: 0.82rem; color: var(--ink-faint); line-height: 1.6; margin-top: 0.4rem;">{r.note}</div>}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      <RadioPlayer client:load stations={playable} countryName={country.name} flag={country.flag} emptyNote={country.radioNote} />
 
-      <RadioPlayer client:load stations={playable} countryName={country.name} flag={country.flag} />
+      {notableDescriptive.length > 0 && (
+        <>
+          <div class="section__kicker" style="margin-top: 2.2rem;">电台简介</div>
+          <p style="color: var(--ink-faint); font-size: 0.85rem; margin: 0.3rem 0 0.8rem;">
+            以下电台暂未收录可直接播放的在线流，仅作简介参考。
+          </p>
+          <div class="radio-grid">
+            {notableDescriptive.map((r) => (
+              <div class="radio-card radio-card--descriptive" style="cursor: default;">
+                <div class="radio-card__play" aria-hidden="true" style="background: var(--surface-deep); color: var(--ink-faint); border-color: var(--line);">📻</div>
+                <div class="radio-card__body">
+                  <div class="radio-card__name">{r.name}</div>
+                  <div class="radio-card__meta">
+                    <span class="radio-tag">{r.genre}</span>
+                    <span class="radio-tag radio-tag--muted">暂无在线流</span>
+                  </div>
+                  {r.note && <div style="font-size: 0.82rem; color: var(--ink-faint); line-height: 1.6; margin-top: 0.4rem;">{r.note}</div>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   </article>
 </Base>

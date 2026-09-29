@@ -9,12 +9,15 @@ export interface Station {
   codec?: string;
   bitrate?: number;
   tags?: string;
+  homepage?: string;
 }
 
 interface Props {
   stations: Station[];
   countryName: string;
   flag?: string;
+  /** 无在线流时的自定义说明 */
+  emptyNote?: string;
 }
 
 function PlayIcon() {
@@ -40,7 +43,7 @@ function Eq() {
   );
 }
 
-export default function RadioPlayer({ stations, countryName, flag }: Props) {
+export default function RadioPlayer({ stations, countryName, flag, emptyNote }: Props) {
   const [currentUrl, setCurrentUrl] = useState<string | null>(null);
   const [playing, setPlaying] = useState<boolean>(false);
 
@@ -57,7 +60,7 @@ export default function RadioPlayer({ stations, countryName, flag }: Props) {
   if (!stations.length) {
     return (
       <p className="empty" style={{ marginTop: '1.4rem' }}>
-        暂未收录该地区的在线电台流，敬请期待。
+        {emptyNote || '暂未收录该地区的在线电台流，敬请期待。'}
       </p>
     );
   }
@@ -86,9 +89,22 @@ export default function RadioPlayer({ stations, countryName, flag }: Props) {
                 {isPlayingNow ? <PauseIcon /> : <PlayIcon />}
               </button>
               <div className="radio-card__body">
-                <div className="radio-card__name" title={s.name}>
-                  {s.name}
-                </div>
+                {s.homepage ? (
+                  <a
+                    className="radio-card__name radio-card__name--link"
+                    href={s.homepage}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={`${s.name} · 访问官网`}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {s.name}
+                  </a>
+                ) : (
+                  <div className="radio-card__name" title={s.name}>
+                    {s.name}
+                  </div>
+                )}
                 <div className="radio-card__meta">
                   {isPlayingNow ? (
                     <span className="radio-card__live">
