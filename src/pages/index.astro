@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import { REGIONS } from '../lib/country';
+import { allCountries, getRegionCounts } from '../data';
+import { SITE_SLOGAN } from '../lib/config';
+
+const counts = getRegionCounts();
+---
+
+<Base>
+  <section class="hero">
+    <div class="container">
+      <div class="wave" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="hero__eyebrow">{SITE_SLOGAN}</div>
+      <h1 class="hero__title">如听仙乐耳暂明</h1>
+      <div class="hero__subtitle">World Music Radio · 一场横跨七大洲的耳朵之旅</div>
+      <p class="hero__desc">
+        我们搜罗世界各国的音乐电台，以国别为纲，带你巡礼古典的庄严、爵士的自由、流行的炽热与民族音乐的千年回响。
+        点开一个国家，让它的历史人文、音乐家与电台流，在同一片声景里与你相遇。
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#regions">开始巡礼</a>
+        <a class="btn btn--ghost" href="/message-board">去留言板</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="regions">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <div class="section__kicker">Explore</div>
+          <h2 class="section__title">按大洲巡礼</h2>
+        </div>
+        <p style="color: var(--ink-faint);">共 {allCountries.length} 个国家与地区</p>
+      </div>
+      <div class="regions">
+        {
+          REGIONS.map((r) => {
+            const n = counts.find((c) => c.region === r.id)?.count ?? 0;
+            return (
+              <a class="region-card" href={`#${r.id}`} data-region={r.id}>
+                <span class="region-card__name">{r.label}</span>
+                <span class="region-card__en">{r.en}</span>
+                <span class="region-card__count">{n} 个国家/地区{r.note ? ` · ${r.note}` : ''}</span>
+              </a>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    REGIONS.map((r) => {
+      const list = allCountries.filter((c) => c.region === r.id);
+      if (!list.length) return null;
+      return (
+        <section class="section" id={r.id} data-region={r.id} style="padding-top: 2rem;">
+          <div class="container">
+            <div class="section__head">
+              <div>
+                <div class="section__kicker">{r.en}</div>
+                <h2 class="section__title">{r.label}</h2>
+              </div>
+              <a href={`/countries/${list[0].slug}`} class="btn btn--ghost btn--sm">探索 →</a>
+            </div>
+            <div class="country-grid">
+              {
+                list.map((c) => (
+                  <a class="country-card" href={`/countries/${c.slug}`} data-region={r.id}>
+                    <span class="country-card__flag" aria-hidden="true">{c.flag}</span>
+                    <div class="country-card__name">{c.name}</div>
+                    <div class="country-card__en">{c.nameEn}</div>
+                    <p class="country-card__intro">{c.intro}</p>
+                    <span class="country-card__more">收听电台 →</span>
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+      );
+    })
+  }
+</Base>

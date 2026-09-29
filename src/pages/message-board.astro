@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import MessageBoard from '../components/MessageBoard.tsx';
+---
+
+<Base title="留言板" description="分享你的听乐感悟——世界音乐电台巡礼留言板">
+  <section class="section" style="padding-top: clamp(2.5rem, 6vw, 4rem);">
+    <div class="container container--narrow">
+      <div class="section__head">
+        <div>
+          <div class="section__kicker">Guestbook</div>
+          <h1 class="section__title">留言板</h1>
+          <p style="color: var(--ink-soft); margin-top: 0.5rem;">
+            分享你此刻正在收听的国度与旋律，也看看其他乐友的足迹。
+          </p>
+        </div>
+      </div>
+      <MessageBoard client:load />
+    </div>
+  </section>
+</Base>

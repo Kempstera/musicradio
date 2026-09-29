@@ -1,0 +1,36 @@
+---
+import { SITE_NAME, SITE_SLOGAN, SITE_DESCRIPTION } from '../lib/config';
+import { allCountries } from '../data';
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div>
+        <div class="site-footer__brand">{SITE_NAME}</div>
+        <p>{SITE_DESCRIPTION}</p>
+        <p style="color: var(--ink-faint); font-size: 0.82rem;">
+          已收录 <b>{allCountries.length}</b> 个国家与地区，数百个可在线收听的音乐电台。
+        </p>
+      </div>
+      <div>
+        <h4>巡礼</h4>
+        <ul>
+          <li><a href="/#regions">按大洲浏览</a></li>
+          <li><a href="/message-board">留言板</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>关于</h4>
+        <ul>
+          <li><a href="/#regions">音乐电台索引</a></li>
+          <li><a href="/">返回首页</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__fine">
+      <span>© {new Date().getFullYear()} {SITE_NAME} · {SITE_SLOGAN}</span>
+      <span>电台流地址来自公开的 radio-browser 数据库，版权归各电台所有。</span>
+    </div>
+  </div>
+</footer>
