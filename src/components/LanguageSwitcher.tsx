@@ -6,6 +6,7 @@ import {
   SUBREGION_LABELS,
   getInitialLang,
   saveLang,
+  LANG_CHANGE_EVENT,
 } from '../lib/i18n';
 import type { Lang, Translation } from '../lib/i18n';
 
@@ -120,6 +121,8 @@ function applyLang(lang: Lang) {
   applyUI(lang);
   applyLabels(lang);
   applyContent(lang);
+  // 通知 React 岛组件（AuthWidget/MessageBoard/VisitorCounter）同步切换文案
+  window.dispatchEvent(new CustomEvent(LANG_CHANGE_EVENT, { detail: lang }));
 }
 
 export default function LanguageSwitcher() {

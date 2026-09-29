@@ -1,7 +1,17 @@
 ---
 import { SITE_NAME, SITE_SLOGAN, SITE_DESCRIPTION } from '../lib/config';
 import { allCountries } from '../data';
+import radiosData from '../data/radios.json';
 import VisitorCounter from './VisitorCounter.tsx';
+
+// 统计页面上实际可在线收听的音乐电台总数：
+// = 各国精选可播放电台（notableRadios 带 url）+ 自动采集的在线流（radios.json，notable-only 国家不叠加）
+const radios = radiosData as Record<string, any[]>;
+const totalRadios = allCountries.reduce((sum, c) => {
+  const notable = (c.notableRadios || []).filter((r) => r.url).length;
+  const fetched = c.radioMode === 'notable-only' ? 0 : (radios[c.iso] || []).length;
+  return sum + notable + fetched;
+}, 0);
 ---
 
 <footer class="site-footer">
@@ -11,7 +21,7 @@ import VisitorCounter from './VisitorCounter.tsx';
         <div class="site-footer__brand">{SITE_NAME}</div>
         <p>{SITE_DESCRIPTION}</p>
         <p style="color: var(--ink-faint); font-size: 0.82rem;">
-          <span data-i18n="footerIncluded">已收录</span> <b>{allCountries.length}</b> <span data-i18n="footerStats">个国家与地区，数百个可在线收听的音乐电台。</span>
+          <span data-i18n="footerIncluded">已收录</span> <b>{allCountries.length}</b> <span data-i18n="footerStats">个国家与地区，</span> <b>{totalRadios}</b> <span data-i18n="footerStats2">个可在线收听的音乐电台。</span>
         </p>
       </div>
       <div>
@@ -22,7 +32,10 @@ import VisitorCounter from './VisitorCounter.tsx';
         </ul>
       </div>
       <div>
-        <h4 data-i18n="footerAbout">关于</h4>
+        <details class="footer-about">
+          <summary data-i18n="footerAbout">关于</summary>
+          <p class="footer-about__line" data-i18n="footerAboutLine">跨越时区与语言，将散落在全球的优质电台一一打捞 @Jeff 2026.09</p>
+        </details>
         <ul>
           <li><a href="/#regions" data-i18n="footerIndex">音乐电台索引</a></li>
           <li><a href="/" data-i18n="footerHome">返回首页</a></li>
@@ -31,7 +44,7 @@ import VisitorCounter from './VisitorCounter.tsx';
     </div>
     <div class="site-footer__fine">
       <span>© {new Date().getFullYear()} {SITE_NAME} · {SITE_SLOGAN}</span>
-      <span data-i18n="footerRadioNote">电台流地址来自公开的 radio-browser 数据库，版权归各电台所有。</span>
+      <span data-i18n="footerRadioNote">电台流地址来自公开的互联网数据库，版权归各电台所有。</span>
       <VisitorCounter client:load />
     </div>
   </div>

@@ -87,7 +87,6 @@ export const europe1: Country[] = [
     ],
     notableRadios: [
       { name: 'Ö1', genre: '古典 / 文化', note: '奥地利广播集团 ORF 的文化与古典频道，欧洲最权威的公共文化电台之一。' },
-      { name: 'Radio Stephansdom', genre: '古典 / 宗教', note: '维也纳圣斯蒂芬大教堂电台，专注宗教音乐与古典。' },
     ],
   },
   {

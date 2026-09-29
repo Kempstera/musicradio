@@ -37,6 +37,7 @@ export interface Translation {
   navExplore: string;
   navGuestbook: string;
   footerAbout: string;
+  footerAboutLine: string;
   footerExplore: string;
   footerBrowse: string;
   footerIndex: string;
@@ -44,6 +45,7 @@ export interface Translation {
   footerRadioNote: string;
   footerIncluded: string;
   footerStats: string;
+  footerStats2: string;
   regionUnit: string;
   subregionUnit: string;
   subdivisionUnit: string;
@@ -59,6 +61,39 @@ export interface Translation {
   capitalLabel: string;
   wikiTitle: string;
   radioEmptyFallback: string;
+  // 登录 / 注册
+  authLoginRegister: string;
+  authLogout: string;
+  authClose: string;
+  authWelcome: string;
+  authSubtitle: string;
+  authLogin: string;
+  authRegister: string;
+  authUsername: string;
+  authUsernamePlaceholder: string;
+  authEmail: string;
+  authPassword: string;
+  authPasswordPlaceholder: string;
+  authBusy: string;
+  authRegisterSuccess: string;
+  authLoginSuccess: string;
+  authErrorFallback: string;
+  // 留言板
+  boardLabel: string;
+  boardPlaceholder: string;
+  boardPublishing: string;
+  boardPublish: string;
+  boardLoading: string;
+  boardEmpty: string;
+  boardLoadError: string;
+  boardPostError: string;
+  boardAnonymous: string;
+  boardJustNow: string;
+  boardMinutesAgo: string;
+  boardHoursAgo: string;
+  // 访客计数
+  visitorLabel: string;
+  visitorTitle: string;
 }
 
 const zhCN: Translation = {
@@ -77,13 +112,15 @@ const zhCN: Translation = {
   navExplore: '大洲巡礼',
   navGuestbook: '留言板',
   footerAbout: '关于',
+  footerAboutLine: '跨越时区与语言，将散落在全球的优质电台一一打捞 @Jeff 2026.09',
   footerExplore: '巡礼',
   footerBrowse: '按大洲浏览',
   footerIndex: '音乐电台索引',
   footerHome: '返回首页',
-  footerRadioNote: '电台流地址来自公开的 radio-browser 数据库，版权归各电台所有。',
+  footerRadioNote: '电台流地址来自公开的互联网数据库，版权归各电台所有。',
   footerIncluded: '已收录',
-  footerStats: '个国家与地区，数百个可在线收听的音乐电台。',
+  footerStats: '个国家与地区，',
+  footerStats2: '个可在线收听的音乐电台。',
   regionUnit: '个国家/地区',
   subregionUnit: '国',
   subdivisionUnit: '个分区',
@@ -98,6 +135,36 @@ const zhCN: Translation = {
   capitalLabel: '首都',
   wikiTitle: '维基百科',
   radioEmptyFallback: '暂未收录该地区的在线电台流，敬请期待。',
+  authLoginRegister: '登录 / 注册',
+  authLogout: '退出',
+  authClose: '关闭',
+  authWelcome: '欢迎来到仙乐电台',
+  authSubtitle: '登录后即可在留言板分享你的听乐感悟',
+  authLogin: '登录',
+  authRegister: '注册',
+  authUsername: '昵称（可选）',
+  authUsernamePlaceholder: '你的昵称',
+  authEmail: '邮箱',
+  authPassword: '密码',
+  authPasswordPlaceholder: '至少 6 位',
+  authBusy: '请稍候…',
+  authRegisterSuccess: '注册成功！请前往邮箱查收确认邮件（部分邮箱可能自动登录）。',
+  authLoginSuccess: '登录成功',
+  authErrorFallback: '操作失败，请重试',
+  boardLabel: '写下你的听乐感悟',
+  boardPlaceholder: '你此刻正在听哪一国的音乐？有什么想分享的感受？',
+  boardPublishing: '发布中…',
+  boardPublish: '发布留言',
+  boardLoading: '加载留言中…',
+  boardEmpty: '还没有留言，来做第一个分享的人吧。',
+  boardLoadError: '加载留言失败',
+  boardPostError: '发布失败，请重试',
+  boardAnonymous: '匿名乐友',
+  boardJustNow: '刚刚',
+  boardMinutesAgo: '分钟前',
+  boardHoursAgo: '小时前',
+  visitorLabel: '访客',
+  visitorTitle: '累计访客',
 };
 
 const zhTW: Translation = {
@@ -116,13 +183,15 @@ const zhTW: Translation = {
   navExplore: '大洲巡禮',
   navGuestbook: '留言板',
   footerAbout: '關於',
+  footerAboutLine: '跨越時區與語言，將散落在全球的優質電台一一打撈 @Jeff 2026.09',
   footerExplore: '巡禮',
   footerBrowse: '按大洲瀏覽',
   footerIndex: '音樂電台索引',
   footerHome: '返回首頁',
-  footerRadioNote: '電台流網址來自公開的 radio-browser 資料庫，版權歸各電台所有。',
+  footerRadioNote: '電台流網址來自公開的網際網路資料庫，版權歸各電台所有。',
   footerIncluded: '已收錄',
-  footerStats: '個國家與地區，數百個可線上收聽的音樂電台。',
+  footerStats: '個國家與地區，',
+  footerStats2: '個可線上收聽的音樂電台。',
   regionUnit: '個國家／地區',
   subregionUnit: '國',
   subdivisionUnit: '個分區',
@@ -137,6 +206,36 @@ const zhTW: Translation = {
   capitalLabel: '首都',
   wikiTitle: '維基百科',
   radioEmptyFallback: '暫未收錄該地區的線上電台串流，敬請期待。',
+  authLoginRegister: '登入 / 註冊',
+  authLogout: '登出',
+  authClose: '關閉',
+  authWelcome: '歡迎來到仙樂電台',
+  authSubtitle: '登入後即可在留言板分享你的聽樂感悟',
+  authLogin: '登入',
+  authRegister: '註冊',
+  authUsername: '暱稱（可選）',
+  authUsernamePlaceholder: '你的暱稱',
+  authEmail: '電子郵件',
+  authPassword: '密碼',
+  authPasswordPlaceholder: '至少 6 位',
+  authBusy: '請稍候…',
+  authRegisterSuccess: '註冊成功！請前往電子郵件查收確認郵件（部分郵箱可能自動登入）。',
+  authLoginSuccess: '登入成功',
+  authErrorFallback: '操作失敗，請重試',
+  boardLabel: '寫下你的聽樂感悟',
+  boardPlaceholder: '你此刻正在聽哪一國的音樂？有什麼想分享的感受？',
+  boardPublishing: '發佈中…',
+  boardPublish: '發佈留言',
+  boardLoading: '載入留言中…',
+  boardEmpty: '還沒有留言，來做第一個分享的人吧。',
+  boardLoadError: '載入留言失敗',
+  boardPostError: '發佈失敗，請重試',
+  boardAnonymous: '匿名樂友',
+  boardJustNow: '剛剛',
+  boardMinutesAgo: '分鐘前',
+  boardHoursAgo: '小時前',
+  visitorLabel: '訪客',
+  visitorTitle: '累計訪客',
 };
 
 const en: Translation = {
@@ -155,13 +254,15 @@ const en: Translation = {
   navExplore: 'Continents',
   navGuestbook: 'Guestbook',
   footerAbout: 'About',
+  footerAboutLine: 'Across time zones and languages, gathering the world\'s finest radio stations one by one — @Jeff 2026.09',
   footerExplore: 'Journey',
   footerBrowse: 'Browse by continent',
   footerIndex: 'Radio index',
   footerHome: 'Back to home',
-  footerRadioNote: 'Stream URLs come from the public radio-browser database; all rights belong to the stations.',
+  footerRadioNote: 'Stream URLs come from public internet databases; all rights belong to the stations.',
   footerIncluded: 'Catalogued',
-  footerStats: 'countries and regions, with hundreds of music stations you can listen to online.',
+  footerStats: 'countries and regions, with',
+  footerStats2: 'music stations you can listen to online.',
   regionUnit: 'countries/regions',
   subregionUnit: 'countries',
   subdivisionUnit: 'subregions',
@@ -176,6 +277,36 @@ const en: Translation = {
   capitalLabel: 'Capital',
   wikiTitle: 'Wikipedia',
   radioEmptyFallback: 'No online streams are available for this region yet. Stay tuned.',
+  authLoginRegister: 'Log in / Sign up',
+  authLogout: 'Log out',
+  authClose: 'Close',
+  authWelcome: 'Welcome to World Music Radio',
+  authSubtitle: 'Log in to share your listening reflections on the guestbook',
+  authLogin: 'Log in',
+  authRegister: 'Sign up',
+  authUsername: 'Nickname (optional)',
+  authUsernamePlaceholder: 'Your nickname',
+  authEmail: 'Email',
+  authPassword: 'Password',
+  authPasswordPlaceholder: 'At least 6 characters',
+  authBusy: 'Please wait…',
+  authRegisterSuccess: 'Registered! Please check your email for the confirmation link (some mailboxes may log you in automatically).',
+  authLoginSuccess: 'Logged in successfully',
+  authErrorFallback: 'Something went wrong. Please try again.',
+  boardLabel: 'Share your listening reflections',
+  boardPlaceholder: 'Which country\'s music are you listening to right now? What would you like to share?',
+  boardPublishing: 'Posting…',
+  boardPublish: 'Post message',
+  boardLoading: 'Loading messages…',
+  boardEmpty: 'No messages yet — be the first to share.',
+  boardLoadError: 'Failed to load messages',
+  boardPostError: 'Failed to post. Please try again.',
+  boardAnonymous: 'Anonymous listener',
+  boardJustNow: 'just now',
+  boardMinutesAgo: 'min ago',
+  boardHoursAgo: 'h ago',
+  visitorLabel: 'Visitors',
+  visitorTitle: 'Total visitors',
 };
 
 const cy: Translation = {
@@ -194,13 +325,15 @@ const cy: Translation = {
   navExplore: 'Cyfandiroedd',
   navGuestbook: 'Llyfr ymwelwyr',
   footerAbout: 'Amdanom',
+  footerAboutLine: 'Ar draws parthau amser ac ieithoedd, gan gasglu gorsafoedd radio gorau\'r byd fesul un — @Jeff 2026.09',
   footerExplore: 'Taith',
   footerBrowse: 'Pori yn ôl cyfandir',
   footerIndex: 'Mynegai radio',
   footerHome: 'Yn ôl i\'r hafan',
-  footerRadioNote: 'Daw URLau\'r ffrydiau o gronfa gyhoeddus radio-browser; mae\'r holl hawliau\'n perthyn i\'r gorsafoedd.',
+  footerRadioNote: 'Daw URLau\'r ffrydiau o gronfeydd data cyhoeddus ar y rhyngrwyd; mae\'r holl hawliau\'n perthyn i\'r gorsafoedd.',
   footerIncluded: 'Wedi\'u catalogio',
-  footerStats: 'o wledydd a rhanbarthau, gyda channoedd o orsafoedd cerddoriaeth i wrando arnynt ar-lein.',
+  footerStats: 'o wledydd a rhanbarthau, gyda',
+  footerStats2: 'o orsafoedd cerddoriaeth i wrando arnynt ar-lein.',
   regionUnit: 'gwledydd/rhanbarthau',
   subregionUnit: 'gwledydd',
   subdivisionUnit: 'isranbarth',
@@ -215,6 +348,36 @@ const cy: Translation = {
   capitalLabel: 'Prifddinas',
   wikiTitle: 'Wicipedia',
   radioEmptyFallback: 'Nid oes ffrydiau ar-lein ar gael eto ar gyfer y rhanbarth hwn. Arhoswch am ragor.',
+  authLoginRegister: 'Mewngofnodi / Cofrestru',
+  authLogout: 'Allgofnodi',
+  authClose: 'Cau',
+  authWelcome: 'Croeso i World Music Radio',
+  authSubtitle: 'Mewngofnodwch i rannu eich myfyrdodau gwrando ar y llyfr ymwelwyr',
+  authLogin: 'Mewngofnodi',
+  authRegister: 'Cofrestru',
+  authUsername: 'Llysenw (dewisol)',
+  authUsernamePlaceholder: 'Eich llysenw',
+  authEmail: 'E-bost',
+  authPassword: 'Cyfrinair',
+  authPasswordPlaceholder: 'O leiaf 6 nod',
+  authBusy: 'Arhoswch…',
+  authRegisterSuccess: 'Wedi cofrestru! Gwiriwch eich e-bost am y ddolen gadarnhau (gall rhai blwch post eich mewngofnodi\'n awtomatig).',
+  authLoginSuccess: 'Wedi mewngofnodi\'n llwyddiannus',
+  authErrorFallback: 'Aeth rhywbeth o\'i le. Rhowch gynnig arall arni.',
+  boardLabel: 'Rhannwch eich myfyrdodau gwrando',
+  boardPlaceholder: 'Pa gerddoriaeth gwlad ydych chi\'n gwrando arni ar hyn o bryd? Beth hoffech chi ei rannu?',
+  boardPublishing: 'Yn postio…',
+  boardPublish: 'Postio neges',
+  boardLoading: 'Yn llwytho negeseuon…',
+  boardEmpty: 'Dim negeseuon eto — byddwch y cyntaf i rannu.',
+  boardLoadError: 'Methwyd llwytho\'r negeseuon',
+  boardPostError: 'Methwyd postio. Rhowch gynnig arall arni.',
+  boardAnonymous: 'Gwrandäwr anhysbys',
+  boardJustNow: 'newydd',
+  boardMinutesAgo: 'munud yn ôl',
+  boardHoursAgo: 'awr yn ôl',
+  visitorLabel: 'Ymwelwyr',
+  visitorTitle: 'Cyfanswm ymwelwyr',
 };
 
 const fr: Translation = {
@@ -233,13 +396,15 @@ const fr: Translation = {
   navExplore: 'Continents',
   navGuestbook: 'Livre d\'or',
   footerAbout: 'À propos',
+  footerAboutLine: 'À travers les fuseaux horaires et les langues, rassembler une à une les plus belles radios du monde — @Jeff 2026.09',
   footerExplore: 'Voyage',
   footerBrowse: 'Parcourir par continent',
   footerIndex: 'Index des radios',
   footerHome: 'Retour à l\'accueil',
-  footerRadioNote: 'Les flux proviennent de la base publique radio-browser ; tous les droits appartiennent aux stations.',
+  footerRadioNote: 'Les flux proviennent de bases de données publiques sur Internet ; tous les droits appartiennent aux stations.',
   footerIncluded: 'Répertorié',
-  footerStats: 'pays et régions, avec des centaines de stations musicales à écouter en ligne.',
+  footerStats: 'pays et régions, avec',
+  footerStats2: 'stations musicales à écouter en ligne.',
   regionUnit: 'pays/régions',
   subregionUnit: 'pays',
   subdivisionUnit: 'sous-régions',
@@ -254,6 +419,36 @@ const fr: Translation = {
   capitalLabel: 'Capitale',
   wikiTitle: 'Wikipédia',
   radioEmptyFallback: 'Aucun flux en ligne n\'est encore disponible pour cette région. À bientôt.',
+  authLoginRegister: 'Connexion / Inscription',
+  authLogout: 'Se déconnecter',
+  authClose: 'Fermer',
+  authWelcome: 'Bienvenue sur World Music Radio',
+  authSubtitle: 'Connectez-vous pour partager vos impressions d\'écoute sur le livre d\'or',
+  authLogin: 'Se connecter',
+  authRegister: 'S\'inscrire',
+  authUsername: 'Pseudo (facultatif)',
+  authUsernamePlaceholder: 'Votre pseudo',
+  authEmail: 'E-mail',
+  authPassword: 'Mot de passe',
+  authPasswordPlaceholder: 'Au moins 6 caractères',
+  authBusy: 'Veuillez patienter…',
+  authRegisterSuccess: 'Inscription réussie ! Veuillez vérifier votre e-mail pour le lien de confirmation (certaines boîtes mail peuvent vous connecter automatiquement).',
+  authLoginSuccess: 'Connexion réussie',
+  authErrorFallback: 'Une erreur est survenue. Veuillez réessayer.',
+  boardLabel: 'Partagez vos impressions d\'écoute',
+  boardPlaceholder: 'Quelle musique de quel pays écoutez-vous en ce moment ? Que souhaitez-vous partager ?',
+  boardPublishing: 'Publication…',
+  boardPublish: 'Publier le message',
+  boardLoading: 'Chargement des messages…',
+  boardEmpty: 'Aucun message pour l\'instant — soyez le premier à partager.',
+  boardLoadError: 'Échec du chargement des messages',
+  boardPostError: 'Échec de la publication. Veuillez réessayer.',
+  boardAnonymous: 'Auditeur anonyme',
+  boardJustNow: 'à l\'instant',
+  boardMinutesAgo: 'min',
+  boardHoursAgo: 'h',
+  visitorLabel: 'Visiteurs',
+  visitorTitle: 'Visiteurs au total',
 };
 
 const de: Translation = {
@@ -272,13 +467,15 @@ const de: Translation = {
   navExplore: 'Kontinente',
   navGuestbook: 'Gästebuch',
   footerAbout: 'Über',
+  footerAboutLine: 'Über Zeitzonen und Sprachen hinweg, die schönsten Radiosender der Welt einen nach dem anderen zusammentragen — @Jeff 2026.09',
   footerExplore: 'Reise',
   footerBrowse: 'Nach Kontinent durchsuchen',
   footerIndex: 'Radio-Index',
   footerHome: 'Zurück zur Startseite',
-  footerRadioNote: 'Stream-URLs stammen aus der öffentlichen radio-browser-Datenbank; alle Rechte liegen bei den Sendern.',
+  footerRadioNote: 'Stream-URLs stammen aus öffentlichen Internet-Datenbanken; alle Rechte liegen bei den Sendern.',
   footerIncluded: 'Erfasst',
-  footerStats: 'Länder und Regionen mit Hunderten von online hörbaren Musiksendern.',
+  footerStats: 'Länder und Regionen mit',
+  footerStats2: 'online hörbaren Musiksendern.',
   regionUnit: 'Länder/Regionen',
   subregionUnit: 'Länder',
   subdivisionUnit: 'Subregionen',
@@ -293,6 +490,36 @@ const de: Translation = {
   capitalLabel: 'Hauptstadt',
   wikiTitle: 'Wikipedia',
   radioEmptyFallback: 'Für diese Region sind noch keine Online-Streams verfügbar. Bleiben Sie dran.',
+  authLoginRegister: 'Anmelden / Registrieren',
+  authLogout: 'Abmelden',
+  authClose: 'Schließen',
+  authWelcome: 'Willkommen bei World Music Radio',
+  authSubtitle: 'Melden Sie sich an, um Ihre Höreindrücke im Gästebuch zu teilen',
+  authLogin: 'Anmelden',
+  authRegister: 'Registrieren',
+  authUsername: 'Spitzname (optional)',
+  authUsernamePlaceholder: 'Ihr Spitzname',
+  authEmail: 'E-Mail',
+  authPassword: 'Passwort',
+  authPasswordPlaceholder: 'Mindestens 6 Zeichen',
+  authBusy: 'Bitte warten…',
+  authRegisterSuccess: 'Registrierung erfolgreich! Bitte prüfen Sie Ihre E-Mail für den Bestätigungslink (einige Postfächer melden Sie automatisch an).',
+  authLoginSuccess: 'Erfolgreich angemeldet',
+  authErrorFallback: 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.',
+  boardLabel: 'Teilen Sie Ihre Höreindrücke',
+  boardPlaceholder: 'Welche Musik aus welchem Land hören Sie gerade? Was möchten Sie teilen?',
+  boardPublishing: 'Wird veröffentlicht…',
+  boardPublish: 'Nachricht veröffentlichen',
+  boardLoading: 'Nachrichten werden geladen…',
+  boardEmpty: 'Noch keine Nachrichten — seien Sie der Erste, der etwas teilt.',
+  boardLoadError: 'Nachrichten konnten nicht geladen werden',
+  boardPostError: 'Veröffentlichung fehlgeschlagen. Bitte versuchen Sie es erneut.',
+  boardAnonymous: 'Anonymer Hörer',
+  boardJustNow: 'gerade eben',
+  boardMinutesAgo: 'Min.',
+  boardHoursAgo: 'Std.',
+  visitorLabel: 'Besucher',
+  visitorTitle: 'Besucher insgesamt',
 };
 
 const it: Translation = {
@@ -311,13 +538,15 @@ const it: Translation = {
   navExplore: 'Continenti',
   navGuestbook: 'Libro degli ospiti',
   footerAbout: 'Informazioni',
+  footerAboutLine: 'Attraverso i fusi orari e le lingue, raccogliere una a una le migliori radio del mondo — @Jeff 2026.09',
   footerExplore: 'Viaggio',
   footerBrowse: 'Sfoglia per continente',
   footerIndex: 'Indice delle radio',
   footerHome: 'Torna alla home',
-  footerRadioNote: 'Gli URL dei flussi provengono dal database pubblico radio-browser; tutti i diritti appartengono alle emittenti.',
+  footerRadioNote: 'Gli URL dei flussi provengono da database pubblici su Internet; tutti i diritti appartengono alle emittenti.',
   footerIncluded: 'Catalogati',
-  footerStats: 'paesi e regioni, con centinaia di stazioni musicali ascoltabili online.',
+  footerStats: 'paesi e regioni, con',
+  footerStats2: 'stazioni musicali ascoltabili online.',
   regionUnit: 'paesi/regioni',
   subregionUnit: 'paesi',
   subdivisionUnit: 'sottoregioni',
@@ -332,6 +561,36 @@ const it: Translation = {
   capitalLabel: 'Capitale',
   wikiTitle: 'Wikipedia',
   radioEmptyFallback: 'Non sono ancora disponibili flussi online per questa regione. A presto.',
+  authLoginRegister: 'Accedi / Registrati',
+  authLogout: 'Esci',
+  authClose: 'Chiudi',
+  authWelcome: 'Benvenuto su World Music Radio',
+  authSubtitle: 'Accedi per condividere le tue riflessioni d\'ascolto sul libro degli ospiti',
+  authLogin: 'Accedi',
+  authRegister: 'Registrati',
+  authUsername: 'Soprannome (facoltativo)',
+  authUsernamePlaceholder: 'Il tuo soprannome',
+  authEmail: 'Email',
+  authPassword: 'Password',
+  authPasswordPlaceholder: 'Almeno 6 caratteri',
+  authBusy: 'Attendere…',
+  authRegisterSuccess: 'Registrazione riuscita! Controlla la tua email per il link di conferma (alcune caselle potrebbero accederti automaticamente).',
+  authLoginSuccess: 'Accesso riuscito',
+  authErrorFallback: 'Qualcosa è andato storto. Riprova.',
+  boardLabel: 'Condividi le tue riflessioni d\'ascolto',
+  boardPlaceholder: 'Quale musica di quale paese stai ascoltando adesso? Cosa vorresti condividere?',
+  boardPublishing: 'Pubblicazione…',
+  boardPublish: 'Pubblica messaggio',
+  boardLoading: 'Caricamento messaggi…',
+  boardEmpty: 'Ancora nessun messaggio — sii il primo a condividere.',
+  boardLoadError: 'Impossibile caricare i messaggi',
+  boardPostError: 'Pubblicazione non riuscita. Riprova.',
+  boardAnonymous: 'Ascoltatore anonimo',
+  boardJustNow: 'adesso',
+  boardMinutesAgo: 'min fa',
+  boardHoursAgo: 'h fa',
+  visitorLabel: 'Visitatori',
+  visitorTitle: 'Visitatori totali',
 };
 
 const es: Translation = {
@@ -350,13 +609,15 @@ const es: Translation = {
   navExplore: 'Continentes',
   navGuestbook: 'Libro de visitas',
   footerAbout: 'Acerca de',
+  footerAboutLine: 'A través de husos horarios e idiomas, reuniendo una a una las mejores emisoras del mundo — @Jeff 2026.09',
   footerExplore: 'Viaje',
   footerBrowse: 'Explorar por continente',
   footerIndex: 'Índice de emisoras',
   footerHome: 'Volver al inicio',
-  footerRadioNote: 'Las URL de los flujos provienen de la base de datos pública radio-browser; todos los derechos pertenecen a las emisoras.',
+  footerRadioNote: 'Las URL de los flujos provienen de bases de datos públicas de Internet; todos los derechos pertenecen a las emisoras.',
   footerIncluded: 'Catalogado',
-  footerStats: 'países y regiones, con cientos de emisoras musicales para escuchar en línea.',
+  footerStats: 'países y regiones, con',
+  footerStats2: 'emisoras musicales para escuchar en línea.',
   regionUnit: 'países/regiones',
   subregionUnit: 'países',
   subdivisionUnit: 'subregiones',
@@ -371,6 +632,36 @@ const es: Translation = {
   capitalLabel: 'Capital',
   wikiTitle: 'Wikipedia',
   radioEmptyFallback: 'Aún no hay flujos en línea disponibles para esta región. Próximamente.',
+  authLoginRegister: 'Iniciar sesión / Registrarse',
+  authLogout: 'Cerrar sesión',
+  authClose: 'Cerrar',
+  authWelcome: 'Bienvenido a World Music Radio',
+  authSubtitle: 'Inicia sesión para compartir tus reflexiones de escucha en el libro de visitas',
+  authLogin: 'Iniciar sesión',
+  authRegister: 'Registrarse',
+  authUsername: 'Apodo (opcional)',
+  authUsernamePlaceholder: 'Tu apodo',
+  authEmail: 'Correo electrónico',
+  authPassword: 'Contraseña',
+  authPasswordPlaceholder: 'Al menos 6 caracteres',
+  authBusy: 'Espere…',
+  authRegisterSuccess: '¡Registro completado! Revisa tu correo para el enlace de confirmación (algunos buzones pueden iniciar sesión automáticamente).',
+  authLoginSuccess: 'Sesión iniciada correctamente',
+  authErrorFallback: 'Algo salió mal. Inténtalo de nuevo.',
+  boardLabel: 'Comparte tus reflexiones de escucha',
+  boardPlaceholder: '¿Qué música de qué país estás escuchando ahora? ¿Qué te gustaría compartir?',
+  boardPublishing: 'Publicando…',
+  boardPublish: 'Publicar mensaje',
+  boardLoading: 'Cargando mensajes…',
+  boardEmpty: 'Aún no hay mensajes — sé el primero en compartir.',
+  boardLoadError: 'No se pudieron cargar los mensajes',
+  boardPostError: 'No se pudo publicar. Inténtalo de nuevo.',
+  boardAnonymous: 'Oyente anónimo',
+  boardJustNow: 'ahora mismo',
+  boardMinutesAgo: 'min',
+  boardHoursAgo: 'h',
+  visitorLabel: 'Visitantes',
+  visitorTitle: 'Visitantes totales',
 };
 
 export const TRANSLATIONS: Record<Lang, Translation> = {
@@ -479,4 +770,21 @@ export function getInitialLang(): Lang {
 
 export function saveLang(lang: Lang) {
   if (typeof window !== 'undefined') window.localStorage.setItem(STORAGE_KEY, lang);
+}
+
+// 语言切换事件名：LanguageSwitcher 切换后派发，供 React 岛组件同步更新文案
+export const LANG_CHANGE_EVENT = 'mr:lang-changed';
+
+/** 读取当前生效语言：优先 DOM 上的 lang 属性，其次 localStorage，最后默认 zh-CN */
+export function getCurrentLang(): Lang {
+  if (typeof document !== 'undefined') {
+    const dom = document.documentElement.getAttribute('lang') as Lang | null;
+    if (dom && dom in TRANSLATIONS) return dom;
+  }
+  return getInitialLang();
+}
+
+/** 取某语言文案（缺失时回退 zh-CN） */
+export function getTranslation(lang: Lang): Translation {
+  return TRANSLATIONS[lang] || TRANSLATIONS['zh-CN'];
 }

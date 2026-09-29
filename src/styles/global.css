@@ -1148,6 +1148,49 @@ p {
   font-size: 0.8rem;
   color: var(--ink-faint);
 }
+
+/* 关于：可展开的文字链接（details/summary），点开后仍在页面底部 */
+.footer-about summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  color: var(--gold-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  margin-bottom: 0.9rem;
+  user-select: none;
+}
+.footer-about summary::-webkit-details-marker {
+  display: none;
+}
+.footer-about summary::after {
+  content: "▾";
+  font-size: 0.72rem;
+  color: var(--gold-deep);
+  transition: transform 0.2s ease;
+}
+.footer-about[open] summary::after {
+  transform: rotate(180deg);
+}
+.footer-about summary:hover {
+  color: var(--vermilion);
+}
+.footer-about summary:hover::after {
+  color: var(--vermilion);
+}
+.footer-about__line {
+  margin: 0 0 1.1rem;
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  max-width: 46ch;
+}
 .visitor-counter {
   display: inline-flex;
   align-items: center;

@@ -87,17 +87,6 @@
       "tags": "",
       "votes": 1707,
       "countrycode": "AL"
-    },
-    {
-      "name": "RADIO MARIA ALBANIA",
-      "url": "http://dreamsiteradiocp2.com:8028/stream",
-      "homepage": "https://www.radiomaria.al/",
-      "codec": "AAC+",
-      "bitrate": 32,
-      "hls": false,
-      "tags": "catholic,religion",
-      "votes": 1324,
-      "countrycode": "AL"
     }
   ],
   "AD": [
@@ -154,17 +143,6 @@
       "hls": false,
       "tags": "fado,folclore,pimba,pop",
       "votes": 1,
-      "countrycode": "AD"
-    },
-    {
-      "name": "Abdulbasit Abdulsamad",
-      "url": "https://radio.mp3islam.com/listen/abdulbasit/radio.mp3",
-      "homepage": "https://mp3islam.com/",
-      "codec": "AAC",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "",
-      "votes": 100,
       "countrycode": "AD"
     }
   ],
@@ -1971,17 +1949,6 @@
       "countrycode": "IS"
     },
     {
-      "name": "Radio Bodun 105.5 Reykjavik",
-      "url": "http://radio.bodun.is:8000/stream",
-      "homepage": "http://tunein.com/radio/Utvarp-Bodun-1055-s102576/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "religion,reykjavik",
-      "votes": 100,
-      "countrycode": "IS"
-    },
-    {
       "name": "Apparatid",
       "url": "http://icecast.365net.is:8000/orbApparatid.aac",
       "homepage": "http://spilarinn.is/#apparatid",
@@ -2331,17 +2298,6 @@
   ],
   "LI": [
     {
-      "name": "Abdulbasit Abdulsamad",
-      "url": "https://radio.mp3islam.com/listen/abdulbasit/radio.mp3",
-      "homepage": "https://mp3islam.com/",
-      "codec": "AAC",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "",
-      "votes": 43,
-      "countrycode": "LI"
-    },
-    {
       "name": "Radio Vaterland",
       "url": "https://radiostream.radiobutler.com/7e9d5eb6-9249-4c7a-9f1c-6d4b9c7a48a8",
       "homepage": "https://www.vaterland.li/",
@@ -2678,17 +2634,6 @@
       "countrycode": "MT"
     },
     {
-      "name": "RADJU MARIJA MALTA",
-      "url": "http://dreamsiteradiocp.com:8102/stream",
-      "homepage": "https://radjumarija.org/",
-      "codec": "MP3",
-      "bitrate": 32,
-      "hls": false,
-      "tags": "catholic,christian,religion,talk",
-      "votes": 296,
-      "countrycode": "MT"
-    },
-    {
       "name": "Magic",
       "url": "https://s46.myradiostream.com:6076/stream",
       "homepage": "https://magic.mt/",
@@ -2697,17 +2642,6 @@
       "hls": false,
       "tags": "",
       "votes": 0,
-      "countrycode": "MT"
-    },
-    {
-      "name": "Abdulbasit Abdulsamad",
-      "url": "https://radio.mp3islam.com/listen/abdulbasit/radio.mp3",
-      "homepage": "https://mp3islam.com/",
-      "codec": "AAC",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "",
-      "votes": 14,
       "countrycode": "MT"
     }
   ],
@@ -2944,17 +2878,6 @@
       "tags": "dance,deep,deep house,house,soulfull",
       "votes": 14,
       "countrycode": "MC"
-    },
-    {
-      "name": "Abdulbasit Abdulsamad",
-      "url": "https://radio.mp3islam.com/listen/abdulbasit/radio.mp3",
-      "homepage": "https://mp3islam.com/",
-      "codec": "AAC",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "",
-      "votes": 42,
-      "countrycode": "MC"
     }
   ],
   "ME": [
@@ -2989,17 +2912,6 @@
       "hls": false,
       "tags": "dance,electro,house",
       "votes": 131,
-      "countrycode": "ME"
-    },
-    {
-      "name": "Radio Svetigora",
-      "url": "http://svetigoralive.com:8879/;",
-      "homepage": "http://www.svetigora.com/",
-      "codec": "AAC+",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "christian,orthodox,religion",
-      "votes": 509,
       "countrycode": "ME"
     },
     {
@@ -3268,17 +3180,6 @@
       "hls": false,
       "tags": "club,electronic,pop,rock",
       "votes": 427,
-      "countrycode": "MK"
-    },
-    {
-      "name": "Radio Maria Macedonia",
-      "url": "http://dreamsiteradiocp.com:8118/stream",
-      "homepage": "https://www.radiomaria.mk/",
-      "codec": "MP3",
-      "bitrate": 32,
-      "hls": false,
-      "tags": "catholic,religion",
-      "votes": 602,
       "countrycode": "MK"
     },
     {
@@ -3888,17 +3789,6 @@
       "countrycode": "SM"
     },
     {
-      "name": "Abdulbasit Abdulsamad",
-      "url": "https://radio.mp3islam.com/listen/abdulbasit/radio.mp3",
-      "homepage": "https://mp3islam.com/",
-      "codec": "AAC",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "",
-      "votes": 36,
-      "countrycode": "SM"
-    },
-    {
       "name": "Radio San Marino",
       "url": "https://d18ufyp3q60j7u.cloudfront.net/radio-ch01/radio-ch01/chunklist_w213256444.m3u8",
       "homepage": "",
@@ -4120,17 +4010,6 @@
       "hls": false,
       "tags": "cultural,drama,literature,public radio,readings,rtvs,čítanie",
       "votes": 3344,
-      "countrycode": "SK"
-    },
-    {
-      "name": "Rádio Lumen",
-      "url": "http://audio.lumen.sk:8000/live128.mp3",
-      "homepage": "http://www.lumen.sk/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "catholic,christian",
-      "votes": 3311,
       "countrycode": "SK"
     }
   ],
@@ -5094,17 +4973,6 @@
       "tags": "entertainment,pop music",
       "votes": 31,
       "countrycode": "AM"
-    },
-    {
-      "name": "Abdulbasit Abdulsamad",
-      "url": "https://radio.mp3islam.com/listen/abdulbasit/radio.mp3",
-      "homepage": "https://mp3islam.com/",
-      "codec": "AAC",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "",
-      "votes": 51,
-      "countrycode": "AM"
     }
   ],
   "AZ": [
@@ -5567,28 +5435,6 @@
       "hls": false,
       "tags": "middle eastern music,pop",
       "votes": 48839,
-      "countrycode": "IR"
-    },
-    {
-      "name": "Radio Mojdeh",
-      "url": "http://ic2326.c1261.fast-serv.com/rm128",
-      "homepage": "http://www.radiomojdeh.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "adventista,christian,persian",
-      "votes": 24017,
-      "countrycode": "IR"
-    },
-    {
-      "name": "Radio Mojdeh - Iranian Farsi/Persian Christian music and talk",
-      "url": "https://ic2326.c1261.fastserv.com/rm128",
-      "homepage": "https://radiomojdeh.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "christian,music,talk,world",
-      "votes": 12937,
       "countrycode": "IR"
     },
     {
@@ -6323,28 +6169,6 @@
       "countrycode": "MM"
     },
     {
-      "name": "DWG Radio Bumese",
-      "url": "http://server32349.streamplus.de/;?type=http&#038;nocache=227",
-      "homepage": "https://www.streamplus.de/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "christian,gospel",
-      "votes": 3164,
-      "countrycode": "MM"
-    },
-    {
-      "name": "Abdulbasit Abdulsamad",
-      "url": "https://radio.mp3islam.com/listen/abdulbasit/radio.mp3",
-      "homepage": "https://mp3islam.com/",
-      "codec": "AAC",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "",
-      "votes": 479,
-      "countrycode": "MM"
-    },
-    {
       "name": "Cherry FM",
       "url": "https://cherry.akiyaresearch.com:444/stream/89/",
       "homepage": "http://www.cherryfmmym.com/",
@@ -6366,17 +6190,6 @@
       "hls": false,
       "tags": "",
       "votes": 4971,
-      "countrycode": "KH"
-    },
-    {
-      "name": "Abdulbasit Abdulsamad",
-      "url": "https://radio.mp3islam.com/listen/abdulbasit/radio.mp3",
-      "homepage": "https://mp3islam.com/",
-      "codec": "AAC",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "",
-      "votes": 269,
       "countrycode": "KH"
     },
     {
@@ -6437,17 +6250,6 @@
       "countrycode": "LA"
     },
     {
-      "name": "Abdulbasit Abdulsamad",
-      "url": "https://radio.mp3islam.com/listen/abdulbasit/radio.mp3",
-      "homepage": "https://mp3islam.com/",
-      "codec": "AAC",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "",
-      "votes": 36,
-      "countrycode": "LA"
-    },
-    {
       "name": "Toki Pona Radio",
       "url": "https://kute.pona.la/stream/tpr",
       "homepage": "https://kute.pona.la/",
@@ -6472,17 +6274,6 @@
       "countrycode": "BN"
     },
     {
-      "name": "Asyil FM",
-      "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/ASYIK_FMAAC_SC",
-      "homepage": "https://zeno.fm/",
-      "codec": "AAC+",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "islamic",
-      "votes": 138,
-      "countrycode": "BN"
-    },
-    {
       "name": "KRISTALfm",
       "url": "https://play.thestreamtech.com:7038/index.html",
       "homepage": "https://www.kristal.fm/",
@@ -6491,17 +6282,6 @@
       "hls": false,
       "tags": "",
       "votes": 89,
-      "countrycode": "BN"
-    },
-    {
-      "name": "Abdulbasit Abdulsamad",
-      "url": "https://radio.mp3islam.com/listen/abdulbasit/radio.mp3",
-      "homepage": "https://mp3islam.com/",
-      "codec": "AAC",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "",
-      "votes": 33,
       "countrycode": "BN"
     }
   ],
@@ -6537,17 +6317,6 @@
       "hls": false,
       "tags": "avant-garde,bebop,big band,bop,combos,contemporary,contemporary jazz,cool,cool jazz,free jazz,fusion,hard bop,hd,mainstream,mainstream jazz,modern,modern big band,post-bop,straight-ahead,walm,west coast",
       "votes": 182548,
-      "countrycode": "US"
-    },
-    {
-      "name": "Christmas Vinyl HD",
-      "url": "https://icecast.walmradio.com:8443/christmas",
-      "homepage": "https://walmradio.com/christmas",
-      "codec": "MP3",
-      "bitrate": 320,
-      "hls": false,
-      "tags": "christian,christmas,easy listening,hd,holiday,otr,seasonal,vintage,vinyl,walm",
-      "votes": 169033,
       "countrycode": "US"
     },
     {
@@ -7616,17 +7385,6 @@
       "countrycode": "EC"
     },
     {
-      "name": "RADIO MARIA ECUADOR",
-      "url": "http://dreamsiteradiocp4.com:8010/stream",
-      "homepage": "http://www.radiomariaecuador.org/",
-      "codec": "AAC+",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "catholic,religion,talk",
-      "votes": 2771,
-      "countrycode": "EC"
-    },
-    {
       "name": "La tukka Ec",
       "url": "http://grupomundodigital.com:8673/live",
       "homepage": "http://latukka.com/",
@@ -7649,17 +7407,6 @@
       "countrycode": "EC"
     },
     {
-      "name": "Radio Onda Positiva 94.1 FM",
-      "url": "https://streamingecuador.net:8011/radioondapositiva",
-      "homepage": "https://radioondapositiva.com/",
-      "codec": "AAC+",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "latin music,merengue,music,musica latina,musica romantica,news,religion,salsa,urban music",
-      "votes": 1555,
-      "countrycode": "EC"
-    },
-    {
       "name": "JC La Bruja",
       "url": "http://s7.yesstreaming.net:8040/stream?1655753305283",
       "homepage": "http://www.jcradio.com.ec/",
@@ -7679,17 +7426,6 @@
       "hls": false,
       "tags": "music,musica,news,noticias",
       "votes": 1168,
-      "countrycode": "EC"
-    },
-    {
-      "name": "HCJB La Voz de los Andes 89.3 FM",
-      "url": "https://streamingecuador.net:8287/hcjb",
-      "homepage": "http://radiohcjb.org/",
-      "codec": "AAC+",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "christian,christian music,cristiana,music,musica cristiana,news,noticias,radio cristiana",
-      "votes": 1184,
       "countrycode": "EC"
     },
     {
@@ -7862,17 +7598,6 @@
       "countrycode": "PY"
     },
     {
-      "name": "RADIO MARIA PARAGUAY",
-      "url": "http://dreamsiteradiocp.com:8090/stream",
-      "homepage": "http://radiomaria.org.py/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "catholic,religion,talk",
-      "votes": 397,
-      "countrycode": "PY"
-    },
-    {
       "name": "Radio Arasuncion",
       "url": "https://stream.radiaura.net/station-2ab200ee-b166-415a-b8df-7b20c6a37ff9",
       "homepage": "https://radiaura.net/arasuncion",
@@ -8042,17 +7767,6 @@
       "countrycode": "NZ"
     },
     {
-      "name": "Wandering Sheep Radio - Christian Smooth Jazz",
-      "url": "http://radio.wanderingsheep.tv:8021/christianjazz",
-      "homepage": "https://wsradio.net/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "christian,smooth jazz",
-      "votes": 965,
-      "countrycode": "NZ"
-    },
-    {
       "name": "Sleep Radio",
       "url": "http://65.109.81.84:9851/stream",
       "homepage": "https://www.sleepradio.co.nz/",
@@ -8105,17 +7819,6 @@
       "hls": false,
       "tags": "chinese,culture,information,lifestyle,music,new zealand",
       "votes": 489,
-      "countrycode": "NZ"
-    },
-    {
-      "name": "Wandering Sheep Radio - Jazz Cafe",
-      "url": "http://radio.wanderingsheep.tv:8000/jazzcafe",
-      "homepage": "http://wsradio.net/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "christian,smooth jazz",
-      "votes": 470,
       "countrycode": "NZ"
     },
     {
@@ -8321,17 +8024,6 @@
   ],
   "west-africa": [
     {
-      "name": "RADIO MARIA TOGO",
-      "url": "http://dreamsiteradiocp.com:8050/stream",
-      "homepage": "http://www.radiomaria.tg/",
-      "codec": "MP3",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "catholic,catolica,christian,religion,religious,talk",
-      "votes": 7378,
-      "countrycode": "TG"
-    },
-    {
       "name": "RTS 92.5 RSI",
       "url": "https://10gb1.acangroup.org:8000/rsi",
       "homepage": "https://www.rts.sn/",
@@ -8488,17 +8180,6 @@
       "countrycode": "RW"
     },
     {
-      "name": "RADIO MARIA UGANDA",
-      "url": "http://dreamsiteradiocp.com:8052/stream",
-      "homepage": "http://www.radiomaria.ug/",
-      "codec": "MP3",
-      "bitrate": 48,
-      "hls": false,
-      "tags": "catholic,religion,talk",
-      "votes": 5500,
-      "countrycode": "UG"
-    },
-    {
       "name": "Sheger FM 102.1",
       "url": "https://stream.zenolive.com/y91n1vtbaw5tv",
       "homepage": "https://www.shegerfm.com/",
@@ -8508,17 +8189,6 @@
       "tags": "",
       "votes": 5227,
       "countrycode": "ET"
-    },
-    {
-      "name": "RADIO MARIA TANZANIA",
-      "url": "http://dreamsiteradiocp2.com:8034/stream",
-      "homepage": "http://www.radiomaria.co.tz/",
-      "codec": "AAC+",
-      "bitrate": 32,
-      "hls": false,
-      "tags": "catholic,religion,talk",
-      "votes": 4849,
-      "countrycode": "TZ"
     },
     {
       "name": "East Africa Radio FM",
@@ -8563,17 +8233,6 @@
       "tags": "",
       "votes": 4216,
       "countrycode": "TZ"
-    },
-    {
-      "name": "RADIO MARIA RWANDA",
-      "url": "http://dreamsiteradiocp.com:8044/stream",
-      "homepage": "http://www.radiomaria.rw/",
-      "codec": "AAC+",
-      "bitrate": 32,
-      "hls": false,
-      "tags": "catholic,christian,cristiana,religion,religious,talk",
-      "votes": 4090,
-      "countrycode": "RW"
     }
   ],
   "central-africa": [
@@ -8586,17 +8245,6 @@
       "hls": false,
       "tags": "",
       "votes": 14885,
-      "countrycode": "CD"
-    },
-    {
-      "name": "RADIO MARIA DEM.REP. CONGO",
-      "url": "http://dreamsiteradiocp.com:8116/stream",
-      "homepage": "http://www.radiomaria.cd/",
-      "codec": "MP3",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "catholic,religion,talk",
-      "votes": 4756,
       "countrycode": "CD"
     },
     {
@@ -8677,28 +8325,6 @@
       "countrycode": "GQ"
     },
     {
-      "name": "Radio Maria Democratic Rep. Congo",
-      "url": "https://dreamsiteradiocp2.com/proxy/rmrepdemcongo?mp=/stream",
-      "homepage": "https://www.radiomaria.cd/",
-      "codec": "AAC+",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "",
-      "votes": 666,
-      "countrycode": "CG"
-    },
-    {
-      "name": "Abdulbasit Abdulsamad",
-      "url": "https://radio.mp3islam.com/listen/abdulbasit/radio.mp3",
-      "homepage": "https://mp3islam.com/",
-      "codec": "AAC",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "",
-      "votes": 257,
-      "countrycode": "CM"
-    },
-    {
       "name": "Mambokadzi DreamRadio",
       "url": "https://cast3.asurahosting.com/proxy/dreamradio/stream.mp3",
       "homepage": "https://www.mambokadzidreamradio.com/",
@@ -8756,17 +8382,6 @@
       "countrycode": "ZA"
     },
     {
-      "name": "Radio Don Bosco",
-      "url": "http://onair15.xdevel.com:9248/;",
-      "homepage": "https://rdb.mg/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "catholic",
-      "votes": 5360,
-      "countrycode": "MG"
-    },
-    {
       "name": "RNA Madagascar",
       "url": "http://drs-live-rna.gasy-internet.info:9001/;",
       "homepage": "http://www.rna-madagascar.com/",
@@ -8822,17 +8437,6 @@
       "countrycode": "ZM"
     },
     {
-      "name": "RADIO MARIA MALAWI",
-      "url": "http://dreamsiteradiocp.com:8040/stream",
-      "homepage": "http://www.radiomaria.mw/",
-      "codec": "AAC+",
-      "bitrate": 32,
-      "hls": false,
-      "tags": "catholic,religion,talk",
-      "votes": 3622,
-      "countrycode": "MW"
-    },
-    {
       "name": "Rádio Fé Angola",
       "url": "http://stream-284.surfernetwork.com/gsndh1xvczetv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJnc25kaDF4dmN6ZXR2IiwiaG9zdCI6InN0cmVhbS0yODQuc3VyZmVybmV0d29yay5jb20iLCJ0bSI6ZmFsc2UsInJ0dGwiOjUsImp0aSI6IjJBRkg2Zm5NVFd5elZMemM2UGZYQ2ciLCJpYXQiOjE3OTA0MjkxMDIsImV4cCI6MTc5MDQyOTE2Mn0.47peskc_qTvqmvKssq2UBke7t9sYwCSB1JGRTgpuljE",
       "homepage": "https://zeno.fm/radio/radio-fe-angola/",
@@ -8841,17 +8445,6 @@
       "hls": false,
       "tags": "religião",
       "votes": 3523,
-      "countrycode": "AO"
-    },
-    {
-      "name": "Ebnézer Rádio",
-      "url": "http://08.stmip.net:10028/;;",
-      "homepage": "http://www.shaloministerio.org/",
-      "codec": "AAC+",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "religion",
-      "votes": 3397,
       "countrycode": "AO"
     },
     {
@@ -8887,6 +8480,5 @@
       "votes": 2542,
       "countrycode": "MW"
     }
-  ],
-  "TL": []
+  ]
 }

@@ -1,9 +1,18 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
+import { getTranslation, getInitialLang, LANG_CHANGE_EVENT } from '../lib/i18n';
+import type { Lang } from '../lib/i18n';
 
 // 访客计数：localStorage 每日去重，向 Supabase visits 表写入一条访问记录，并读取总数
 export default function VisitorCounter() {
   const [count, setCount] = useState<number | null>(null);
+  const [lang, setLang] = useState<Lang>(() => getInitialLang());
+
+  useEffect(() => {
+    const onLang = (e: Event) => setLang((e as CustomEvent<Lang>).detail);
+    window.addEventListener(LANG_CHANGE_EVENT, onLang);
+    return () => window.removeEventListener(LANG_CHANGE_EVENT, onLang);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -34,10 +43,12 @@ export default function VisitorCounter() {
 
   if (count === null) return null;
 
+  const t = getTranslation(lang);
+
   return (
-    <span className="visitor-counter" title="累计访客">
+    <span className="visitor-counter" title={t.visitorTitle}>
       <span className="visitor-counter__dot" aria-hidden="true" />
-      访客 <b>{count.toLocaleString()}</b>
+      {t.visitorLabel} <b>{count.toLocaleString()}</b>
     </span>
   );
 }

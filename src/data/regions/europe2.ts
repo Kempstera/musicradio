@@ -710,6 +710,6 @@ export const europe2: Country[] = [
       { name: '乔瓦尼·帕莱斯特里纳', nameEn: 'Giovanni Pierluigi da Palestrina', role: '作曲家', desc: '文艺复兴复调圣乐的大师，其弥撒曲与经文歌影响西方音乐数百年。' },
       { name: '西斯廷教堂唱诗班', nameEn: 'Sistine Chapel Choir', role: '合唱团', desc: '教皇专属合唱团，世界上历史最悠久的合唱团体之一。' },
     ],
-    notableRadios: [{ name: 'Radio Vaticana', genre: '宗教 / 古典', note: '梵蒂冈广播电台，播报教廷资讯并播放圣乐与古典音乐。' }],
+    radioNote: '梵蒂冈的广播以宗教内容为主，目前暂未收录可在线收听的世俗音乐电台。',
   },
 ];

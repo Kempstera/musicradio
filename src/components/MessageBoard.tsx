@@ -1,5 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
+import { getTranslation, getInitialLang, LANG_CHANGE_EVENT } from '../lib/i18n';
+import type { Lang, Translation } from '../lib/i18n';
 
 interface Message {
   id: string;
@@ -8,12 +10,12 @@ interface Message {
   created_at: string;
 }
 
-function timeAgo(iso: string): string {
+function timeAgo(iso: string, t: Translation): string {
   const d = new Date(iso);
   const diff = (Date.now() - d.getTime()) / 1000;
-  if (diff < 60) return '刚刚';
-  if (diff < 3600) return `${Math.floor(diff / 60)} 分钟前`;
-  if (diff < 86400) return `${Math.floor(diff / 3600)} 小时前`;
+  if (diff < 60) return t.boardJustNow;
+  if (diff < 3600) return `${Math.floor(diff / 60)} ${t.boardMinutesAgo}`;
+  if (diff < 86400) return `${Math.floor(diff / 3600)} ${t.boardHoursAgo}`;
   const ymd = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   return ymd;
 }
@@ -25,6 +27,15 @@ export default function MessageBoard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
+  const [lang, setLang] = useState<Lang>(() => getInitialLang());
+
+  const t = getTranslation(lang);
+
+  useEffect(() => {
+    const onLang = (e: Event) => setLang((e as CustomEvent<Lang>).detail);
+    window.addEventListener(LANG_CHANGE_EVENT, onLang);
+    return () => window.removeEventListener(LANG_CHANGE_EVENT, onLang);
+  }, []);
 
   const load = useCallback(async () => {
     try {
@@ -36,11 +47,11 @@ export default function MessageBoard() {
       if (err) throw err;
       setMessages(data || []);
     } catch (e: any) {
-      setError(e?.message || '加载留言失败');
+      setError(e?.message || t.boardLoadError);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [t.boardLoadError]);
 
   useEffect(() => {
     load();
@@ -57,7 +68,7 @@ export default function MessageBoard() {
     setBusy(true);
     setError('');
     try {
-      const username = user?.user_metadata?.username || user?.email?.split('@')[0] || '匿名乐友';
+      const username = user?.user_metadata?.username || user?.email?.split('@')[0] || t.boardAnonymous;
       const { error: err } = await supabase.from('messages').insert({
         username,
         content: content.trim(),
@@ -66,7 +77,7 @@ export default function MessageBoard() {
       setContent('');
       await load();
     } catch (e: any) {
-      setError(e?.message || '发布失败，请重试');
+      setError(e?.message || t.boardPostError);
     } finally {
       setBusy(false);
     }
@@ -78,29 +89,29 @@ export default function MessageBoard() {
         {user ? (
           <form onSubmit={submit}>
             <div className="field">
-              <label htmlFor="msg-content">写下你的听乐感悟</label>
+              <label htmlFor="msg-content">{t.boardLabel}</label>
               <textarea
                 id="msg-content"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                placeholder="你此刻正在听哪一国的音乐？有什么想分享的感受？"
+                placeholder={t.boardPlaceholder}
                 maxLength={500}
                 required
               />
             </div>
             {error && <div className="notice notice--error">{error}</div>}
             <button className="btn btn--primary" disabled={busy}>
-              {busy ? '发布中…' : '发布留言'}
+              {busy ? t.boardPublishing : t.boardPublish}
             </button>
           </form>
         ) : (
           <div style={{ textAlign: 'center', padding: '1rem 0' }}>
-            <p style={{ color: 'var(--ink-soft)' }}>登录后即可在留言板分享你的听乐感悟</p>
+            <p style={{ color: 'var(--ink-soft)' }}>{t.authSubtitle}</p>
             <button
               className="btn btn--gold"
               onClick={() => window.dispatchEvent(new CustomEvent('open-auth'))}
             >
-              登录 / 注册
+              {t.authLoginRegister}
             </button>
           </div>
         )}
@@ -108,18 +119,18 @@ export default function MessageBoard() {
 
       <div className="message-list">
         {loading ? (
-          <div className="empty"><div className="spinner" />加载留言中…</div>
+          <div className="empty"><div className="spinner" />{t.boardLoading}</div>
         ) : messages.length === 0 ? (
-          <div className="empty">还没有留言，来做第一个分享的人吧。</div>
+          <div className="empty">{t.boardEmpty}</div>
         ) : (
           messages.map((m) => (
             <div className="message" key={m.id}>
               <div className="message__head">
                 <div className="message__author">
-                  <span className="message__avatar">{m.username?.slice(0, 1) || '乐'}</span>
-                  {m.username || '匿名乐友'}
+                  <span className="message__avatar">{m.username?.slice(0, 1) || t.boardAnonymous.slice(0, 1)}</span>
+                  {m.username || t.boardAnonymous}
                 </div>
-                <span className="message__time">{timeAgo(m.created_at)}</span>
+                <span className="message__time">{timeAgo(m.created_at, t)}</span>
               </div>
               <div className="message__text">{m.content}</div>
             </div>
