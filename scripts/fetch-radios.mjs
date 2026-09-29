@@ -35,6 +35,7 @@ const TARGETS = [
   // 东南亚
   { key: 'TH' }, { key: 'VN' }, { key: 'ID' }, { key: 'MY' }, { key: 'PH' },
   { key: 'SG' }, { key: 'MM' }, { key: 'KH' }, { key: 'LA' }, { key: 'BN' },
+  { key: 'TL' },
   // 北美
   { key: 'US' }, { key: 'CA' }, { key: 'MX' },
   // 南美
@@ -52,6 +53,27 @@ const TARGETS = [
 
 // 用于丰富曲风的标签
 const GENRE_TAGS = ['classical', 'jazz', 'folk', 'pop', 'culture', 'news'];
+
+// 非音乐条目黑名单：电视伴音、古兰经/经文诵读、讲道等（命中即剔除）
+const NON_MUSIC_PATTERNS = [
+  /\btv\b/i,        // 电视（独立词，如 "News 24 TV"、"tv" tag）
+  /television/i,    // 电视
+  /quran/i,         // 古兰经
+  /koran/i,
+  /قرآن/i,
+  /古兰经/i,
+  /\bbible\b/i,     // 读经 / 讲道
+  /scripture/i,
+  /evangelio/i,
+  /sermon/i,
+  /preaching/i,
+  /devotional/i,
+];
+
+function isNonMusic(s) {
+  const text = `${s.name || ''} ${s.tags || ''}`;
+  return NON_MUSIC_PATTERNS.some((re) => re.test(text));
+}
 
 async function getJSON(mirror, path) {
   const res = await fetch(`${mirror}${path}`, { signal: AbortSignal.timeout(25000) });
@@ -98,6 +120,7 @@ async function collectCountry(iso) {
   const add = (arr) => {
     for (const s of arr) {
       if (!isPlayable(s)) continue;
+      if (isNonMusic(s)) continue;
       if (seen.has(s.stationuuid)) continue;
       seen.set(s.stationuuid, normalize(s));
     }

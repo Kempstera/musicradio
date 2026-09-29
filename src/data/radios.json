@@ -1,17 +1,6 @@
 {
   "AL": [
     {
-      "name": "Albania News 24 TV",
-      "url": "http://tv.balkanweb.com:8081/news24/livestream/playlist.m3u8",
-      "homepage": "http://www.balkanweb.com/",
-      "codec": "AAC,H.264",
-      "bitrate": 886,
-      "hls": true,
-      "tags": "",
-      "votes": 4782,
-      "countrycode": "AL"
-    },
-    {
       "name": "Radio Shqip - Tirana 92.0 MHz",
       "url": "https://cp1.sednastream.com/proxy/radioshqip?mp=/stream",
       "homepage": "http://shqipfm.al/",
@@ -1136,17 +1125,6 @@
       "hls": false,
       "tags": "greek,sports",
       "votes": 715,
-      "countrycode": "CY"
-    },
-    {
-      "name": "PIK Sat TV",
-      "url": "http://l3.cloudskep.com/cybcsat/abr/playlist.m3u8",
-      "homepage": "http://www.riknews.com.cy/",
-      "codec": "AAC,H.264",
-      "bitrate": 2945,
-      "hls": true,
-      "tags": "",
-      "votes": 378,
       "countrycode": "CY"
     },
     {
@@ -5954,17 +5932,6 @@
       "countrycode": "AM"
     },
     {
-      "name": "Armenian Bible Study Radio",
-      "url": "https://ssl.nexuscast.com:8082/stream?type=http&nocache=30722",
-      "homepage": "https://armenianbiblestudy.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 31,
-      "countrycode": "AM"
-    },
-    {
       "name": "Abdulbasit Abdulsamad",
       "url": "https://radio.mp3islam.com/listen/abdulbasit/radio.mp3",
       "homepage": "https://mp3islam.com/",
@@ -6200,17 +6167,6 @@
       "countrycode": "CN"
     },
     {
-      "name": "CCTV-13新闻伴音",
-      "url": "https://piccpndali.v.myalicdn.com/audio/cctv13_2.m3u8",
-      "homepage": "https://www.cctv.com/",
-      "codec": "UNKNOWN",
-      "bitrate": 0,
-      "hls": true,
-      "tags": "tv",
-      "votes": 14783,
-      "countrycode": "CN"
-    },
-    {
       "name": "凤凰卫视资讯台",
       "url": "http://playtv-live.ifeng.com/live/06OLEEWQKN4_audio.m3u8",
       "homepage": "https://www.ifeng.com/",
@@ -6432,17 +6388,6 @@
       "hls": true,
       "tags": "",
       "votes": 1561,
-      "countrycode": "KR"
-    },
-    {
-      "name": "Arirang TV",
-      "url": "http://amdlive.ctnd.com.edgesuite.net/arirang_1ch/smil:arirang_1ch.smil/playlist.m3u8",
-      "homepage": "http://www.arirang.co.kr/index.asp",
-      "codec": "UNKNOWN",
-      "bitrate": 656,
-      "hls": true,
-      "tags": "tv",
-      "votes": 823,
       "countrycode": "KR"
     },
     {
@@ -6971,17 +6916,6 @@
       "countrycode": "TH"
     },
     {
-      "name": "Top News",
-      "url": "https://live.topnews.co.th/hls/topnews.m3u8",
-      "homepage": "https://www.topnews.co.th/",
-      "codec": "UNKNOWN",
-      "bitrate": 300,
-      "hls": true,
-      "tags": "hls video,news,politics & current affairs,tv",
-      "votes": 1683,
-      "countrycode": "TH"
-    },
-    {
       "name": "ลูกทุ่งเน็ตเวิร์ค",
       "url": "http://media.login.in.th:8200/;stream.mp3",
       "homepage": "http://looktung.net/",
@@ -7034,17 +6968,6 @@
       "hls": false,
       "tags": "",
       "votes": 1606,
-      "countrycode": "TH"
-    },
-    {
-      "name": "Thai PBS TV",
-      "url": "http://thaipbs-live.cdn.byteark.com/live-en/playlist_720p/index.m3u8",
-      "homepage": "http://www.thaipbs.or.th/",
-      "codec": "UNKNOWN",
-      "bitrate": 0,
-      "hls": true,
-      "tags": "",
-      "votes": 2278,
       "countrycode": "TH"
     }
   ],
@@ -9130,17 +9053,6 @@
       "countrycode": "VE"
     },
     {
-      "name": "Radio Cristiana Venezuela",
-      "url": "https://stream.zeno.fm/r7zrx18xcfhvv",
-      "homepage": "https://zeno.fm/radio/radio-cristiana-venezuela-fm/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "bible,cristiana,evangelio,gospel,religious",
-      "votes": 1006,
-      "countrycode": "VE"
-    },
-    {
       "name": "FIESTA VALLENATA",
       "url": "https://stream.zeno.fm/qlznh4yhpvytv",
       "homepage": "https://zeno.fm/radio/fiesta-vallenata-wt3b/",
@@ -9999,17 +9911,6 @@
       "hls": false,
       "tags": "pop,top40",
       "votes": 36071,
-      "countrycode": "DZ"
-    },
-    {
-      "name": "إذاعة القرآن الكريم",
-      "url": "http://stream.radiojar.com/0tpy1h0kxtzuv",
-      "homepage": "",
-      "codec": "MP3",
-      "bitrate": 0,
-      "hls": false,
-      "tags": "classical",
-      "votes": 24749,
       "countrycode": "DZ"
     },
     {
@@ -10988,5 +10889,6 @@
       "votes": 2542,
       "countrycode": "MW"
     }
-  ]
+  ],
+  "TL": []
 }
