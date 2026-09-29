@@ -3,6 +3,8 @@ import Base from '../../layouts/Base.astro';
 import RadioPlayer from '../../components/RadioPlayer.tsx';
 import type { Station } from '../../components/RadioPlayer.tsx';
 import { allCountries } from '../../data';
+import { getCountryAllLangs } from '../../data/i18n';
+import { toCountryContent } from '../../lib/i18n-content';
 import { CONTINENT_MAP, SUBREGION_MAP } from '../../lib/country';
 import type { Country } from '../../lib/country';
 import radiosData from '../../data/radios.json';
@@ -39,7 +41,10 @@ const notablePlayable: Station[] = (country.notableRadios || [])
     homepage: r.homepage,
   }));
 
-const notableDescriptive = (country.notableRadios || []).filter((r) => !r.url);
+// 描述性电台（无在线流），保留其在 notableRadios 中的原始下标，用于对齐译文
+const notableDescriptive = (country.notableRadios || [])
+  .map((r, i) => ({ r, i }))
+  .filter(({ r }) => !r.url);
 
 const playable = country.radioMode === 'notable-only' ? notablePlayable : [...notablePlayable, ...fetchedStations];
 
@@ -49,29 +54,39 @@ const musicians = country.musicians.map((m) => ({
   wikiUrl:
     m.wikiUrl || (m.nameEn ? `https://en.wikipedia.org/wiki/${encodeURIComponent(m.nameEn.replace(/\s+/g, '_'))}` : undefined),
 }));
+
+// 正文多语言 blob：{ lang: { slug: { ... } } }（zh-CN 为原文，其余为译文）
+const contentBlob: Record<string, Record<string, unknown>> = {
+  'zh-CN': { [country.slug]: toCountryContent(country) },
+};
+for (const [lang, c] of Object.entries(getCountryAllLangs(country.slug))) {
+  contentBlob[lang] = { [country.slug]: c };
+}
+const contentBlobJson = JSON.stringify(contentBlob).replace(/</g, '\\u003c');
 ---
 
 <Base title={`${country.name} · ${country.nameEn}`} description={country.intro}>
+  <script type="application/json" id="content-blob" is:inline set:html={contentBlobJson}></script>
   <article data-region={country.continent}>
     <header class="country-hero">
       <div class="container container--narrow">
         <nav class="breadcrumb" aria-label="面包屑">
-          <a href="/">首页</a><span class="sep">/</span>
-          <a href={`/#${country.continent}`}>{continent.label}</a><span class="sep">/</span>
-          <a href={`/#${country.continent}`}>{subregion.label}</a><span class="sep">/</span>
-          <span>{country.name}</span>
+          <a href="/" data-i18n="navHome">首页</a><span class="sep">/</span>
+          <a href={`/#${country.continent}`} data-continent={country.continent}>{continent.label}</a><span class="sep">/</span>
+          <a href={`/#${country.continent}`} data-subregion={country.subregion}>{subregion.label}</a><span class="sep">/</span>
+          <span data-ct="name" data-slug={country.slug}>{country.name}</span>
         </nav>
         <div class="country-hero__flag" aria-hidden="true">{country.flag}</div>
-        <h1 class="country-hero__title">{country.name}</h1>
+        <h1 class="country-hero__title" data-ct="name" data-slug={country.slug}>{country.name}</h1>
         <div class="country-hero__en">{country.nameEn}{country.nameLocal ? ` · ${country.nameLocal}` : ''}</div>
         <div class="country-hero__meta">
-          <span class="chip">📍 首都 {country.capital}</span>
+          <span class="chip">📍 <span data-i18n="capitalLabel">首都</span> {country.capital}</span>
           <span class="chip">🗣️ {country.languages.join(' / ')}</span>
           {country.isGroup
             ? <span class="chip">🌍 {country.groupCountries?.join('、')}</span>
-            : <span class="chip">{subregion.label}</span>}
+            : <span class="chip" data-subregion={country.subregion}>{subregion.label}</span>}
         </div>
-        <p class="country-hero__intro" style="max-width: 62ch; margin-top: 1.4rem; font-size: 1.05rem; color: var(--ink-soft);">
+        <p class="country-hero__intro" style="max-width: 62ch; margin-top: 1.4rem; font-size: 1.05rem; color: var(--ink-soft);" data-ct="intro" data-slug={country.slug}>
           {country.intro}
         </p>
       </div>
@@ -79,52 +94,52 @@ const musicians = country.musicians.map((m) => ({
 
     <div class="container container--narrow" style="padding-top: 2.5rem;">
       <div class="prose">
-        <h2><span class="num">I.</span>历史人文</h2>
-        {country.history.map((p) => <p set:html={p} />)}
+        <h2><span class="num">I.</span><span data-i18n="histSection">历史人文</span></h2>
+        {country.history.map((p, i) => <p data-ct="history" data-idx={i} data-slug={country.slug} set:html={p} />)}
 
-        <h2><span class="num">II.</span>音乐史</h2>
-        {country.music.map((p) => <p set:html={p} />)}
+        <h2><span class="num">II.</span><span data-i18n="musicSection">音乐史</span></h2>
+        {country.music.map((p, i) => <p data-ct="music" data-idx={i} data-slug={country.slug} set:html={p} />)}
       </div>
 
-      <h2 class="section__title" style="margin-top: 2.4rem; font-size: 1.7rem;">音乐家及主要作品</h2>
+      <h2 class="section__title" style="margin-top: 2.4rem; font-size: 1.7rem;" data-i18n="musiciansSection">音乐家及主要作品</h2>
       <div class="musician-list">
-        {musicians.map((m) => (
+        {musicians.map((m, i) => (
           <div class="musician">
             {m.wikiUrl ? (
-              <a class="musician__name musician__name--link" href={m.wikiUrl} target="_blank" rel="noopener noreferrer" title={`${m.name} · 维基百科`}>
+              <a class="musician__name musician__name--link" href={m.wikiUrl} target="_blank" rel="noopener noreferrer" title={`${m.name} · Wikipedia`} data-ct="m-name" data-idx={i} data-slug={country.slug}>
                 {m.name} <span class="musician__ext" aria-hidden="true">↗</span>
               </a>
             ) : (
-              <div class="musician__name">{m.name}</div>
+              <div class="musician__name" data-ct="m-name" data-idx={i} data-slug={country.slug}>{m.name}</div>
             )}
-            {m.nameEn && <div class="musician__en">{m.nameEn}</div>}
-            <div class="musician__role">{m.role}</div>
-            <div class="musician__desc">{m.desc}</div>
+            {m.nameEn && <div class="musician__en" data-hide-langs="en,cy,fr,de,it,es">{m.nameEn}</div>}
+            <div class="musician__role" data-ct="m-role" data-idx={i} data-slug={country.slug}>{m.role}</div>
+            <div class="musician__desc" data-ct="m-desc" data-idx={i} data-slug={country.slug}>{m.desc}</div>
           </div>
         ))}
       </div>
 
-      <h2 class="section__title" style="margin-top: 2.8rem; font-size: 1.7rem;">主要音乐电台</h2>
+      <h2 class="section__title" style="margin-top: 2.8rem; font-size: 1.7rem;" data-i18n="radiosSection">主要音乐电台</h2>
 
-      <RadioPlayer client:load stations={playable} countryName={country.name} flag={country.flag} emptyNote={country.radioNote} />
+      <RadioPlayer client:load stations={playable} countryName={country.name} flag={country.flag} emptyNote={country.radioNote} slug={country.slug} />
 
       {notableDescriptive.length > 0 && (
         <>
-          <div class="section__kicker" style="margin-top: 2.2rem;">电台简介</div>
-          <p style="color: var(--ink-faint); font-size: 0.85rem; margin: 0.3rem 0 0.8rem;">
+          <div class="section__kicker" style="margin-top: 2.2rem;" data-i18n="radioIntroKicker">电台简介</div>
+          <p style="color: var(--ink-faint); font-size: 0.85rem; margin: 0.3rem 0 0.8rem;" data-i18n="radioNoStreamNote">
             以下电台暂未收录可直接播放的在线流，仅作简介参考。
           </p>
           <div class="radio-grid">
-            {notableDescriptive.map((r) => (
+            {notableDescriptive.map(({ r, i }) => (
               <div class="radio-card radio-card--descriptive" style="cursor: default;">
                 <div class="radio-card__play" aria-hidden="true" style="background: var(--surface-deep); color: var(--ink-faint); border-color: var(--line);">📻</div>
                 <div class="radio-card__body">
                   <div class="radio-card__name">{r.name}</div>
                   <div class="radio-card__meta">
-                    <span class="radio-tag">{r.genre}</span>
-                    <span class="radio-tag radio-tag--muted">暂无在线流</span>
+                    <span class="radio-tag" data-ct="r-genre" data-idx={i} data-slug={country.slug}>{r.genre}</span>
+                    <span class="radio-tag radio-tag--muted" data-i18n="radioNoStreamTag">暂无在线流</span>
                   </div>
-                  {r.note && <div style="font-size: 0.82rem; color: var(--ink-faint); line-height: 1.6; margin-top: 0.4rem;">{r.note}</div>}
+                  {r.note && <div style="font-size: 0.82rem; color: var(--ink-faint); line-height: 1.6; margin-top: 0.4rem;" data-ct="r-note" data-idx={i} data-slug={country.slug}>{r.note}</div>}
                 </div>
               </div>
             ))}

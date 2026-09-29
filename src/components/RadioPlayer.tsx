@@ -18,6 +18,8 @@ interface Props {
   flag?: string;
   /** 无在线流时的自定义说明 */
   emptyNote?: string;
+  /** 国家 slug（用于无在线流提示的正文多语言切换） */
+  slug?: string;
 }
 
 function PlayIcon() {
@@ -43,7 +45,7 @@ function Eq() {
   );
 }
 
-export default function RadioPlayer({ stations, countryName, flag, emptyNote }: Props) {
+export default function RadioPlayer({ stations, countryName, flag, emptyNote, slug }: Props) {
   const [currentUrl, setCurrentUrl] = useState<string | null>(null);
   const [playing, setPlaying] = useState<boolean>(false);
 
@@ -59,7 +61,7 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote }: 
 
   if (!stations.length) {
     return (
-      <p className="empty" style={{ marginTop: '1.4rem' }}>
+      <p className="empty" style={{ marginTop: '1.4rem' }} data-ct="radioNote" data-slug={slug} data-i18n="radioEmptyFallback">
         {emptyNote || '暂未收录该地区的在线电台流，敬请期待。'}
       </p>
     );
