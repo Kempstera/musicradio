@@ -288,7 +288,7 @@ export const europe2: Country[] = [
     ],
     notableRadios: [
       { name: 'Antena 2', genre: '古典', note: '葡萄牙广播的古典与文化频道。', url: 'https://streaming-live.rtp.pt/liveradio/antena280a/playlist.m3u8?DVR', hls: true },
-      { name: 'Rádio Amália', genre: '法朵', note: '专门播放法朵音乐的电台。' },
+      { name: 'Rádio Amália', genre: '法朵', note: '专门播放法朵音乐的电台。', url: 'https://centova.radio.com.pt/proxy/496?mp=/stream', hls: false },
     ],
   },
   {
@@ -350,7 +350,7 @@ export const europe2: Country[] = [
       { name: '莫杰斯特·穆索尔斯基', nameEn: 'Modest Mussorgsky', role: '作曲家', desc: '「强力集团」成员，《图画展览会》《鲍里斯·戈东诺夫》粗犷而深刻。' },
     ],
     notableRadios: [
-      { name: 'Radio Orfey', genre: '古典', note: '俄罗斯国家古典音乐电台，俄罗斯广播集团的古典频道。' },
+      { name: 'Radio Orfey', genre: '古典', note: '俄罗斯国家古典音乐电台，俄罗斯广播集团的古典频道。', url: 'https://orfeyfm.hostingradio.ru:8034/orfeyfm192.mp3', hls: false },
       { name: 'Radio Rossii Kultura', genre: '古典 / 文化', note: '俄罗斯国家广播的文化频道。' },
     ],
   },
@@ -511,7 +511,7 @@ export const europe2: Country[] = [
       { name: 'E.S.T.', nameEn: 'Esbjörn Svensson Trio', role: '爵士三重奏', desc: '欧洲最具影响力的当代爵士三重奏，以极富画面感的演奏闻名。' },
     ],
     notableRadios: [
-      { name: 'SR P2', genre: '古典 / 爵士 / 文化', note: '瑞典广播的古典与爵士频道。' },
+      { name: 'SR P2', genre: '古典 / 爵士 / 文化', note: '瑞典广播的古典与爵士频道。', url: 'https://live1.sr.se/p2-aac-320', hls: false },
       { name: 'Sveriges Radio P1', genre: '文化 / 综合', note: '瑞典广播的文化频道。', url: 'https://live1.sr.se/p1-aac-320', hls: false},
     ],
   },
@@ -604,8 +604,10 @@ export const europe2: Country[] = [
     ],
     notableRadios: [
       { name: 'BBC Radio 3', genre: '古典 / 爵士 / 文化', note: '世界最权威的古典音乐电台，BBC 逍遥音乐会的直播平台。', url: 'https://as-hls-ww-live.akamaized.net/pool_23461179/live/ww/bbc_radio_three/bbc_radio_three.isml/bbc_radio_three-audio=320000.norewind.m3u8', hls: true },
+      { name: 'BBC Radio 3 Unwind', genre: '古典 / 放松', note: 'BBC Radio 3 的放松副频道，精选舒缓古典音乐，帮助听众放松身心。', url: 'https://as-hls-ww-live.akamaized.net/pool_30624046/live/ww/bbc_radio_three_unwind/bbc_radio_three_unwind.isml/bbc_radio_three_unwind-audio=320000.norewind.m3u8', hls: true },
       { name: 'Classic FM', genre: '古典', note: '英国最受欢迎的古典电台。', url: 'https://media-ice.musicradio.com/ClassicFMMP3', hls: false },
       { name: 'Classic FM Calm', genre: '古典 / 放松', note: '英国 Classic FM 的放松副频道，精选舒缓古典与氛围曲目。', url: 'https://media-ice.musicradio.com/ClassicFMCalmMP3', hls: false },
+      { name: 'Classic FM Movies', genre: '古典 / 电影原声', note: '英国 Classic FM 的电影原声音乐频道，播放经典电影配乐。', url: 'https://media-ice.musicradio.com/ClassicFMMoviesMP3', hls: false },
       { name: 'Jazz FM', genre: '爵士', note: '英国著名的爵士电台。' },
     ],
   },

@@ -5,16 +5,6 @@ import type { Lang } from '../lib/i18n';
 export type StationNote = Partial<Record<Lang, string>> & { 'zh-CN': string };
 
 export const STATION_NOTES: Record<string, StationNote> = {
-  'https://stream.live.vc.bbcmedia.co.uk/bbc_world_service': {
-    'zh-CN': '英国广播公司的国际新闻与资讯电台，覆盖全球。',
-    'zh-TW': '英國廣播公司的國際新聞與資訊電臺，覆蓋全球。',
-    en: "The BBC's international news and information service, heard worldwide.",
-    fr: "Le service international d'information et d'actualités de la BBC, écouté dans le monde entier.",
-    de: 'Der internationale Nachrichten- und Informationsdienst der BBC, weltweit zu hören.',
-    it: "Il servizio internazionale di notizie e informazione della BBC, ascoltato in tutto il mondo.",
-    es: 'El servicio internacional de noticias e información de la BBC, escuchado en todo el mundo.',
-    cy: "Gwasanaeth newyddion a gwybodaeth rhyngwladol y BBC, a glywir ledled y byd.",
-  },
   'https://media-ssl.musicradio.com/Heart80sMP3': {
     'zh-CN': '英国 Heart 电台的 80 年代金曲频道。',
     'zh-TW': '英國 Heart 電臺的 80 年代金曲頻道。',

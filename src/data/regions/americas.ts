@@ -31,6 +31,7 @@ export const americas: Country[] = [
       { name: 'WQXR (New York)', genre: '古典', note: '纽约的旗舰古典电台，美国最著名的古典音乐广播。', url: 'https://stream.wqxr.org/wqxr-web?nyprBrowserId=32c67956bf1d5600', hls: false},
       { name: 'NPR Classical / KUSC', genre: '古典', note: '美国公共广播的古典音乐节目网络。', url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/KUSCAAC64.aac', hls: false},
       { name: 'Jazz24 / WBGO', genre: '爵士', note: '美国著名的爵士电台。', url: 'https://knkx-live-a.edge.audiocdn.com/6285_256k', hls: false},
+      { name: 'Great Escape', genre: '古典 / 放松', note: '古典音乐网络 Classical California 的放松频道，全天候播放舒缓的古典音乐。', url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/CC4_S01AAC_96.aac', hls: false},
     ],
   },
   {

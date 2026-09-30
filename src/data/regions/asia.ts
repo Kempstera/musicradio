@@ -154,7 +154,7 @@ export const asia: Country[] = [
       { name: 'BTS', nameEn: '防弹少年团', role: '偶像组合', desc: '全球现象级 K-pop 组合，多次登顶美国 Billboard 榜单。' },
     ],
     notableRadios: [
-      { name: 'KBS Classic FM (1FM)', genre: '古典', note: '韩国放送公社的古典音乐频道。' },
+      { name: 'KBS Classic FM (1FM)', genre: '古典', note: '韩国放送公社的古典音乐频道。', url: 'https://radio.bsod.kr/stream/?stn=kbs&ch=1fm', hls: true },
       { name: 'EBS FM', genre: '教育 / 文化', note: '韩国教育广播，兼播古典与文化节目。', url: 'https://ebsonairiosaod.ebs.co.kr/fmradiobandiaod/bandiappaac/playlist.m3u8', hls: true},
     ],
   },

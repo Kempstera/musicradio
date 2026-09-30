@@ -165,7 +165,7 @@ export const africa: Country[] = [
     history: ['贝宁是古达荷美王国的核心，其伏都（Vodun）信仰深刻影响了加勒比与美洲的宗教文化。阿波美的王宫遗址见证了这一王国的辉煌。'],
     music: ['贝宁的音乐与伏都教仪式密不可分，节奏复杂而充满力量；安吉丽克·基乔（Angélique Kidjo）是贝宁最闪耀的国际巨星，多次获格莱美奖，把非洲音乐与爵士、放克、拉丁熔于一炉。'],
     musicians: [{ name: '安吉丽克·基乔', nameEn: 'Angélique Kidjo', role: '歌手', desc: '格莱美得主，贝宁与非洲音乐的国际名片。' }],
-    notableRadios: [{ name: 'ORTB Radio', genre: '非洲 / 流行', note: '贝宁国家广播。' }],
+    notableRadios: [{ name: 'ORTB Radio', genre: '非洲 / 流行', note: '贝宁国家广播。', url: 'https://listen.radioking.com/radio/47608/stream/84430', hls: false }],
   },
   {
     slug: 'togo', name: '多哥', nameEn: 'Togo',
@@ -278,7 +278,7 @@ export const africa: Country[] = [
     history: ['卢旺达被称为「千丘之国」，1994 年的种族屠杀是其深刻的创伤，此后这个国家以惊人的速度重建，基加利成为非洲最整洁有序的城市之一。'],
     music: ['卢旺达的传统鼓乐（ingoma）曾服务于宫廷与仪式，鼓手以精湛技艺演奏复杂的节奏；当代卢旺达流行乐则融合了东非节奏与现代制作，成为青年文化的声音。'],
     musicians: [{ name: '卢旺达皇家鼓乐团', nameEn: 'Ingoma Ensemble', role: '传统鼓乐团', desc: '传承卢旺达宫廷鼓乐传统的音乐团体。' }],
-    notableRadios: [{ name: 'Radio Rwanda', genre: '东非 / 传统', note: '卢旺达国家广播。' }],
+    notableRadios: [{ name: 'Radio Rwanda', genre: '东非 / 传统', note: '卢旺达国家广播。', url: 'https://listen.rba.co.rw:8008/rwanda/', hls: false }],
   },
   {
     slug: 'burundi', name: '布隆迪', nameEn: 'Burundi',

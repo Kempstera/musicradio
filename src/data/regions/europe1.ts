@@ -143,7 +143,7 @@ export const europe1: Country[] = [
     ],
     notableRadios: [
       { name: 'Klara', genre: '古典 / 爵士', note: '弗拉芒公共广播 VRT 的古典与爵士频道，品质极高。', url: 'https://icecast.vrtcdn.be/klara-high.mp3', hls: false},
-      { name: 'Musiq3', genre: '古典', note: '法语公共广播 RTBF 的古典频道。' },
+      { name: 'Musiq3', genre: '古典', note: '法语公共广播 RTBF 的古典频道。', url: 'https://radios.rtbf.be/musiq3-128.aac', hls: false },
     ],
   },
   {
@@ -199,7 +199,7 @@ export const europe1: Country[] = [
       { name: '保加利亚神秘之声', nameEn: 'Le Mystère des Voix Bulgares', role: '女声合唱团', desc: '以天籁般的不协和和声与复合节奏震撼西方乐坛，成为世界音乐的传奇。' },
     ],
     notableRadios: [
-      { name: 'BNR Hristo Botev', genre: '古典 / 文化', note: '保加利亚国家广播的文化频道，古典与民族音乐并重。' },
+      { name: 'BNR Hristo Botev', genre: '古典 / 文化', note: '保加利亚国家广播的文化频道，古典与民族音乐并重。', url: 'https://lb-hls.cdn.bg/2032/fls/HrBotev.stream/playlist.m3u8', hls: true },
       { name: 'Radio Bulgaria', genre: '综合 / 民族', note: '对外广播频道，可听到地道的保加利亚民间音乐。' },
     ],
   },
@@ -561,8 +561,8 @@ export const europe1: Country[] = [
       { name: '酋长乐队', nameEn: 'The Chieftains', role: '传统乐团', desc: '爱尔兰传统音乐走向世界的旗帜，曾六获格莱美奖。' },
     ],
     notableRadios: [
-      { name: 'RTÉ Lyric FM', genre: '古典 / 爵士 / 艺术', note: '爱尔兰广播的古典与艺术频道，品质上乘。' },
-      { name: 'RTÉ Radio 1', genre: '综合 / 传统', note: '爱尔兰广播主频道，常有传统音乐节目。' },
+      { name: 'RTÉ Lyric FM', genre: '古典 / 爵士 / 艺术', note: '爱尔兰广播的古典与艺术频道，品质上乘。', url: 'https://liveaudio.rte.ie/hls-radio/lyric/chunklist.m3u8', hls: true },
+      { name: 'RTÉ Radio 1', genre: '综合 / 传统', note: '爱尔兰广播主频道，常有传统音乐节目。', url: 'https://liveaudio.rte.ie/hls-radio/radio1/chunklist.m3u8', hls: true },
     ],
   },
   {
@@ -649,6 +649,6 @@ export const europe1: Country[] = [
       { name: '雅沙·海菲茨', nameEn: 'Jascha Heifetz', role: '小提琴家', desc: '出生于维尔纽斯，被公认为 20 世纪最伟大的小提琴家，琴技登峰造极。' },
       { name: '米尔加·格拉日尼特-泰拉', nameEn: 'Mirga Gražinytė-Tyla', role: '指挥家', desc: '新生代指挥明星，曾任伯明翰市立交响乐团音乐总监。' },
     ],
-    notableRadios: [{ name: 'LRT Klasika', genre: '古典 / 文化', note: '立陶宛广播电视台的古典与文化频道。' }],
+    notableRadios: [{ name: 'LRT Klasika', genre: '古典 / 文化', note: '立陶宛广播电视台的古典与文化频道。', url: 'https://stream-live.lrt.lt/klasika/master.m3u8', hls: true }],
   },
 ];

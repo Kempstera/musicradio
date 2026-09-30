@@ -2293,18 +2293,6 @@
       "stationuuid": "422c303d-2e17-11ea-aa0c-52543be04c81"
     },
     {
-      "name": "法国国际广播电台",
-      "url": "https://rfienchinois64k.ice.infomaniak.ch/rfienchinois-64.mp3",
-      "homepage": "",
-      "codec": "MP3",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "",
-      "votes": 8074,
-      "countrycode": "FR",
-      "stationuuid": "21ef0997-adba-46c7-a2e1-03e3130bd5ad"
-    },
-    {
       "name": "RFM POP-ROCK",
       "url": "https://stream.rfm.fr/rfm-wr10.aac",
       "homepage": "http://www.rfm.fr/programmes/les-webradios",
@@ -7564,18 +7552,6 @@
       "votes": 21707,
       "countrycode": "GB",
       "stationuuid": "9619e7d7-0601-11e8-ae97-52543be04c81"
-    },
-    {
-      "name": "BBC World Service",
-      "url": "https://stream.live.vc.bbcmedia.co.uk/bbc_world_service",
-      "homepage": "https://www.bbc.co.uk/sounds/play/live:bbc_world_service",
-      "codec": "MP3",
-      "bitrate": 56,
-      "hls": false,
-      "tags": "bbc",
-      "votes": 17052,
-      "countrycode": "GB",
-      "stationuuid": "598c4d0e-6b06-43fb-bff4-717c591213a9"
     },
     {
       "name": "Exclusively Dire Straits",
