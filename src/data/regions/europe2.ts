@@ -47,7 +47,7 @@ export const europe2: Country[] = [
     musicians: [
       { name: '卢森堡爱乐乐团', nameEn: 'Orchestre Philharmonique du Luxembourg', role: '管弦乐团', desc: '卢森堡最主要的古典音乐机构，常与国际知名独奏家、指挥家合作。' },
     ],
-    notableRadios: [{ name: 'Radio 100,7', genre: '综合 / 文化', note: '卢森堡公共广播，播放古典与本土文化节目。' }],
+    notableRadios: [{ name: 'Radio 100,7', genre: '综合 / 文化', note: '卢森堡公共广播，播放古典与本土文化节目。', url: 'https://100komma7.cast.addradio.de/100komma7/live/mp3/128/stream.mp3', hls: false}],
   },
   {
     slug: 'malta',
@@ -95,7 +95,7 @@ export const europe2: Country[] = [
     musicians: [
       { name: '玛丽亚·比舒', nameEn: 'Maria Bieșu', role: '女高音', desc: '摩尔多瓦最著名的歌剧女高音，其名字被用来命名基希讷乌的国家歌剧院。' },
     ],
-    notableRadios: [{ name: 'Radio Moldova', genre: '综合 / 民族', note: '摩尔多瓦国家广播，播放大量民族音乐。' }],
+    notableRadios: [{ name: 'Radio Moldova', genre: '综合 / 民族', note: '摩尔多瓦国家广播，播放大量民族音乐。', url: 'https://radiolive.trm.md:8001/hls_rmt/tineret.m3u8', hls: true}],
   },
   {
     slug: 'monaco',
@@ -172,7 +172,7 @@ export const europe2: Country[] = [
       { name: '安德烈·里欧', nameEn: 'André Rieu', role: '小提琴家 / 指挥家', desc: '以「约翰·施特劳斯管弦乐团」的华尔兹巡演风靡全球，让古典走进大众。' },
     ],
     notableRadios: [
-      { name: 'NPO Radio 4', genre: '古典', note: '荷兰公共广播的古典频道。' },
+      { name: 'NPO Radio 4', genre: '古典', note: '荷兰公共广播的古典频道。', url: 'https://icecast.omroep.nl/radio4-bb-mp3', hls: false},
       { name: 'Sublime', genre: '爵士 / 灵魂', note: '荷兰最著名的爵士与灵魂乐电台。', url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/SUBLIME.mp3?dist=sublime_website', hls: false},
     ],
   },
@@ -227,7 +227,7 @@ export const europe2: Country[] = [
     ],
     notableRadios: [
       { name: 'NRK Klassisk', genre: '古典', note: '挪威广播的古典频道。', url: 'https://cdn0-47115-liveicecast0.dna.contentdelivery.net/klassisk_mp3_h', hls: false},
-      { name: 'NRK Jazz', genre: '爵士', note: '挪威广播的爵士频道。' },
+      { name: 'NRK Jazz', genre: '爵士', note: '挪威广播的爵士频道。', url: 'https://cdn0-47115-liveicecast0.dna.contentdelivery.net/jazz_mp3_h', hls: false},
     ],
   },
   {
@@ -401,7 +401,7 @@ export const europe2: Country[] = [
     musicians: [
       { name: '古查小号节', nameEn: 'Guča Trumpet Festival', role: '音乐节', desc: '全球最著名的铜管乐节日，被誉为「最狂野的音乐节」。' },
     ],
-    notableRadios: [{ name: 'Radio Belgrade 2', genre: '文化 / 古典', note: '塞尔维亚广播的文化频道，兼播古典音乐。' }],
+    notableRadios: [{ name: 'Radio Belgrade 2', genre: '文化 / 古典', note: '塞尔维亚广播的文化频道，兼播古典音乐。', url: 'https://rtsradio-live.morescreens.com/RTS_2_002/audio/chunklist.m3u8', hls: true}],
   },
   {
     slug: 'slovakia',
@@ -451,7 +451,7 @@ export const europe2: Country[] = [
       { name: '斯拉夫科·阿夫塞尼克', nameEn: 'Slavko Avsenik', role: '民谣音乐家', desc: '奥伯克莱纳民间音乐的开创者，其手风琴合奏风靡整个德语区。' },
       { name: 'Laibach', nameEn: 'Laibach', role: '工业乐队', desc: '极具先锋性的工业/实验乐队，以政治与艺术的挑衅著称。' },
     ],
-    notableRadios: [{ name: 'RTV Slovenija - ARS', genre: '文化 / 古典', note: '斯洛文尼亚广播电视的第三频道，古典与文化并重。' }],
+    notableRadios: [{ name: 'RTV Slovenija - ARS', genre: '文化 / 古典', note: '斯洛文尼亚广播电视的第三频道，古典与文化并重。', url: 'https://mp3.rtvslo.si/ars', hls: false}],
   },
   {
     slug: 'spain',
@@ -541,7 +541,7 @@ export const europe2: Country[] = [
       { name: '埃内斯特·安塞美', nameEn: 'Ernest Ansermet', role: '指挥家', desc: '瑞士罗曼德管弦乐团奠基人，德彪西、拉威尔作品的权威诠释者。' },
     ],
     notableRadios: [
-      { name: 'RTS Espace 2', genre: '古典 / 文化', note: '瑞士法语广播的古典与文化频道。' },
+      { name: 'RTS Espace 2', genre: '古典 / 文化', note: '瑞士法语广播的古典与文化频道。', url: 'https://stream.srg-ssr.ch/m/espace-2/mp3_128', hls: false},
       { name: 'SRF 2 Kultur', genre: '古典 / 文化', note: '瑞士德语广播的文化频道。', url: 'https://stream.srg-ssr.ch/m/drs2/aacp_32', hls: false},
     ],
   },

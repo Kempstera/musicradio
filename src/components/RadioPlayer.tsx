@@ -14,6 +14,10 @@ export interface Station {
   homepage?: string;
   /** 电台简介（精选电台的客观介绍，可选） */
   note?: string;
+  /** note 在 notableRadios 中的原始下标（用于 content-blob 的多语言对齐） */
+  noteIdx?: number;
+  /** 采集电台简介的索引键（流地址 url，用于 station-notes-blob 的多语言对齐） */
+  noteKey?: string;
 }
 
 interface Props {
@@ -139,7 +143,17 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
                     <span key={t} className="radio-tag">{t}</span>
                   ))}
                 </div>
-                {s.note && <div className="radio-card__note">{s.note}</div>}
+                {s.note && (
+                  <div
+                    className="radio-card__note"
+                    data-ct={s.noteKey ? 'r-snote' : 'r-note'}
+                    data-idx={s.noteIdx ?? -1}
+                    data-note-key={s.noteKey}
+                    data-slug={slug}
+                  >
+                    {s.note}
+                  </div>
+                )}
               </div>
               <FavoriteButton
                 station={{

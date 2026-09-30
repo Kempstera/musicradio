@@ -8,6 +8,8 @@ import { toCountryContent } from '../../lib/i18n-content';
 import { CONTINENT_MAP, SUBREGION_MAP } from '../../lib/country';
 import type { Country } from '../../lib/country';
 import radiosData from '../../data/radios.json';
+import { STATION_NOTES } from '../../data/station-notes';
+import type { Lang } from '../../lib/i18n';
 
 export function getStaticPaths() {
   return allCountries.map((c) => ({ params: { slug: c.slug }, props: { country: c } }));
@@ -18,20 +20,26 @@ const continent = CONTINENT_MAP[country.continent];
 const subregion = SUBREGION_MAP[country.subregion];
 const radios = radiosData as Record<string, any[]>;
 
-const fetchedStations: Station[] = (radios[country.iso] || []).map((s, i) => ({
-  id: `${country.iso}-${i}`,
-  name: s.name,
-  url: s.url,
-  hls: !!s.hls,
-  codec: s.codec,
-  bitrate: s.bitrate,
-  tags: s.tags,
-  homepage: s.homepage,
-}));
+const fetchedStations: Station[] = (radios[country.iso] || []).map((s, i) => {
+  const sn = STATION_NOTES[s.url];
+  return {
+    id: `${country.iso}-${i}`,
+    name: s.name,
+    url: s.url,
+    hls: !!s.hls,
+    codec: s.codec,
+    bitrate: s.bitrate,
+    tags: s.tags,
+    homepage: s.homepage,
+    note: sn?.['zh-CN'],
+    noteKey: sn ? s.url : undefined,
+  };
+});
 
 const notablePlayable: Station[] = (country.notableRadios || [])
-  .filter((r) => r.url)
-  .map((r, i) => ({
+  .map((r, i) => ({ r, i }))
+  .filter(({ r }) => r.url)
+  .map(({ r, i }) => ({
     id: `notable-${i}`,
     name: r.name,
     url: r.url as string,
@@ -40,6 +48,7 @@ const notablePlayable: Station[] = (country.notableRadios || [])
     tags: r.genre,
     homepage: r.homepage,
     note: r.note,
+    noteIdx: i,
   }));
 
 // 描述性电台（无在线流），保留其在 notableRadios 中的原始下标，用于对齐译文
@@ -64,10 +73,23 @@ for (const [lang, c] of Object.entries(getCountryAllLangs(country.slug))) {
   contentBlob[lang] = { [country.slug]: c };
 }
 const contentBlobJson = JSON.stringify(contentBlob).replace(/</g, '\\u003c');
+
+// 著名采集电台的简介 blob：{ lang: { url: note } }（供前端 data-ct="r-snote" 切换语言）
+const STATION_NOTE_LANGS: Lang[] = ['zh-CN', 'zh-TW', 'en', 'cy', 'fr', 'de', 'it', 'es'];
+const stationNotesBlob: Record<string, Record<string, string>> = {};
+for (const lang of STATION_NOTE_LANGS) stationNotesBlob[lang] = {};
+for (const [url, notes] of Object.entries(STATION_NOTES)) {
+  for (const lang of STATION_NOTE_LANGS) {
+    const t = notes[lang] || notes['zh-CN'];
+    if (t) stationNotesBlob[lang][url] = t;
+  }
+}
+const stationNotesBlobJson = JSON.stringify(stationNotesBlob).replace(/</g, '\\u003c');
 ---
 
 <Base title={`${country.name} · ${country.nameEn}`} description={country.intro}>
   <script type="application/json" id="content-blob" is:inline set:html={contentBlobJson}></script>
+  <script type="application/json" id="station-notes-blob" is:inline set:html={stationNotesBlobJson}></script>
   <article data-region={country.continent}>
     <header class="country-hero">
       <div class="container container--narrow">

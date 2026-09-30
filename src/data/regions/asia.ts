@@ -155,7 +155,7 @@ export const asia: Country[] = [
     ],
     notableRadios: [
       { name: 'KBS Classic FM (1FM)', genre: '古典', note: '韩国放送公社的古典音乐频道。' },
-      { name: 'EBS FM', genre: '教育 / 文化', note: '韩国教育广播，兼播古典与文化节目。' },
+      { name: 'EBS FM', genre: '教育 / 文化', note: '韩国教育广播，兼播古典与文化节目。', url: 'https://ebsonairiosaod.ebs.co.kr/fmradiobandiaod/bandiappaac/playlist.m3u8', hls: true},
     ],
   },
   {
@@ -185,8 +185,8 @@ export const asia: Country[] = [
       { name: '阿赫梅特·阿德南·赛贡', nameEn: 'Ahmet Adnan Saygun', role: '作曲家', desc: '土耳其现代音乐奠基人之一，把马卡姆传统融入交响乐。' },
     ],
     notableRadios: [
-      { name: 'TRT Radyo 3', genre: '古典 / 爵士', note: '土耳其广播电视的古典与爵士频道。' },
-      { name: 'TRT Türk Sanat Müziği', genre: '土耳其古典 / 马卡姆', note: '播放土耳其古典艺术音乐的频道。' },
+      { name: 'TRT Radyo 3', genre: '古典 / 爵士', note: '土耳其广播电视的古典与爵士频道。', url: 'https://radio-trtradyo3.live.trt.com.tr/master.m3u8', hls: true},
+      { name: 'TRT Türk Sanat Müziği', genre: '土耳其古典 / 马卡姆', note: '播放土耳其古典艺术音乐的频道。', url: 'https://radio-trtturku.live.trt.com.tr/master.m3u8', hls: true},
     ],
   },
   {
@@ -244,7 +244,7 @@ export const asia: Country[] = [
     ],
     notableRadios: [
       { name: 'All India Radio - Raagam', genre: '卡纳提克古典', note: '全印广播的南印度古典音乐频道。' },
-      { name: 'Radio City / AIR FM', genre: '综合 / 宝莱坞', note: '印度主流 FM 电台，播放宝莱坞与流行音乐。' },
+      { name: 'Radio City / AIR FM', genre: '综合 / 宝莱坞', note: '印度主流 FM 电台，播放宝莱坞与流行音乐。', url: 'https://airhlspush.pc.cdn.bitgravity.com/httppush/hlspbaudio005/hlspbaudio00564kbps.m3u8', hls: true},
     ],
   },
   {
@@ -322,7 +322,7 @@ export const asia: Country[] = [
       { name: '巴厘甘美兰合奏', nameEn: 'Balinese Gamelan Ensemble', role: '民族乐团', desc: '巴厘岛的甘美兰以更急促华丽的风格闻名，常伴舞蹈与仪式。' },
       { name: '昂贡（Angklung）乐团', nameEn: 'Angklung Ensemble', role: '竹乐合奏', desc: '用摇竹管发声的昂贡乐器合奏，被列入人类非物质文化遗产。' },
     ],
-    notableRadios: [{ name: 'RRI Pro 2', genre: '综合 / 甘美兰', note: '印度尼西亚共和国广播的音乐频道。' }],
+    notableRadios: [{ name: 'RRI Pro 2', genre: '综合 / 甘美兰', note: '印度尼西亚共和国广播的音乐频道。', url: 'https://stream-node2.rri.co.id/streaming/21/9221/rritjpinangpro2.mp3', hls: false}],
   },
   {
     slug: 'malaysia',
@@ -346,7 +346,7 @@ export const asia: Country[] = [
     musicians: [
       { name: '马来西亚爱乐乐团', nameEn: 'Malaysian Philharmonic Orchestra', role: '管弦乐团', desc: '位于吉隆坡双子塔下国油音乐厅，是东南亚最著名的交响乐团之一。' },
     ],
-    notableRadios: [{ name: 'Radio Klasik', genre: '古典 / 马来传统', note: '马来西亚广播电台的古典与传统音乐频道。' }],
+    notableRadios: [{ name: 'Radio Klasik', genre: '古典 / 马来传统', note: '马来西亚广播电台的古典与传统音乐频道。', url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_KLASIKAAC_SC', hls: false}],
   },
   {
     slug: 'philippines',
@@ -397,8 +397,8 @@ export const asia: Country[] = [
       { name: '孙燕姿', nameEn: 'Stefanie Sun', role: '歌手', desc: '新加坡最具代表性的华语流行天后。' },
     ],
     notableRadios: [
-      { name: 'Symphony 92.4', genre: '古典', note: '新加坡的古典音乐电台。' },
-      { name: 'Mediacorp CLASS 95', genre: '流行 / 经典', note: '新加坡的经典流行电台。' },
+      { name: 'Symphony 92.4', genre: '古典', note: '新加坡的古典音乐电台。', url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/SYMPHONY924AAC.aac', hls: false},
+      { name: 'Mediacorp CLASS 95', genre: '流行 / 经典', note: '新加坡的经典流行电台。', url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/CLASS95AAC.aac', hls: false},
     ],
   },
   {
@@ -471,7 +471,7 @@ export const asia: Country[] = [
     musicians: [
       { name: '坎笙合奏', nameEn: 'Khaen Ensemble', role: '民族乐团', desc: '以竹制口琴「坎」为核心的老挝民间音乐，悠扬而亲切。' },
     ],
-    notableRadios: [{ name: 'Lao National Radio', genre: '综合 / 传统', note: '老挝国家广播，播放本土与传统音乐。' }],
+    notableRadios: [{ name: 'Lao National Radio', genre: '综合 / 传统', note: '老挝国家广播，播放本土与传统音乐。', url: 'https://radio.lnr.org.la/fm103', hls: false}],
   },
   {
     slug: 'brunei',
@@ -944,7 +944,7 @@ export const asia: Country[] = [
       { name: '费鲁兹', nameEn: 'Fairuz', role: '歌手', desc: '阿拉伯世界最具标志性的歌唱家，被誉为「黎巴嫩的声音」。' },
       { name: '拉赫巴尼兄弟', nameEn: 'Rahbani Brothers', role: '作曲家', desc: '阿西与曼苏尔·拉赫巴尼，为费鲁兹创作的歌剧式歌曲定义了现代阿拉伯音乐。' },
     ],
-    notableRadios: [{ name: 'Radio Liban / Voice of Lebanon', genre: '综合 / 阿拉伯', note: '黎巴嫩广播与黎巴嫩之声，播放阿拉伯音乐与文化节目。' }],
+    notableRadios: [{ name: 'Radio Liban / Voice of Lebanon', genre: '综合 / 阿拉伯', note: '黎巴嫩广播与黎巴嫩之声，播放阿拉伯音乐与文化节目。', url: 'https://media2.streambrothers.com:2020/stream/8194', hls: false}],
   },
   {
     slug: 'jordan',

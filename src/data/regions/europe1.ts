@@ -142,7 +142,7 @@ export const europe1: Country[] = [
       { name: '雅克·布雷尔', nameEn: 'Jacques Brel', role: '香颂歌手', desc: '香颂（Chanson）巨匠，以深沉有力的戏剧化演唱诠释人间悲欢。' },
     ],
     notableRadios: [
-      { name: 'Klara', genre: '古典 / 爵士', note: '弗拉芒公共广播 VRT 的古典与爵士频道，品质极高。' },
+      { name: 'Klara', genre: '古典 / 爵士', note: '弗拉芒公共广播 VRT 的古典与爵士频道，品质极高。', url: 'https://icecast.vrtcdn.be/klara-high.mp3', hls: false},
       { name: 'Musiq3', genre: '古典', note: '法语公共广播 RTBF 的古典频道。' },
     ],
   },
@@ -282,7 +282,7 @@ export const europe1: Country[] = [
       { name: '扬·库贝利克', nameEn: 'Jan Kubelík', role: '小提琴家', desc: '「小提琴之王」帕格尼尼传统的继承者，20 世纪初最伟大的捷克小提琴家之一。' },
     ],
     notableRadios: [
-      { name: 'ČRo Vltava', genre: '古典 / 文化', note: '捷克广播的文化与古典频道，欧洲最优质的公共文化电台之一。' },
+      { name: 'ČRo Vltava', genre: '古典 / 文化', note: '捷克广播的文化与古典频道，欧洲最优质的公共文化电台之一。', url: 'https://icecast5.play.cz/cro3-128.mp3', hls: false},
       { name: 'ČRo D-dur', genre: '古典', note: '捷克广播的纯古典频道。', url: 'https://rozhlas.stream/ddur.mp3', hls: false},
     ],
   },
@@ -341,7 +341,7 @@ export const europe1: Country[] = [
       { name: '尼姆·雅尔维', nameEn: 'Neeme Järvi', role: '指挥家', desc: '高产而权威的指挥大师，其子帕沃、克里斯蒂安·雅尔维也都是著名指挥家。' },
       { name: '韦利奥·托尔米斯', nameEn: 'Veljo Tormis', role: '作曲家', desc: '以波罗的海芬兰人的古老民歌为素材创作大量合唱杰作。' },
     ],
-    notableRadios: [{ name: 'Klassikaraadio', genre: '古典', note: '爱沙尼亚公共广播 ERR 的古典频道。' }],
+    notableRadios: [{ name: 'Klassikaraadio', genre: '古典', note: '爱沙尼亚公共广播 ERR 的古典频道。', url: 'https://icecast.err.ee/klassikaraadio.mp3', hls: false}],
   },
   {
     slug: 'finland',
@@ -370,7 +370,7 @@ export const europe1: Country[] = [
     ],
     notableRadios: [
       { name: 'Yle Klassinen', genre: '古典', note: '芬兰广播公司 YLE 的古典频道。', url: 'https://icecast.live.yle.fi/radio/YleKlassinen/icecast.audio', hls: false},
-      { name: 'Yle Radio 1', genre: '文化 / 古典', note: 'YLE 的文化频道，播放大量古典与艺术节目。' },
+      { name: 'Yle Radio 1', genre: '文化 / 古典', note: 'YLE 的文化频道，播放大量古典与艺术节目。', url: 'https://icecast.live.yle.fi/radio/YleRadio1Hifi/icecast.audio', hls: false},
     ],
   },
   {
@@ -468,7 +468,7 @@ export const europe1: Country[] = [
       { name: '迪米特里·米特罗普洛斯', nameEn: 'Dimitris Mitropoulos', role: '指挥家', desc: '20 世纪中叶纽约爱乐乐团的掌门人，以过目不忘的背谱指挥闻名。' },
     ],
     notableRadios: [
-      { name: 'ERT Third Programme', genre: '古典 / 文化', note: '希腊广播电视的文化频道，古典音乐与艺术节目。' },
+      { name: 'ERT Third Programme', genre: '古典 / 文化', note: '希腊广播电视的文化频道，古典音乐与艺术节目。', url: 'https://radiostreaming.ert.gr/ert-trito', hls: false},
       { name: 'Kosmos 93.6', genre: '世界音乐', note: 'ERT 的世界音乐频道，可听到大量雷贝蒂卡与地中海之声。', url: 'https://radiostreaming.ert.gr/ert-kosmos', hls: false},
     ],
   },
@@ -499,7 +499,7 @@ export const europe1: Country[] = [
       { name: '乔治·索尔蒂', nameEn: 'Georg Solti', role: '指挥家', desc: '曾执掌芝加哥交响乐团，其《指环》录音被誉为史上最伟大的歌剧录音之一。' },
     ],
     notableRadios: [
-      { name: 'Bartók Rádió (MR3)', genre: '古典', note: '匈牙利广播的古典频道，以巴托克命名。' },
+      { name: 'Bartók Rádió (MR3)', genre: '古典', note: '匈牙利广播的古典频道，以巴托克命名。', url: 'https://icast.connectmedia.hu/4741/mr3.mp3', hls: false},
       { name: 'Kossuth Rádió (MR1)', genre: '综合 / 民族', note: '匈牙利广播主频道，兼顾民族音乐与新闻。', url: 'https://icast.connectmedia.hu/4736/mr1.mp3', hls: false},
     ],
   },
@@ -595,7 +595,7 @@ export const europe1: Country[] = [
     notableRadios: [
       { name: 'Rai Radio 3 Classica', genre: '古典', note: '意大利国家广播的古典频道。', url: 'https://icecdn-19d24861e90342cc8decb03c24c8a419.msvdn.net/icecastRelay/S53422322/bTdUFhYMnnra/icecast', hls: false},
       { name: 'Radio Classica', genre: '古典', note: '意大利知名古典电台。', url: 'https://stream10.xdevel.com/audio0s978096-2470/stream/icecast.audio', hls: false},
-      { name: 'Rai Radio 3', genre: '文化 / 古典', note: '意大利国家广播的文化频道。' },
+      { name: 'Rai Radio 3', genre: '文化 / 古典', note: '意大利国家广播的文化频道。', url: 'https://icestreaming.rai.it/3.mp3', hls: false},
     ],
   },
   {

@@ -61,7 +61,7 @@ export const americas: Country[] = [
     ],
     notableRadios: [
       { name: 'CBC Music', genre: '古典 / 多元', note: '加拿大广播公司的音乐频道，兼播古典、爵士与本土音乐。', url: 'https://cbcradiolive.akamaized.net/hls/live/2041057/ES_R2ETR/master.m3u8', hls: true},
-      { name: 'ICI Musique', genre: '法语 / 多元', note: '加拿大广播的法语音乐频道。' },
+      { name: 'ICI Musique', genre: '法语 / 多元', note: '加拿大广播的法语音乐频道。', url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/CBFXFM_SRC.mp3', hls: false},
     ],
   },
   {

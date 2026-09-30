@@ -81,7 +81,7 @@ export const africa: Country[] = [
       { name: '金·桑尼·阿德', nameEn: 'King Sunny Ade', role: '朱朱音乐家', desc: '约鲁巴「朱朱」音乐的大师。' },
       { name: '伯纳·博伊', nameEn: 'Burna Boy', role: 'Afrobeats 歌手', desc: '当代 Afrobeats 的全球旗手，格莱美得主。' },
     ],
-    notableRadios: [{ name: 'Cool FM / Rhythm FM Lagos', genre: 'Afrobeats / 流行', note: '拉各斯的主流音乐电台。' }],
+    notableRadios: [{ name: 'Cool FM / Rhythm FM Lagos', genre: 'Afrobeats / 流行', note: '拉各斯的主流音乐电台。', url: 'https://coolfmlagos969-atunwadigital.streamguys1.com/coolfmlagos969', hls: false}],
   },
   {
     slug: 'ghana', name: '加纳', nameEn: 'Ghana',
@@ -92,7 +92,7 @@ export const africa: Country[] = [
     musicians: [
       { name: 'E.T. 门萨', nameEn: 'E.T. Mensah', role: 'Highlife 音乐家', desc: '「Highlife 之王」，加纳现代流行乐的奠基人。' },
     ],
-    notableRadios: [{ name: 'Joy FM / Peace FM', genre: 'Highlife / 流行', note: '阿克拉的主流音乐电台。' }],
+    notableRadios: [{ name: 'Joy FM / Peace FM', genre: 'Highlife / 流行', note: '阿克拉的主流音乐电台。', url: 'https://mmg.streamguys1.com/JoyFM-mp3', hls: false}],
   },
   {
     slug: 'senegal', name: '塞内加尔', nameEn: 'Senegal', nameLocal: 'Sénégal',
@@ -219,7 +219,7 @@ export const africa: Country[] = [
     history: ['佛得角是大西洋上的火山群岛，曾是葡萄牙殖民与奴隶贸易的中转站，克里奥尔文化在此生根，形成了独一无二的语言与音乐。'],
     music: ['佛得角的灵魂是「莫尔纳」（Morna）——一种忧郁而深情的歌谣，被列入人类非物质文化遗产；西萨莉亚·埃沃拉（Cesária Évora）以赤足演唱的《Sodade》让全世界的听众为之动容。此外，欢快的「科拉代拉」（coladeira）则是群岛的舞曲。'],
     musicians: [{ name: '西萨莉亚·埃沃拉', nameEn: 'Cesária Évora', role: '歌手', desc: '「赤足天后」，把佛得角的莫尔纳唱向世界。' }],
-    notableRadios: [{ name: 'RTC / RCV', genre: '莫尔纳 / 科拉代拉', note: '佛得角国家广播。' }],
+    notableRadios: [{ name: 'RTC / RCV', genre: '莫尔纳 / 科拉代拉', note: '佛得角国家广播。', url: 'https://a3.asurahosting.com:6980/radio.mp3', hls: false}],
   },
   {
     slug: 'mauritania', name: '毛里塔尼亚', nameEn: 'Mauritania', nameLocal: 'موريتانيا',
@@ -242,7 +242,7 @@ export const africa: Country[] = [
       { name: '穆拉图·阿斯塔特克', nameEn: 'Mulatu Astatke', role: '作曲家 / 颤音琴家', desc: '「Ethio-jazz 之父」，爵士与埃塞俄比亚传统间的桥梁。' },
       { name: '马哈茂德·艾哈迈德', nameEn: 'Mahmoud Ahmed', role: '歌手', desc: '埃塞俄比亚流行音乐的传奇之声。' },
     ],
-    notableRadios: [{ name: 'Fana FM / Sheger FM', genre: '埃塞俄比亚 / Ethio-jazz', note: '亚的斯亚贝巴的主流电台。' }],
+    notableRadios: [{ name: 'Fana FM / Sheger FM', genre: '埃塞俄比亚 / Ethio-jazz', note: '亚的斯亚贝巴的主流电台。', url: 'https://stream.zenolive.com/y91n1vtbaw5tv', hls: false}],
   },
   {
     slug: 'kenya', name: '肯尼亚', nameEn: 'Kenya',
@@ -260,7 +260,7 @@ export const africa: Country[] = [
     history: ['坦桑尼亚由坦噶尼喀与桑给巴尔联合而成，斯瓦希里语正是从这里走向整个东非。桑给巴尔岛的石头城融合了阿拉伯、印度与非洲的千年文明。'],
     music: ['坦桑尼亚的「塔拉布」（taarab）是海岸的招牌——融合阿拉伯旋律与斯瓦希里诗歌的精致音乐，桑给巴尔的塔拉布被列入人类非物质文化遗产；当代的「Bongo Flava」则是东非最流行的嘻哈与 R&B 曲风。'],
     musicians: [{ name: '比·基杜德', nameEn: 'Bi Kidude', role: '歌手', desc: '桑给巴尔的「塔拉布之母」，传奇的女歌手。' }],
-    notableRadios: [{ name: 'Clouds FM / Radio One', genre: 'Bongo Flava / 塔拉布', note: '达累斯萨拉姆的主流电台。' }],
+    notableRadios: [{ name: 'Clouds FM / Radio One', genre: 'Bongo Flava / 塔拉布', note: '达累斯萨拉姆的主流电台。', url: 'https://radioonetanzania.radioca.st/stream', hls: false}],
   },
   {
     slug: 'uganda', name: '乌干达', nameEn: 'Uganda',
@@ -269,7 +269,7 @@ export const africa: Country[] = [
     history: ['乌干达是「非洲明珠」，维多利亚湖与尼罗河源头在此交汇，布干达等古老王国留下了丰富的音乐与宫廷传统。'],
     music: ['乌干达的音乐传统多元：宫廷的鼓乐、东非的流行节奏与当代的「Kadongo Kamu」叙事歌谣并存；杰弗里·奥里耶马（Geoffrey Oryema）把乌干达的民谣与西方音乐融合，赢得了国际声誉。'],
     musicians: [{ name: '杰弗里·奥里耶马', nameEn: 'Geoffrey Oryema', role: '歌手', desc: '把乌干达民谣带向世界的音乐家。' }],
-    notableRadios: [{ name: 'Radio Simba / Capital FM', genre: '东非 / 流行', note: '坎帕拉的主流电台。' }],
+    notableRadios: [{ name: 'Radio Simba / Capital FM', genre: '东非 / 流行', note: '坎帕拉的主流电台。', url: 'https://capitalfm.cloudrad.io/stream', hls: false}],
   },
   {
     slug: 'rwanda', name: '卢旺达', nameEn: 'Rwanda', nameLocal: 'Rwanda',
@@ -359,7 +359,7 @@ export const africa: Country[] = [
     history: ['毛里求斯是印度洋上的多元文化岛国，印度裔、非洲裔、华裔与克里奥尔人和谐共处，路易港见证了殖民贸易的历史。'],
     music: ['毛里求斯的招牌是「赛加」（Sega）——以拉瓦纳（ravanne，手鼓）为特色的克里奥尔舞曲，被列入人类非物质文化遗产；卡亚（Kaya，约瑟夫·托皮泽）把毛里求斯的声音带向了世界。'],
     musicians: [{ name: '卡亚', nameEn: 'Kaya (Joseph Réginald Topize)', role: '歌手', desc: '毛里求斯赛加音乐的代表人物。' }],
-    notableRadios: [{ name: 'MBC Radio', genre: '赛加 / 克里奥尔', note: '毛里求斯国家广播。' }],
+    notableRadios: [{ name: 'MBC Radio', genre: '赛加 / 克里奥尔', note: '毛里求斯国家广播。', url: 'https://radio.mbconline.xyz/hls/radiomaurice.m3u8', hls: true}],
   },
 
   // ===== 中非 =====
@@ -385,7 +385,7 @@ export const africa: Country[] = [
       { name: '弗朗哥', nameEn: 'Franco (Luambo Makiadi)', role: '音乐家', desc: '刚果伦巴的巨人，其乐队 OK Jazz 定义了非洲流行乐。' },
       { name: '塔布·莱伊·罗谢罗', nameEn: 'Tabu Ley Rochereau', role: '歌手', desc: '刚果伦巴与苏库斯的传奇歌手。' },
     ],
-    notableRadios: [{ name: 'RTNC / Top Congo FM', genre: '伦巴 / 苏库斯', note: '金沙萨的主流电台。' }],
+    notableRadios: [{ name: 'RTNC / Top Congo FM', genre: '伦巴 / 苏库斯', note: '金沙萨的主流电台。', url: 'https://topcongofm2.ice.infomaniak.ch/topcongofm2-64.mp3', hls: false}],
   },
   {
     slug: 'congo', name: '刚果（布）', nameEn: 'Republic of the Congo', nameLocal: 'Congo',
@@ -463,7 +463,7 @@ export const africa: Country[] = [
       { name: '休·马塞凯拉', nameEn: 'Hugh Masekela', role: '爵士小号手', desc: '南非爵士的代表。' },
       { name: '雷帝史密斯·黑曼巴佐', nameEn: 'Ladysmith Black Mambazo', role: '合唱团', desc: '祖鲁无伴奏合唱的传奇，多次获格莱美。' },
     ],
-    notableRadios: [{ name: 'Metro FM / SAfm', genre: '南非 / 爵士', note: '南非主流音乐电台。' }],
+    notableRadios: [{ name: 'Metro FM / SAfm', genre: '南非 / 爵士', note: '南非主流音乐电台。', url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/METROFMAAC.aac', hls: false}],
   },
   {
     slug: 'namibia', name: '纳米比亚', nameEn: 'Namibia',
@@ -511,7 +511,7 @@ export const africa: Country[] = [
       { name: '托马斯·马普富莫', nameEn: 'Thomas Mapfumo', role: '音乐家', desc: '把姆比拉与绍纳传统带入现代流行乐的先驱。' },
       { name: '奥利弗·姆图库齐', nameEn: 'Oliver Mtukudzi', role: '歌手', desc: '津巴布韦最受爱戴的歌手之一。' },
     ],
-    notableRadios: [{ name: 'ZBC Radio / Star FM', genre: '绍纳 / 姆比拉', note: '哈拉雷的主流电台。' }],
+    notableRadios: [{ name: 'ZBC Radio / Star FM', genre: '绍纳 / 姆比拉', note: '哈拉雷的主流电台。', url: 'https://edge.iono.fm/xice/159_medium.aac', hls: false}],
   },
   {
     slug: 'zambia', name: '赞比亚', nameEn: 'Zambia',

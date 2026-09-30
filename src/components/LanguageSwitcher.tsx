@@ -23,6 +23,7 @@ interface ContentNode {
 type ContentBlob = Record<string, Record<string, ContentNode>>;
 
 let cachedBlob: ContentBlob | null = null;
+let cachedSnote: Record<string, Record<string, string>> | null = null;
 
 function readBlob(): ContentBlob | null {
   if (cachedBlob) return cachedBlob;
@@ -34,6 +35,18 @@ function readBlob(): ContentBlob | null {
     cachedBlob = null;
   }
   return cachedBlob;
+}
+
+function readStationNotesBlob(): Record<string, Record<string, string>> | null {
+  if (cachedSnote) return cachedSnote;
+  const el = document.getElementById('station-notes-blob');
+  if (!el) return null;
+  try {
+    cachedSnote = JSON.parse(el.textContent || '{}');
+  } catch {
+    cachedSnote = null;
+  }
+  return cachedSnote;
 }
 
 /** 根据 data-ct 字段取某语言下的内容值 */
@@ -104,13 +117,21 @@ function applyLabels(lang: Lang) {
 
 function applyContent(lang: Lang) {
   const blob = readBlob();
-  if (!blob) return;
+  const snote = readStationNotesBlob();
+  if (!blob && !snote) return;
   document.querySelectorAll<HTMLElement>('[data-ct]').forEach((el) => {
     const ct = el.getAttribute('data-ct');
-    const slug = el.getAttribute('data-slug');
-    const idx = parseInt(el.getAttribute('data-idx') || '0', 10);
-    if (!ct || !slug) return;
-    const val = resolveContent(blob, lang, slug, ct, idx);
+    if (!ct) return;
+    let val: string | undefined;
+    if (ct === 'r-snote') {
+      const key = el.getAttribute('data-note-key') || '';
+      val = snote?.[lang]?.[key];
+    } else {
+      const slug = el.getAttribute('data-slug');
+      const idx = parseInt(el.getAttribute('data-idx') || '0', 10);
+      if (!slug || !blob) return;
+      val = resolveContent(blob, lang, slug, ct, idx);
+    }
     if (val !== undefined && val !== '') {
       el.textContent = val;
     }

@@ -27,8 +27,8 @@ export const oceania: Country[] = [
       { name: 'AC/DC', nameEn: 'AC/DC', role: '摇滚乐队', desc: '澳大利亚最成功的摇滚乐队，《Back in Black》是史上销量最高的专辑之一。' },
     ],
     notableRadios: [
-      { name: 'ABC Classic', genre: '古典', note: '澳大利亚广播公司的古典频道，南半球最重要的古典电台。' },
-      { name: 'Double J', genre: '独立 / 多元', note: '澳大利亚广播的音乐频道，聚焦独立音乐。' },
+      { name: 'ABC Classic', genre: '古典', note: '澳大利亚广播公司的古典频道，南半球最重要的古典电台。', url: 'https://mediaserviceslive.akamaized.net/hls/live/2038316/classicfmnsw/masterhq.m3u8', hls: true},
+      { name: 'Double J', genre: '独立 / 多元', note: '澳大利亚广播的音乐频道，聚焦独立音乐。', url: 'https://mediaserviceslive.akamaized.net/hls/live/2108567/doublejnsw/v0-221.m3u8', hls: true},
     ],
   },
   {
@@ -56,8 +56,8 @@ export const oceania: Country[] = [
       { name: '洛德', nameEn: 'Lorde', role: '歌手', desc: '新西兰新生代唱作人代表，《Royals》获得格莱美奖。' },
     ],
     notableRadios: [
-      { name: 'RNZ Concert', genre: '古典', note: '新西兰广播的古典频道。' },
-      { name: 'RNZ National', genre: '综合 / 文化', note: '新西兰广播的全国频道，兼播毛利音乐。' },
+      { name: 'RNZ Concert', genre: '古典', note: '新西兰广播的古典频道。', url: 'https://stream-ice.radionz.co.nz/concert_aac64', hls: false},
+      { name: 'RNZ National', genre: '综合 / 文化', note: '新西兰广播的全国频道，兼播毛利音乐。', url: 'https://stream-ice.radionz.co.nz/national_aac64', hls: false},
     ],
   },
   {
