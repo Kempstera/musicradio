@@ -2680,6 +2680,11 @@
         "note": "全印广播的南印度古典音乐频道。"
       },
       {
+        "name": "AIR Vividh Bharati",
+        "genre": "宝莱坞 / 电影音乐",
+        "note": "全印广播（AIR）著名的电影音乐频道，播放宝莱坞金曲。"
+      },
+      {
         "name": "Radio City / AIR FM",
         "genre": "综合 / 宝莱坞",
         "note": "印度主流 FM 电台，播放宝莱坞与流行音乐。"
@@ -3648,8 +3653,19 @@
         "desc": "被誉为「阿富汗猫王」，其歌声是阿富汗几代人的共同记忆。"
       }
     ],
-    "radios": [],
-    "radioNote": "受局势影响，阿富汗目前无稳定可访问的在线音乐流，暂无法提供在线播放。"
+    "radios": [
+      {
+        "name": "Ariana FM",
+        "genre": "流行 / 综合",
+        "note": "喀布尔的主流商业电台，播放阿富汗流行与传统音乐。"
+      },
+      {
+        "name": "Begum FM",
+        "genre": "综合 / 女性",
+        "note": "喀布尔以女性议题与音乐为主的电台。"
+      }
+    ],
+    "radioNote": ""
   },
   "bangladesh": {
     "name": "孟加拉国",
@@ -3676,6 +3692,11 @@
       }
     ],
     "radios": [
+      {
+        "name": "Radio Foorti",
+        "genre": "流行",
+        "note": "孟加拉国最大的商业音乐电台网络。"
+      },
       {
         "name": "Bangladesh Betar",
         "genre": "综合 / 罗宾德拉",
@@ -3723,8 +3744,19 @@
         "desc": "以大鼓、合唱与舞蹈为核心的马尔代夫传统音乐，热情奔放。"
       }
     ],
-    "radios": [],
-    "radioNote": "马尔代夫岛国的广播以旅游与综合节目为主，目前无稳定可访问的在线音乐流。"
+    "radios": [
+      {
+        "name": "Dhivehi Raajjeyge Adu",
+        "genre": "综合 / 迪维希",
+        "note": "马尔代夫之声，国家广播的主频道。"
+      },
+      {
+        "name": "Dhivehi FM",
+        "genre": "流行 / 迪维希",
+        "note": "马尔代夫国家媒体旗下的娱乐音乐频道。"
+      }
+    ],
+    "radioNote": ""
   },
   "nepal": {
     "name": "尼泊尔",
@@ -3749,6 +3781,11 @@
         "name": "Radio Nepal",
         "genre": "综合 / 洛卡",
         "note": "尼泊尔国家广播，播放民间音乐与流行歌曲。"
+      },
+      {
+        "name": "Kantipur FM",
+        "genre": "流行 / 综合",
+        "note": "尼泊尔主要的商业电台，播放流行音乐。"
       }
     ],
     "radioNote": ""
@@ -3782,6 +3819,11 @@
         "name": "Radio Pakistan",
         "genre": "综合 / 加扎尔",
         "note": "巴基斯坦国家广播，播放加扎尔与古典音乐。"
+      },
+      {
+        "name": "FM 101",
+        "genre": "娱乐 / 流行",
+        "note": "巴基斯坦广播公司旗下的娱乐频道，播放流行与娱乐节目。"
       }
     ],
     "radioNote": ""
@@ -3805,6 +3847,16 @@
       }
     ],
     "radios": [
+      {
+        "name": "Hiru FM",
+        "genre": "流行 / 僧伽罗",
+        "note": "斯里兰卡最受欢迎的僧伽罗语音乐电台之一。"
+      },
+      {
+        "name": "Sun FM",
+        "genre": "流行",
+        "note": "斯里兰卡的当代流行音乐电台。"
+      },
       {
         "name": "Sri Lanka Broadcasting Corporation",
         "genre": "综合 / 拜拉",

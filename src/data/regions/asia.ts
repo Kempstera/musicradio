@@ -243,7 +243,8 @@ export const asia: Country[] = [
       { name: 'A.R. 拉赫曼', nameEn: 'A.R. Rahman', role: '作曲家', desc: '《贫民窟的百万富翁》奥斯卡配乐得主，宝莱坞音乐的国际名片。' },
     ],
     notableRadios: [
-      { name: 'All India Radio - Raagam', genre: '卡纳提克古典', note: '全印广播的南印度古典音乐频道。' },
+      { name: 'All India Radio - Raagam', genre: '卡纳提克古典', note: '全印广播的南印度古典音乐频道。', url: 'https://airhlspush.pc.cdn.bitgravity.com/httppush/hlspbaudioragam/hlspbaudioragam_Auto.m3u8', hls: true },
+      { name: 'AIR Vividh Bharati', genre: '宝莱坞 / 电影音乐', note: '全印广播（AIR）著名的电影音乐频道，播放宝莱坞金曲。', url: 'https://air.pc.cdn.bitgravity.com/air/live/pbaudio001/playlist.m3u8', hls: true },
       { name: 'Radio City / AIR FM', genre: '综合 / 宝莱坞', note: '印度主流 FM 电台，播放宝莱坞与流行音乐。', url: 'https://airhlspush.pc.cdn.bitgravity.com/httppush/hlspbaudio005/hlspbaudio00564kbps.m3u8', hls: true},
     ],
   },
@@ -1045,7 +1046,10 @@ export const asia: Country[] = [
       { name: '乌斯塔德·穆罕默德·奥马尔', nameEn: 'Ustad Mohammad Omar', role: '鲁巴布演奏家', desc: '阿富汗鲁巴布琴的大师，其演奏被广泛录音传世。' },
       { name: '艾哈迈德·查希尔', nameEn: 'Ahmad Zahir', role: '歌手', desc: '被誉为「阿富汗猫王」，其歌声是阿富汗几代人的共同记忆。' },
     ],
-    radioNote: '受局势影响，阿富汗目前无稳定可访问的在线音乐流，暂无法提供在线播放。',
+    notableRadios: [
+      { name: 'Ariana FM', genre: '流行 / 综合', note: '喀布尔的主流商业电台，播放阿富汗流行与传统音乐。', url: 'https://streams.radio.co/sa3345aaa8/listen', hls: false },
+      { name: 'Begum FM', genre: '综合 / 女性', note: '喀布尔以女性议题与音乐为主的电台。', url: 'https://s5.radio.co/se6264cb34/listen', hls: false },
+    ],
   },
   {
     slug: 'bangladesh',
@@ -1070,7 +1074,10 @@ export const asia: Country[] = [
       { name: '罗宾德拉纳特·泰戈尔', nameEn: 'Rabindranath Tagore', role: '诗人 / 作曲家', desc: '诺贝尔文学奖得主，创作了数千首歌曲，是孟加拉音乐的灵魂人物。' },
       { name: '拉隆·沙', nameEn: 'Lalon Shah', role: '鲍尔诗人', desc: '孟加拉最伟大的神秘主义诗人与歌者，其思想影响深远。' },
     ],
-    notableRadios: [{ name: 'Bangladesh Betar', genre: '综合 / 罗宾德拉', note: '孟加拉国家广播，播放罗宾德拉音乐与民间音乐。' }],
+    notableRadios: [
+      { name: 'Radio Foorti', genre: '流行', note: '孟加拉国最大的商业音乐电台网络。', url: 'https://radiofoorti.fm/api/stream', hls: false },
+      { name: 'Bangladesh Betar', genre: '综合 / 罗宾德拉', note: '孟加拉国家广播，播放罗宾德拉音乐与民间音乐。' },
+    ],
   },
   {
     slug: 'bhutan',
@@ -1118,7 +1125,10 @@ export const asia: Country[] = [
     musicians: [
       { name: '博杜贝鲁鼓乐团', nameEn: 'Boduberu Ensemble', role: '传统乐团', desc: '以大鼓、合唱与舞蹈为核心的马尔代夫传统音乐，热情奔放。' },
     ],
-    radioNote: '马尔代夫岛国的广播以旅游与综合节目为主，目前无稳定可访问的在线音乐流。',
+    notableRadios: [
+      { name: 'Dhivehi Raajjeyge Adu', genre: '综合 / 迪维希', note: '马尔代夫之声，国家广播的主频道。', url: 'https://radio.psm.mv/draair', hls: false },
+      { name: 'Dhivehi FM', genre: '流行 / 迪维希', note: '马尔代夫国家媒体旗下的娱乐音乐频道。', url: 'https://radio.psm.mv/fmair', hls: false },
+    ],
   },
   {
     slug: 'nepal',
@@ -1142,7 +1152,10 @@ export const asia: Country[] = [
     musicians: [
       { name: '纳拉扬·戈帕尔', nameEn: 'Narayan Gopal', role: '歌手', desc: '被称为「尼泊尔之声」，是尼泊尔现代音乐史上最受爱戴的歌唱家。' },
     ],
-    notableRadios: [{ name: 'Radio Nepal', genre: '综合 / 洛卡', note: '尼泊尔国家广播，播放民间音乐与流行歌曲。' }],
+    notableRadios: [
+      { name: 'Radio Nepal', genre: '综合 / 洛卡', note: '尼泊尔国家广播，播放民间音乐与流行歌曲。', url: 'https://stream1.radionepal.gov.np/live', hls: false },
+      { name: 'Kantipur FM', genre: '流行 / 综合', note: '尼泊尔主要的商业电台，播放流行音乐。', url: 'https://radio-broadcast.ekantipur.com/stream', hls: false },
+    ],
   },
   {
     slug: 'pakistan',
@@ -1167,7 +1180,10 @@ export const asia: Country[] = [
       { name: '努斯拉特·法塔赫·阿里·汗', nameEn: 'Nusrat Fateh Ali Khan', role: '卡瓦利歌唱家', desc: '卡瓦利音乐最伟大的歌唱家，其嗓音震撼世界乐坛。' },
       { name: '阿卜杜拉·易卜拉欣', nameEn: 'Abida Parveen', role: '苏菲歌唱家', desc: '巴基斯坦最受尊崇的苏菲女歌唱家，演唱加扎尔与卡瓦利。' },
     ],
-    notableRadios: [{ name: 'Radio Pakistan', genre: '综合 / 加扎尔', note: '巴基斯坦国家广播，播放加扎尔与古典音乐。' }],
+    notableRadios: [
+      { name: 'Radio Pakistan', genre: '综合 / 加扎尔', note: '巴基斯坦国家广播，播放加扎尔与古典音乐。', url: 'https://whmsonic.radio.gov.pk:7003/stream', hls: false },
+      { name: 'FM 101', genre: '娱乐 / 流行', note: '巴基斯坦广播公司旗下的娱乐频道，播放流行与娱乐节目。', url: 'https://whmsonic.radio.gov.pk:7008/stream', hls: false },
+    ],
   },
   {
     slug: 'sri-lanka',
@@ -1191,6 +1207,10 @@ export const asia: Country[] = [
     musicians: [
       { name: '斯里兰卡康提鼓乐团', nameEn: 'Kandyan Drum Ensemble', role: '传统乐团', desc: '以康提鼓为核心的斯里兰卡仪式与节庆鼓乐。' },
     ],
-    notableRadios: [{ name: 'Sri Lanka Broadcasting Corporation', genre: '综合 / 拜拉', note: '斯里兰卡国家广播，播放拜拉与僧伽罗音乐。' }],
+    notableRadios: [
+      { name: 'Hiru FM', genre: '流行 / 僧伽罗', note: '斯里兰卡最受欢迎的僧伽罗语音乐电台之一。', url: 'https://radio.lotustechnologieslk.net:2020/stream/hirufmgarden/stream/1/', hls: false },
+      { name: 'Sun FM', genre: '流行', note: '斯里兰卡的当代流行音乐电台。', url: 'https://radio.lotustechnologieslk.net:2020/stream/sunfmgarden', hls: false },
+      { name: 'Sri Lanka Broadcasting Corporation', genre: '综合 / 拜拉', note: '斯里兰卡国家广播，播放拜拉与僧伽罗音乐。' },
+    ],
   },
 ];
