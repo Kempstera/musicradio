@@ -5212,6 +5212,17 @@
   ],
   "JP": [
     {
+      "name": "Retro PC GAME MUSIC Streaming Radio",
+      "url": "http://gyusyabu.ddo.jp:8000/",
+      "homepage": "http://gyusyabu.ddo.jp/MP3/MP3.html",
+      "codec": "MP3",
+      "bitrate": 256,
+      "hls": false,
+      "tags": "chiptune,retro games,soundtracks,video game",
+      "votes": 2397,
+      "countrycode": "JP"
+    },
+    {
       "name": "Gensokyo Radio",
       "url": "https://stream.gensokyoradio.net/3",
       "homepage": "https://gensokyoradio.net/",
@@ -5219,7 +5230,7 @@
       "bitrate": 256,
       "hls": false,
       "tags": "anime,touhou",
-      "votes": 2393,
+      "votes": 2394,
       "countrycode": "JP"
     },
     {
@@ -5230,7 +5241,18 @@
       "bitrate": 192,
       "hls": false,
       "tags": "jpop",
-      "votes": 3350,
+      "votes": 3352,
+      "countrycode": "JP"
+    },
+    {
+      "name": "Free FM Tokyo",
+      "url": "https://rocafmadrid.radioca.st/",
+      "homepage": "http://freefmradio.net/",
+      "codec": "MP3",
+      "bitrate": 320,
+      "hls": false,
+      "tags": "free fm,free japan music,musica,tokyo",
+      "votes": 1616,
       "countrycode": "JP"
     },
     {
@@ -5241,7 +5263,40 @@
       "bitrate": 128,
       "hls": false,
       "tags": "japanese,japanese music,jazz",
-      "votes": 7655,
+      "votes": 7661,
+      "countrycode": "JP"
+    },
+    {
+      "name": "Anime Para Ti",
+      "url": "https://stream.zeno.fm/qpn8mkt8c4duv",
+      "homepage": "https://www.facebook.com/radioanimeparati",
+      "codec": "MP3",
+      "bitrate": 128,
+      "hls": false,
+      "tags": "anime,anime openings,jpop,music",
+      "votes": 4884,
+      "countrycode": "JP"
+    },
+    {
+      "name": "J1 Gold (HTTP)",
+      "url": "http://jenny.torontocast.com:8062/",
+      "homepage": "https://en.j1fm.tokyo/",
+      "codec": "MP3",
+      "bitrate": 128,
+      "hls": false,
+      "tags": "jpop",
+      "votes": 2109,
+      "countrycode": "JP"
+    },
+    {
+      "name": "Free FM 80 Tokyo",
+      "url": "https://freefm80.radioca.st/",
+      "homepage": "http://www.freefmworld.com/",
+      "codec": "MP3",
+      "bitrate": 320,
+      "hls": false,
+      "tags": "#80s,#freefm,#freefm80s",
+      "votes": 1507,
       "countrycode": "JP"
     },
     {
@@ -5252,7 +5307,7 @@
       "bitrate": 0,
       "hls": false,
       "tags": "anime,jpop",
-      "votes": 2253,
+      "votes": 2254,
       "countrycode": "JP"
     },
     {
@@ -5263,7 +5318,7 @@
       "bitrate": 128,
       "hls": false,
       "tags": "classic jazz,hawaiian music,pop,smooth jazz",
-      "votes": 1694,
+      "votes": 1695,
       "countrycode": "JP"
     },
     {
@@ -5274,7 +5329,18 @@
       "bitrate": 96,
       "hls": false,
       "tags": "enka,japan,japanese,jpop,kayokyoku,talk radio",
-      "votes": 1715,
+      "votes": 1716,
+      "countrycode": "JP"
+    },
+    {
+      "name": "J1 Hits (HTTP)",
+      "url": "http://jenny.torontocast.com:8056/",
+      "homepage": "https://en.j1fm.tokyo/",
+      "codec": "MP3",
+      "bitrate": 128,
+      "hls": false,
+      "tags": "",
+      "votes": 1281,
       "countrycode": "JP"
     }
   ],
@@ -5288,6 +5354,105 @@
       "hls": false,
       "tags": "kpop",
       "votes": 2765,
+      "countrycode": "KR"
+    },
+    {
+      "name": "Big B Radio - Kpop",
+      "url": "https://antares.dribbcast.com/proxy/kpop?mp=/s",
+      "homepage": "https://bigbradio.net/kpop",
+      "codec": "MP3",
+      "bitrate": 192,
+      "hls": false,
+      "tags": "music,pop",
+      "votes": 2670,
+      "countrycode": "KR"
+    },
+    {
+      "name": "Oldpop Cafe",
+      "url": "http://cast.oldpopcafe.net:7080/",
+      "homepage": "https://oldpopcafe.net/",
+      "codec": "MP3",
+      "bitrate": 128,
+      "hls": false,
+      "tags": "oldies,pop music,popular music",
+      "votes": 2072,
+      "countrycode": "KR"
+    },
+    {
+      "name": "KBS Classic FM",
+      "url": "https://1fm.gscdn.kbs.co.kr/1fm_192_2.m3u8?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly8xZm0uZ3NjZG4ua2JzLmNvLmtyLyoiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTA1NTQ4MDR9fX1dfQ__&Key-Pair-Id=APKAICDSGT3Y7IXGJ3TA&Signature=O7UfiqBLJ9CxvIOA1BxIt6J85JLTqnF0GxFJvpcpWpnxydJXtTBeIBtI~A1kSnqK6~YroSdlY6~d970e3KGtO7jqA5qe2ZPe2TvP5cDK5sIvUtHrFGwyQyAsdwODPf8ZP9gZLwIwJAePPplihjYNKjYhrwFW~F9Rbl71yTzLA2eNF0xFey06npu~QwU~SLiM9q1x-QdXmO7KL2fDcD7ZY3NbC4J5iB~YSL48WDKEoDRXuwN8FUF40dLLQg3hxsv68shuK4TQxM9ZdV72EXz~O880sXvUXWRdT4NlXAB~PRp2LtuitLQHRtHNYMGF~8HS6-BoY89pBVWVmGnklFUU8g__",
+      "homepage": "http://www.kbs.co.kr/",
+      "codec": "UNKNOWN",
+      "bitrate": 0,
+      "hls": true,
+      "tags": "",
+      "votes": 2155,
+      "countrycode": "KR"
+    },
+    {
+      "name": "MBC FM4U",
+      "url": "https://minimw.imbc.com/dmfm/_definst_/mfm.stream/playlist.m3u8?_lsu_sa_=6101C112D3AB32E4514FF54C3BF16D4C457534B5D806C2F830001Ca4F6CC3866A6a1735F32D2C34520EC3A4148b131A31110A47CBB3F0AA4BD5EC9E41FA237A602419FE8894C2B8C92164A79864A3E05B4DA9D604C55DBDE5BF45552771DF9878AC2FE35C58EE24E17CB4923166DF388",
+      "homepage": "http://www.imbc.com/",
+      "codec": "AAC",
+      "bitrate": 65,
+      "hls": true,
+      "tags": "",
+      "votes": 1561,
+      "countrycode": "KR"
+    },
+    {
+      "name": "MBC FM",
+      "url": "https://minisw.imbc.com/dsfm/_definst_/sfm.stream/playlist.m3u8?_lsu_sa_=60514C1BA3EB33C42D4525A53CB1704D65F83BD50A0D42F73A90EEaE46E53D069DaF430A34120E40307D3831FAb2219C105EDA095DD55BBC75F24E27120D11CE0F58D93499A264D660706588F4EAB8CB223B6C610A7484CA104433DDA3BB5CF0E7810F6DFA9E356D98627626A762F076",
+      "homepage": "http://www.imbc.com/",
+      "codec": "AAC",
+      "bitrate": 65,
+      "hls": true,
+      "tags": "",
+      "votes": 1326,
+      "countrycode": "KR"
+    },
+    {
+      "name": "SBS Power FM",
+      "url": "https://radiolive.sbs.co.kr/powerpc/powerfm.stream/playlist.m3u8?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3OTA0Mzk2MDYsInBhdGgiOiIvcG93ZXJmbS5zdHJlYW0iLCJkdXJhdGlvbiI6LTEsInVubyI6IjVlYmUyZTlmLWQ0MDUtNDNhYy1iN2NkLWVhNjMyNWU4OGUyYiIsImlhdCI6MTc5MDM5NjQwNn0.AQDGfwbX5B0uWs-AZ-O-hCbpk-fPl-SbPSCBqtr81Kw",
+      "homepage": "https://www.sbs.co.kr/",
+      "codec": "AAC",
+      "bitrate": 145,
+      "hls": true,
+      "tags": "",
+      "votes": 920,
+      "countrycode": "KR"
+    },
+    {
+      "name": "Arirang Radio",
+      "url": "http://amdlive.ctnd.com.edgesuite.net/arirang_3ch/smil:arirang_3ch.smil/playlist.m3u8",
+      "homepage": "https://arirang.com/radio",
+      "codec": "UNKNOWN",
+      "bitrate": 656,
+      "hls": true,
+      "tags": "",
+      "votes": 309,
+      "countrycode": "KR"
+    },
+    {
+      "name": "SBS Love FM",
+      "url": "https://radiolive.sbs.co.kr/lovepc/lovefm.stream/playlist.m3u8?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3OTA0NzIwMTEsInBhdGgiOiIvbG92ZWZtLnN0cmVhbSIsImR1cmF0aW9uIjotMSwidW5vIjoiYmJiYjM2NmMtMWI1OS00ZDBiLTgyNjEtOWUzY2IwYzdiYzk1IiwiaWF0IjoxNzkwNDI4ODExfQ.zXF2gZvNh85tLNN3FYDEcBvN_NDKbPHwpsq543yVC9k",
+      "homepage": "https://www.sbs.co.kr/",
+      "codec": "AAC",
+      "bitrate": 146,
+      "hls": true,
+      "tags": "",
+      "votes": 556,
+      "countrycode": "KR"
+    },
+    {
+      "name": "CBS 음악 FM",
+      "url": "https://m-aac.cbs.co.kr/cbs939/_definst_/cbs939.stream/playlist.m3u8",
+      "homepage": "",
+      "codec": "AAC",
+      "bitrate": 96,
+      "hls": true,
+      "tags": "",
+      "votes": 538,
       "countrycode": "KR"
     }
   ],
@@ -11507,6 +11672,109 @@
       "tags": "easy listening",
       "votes": 178,
       "countrycode": "MZ"
+    }
+  ],
+  "MN": [
+    {
+      "name": "MGL Radio",
+      "url": "http://stream17.shoutcastsolutions.com:8096/",
+      "homepage": "http://mglradio.com/",
+      "codec": "MP3",
+      "bitrate": 128,
+      "hls": false,
+      "tags": "",
+      "votes": 1424,
+      "countrycode": "MN"
+    },
+    {
+      "name": "Mongolian Music Radio",
+      "url": "http://65.108.143.81:7700/1",
+      "homepage": "https://www.radiosons.com/",
+      "codec": "MP3",
+      "bitrate": 128,
+      "hls": false,
+      "tags": "electro,pop,rock,top 40",
+      "votes": 299,
+      "countrycode": "MN"
+    },
+    {
+      "name": "Elgen Nutag",
+      "url": "https://a6.asurahosting.com:7210/radio.mp3",
+      "homepage": "",
+      "codec": "MP3",
+      "bitrate": 128,
+      "hls": false,
+      "tags": "culture,folk,music,radio books,talk",
+      "votes": 13,
+      "countrycode": "MN"
+    },
+    {
+      "name": "Ehlelradio",
+      "url": "https://stream.zeno.fm/c6cvywws538uv",
+      "homepage": "",
+      "codec": "MP3",
+      "bitrate": 128,
+      "hls": false,
+      "tags": "music,news,talk",
+      "votes": 10,
+      "countrycode": "MN"
+    },
+    {
+      "name": "Xadun 107.5",
+      "url": "https://stream.zeno.fm/z3sbdspshrhvv",
+      "homepage": "",
+      "codec": "MP3",
+      "bitrate": 128,
+      "hls": false,
+      "tags": "news,oldies,pop,rock,talk",
+      "votes": 7,
+      "countrycode": "MN"
+    }
+  ],
+  "KP": [
+    {
+      "name": "Pyongyang FM 105.2 (평양FM 平壤调频)",
+      "url": "https://listen7.myradio24.com/69366",
+      "homepage": "https://kfaspain.es/emisora-central-de-corea-pyongyang-fm/",
+      "codec": "MP3",
+      "bitrate": 128,
+      "hls": false,
+      "tags": "news music",
+      "votes": 802,
+      "countrycode": "KP"
+    },
+    {
+      "name": "KCBS 조선중앙방송 (Korean Central Broadcasting)",
+      "url": "https://stream.intchoson.com/kcbs/main_stream.m3u8",
+      "homepage": "http://www.kcna.kp/en",
+      "codec": "UNKNOWN",
+      "bitrate": 0,
+      "hls": true,
+      "tags": "information",
+      "votes": 6,
+      "countrycode": "KP"
+    },
+    {
+      "name": "Voice of Korea 조선의 소리 (朝鲜之声)",
+      "url": "https://stream.intchoson.com/vok/main_stream.m3u8",
+      "homepage": "https://www.vok.rep.kp/index.php/home/main/ch",
+      "codec": "UNKNOWN",
+      "bitrate": 0,
+      "hls": true,
+      "tags": "information,international",
+      "votes": 4,
+      "countrycode": "KP"
+    },
+    {
+      "name": "Voice of Korea (Русский 俄语)",
+      "url": "https://listen4.myradio24.com/60315",
+      "homepage": "http://www.vok.rep.kp/index.php/home/main/ru",
+      "codec": "MP3",
+      "bitrate": 320,
+      "hls": false,
+      "tags": "",
+      "votes": 396,
+      "countrycode": "KP"
     }
   ]
 }

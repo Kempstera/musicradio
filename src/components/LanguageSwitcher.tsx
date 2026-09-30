@@ -132,6 +132,19 @@ export default function LanguageSwitcher() {
     const initial = getInitialLang();
     setLang(initial);
     applyLang(initial);
+
+    // 处理浏览器「后退/前进」从 bfcache（往返缓存）恢复页面的情况：
+    // 此时 React 不会重新水合、useEffect 不再执行，DOM 仍停留在缓存时的语言，
+    // 但 localStorage 可能已变化 —— 需按当前存储值重新应用语言。
+    const onShow = (e: PageTransitionEvent) => {
+      if (e.persisted) {
+        const cur = getInitialLang();
+        setLang(cur);
+        applyLang(cur);
+      }
+    };
+    window.addEventListener('pageshow', onShow);
+    return () => window.removeEventListener('pageshow', onShow);
   }, []);
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {

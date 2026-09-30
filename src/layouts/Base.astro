@@ -19,6 +19,18 @@ const desc = description || SITE_DESCRIPTION;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // 尽早按 localStorage 设置 <html lang>，避免 SSR 中文 → 用户已选语言的错位与闪烁
+      (function () {
+        try {
+          var s = window.localStorage.getItem('mr_lang');
+          var langs = ['zh-CN', 'zh-TW', 'en', 'cy', 'fr', 'de', 'it', 'es'];
+          if (s && langs.indexOf(s) >= 0) {
+            document.documentElement.setAttribute('lang', s);
+          }
+        } catch (e) {}
+      })();
+    </script>
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
