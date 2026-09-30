@@ -1202,61 +1202,6 @@
       "countrycode": "HR"
     },
     {
-      "name": "Radio Deejay HR",
-      "url": "http://live.deejay.hr:7002/;",
-      "homepage": "http://www.deejay.hr/",
-      "codec": "MP3",
-      "bitrate": 192,
-      "hls": false,
-      "tags": "dance,electronica,pop",
-      "votes": 7283,
-      "countrycode": "HR"
-    },
-    {
-      "name": "Radio Banovina",
-      "url": "http://stream1.radio-banovina.hr:8008/;",
-      "homepage": "http://www.radio-banovina.hr/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "folk",
-      "votes": 15215,
-      "countrycode": "HR"
-    },
-    {
-      "name": "Radio stubica",
-      "url": "http://radiostubica.hc.hr:7006/stream",
-      "homepage": "https://radio-stubica.hr/",
-      "codec": "AAC+",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "folklore,pop music",
-      "votes": 2968,
-      "countrycode": "HR"
-    },
-    {
-      "name": "Extra FM",
-      "url": "http://streams.extrafm.hr:8110/;",
-      "homepage": "https://extrafm.hr/",
-      "codec": "AAC+",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "folk",
-      "votes": 17314,
-      "countrycode": "HR"
-    },
-    {
-      "name": "Antena Zagreb Uživo",
-      "url": "http://live.antenazagreb.hr:8002/;",
-      "homepage": "http://www.antenazagreb.hr/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "",
-      "votes": 6243,
-      "countrycode": "HR"
-    },
-    {
       "name": "Top Radio",
       "url": "https://c5.hostingcentar.com/streams/topradio/",
       "homepage": "https://topradio.hr/",
@@ -1265,39 +1210,6 @@
       "hls": false,
       "tags": "",
       "votes": 4396,
-      "countrycode": "HR"
-    },
-    {
-      "name": "Bravo",
-      "url": "http://c5.hostingcentar.com:8059/stream",
-      "homepage": "https://br.hr/",
-      "codec": "AAC+",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "croatian,international",
-      "votes": 3985,
-      "countrycode": "HR"
-    },
-    {
-      "name": "Radio Dalmacija",
-      "url": "http://shoutcast.pondi.hr:8000/;",
-      "homepage": "https://www.radiodalmacija.hr/",
-      "codec": "AAC+",
-      "bitrate": 72,
-      "hls": false,
-      "tags": "dalmatia,hits,pop,regional,split",
-      "votes": 8571,
-      "countrycode": "HR"
-    },
-    {
-      "name": "HRT HR 1 - Prvi program",
-      "url": "http://28503.live.streamtheworld.com:3690/PROGRAM1AAC_SC",
-      "homepage": "http://radio.hrt.hr/prvi-program/",
-      "codec": "AAC+",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "",
-      "votes": 4628,
       "countrycode": "HR"
     },
     {
@@ -1728,7 +1640,7 @@
   "DK": [
     {
       "name": "Classic FM",
-      "url": "http://webradio.classicfm.dk/classichorsens",
+      "url": "https://webradio.classicfm.dk/classichorsens",
       "homepage": "http://classicfm.dk/",
       "codec": "MP3",
       "bitrate": 192,
@@ -1739,7 +1651,7 @@
     },
     {
       "name": "DR P1",
-      "url": "http://live-icy.gss.dr.dk/A/A03H.mp3",
+      "url": "https://live-icy.gss.dr.dk/A/A03H.mp3",
       "homepage": "http://www.dr.dk/p1",
       "codec": "MP3",
       "bitrate": 128,
@@ -1750,7 +1662,7 @@
     },
     {
       "name": "Vinylhits.dk",
-      "url": "http://stream.vinylhits.dk/vinylmp3",
+      "url": "https://stream.vinylhits.dk/vinylmp3",
       "homepage": "https://vinylhits.dk/",
       "codec": "MP3",
       "bitrate": 0,
@@ -1761,7 +1673,7 @@
     },
     {
       "name": "PartyFM",
-      "url": "http://stream.partyfm.dk/Party320/",
+      "url": "https://stream.partyfm.dk/Party320/",
       "homepage": "https://www.partyfm.dk/",
       "codec": "MP3",
       "bitrate": 320,
@@ -1772,7 +1684,7 @@
     },
     {
       "name": "DR P4 København",
-      "url": "http://live-icy.dr.dk/A/A08H.mp3",
+      "url": "https://live-icy.dr.dk/A/A08H.mp3",
       "homepage": "http://www.dr.dk/p4kbh",
       "codec": "MP3",
       "bitrate": 128,
@@ -1783,7 +1695,7 @@
     },
     {
       "name": "Limfjord Plus Slager",
-      "url": "http://media.limfjordnetradio.dk/plusslager128",
+      "url": "https://media.limfjordnetradio.dk/plusslager128",
       "homepage": "http://www.limfjordplus.dk/",
       "codec": "MP3",
       "bitrate": 128,
@@ -1794,7 +1706,7 @@
     },
     {
       "name": "DR P3",
-      "url": "http://live-icy.dr.dk/A/A05H.mp3",
+      "url": "https://live-icy.dr.dk/A/A05H.mp3",
       "homepage": "http://www.dr.dk/p3",
       "codec": "MP3",
       "bitrate": 128,
@@ -1805,7 +1717,7 @@
     },
     {
       "name": "Retro Radio",
-      "url": "http://stream128.retro-radio.dk/retro",
+      "url": "https://stream128.retro-radio.dk/retro",
       "homepage": "http://www.retro-radio.dk/",
       "codec": "AAC+",
       "bitrate": 128,
@@ -1816,7 +1728,7 @@
     },
     {
       "name": "Radio Soft",
-      "url": "http://tx-bauerdk.sharp-stream.com/http_live.php?i=radiosoft_dk_mp3",
+      "url": "https://tx-bauerdk.sharp-stream.com/http_live.php?i=radiosoft_dk_mp3",
       "homepage": "http://www.radioplay.dk/radiosoft",
       "codec": "MP3",
       "bitrate": 128,
@@ -1827,7 +1739,7 @@
     },
     {
       "name": "Skala FM",
-      "url": "http://webradio.skala.fm/kolding",
+      "url": "https://webradio.skala.fm/kolding",
       "homepage": "http://www.skala.fm/",
       "codec": "MP3",
       "bitrate": 192,
@@ -1838,7 +1750,7 @@
     },
     {
       "name": "DR P8 JAZZ",
-      "url": "http://live-icy.dr.dk/A/A22H.mp3",
+      "url": "https://live-icy.dr.dk/A/A22H.mp3",
       "homepage": "http://www.dr.dk/p8jazz",
       "codec": "MP3",
       "bitrate": 128,
@@ -1849,7 +1761,7 @@
     },
     {
       "name": "DR P5",
-      "url": "http://live-icy.dr.dk/A/A25H.mp3",
+      "url": "https://live-icy.dr.dk/A/A25H.mp3",
       "homepage": "http://www.dr.dk/p5",
       "codec": "MP3",
       "bitrate": 128,
@@ -3169,72 +3081,6 @@
   ],
   "IS": [
     {
-      "name": "Bylgjan 98.9 Reykjavik",
-      "url": "http://icecast.365net.is:8000/orbbylgjan.aac",
-      "homepage": "http://bylgjan.visir.is/",
-      "codec": "AAC+",
-      "bitrate": 130,
-      "hls": false,
-      "tags": "local music,music,news,reykjavik,sport,talk",
-      "votes": 607,
-      "countrycode": "IS"
-    },
-    {
-      "name": "Trolli FM 103.7 Siglufjordu",
-      "url": "http://live.trolli.is:8200/;",
-      "homepage": "http://fm.trolli.is/",
-      "codec": "MP3",
-      "bitrate": 256,
-      "hls": false,
-      "tags": "adult contemporary,siglufjordu,top 40",
-      "votes": 220,
-      "countrycode": "IS"
-    },
-    {
-      "name": "Rúv rás1",
-      "url": "http://netradio.ruv.is/ras1.aac",
-      "homepage": "https://www.ruv.is/",
-      "codec": "AAC+",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "culture,news",
-      "votes": 387,
-      "countrycode": "IS"
-    },
-    {
-      "name": "80's Bylgjan",
-      "url": "http://icecast.365net.is:8000/orb80s.aac",
-      "homepage": "http://vefutvarp.visir.is/player/#/",
-      "codec": "AAC+",
-      "bitrate": 131,
-      "hls": false,
-      "tags": "80s,local music",
-      "votes": 347,
-      "countrycode": "IS"
-    },
-    {
-      "name": "X977",
-      "url": "http://icecast.365net.is:8000/orbXid.aac",
-      "homepage": "http://x977.visir.is/",
-      "codec": "AAC+",
-      "bitrate": 130,
-      "hls": false,
-      "tags": "local music,rock",
-      "votes": 289,
-      "countrycode": "IS"
-    },
-    {
-      "name": "Rás2",
-      "url": "http://netradio.ruv.is/ras2.aac",
-      "homepage": "https://www.ruv.is/",
-      "codec": "AAC+",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 271,
-      "countrycode": "IS"
-    },
-    {
       "name": "Útvarp Saga",
       "url": "https://stream.utvarpsaga.is/Hljodver",
       "homepage": "https://utvarpsaga.is/",
@@ -3243,50 +3089,6 @@
       "hls": false,
       "tags": "news talk,talk & speech,talk radio",
       "votes": 109,
-      "countrycode": "IS"
-    },
-    {
-      "name": "Visir \"FM957\" 95.7 Reykjavik",
-      "url": "http://icecast.365net.is:8000/orbFm957.aac",
-      "homepage": "http://fm957.visir.is/",
-      "codec": "AAC+",
-      "bitrate": 131,
-      "hls": false,
-      "tags": "local music,pop,reykjavik",
-      "votes": 162,
-      "countrycode": "IS"
-    },
-    {
-      "name": "Gull Bylgjan 90.9 Reykjavik",
-      "url": "http://icecast.365net.is:8000/orbGullBylgjan.aac",
-      "homepage": "http://vefutvarp.visir.is/gull_bylgjan/",
-      "codec": "AAC+",
-      "bitrate": 130,
-      "hls": false,
-      "tags": "classic rock,local music,reykjavik",
-      "votes": 144,
-      "countrycode": "IS"
-    },
-    {
-      "name": "Visir \"FM 957 Extra\" Reykjavik",
-      "url": "http://icecast.365net.is:8000/orbFmExtra.aac",
-      "homepage": "http://fm957.visir.is/",
-      "codec": "AAC+",
-      "bitrate": 130,
-      "hls": false,
-      "tags": "contemporary hits,reykjavik,top 40",
-      "votes": 102,
-      "countrycode": "IS"
-    },
-    {
-      "name": "Apparatid",
-      "url": "http://icecast.365net.is:8000/orbApparatid.aac",
-      "homepage": "http://spilarinn.is/#apparatid",
-      "codec": "AAC+",
-      "bitrate": 130,
-      "hls": false,
-      "tags": "local music",
-      "votes": 92,
       "countrycode": "IS"
     },
     {
@@ -4153,19 +3955,8 @@
   ],
   "LU": [
     {
-      "name": "RTL Radio Letzebuerg",
-      "url": "http://sc-rtllive.newmedia.lu/",
-      "homepage": "http://www.rtl.lu/",
-      "codec": "MP3",
-      "bitrate": 256,
-      "hls": false,
-      "tags": "information,pop",
-      "votes": 2319,
-      "countrycode": "LU"
-    },
-    {
       "name": "Generation Dance Radio",
-      "url": "http://generationdance.lu/radio/8030/hd",
+      "url": "https://generationdance.lu/radio/8030/hd",
       "homepage": "https://generation.dance/",
       "codec": "MP3",
       "bitrate": 192,
@@ -4176,7 +3967,7 @@
     },
     {
       "name": "Generation Dance Radio",
-      "url": "http://generationdance.lu/radio/8030/mobile",
+      "url": "https://generationdance.lu/radio/8030/mobile",
       "homepage": "https://generation.dance/",
       "codec": "AAC",
       "bitrate": 64,
@@ -4186,19 +3977,8 @@
       "countrycode": "LU"
     },
     {
-      "name": "Eldoradio",
-      "url": "http://81.92.238.33/",
-      "homepage": "http://radio.eldo.lu/",
-      "codec": "MP3",
-      "bitrate": 256,
-      "hls": false,
-      "tags": "pop",
-      "votes": 1578,
-      "countrycode": "LU"
-    },
-    {
       "name": "RTL Radio - Deutschlands Hit-Radio",
-      "url": "http://stream.rtlradio.de/rtl-de-national/mp3-192/",
+      "url": "https://stream.rtlradio.de/rtl-de-national/mp3-192/",
       "homepage": "",
       "codec": "MP3",
       "bitrate": 0,
@@ -4209,7 +3989,7 @@
     },
     {
       "name": "Radio 100komma7",
-      "url": "http://100komma7.cast.addradio.de/100komma7/live/mp3/320/stream.mp3",
+      "url": "https://100komma7.cast.addradio.de/100komma7/live/mp3/320/stream.mp3",
       "homepage": "https://100komma7.lu/",
       "codec": "MP3",
       "bitrate": 320,
@@ -4231,7 +4011,7 @@
     },
     {
       "name": "Radio 100,7",
-      "url": "http://100komma7.cast.addradio.de/100komma7/live/mp3/128/stream.mp3",
+      "url": "https://100komma7.cast.addradio.de/100komma7/live/mp3/128/stream.mp3",
       "homepage": "https://www.100komma7.lu/",
       "codec": "MP3",
       "bitrate": 128,
@@ -4242,7 +4022,7 @@
     },
     {
       "name": "L'Essentiel Radio",
-      "url": "http://lessentielradio.ice.infomaniak.ch/lessentielradio-128.mp3",
+      "url": "https://lessentielradio.ice.infomaniak.ch/lessentielradio-128.mp3",
       "homepage": "http://lessentielradio.lu/",
       "codec": "MP3",
       "bitrate": 256,
@@ -4324,28 +4104,6 @@
     }
   ],
   "MT": [
-    {
-      "name": "One Radio",
-      "url": "http://s10.voscast.com:8202/stream",
-      "homepage": "http://one.com.mt/oneradio",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 1262,
-      "countrycode": "MT"
-    },
-    {
-      "name": "Christmas Radio Malta",
-      "url": "http://philae.shoutca.st:8402/stream?type=http&nocache=165",
-      "homepage": "https://www.christmasradiomalta.com/",
-      "codec": "MP3",
-      "bitrate": 320,
-      "hls": false,
-      "tags": "",
-      "votes": 71,
-      "countrycode": "MT"
-    },
     {
       "name": "Bay Easy 100.2",
       "url": "https://stream.v3.network/proxy/easy/stream.mp3",
@@ -4658,24 +4416,13 @@
   "MC": [
     {
       "name": "Radio Monaco 98.2",
-      "url": "http://radiomonaco.ice.infomaniak.ch/radiomonaco-128.mp3",
+      "url": "https://radiomonaco.ice.infomaniak.ch/radiomonaco-128.mp3",
       "homepage": "http://www.radio-monaco.com/",
       "codec": "MP3",
       "bitrate": 128,
       "hls": false,
       "tags": "euro hits,monte carlo",
       "votes": 5657,
-      "countrycode": "MC"
-    },
-    {
-      "name": "Radio Monte Carlo",
-      "url": "http://edge.radiomontecarlo.net/RMC.mp3",
-      "homepage": "http://www.radiomontecarlo.net/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "music,news",
-      "votes": 1536,
       "countrycode": "MC"
     },
     {
@@ -6456,7 +6203,7 @@
     },
     {
       "name": "USMARADIO",
-      "url": "http://usmaradio.out.airtime.pro:8000/usmaradio_a",
+      "url": "https://usmaradio.out.airtime.pro:8000/usmaradio_a",
       "homepage": "http://www.usmaradio.org/",
       "codec": "MP3",
       "bitrate": 192,
@@ -6478,7 +6225,7 @@
     },
     {
       "name": "Radio San Marino Classic",
-      "url": "http://d18ufyp3q60j7u.cloudfront.net/radio-ch01/radio-ch02/playlist.m3u8",
+      "url": "https://d18ufyp3q60j7u.cloudfront.net/radio-ch01/radio-ch02/playlist.m3u8",
       "homepage": "https://www.smtvsanmarino.sm/radio/ascolta-radio-classic",
       "codec": "AAC",
       "bitrate": 222,
@@ -6890,7 +6637,7 @@
   "SI": [
     {
       "name": "Val 202",
-      "url": "http://mp3.rtvslo.si/val202",
+      "url": "https://mp3.rtvslo.si/val202",
       "homepage": "http://val202.rtvslo.si/",
       "codec": "AAC",
       "bitrate": 192,
@@ -6901,7 +6648,7 @@
     },
     {
       "name": "Radio Prvi",
-      "url": "http://mp3.rtvslo.si/ra1",
+      "url": "https://mp3.rtvslo.si/ra1",
       "homepage": "http://radioprvi.rtvslo.si/",
       "codec": "AAC",
       "bitrate": 192,
@@ -6912,7 +6659,7 @@
     },
     {
       "name": "Radio 1",
-      "url": "http://live.radio.si/Radio1",
+      "url": "https://live.radio.si/Radio1",
       "homepage": "https://www.radio1.si/",
       "codec": "MP3",
       "bitrate": 128,
@@ -6922,102 +6669,14 @@
       "countrycode": "SI"
     },
     {
-      "name": "ROCK RADIO SI",
-      "url": "http://stream.rockradio.si:9034/;",
-      "homepage": "http://www.rockradio.si/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "rock",
-      "votes": 3824,
-      "countrycode": "SI"
-    },
-    {
-      "name": "Radio Capris 80",
-      "url": "http://stream02.exit.si:8000/80?",
-      "homepage": "https://www.radiocapris.si/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 3435,
-      "countrycode": "SI"
-    },
-    {
-      "name": "Hitradio center 80's",
-      "url": "http://stream3.radiocenter.si:8064/;stream/1",
-      "homepage": "http://radiocenter.si/",
-      "codec": "AAC+",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "public radio",
-      "votes": 2924,
-      "countrycode": "SI"
-    },
-    {
-      "name": "Hitradio Center",
-      "url": "http://stream3.radiocenter.si:8000/center",
-      "homepage": "http://radiocenter.si/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "public radio",
-      "votes": 2611,
-      "countrycode": "SI"
-    },
-    {
-      "name": "Radio Capris 90 DANCE",
-      "url": "http://stream02.exit.si:8000/MEGAMIX?",
-      "homepage": "https://www.radiocapris.si/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 2044,
-      "countrycode": "SI"
-    },
-    {
       "name": "Radio Si",
-      "url": "http://mp3.rtvslo.si/rsi",
+      "url": "https://mp3.rtvslo.si/rsi",
       "homepage": "http://radiosi.eu/",
       "codec": "AAC",
       "bitrate": 192,
       "hls": false,
       "tags": "adult contemporary,international,public radio,rtvslo",
       "votes": 1860,
-      "countrycode": "SI"
-    },
-    {
-      "name": "Radio Aktual",
-      "url": "http://195.95.158.131:9080/",
-      "homepage": "http://www.radioaktual.si/",
-      "codec": "MP3",
-      "bitrate": 0,
-      "hls": false,
-      "tags": "dalmatia,ex-yu music,slovenian music",
-      "votes": 9016,
-      "countrycode": "SI"
-    },
-    {
-      "name": "Radio Veseljak",
-      "url": "http://195.95.158.131:9060/",
-      "homepage": "http://veseljak.si/",
-      "codec": "MP3",
-      "bitrate": 0,
-      "hls": false,
-      "tags": "folk",
-      "votes": 4168,
-      "countrycode": "SI"
-    },
-    {
-      "name": "Radio City (Maribor) 100.6 FM",
-      "url": "http://82.149.22.34:8000/CityMp364mono.mp3",
-      "homepage": "http://www.radiocity.si/",
-      "codec": "MP3",
-      "bitrate": 0,
-      "hls": false,
-      "tags": "adult hits,regional",
-      "votes": 3081,
       "countrycode": "SI"
     },
     {
@@ -7460,7 +7119,7 @@
   "CH": [
     {
       "name": "GDS.FM",
-      "url": "http://gdsfm.out.airtime.pro:8000/gdsfm_a",
+      "url": "https://gdsfm.out.airtime.pro:8000/gdsfm_a",
       "homepage": "http://www.gds.fm/",
       "codec": "MP3",
       "bitrate": 320,
@@ -7471,7 +7130,7 @@
     },
     {
       "name": "1.FM - Amsterdam Trance Radio",
-      "url": "http://strm112.1.fm/atr_mobile_mp3",
+      "url": "https://strm112.1.fm/atr_mobile_mp3",
       "homepage": "http://www.1.fm/",
       "codec": "MP3",
       "bitrate": 256,
@@ -7482,7 +7141,7 @@
     },
     {
       "name": "1.FM - Deep House Radio",
-      "url": "http://strm112.1.fm/deephouse_mobile_mp3",
+      "url": "https://strm112.1.fm/deephouse_mobile_mp3",
       "homepage": "http://www.1.fm/",
       "codec": "MP3",
       "bitrate": 256,
@@ -7493,7 +7152,7 @@
     },
     {
       "name": "1.FM - Classic Rock Replay Radio",
-      "url": "http://strm112.1.fm/crock_mobile_mp3",
+      "url": "https://strm112.1.fm/crock_mobile_mp3",
       "homepage": "http://www.1.fm/",
       "codec": "MP3",
       "bitrate": 256,
@@ -7504,7 +7163,7 @@
     },
     {
       "name": "1.FM - Absolute Country Hits Radio",
-      "url": "http://strm112.1.fm/acountry_mobile_mp3",
+      "url": "https://strm112.1.fm/acountry_mobile_mp3",
       "homepage": "http://www.1.fm/",
       "codec": "MP3",
       "bitrate": 256,
@@ -7515,7 +7174,7 @@
     },
     {
       "name": "1.FM - Classic Country Radio",
-      "url": "http://strm112.1.fm/ccountry_mobile_mp3",
+      "url": "https://strm112.1.fm/ccountry_mobile_mp3",
       "homepage": "http://www.1.fm/",
       "codec": "MP3",
       "bitrate": 256,
@@ -7526,7 +7185,7 @@
     },
     {
       "name": "1.FM - Chillout Lounge Radio",
-      "url": "http://strm112.1.fm/chilloutlounge_mobile_mp3",
+      "url": "https://strm112.1.fm/chilloutlounge_mobile_mp3",
       "homepage": "https://www.1.fm/",
       "codec": "MP3",
       "bitrate": 256,
@@ -7537,7 +7196,7 @@
     },
     {
       "name": "1.FM - Blues Radio",
-      "url": "http://strm112.1.fm/blues_mobile_mp3",
+      "url": "https://strm112.1.fm/blues_mobile_mp3",
       "homepage": "https://www.1.fm/",
       "codec": "MP3",
       "bitrate": 256,
@@ -7548,7 +7207,7 @@
     },
     {
       "name": "1.FM - Rock Classics Radio",
-      "url": "http://strm112.1.fm/rockclassics_mobile_mp3",
+      "url": "https://strm112.1.fm/rockclassics_mobile_mp3",
       "homepage": "http://www.1.fm/",
       "codec": "MP3",
       "bitrate": 256,
@@ -7559,7 +7218,7 @@
     },
     {
       "name": "1.FM - Cafe Radio",
-      "url": "http://strm112.1.fm/caferadio_mobile_mp3",
+      "url": "https://strm112.1.fm/caferadio_mobile_mp3",
       "homepage": "https://www.1.fm/",
       "codec": "MP3",
       "bitrate": 256,
@@ -7570,7 +7229,7 @@
     },
     {
       "name": "1.FM - Bombay Beats India Radio",
-      "url": "http://strm112.1.fm/bombaybeats_mobile_mp3",
+      "url": "https://strm112.1.fm/bombaybeats_mobile_mp3",
       "homepage": "http://www.1.fm/",
       "codec": "MP3",
       "bitrate": 256,
@@ -7581,7 +7240,7 @@
     },
     {
       "name": "1.FM - Deep Techno & Deep House",
-      "url": "http://strm112.1.fm/deeptech_mobile_mp3",
+      "url": "https://strm112.1.fm/deeptech_mobile_mp3",
       "homepage": "http://www.1.fm/",
       "codec": "MP3",
       "bitrate": 256,
@@ -8112,28 +7771,6 @@
       "countrycode": "GE"
     },
     {
-      "name": "Tbilisi FM 93,5",
-      "url": "http://iis.ge:8000/radiotbilisi.mp3",
-      "homepage": "http://tbilisifm.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "news,talk",
-      "votes": 4373,
-      "countrycode": "GE"
-    },
-    {
-      "name": "Hereti FM",
-      "url": "http://iis.ge:8000/hereti.mp3",
-      "homepage": "http://www.heretifm.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "folk,news,pop",
-      "votes": 2676,
-      "countrycode": "GE"
-    },
-    {
       "name": "არდაიდარდო",
       "url": "https://tv.cdn.xsg.ge/cld9-0386/ardaidardo/tracks-a1/mono.m3u8",
       "homepage": "https://ardaidardo.ge/",
@@ -8187,31 +7824,9 @@
       "tags": "",
       "votes": 612,
       "countrycode": "GE"
-    },
-    {
-      "name": "უცნობი FM (Ucnobi FM)",
-      "url": "http://149.3.104.166:8000/stream.ogg",
-      "homepage": "http://ucnobifm.ge/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 538,
-      "countrycode": "GE"
     }
   ],
   "AM": [
-    {
-      "name": "Fama",
-      "url": "http://eu.stream4cast.com:8036/stream/",
-      "homepage": "https://www.radiofama.am/",
-      "codec": "MP3",
-      "bitrate": 192,
-      "hls": false,
-      "tags": "",
-      "votes": 2008,
-      "countrycode": "AM"
-    },
     {
       "name": "LOVE RADIO",
       "url": "https://loveradio.streamingmedia.it/play",
@@ -8304,7 +7919,7 @@
   "AZ": [
     {
       "name": "AutoLife Radio Azerbaijan",
-      "url": "http://radio.autoliferadio.com:8090/radio",
+      "url": "https://radio.autoliferadio.com:8090/radio",
       "homepage": "https://autoliferadio.com/",
       "codec": "MP3",
       "bitrate": 192,
@@ -8348,7 +7963,7 @@
     },
     {
       "name": "Araz fm 103.3",
-      "url": "http://s39.myradiostream.com/5458/listen.mp3",
+      "url": "https://s39.myradiostream.com/5458/listen.mp3",
       "homepage": "http://araz.fm/",
       "codec": "MP3",
       "bitrate": 128,
@@ -8380,17 +7995,6 @@
       "countrycode": "AZ"
     },
     {
-      "name": "Asan Radio",
-      "url": "http://94.20.74.206:4448/stream1",
-      "homepage": "http://www.asanradio.az/",
-      "codec": "MP3",
-      "bitrate": 112,
-      "hls": false,
-      "tags": "",
-      "votes": 11977,
-      "countrycode": "AZ"
-    },
-    {
       "name": "ASAN Radio",
       "url": "https://play.asanradio.az/",
       "homepage": "http://asanradio.az/",
@@ -8403,7 +8007,7 @@
     },
     {
       "name": "Naxçıvan Radiosu",
-      "url": "http://s33.myradiostream.com:12782/listen.mp3",
+      "url": "https://s33.myradiostream.com:12782/listen.mp3",
       "homepage": "https://radio.ntv.az/",
       "codec": "AAC+",
       "bitrate": 64,
@@ -8427,24 +8031,13 @@
   "CN": [
     {
       "name": "CNR-1 中国之声",
-      "url": "http://zbbf2.ahbztv.com/live/4f3.m3u8",
+      "url": "https://zbbf2.ahbztv.com/live/4f3.m3u8",
       "homepage": "http://www.cnr.cn/",
       "codec": "UNKNOWN",
       "bitrate": 236,
       "hls": true,
       "tags": "information,news,public radio",
       "votes": 4172,
-      "countrycode": "CN"
-    },
-    {
-      "name": "AsiaFM高清音乐台",
-      "url": "http://asiafm.hk:8000/asiahd",
-      "homepage": "http://www.asiafm.net/index.php#page1",
-      "codec": "AAC+",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "192kbps,hd,music",
-      "votes": 2985,
       "countrycode": "CN"
     },
     {
@@ -8482,7 +8075,7 @@
     },
     {
       "name": "清晨音乐台",
-      "url": "http://lhttp.qingting.fm/live/4915/64k.mp3",
+      "url": "https://lhttp.qingting.fm/live/4915/64k.mp3",
       "homepage": "https://m.weibo.cn/u/2022851417",
       "codec": "MP3",
       "bitrate": 0,
@@ -8503,19 +8096,8 @@
       "countrycode": "CN"
     },
     {
-      "name": "华语金曲500首",
-      "url": "http://ls.qingting.fm/live/3412131.m3u8?bitrate=64",
-      "homepage": "https://m.qingting.fm/",
-      "codec": "UNKNOWN",
-      "bitrate": 0,
-      "hls": true,
-      "tags": "golden music",
-      "votes": 17275,
-      "countrycode": "CN"
-    },
-    {
       "name": "凤凰卫视资讯台",
-      "url": "http://playtv-live.ifeng.com/live/06OLEEWQKN4_audio.m3u8",
+      "url": "https://playtv-live.ifeng.com/live/06OLEEWQKN4_audio.m3u8",
       "homepage": "https://www.ifeng.com/",
       "codec": "UNKNOWN",
       "bitrate": 0,
@@ -8525,19 +8107,8 @@
       "countrycode": "CN"
     },
     {
-      "name": "CNR-2 经济之声",
-      "url": "http://ngcdn002.cnr.cn/live/jjzs/index.m3u8",
-      "homepage": "http://www.cnr.cn/",
-      "codec": "UNKNOWN",
-      "bitrate": 0,
-      "hls": true,
-      "tags": "economic,news",
-      "votes": 8389,
-      "countrycode": "CN"
-    },
-    {
       "name": "凤凰卫视中文台",
-      "url": "http://playtv-live.ifeng.com/live/06OLEGEGM4G_audio.m3u8",
+      "url": "https://playtv-live.ifeng.com/live/06OLEGEGM4G_audio.m3u8",
       "homepage": "https://www.ifeng.com/",
       "codec": "UNKNOWN",
       "bitrate": 0,
@@ -8548,17 +8119,6 @@
     }
   ],
   "JP": [
-    {
-      "name": "Retro PC GAME MUSIC Streaming Radio",
-      "url": "http://gyusyabu.ddo.jp:8000/",
-      "homepage": "http://gyusyabu.ddo.jp/MP3/MP3.html",
-      "codec": "MP3",
-      "bitrate": 256,
-      "hls": false,
-      "tags": "chiptune,retro games,soundtracks,video game",
-      "votes": 2397,
-      "countrycode": "JP"
-    },
     {
       "name": "Gensokyo Radio",
       "url": "https://stream.gensokyoradio.net/3",
@@ -8594,7 +8154,7 @@
     },
     {
       "name": "Jazz Sakura (asia dream radio)",
-      "url": "http://kathy.torontocast.com:3330/stream/1/?esPlayer&cb=82181.mp3",
+      "url": "https://kathy.torontocast.com:3330/stream/1/?esPlayer&cb=82181.mp3",
       "homepage": "https://asiadreamradio.torontocast.stream/stations/en/index.html",
       "codec": "MP3",
       "bitrate": 128,
@@ -8616,7 +8176,7 @@
     },
     {
       "name": "J1 Gold (HTTP)",
-      "url": "http://jenny.torontocast.com:8062/",
+      "url": "https://jenny.torontocast.com:8062/",
       "homepage": "https://en.j1fm.tokyo/",
       "codec": "MP3",
       "bitrate": 128,
@@ -8649,7 +8209,7 @@
     },
     {
       "name": "Shonan Beach FM 78.9",
-      "url": "http://shonanbeachfm.out.airtime.pro:8000/shonanbeachfm_a",
+      "url": "https://shonanbeachfm.out.airtime.pro:8000/shonanbeachfm_a",
       "homepage": "https://www.beachfm.co.jp/",
       "codec": "MP3",
       "bitrate": 128,
@@ -8659,19 +8219,8 @@
       "countrycode": "JP"
     },
     {
-      "name": "FM Kahoku 78.7 (FMかほく, JOZZ5AM-FM, 78.7 MHz, Kahoku City, Ishikawa)",
-      "url": "http://radio.kahoku.net:8000/;",
-      "homepage": "http://fm.kahoku.net/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "enka,japan,japanese,jpop,kayokyoku,talk radio",
-      "votes": 1716,
-      "countrycode": "JP"
-    },
-    {
       "name": "J1 Hits (HTTP)",
-      "url": "http://jenny.torontocast.com:8056/",
+      "url": "https://jenny.torontocast.com:8056/",
       "homepage": "https://en.j1fm.tokyo/",
       "codec": "MP3",
       "bitrate": 128,
@@ -8702,17 +8251,6 @@
       "hls": false,
       "tags": "music,pop",
       "votes": 2670,
-      "countrycode": "KR"
-    },
-    {
-      "name": "Oldpop Cafe",
-      "url": "http://cast.oldpopcafe.net:7080/",
-      "homepage": "https://oldpopcafe.net/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "oldies,pop music,popular music",
-      "votes": 2072,
       "countrycode": "KR"
     },
     {
@@ -8760,17 +8298,6 @@
       "countrycode": "KR"
     },
     {
-      "name": "Arirang Radio",
-      "url": "http://amdlive.ctnd.com.edgesuite.net/arirang_3ch/smil:arirang_3ch.smil/playlist.m3u8",
-      "homepage": "https://arirang.com/radio",
-      "codec": "UNKNOWN",
-      "bitrate": 656,
-      "hls": true,
-      "tags": "",
-      "votes": 309,
-      "countrycode": "KR"
-    },
-    {
       "name": "SBS Love FM",
       "url": "https://radiolive.sbs.co.kr/lovepc/lovefm.stream/playlist.m3u8?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3OTA0NzIwMTEsInBhdGgiOiIvbG92ZWZtLnN0cmVhbSIsImR1cmF0aW9uIjotMSwidW5vIjoiYmJiYjM2NmMtMWI1OS00ZDBiLTgyNjEtOWUzY2IwYzdiYzk1IiwiaWF0IjoxNzkwNDI4ODExfQ.zXF2gZvNh85tLNN3FYDEcBvN_NDKbPHwpsq543yVC9k",
       "homepage": "https://www.sbs.co.kr/",
@@ -8795,28 +8322,6 @@
   ],
   "TR": [
     {
-      "name": "Radyo 7",
-      "url": "http://46.20.3.250/;stream",
-      "homepage": "http://www.radyo7.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 16669,
-      "countrycode": "TR"
-    },
-    {
-      "name": "Türkülerle Türkiye",
-      "url": "http://37.247.98.8/stream/22/;",
-      "homepage": "https://www.canliradyodinle.fm/radyo-turkulerle-turkiye-dinle.html",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "türkü",
-      "votes": 15844,
-      "countrycode": "TR"
-    },
-    {
       "name": "Radyo Şiran",
       "url": "https://live.radyositesihazir.com/8078/stream",
       "homepage": "https://live.radyositesihazir.com/8078/stream",
@@ -8839,28 +8344,6 @@
       "countrycode": "TR"
     },
     {
-      "name": "Ankara Havalari",
-      "url": "http://37.247.98.8/stream/30/;",
-      "homepage": "",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "folk",
-      "votes": 8698,
-      "countrycode": "TR"
-    },
-    {
-      "name": "ALTIN SARKILAR",
-      "url": "http://37.247.98.8/stream/25/;",
-      "homepage": "http://www.radyohome.com/#altinsarkilar",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "golden oldies,retro",
-      "votes": 8104,
-      "countrycode": "TR"
-    },
-    {
       "name": "Alem Fm",
       "url": "https://turkmedya.radyotvonline.net/alemfmaac",
       "homepage": "https://www.alemfm.com/",
@@ -8873,7 +8356,7 @@
     },
     {
       "name": "Virgin Radio Türkiye",
-      "url": "http://23623.live.streamtheworld.com/VIRGIN_RADIO_SC",
+      "url": "https://23623.live.streamtheworld.com/VIRGIN_RADIO_SC",
       "homepage": "http://www.virginradioturkiye.com/",
       "codec": "MP3",
       "bitrate": 64,
@@ -8881,42 +8364,9 @@
       "tags": "pop rock",
       "votes": 20527,
       "countrycode": "TR"
-    },
-    {
-      "name": "Metro FM",
-      "url": "http://27743.live.streamtheworld.com:3690/METRO_FMAAC_SC",
-      "homepage": "https://metrofm.com.tr/",
-      "codec": "AAC+",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "",
-      "votes": 12200,
-      "countrycode": "TR"
-    },
-    {
-      "name": "Baba Radyo",
-      "url": "http://46.20.7.116/",
-      "homepage": "",
-      "codec": "AAC+",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "folk",
-      "votes": 8537,
-      "countrycode": "TR"
     }
   ],
   "IR": [
-    {
-      "name": "Faz",
-      "url": "http://www.radiofaaz.com:8000/radiofaaz",
-      "homepage": "http://www.radiofaaz.com:8000/radiofaaz",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 56503,
-      "countrycode": "IR"
-    },
     {
       "name": "Radio Navahang",
       "url": "https://navairan.com/;stream.nsv",
@@ -8940,30 +8390,8 @@
       "countrycode": "IR"
     },
     {
-      "name": "Radio Sarcheshme",
-      "url": "http://sarcheshmeh.icdndhcp.com:18452/stream",
-      "homepage": "http://sarcheshmeh.icdndhcp.com:18452/stream",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "",
-      "votes": 48424,
-      "countrycode": "IR"
-    },
-    {
-      "name": "parsa",
-      "url": "http://parsa.icdndhcp.com:18000/stream",
-      "homepage": "http://radio.sarcheshmeh.us/parsa.html",
-      "codec": "MP3",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "classical",
-      "votes": 72116,
-      "countrycode": "IR"
-    },
-    {
       "name": "Iran On Air",
-      "url": "http://ice41.securenetsystems.net/KIRN",
+      "url": "https://ice41.securenetsystems.net/KIRN",
       "homepage": "http://www.iranonair.com/",
       "codec": "AAC+",
       "bitrate": 24,
@@ -8974,17 +8402,6 @@
     }
   ],
   "IN": [
-    {
-      "name": "Radio BollyFm",
-      "url": "http://stream.radiobollyfm.in:8201/hd?t=1526570335",
-      "homepage": "http://www.radiobollyfm.in/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 28205,
-      "countrycode": "IN"
-    },
     {
       "name": "Radio Mirchi Hindi",
       "url": "https://eu8.fastcast4u.com/proxy/clyedupq/stream",
@@ -9017,17 +8434,6 @@
       "tags": "india,love,mirchi,pop,romantic",
       "votes": 10603,
       "countrycode": "IN"
-    },
-    {
-      "name": "Fnf.Fm Hindi",
-      "url": "http://192.99.8.192:5032/;stream",
-      "homepage": "http://hi.fnf.fm/?m=1",
-      "codec": "MP3",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "bollywood",
-      "votes": 41845,
-      "countrycode": "IN"
     }
   ],
   "TH": [
@@ -9043,17 +8449,6 @@
       "countrycode": "TH"
     },
     {
-      "name": "สวพ.91",
-      "url": "http://122.155.16.48:8955/;stream.mp3",
-      "homepage": "http://fm91bkk.com/",
-      "codec": "MP3",
-      "bitrate": 320,
-      "hls": false,
-      "tags": "traffic,volunteer",
-      "votes": 2125,
-      "countrycode": "TH"
-    },
-    {
       "name": "Cool fahrenheit",
       "url": "https://coolism-web.cdn.byteark.com/;stream/1",
       "homepage": "http://www.coolism.net/index.php",
@@ -9062,61 +8457,6 @@
       "hls": false,
       "tags": "",
       "votes": 4098,
-      "countrycode": "TH"
-    },
-    {
-      "name": "90 rakthai",
-      "url": "http://radio11.plathong.net:8896/;stream.mp3",
-      "homepage": "http://radio11.plathong.net:8896/;stream.mp3",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "",
-      "votes": 6307,
-      "countrycode": "TH"
-    },
-    {
-      "name": "Isan FM 98",
-      "url": "http://radio11.plathong.net:8900/stream.mp3",
-      "homepage": "http://www.isanfm.com/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "pop",
-      "votes": 2064,
-      "countrycode": "TH"
-    },
-    {
-      "name": "ลูกทุ่งเน็ตเวิร์ค",
-      "url": "http://media.login.in.th:8200/;stream.mp3",
-      "homepage": "http://looktung.net/",
-      "codec": "MP3",
-      "bitrate": 320,
-      "hls": false,
-      "tags": "fm 98.5 mhz ลูกทุ่ง ทั้งวัน ทั้งคืน",
-      "votes": 1392,
-      "countrycode": "TH"
-    },
-    {
-      "name": "มิติข่าว 90.5",
-      "url": "http://live3.smartbomb.co.th:8624/;stream.mp3",
-      "homepage": "http://www.smartbomb.co.th/",
-      "codec": "MP3",
-      "bitrate": 0,
-      "hls": false,
-      "tags": "news,news talk",
-      "votes": 4657,
-      "countrycode": "TH"
-    },
-    {
-      "name": "ลูกทุ่ง รักไทย ๙๐",
-      "url": "http://radio11.plathong.net:8896/;stream.mp3",
-      "homepage": "http://www.90rakthai.com/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "music",
-      "votes": 1802,
       "countrycode": "TH"
     },
     {
@@ -9156,24 +8496,13 @@
     },
     {
       "name": "Vietnamese National People",
-      "url": "http://c13.radioboss.fm:8127/stream",
+      "url": "https://c13.radioboss.fm:8127/stream",
       "homepage": "",
       "codec": "MP3",
       "bitrate": 48,
       "hls": false,
       "tags": "news",
       "votes": 1862,
-      "countrycode": "VN"
-    },
-    {
-      "name": "FM HANOI 90 MHz",
-      "url": "http://14.162.146.90:8000/HANOI90",
-      "homepage": "http://e.mytuner-radio.com/embed/hanoi90-495426",
-      "codec": "MP3",
-      "bitrate": 320,
-      "hls": false,
-      "tags": "",
-      "votes": 782,
       "countrycode": "VN"
     },
     {
@@ -9188,17 +8517,6 @@
       "countrycode": "VN"
     },
     {
-      "name": "FM HANOI 96 MHz",
-      "url": "http://222.252.21.96:8000/HANOI96",
-      "homepage": "http://e.mytuner-radio.com/embed/hanoi96-495538",
-      "codec": "MP3",
-      "bitrate": 320,
-      "hls": false,
-      "tags": "",
-      "votes": 571,
-      "countrycode": "VN"
-    },
-    {
       "name": "ZING BOLERO",
       "url": "https://vnno-ne-3-tf-multi-playlist-zmp3.zmdcdn.me/BJ7DyJjfG_E/zhls/playback-realtime/audio/5bace800d4453d1b6454/audio.m3u8",
       "homepage": "",
@@ -9207,28 +8525,6 @@
       "hls": true,
       "tags": "pop",
       "votes": 960,
-      "countrycode": "VN"
-    },
-    {
-      "name": "Digital Radio Hongkong",
-      "url": "http://ice.digitalradiohk.net:8000/drhk",
-      "homepage": "",
-      "codec": "AAC+",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "pop",
-      "votes": 241,
-      "countrycode": "VN"
-    },
-    {
-      "name": "VIET RADIO 1560",
-      "url": "http://71.4.56.20/3rdout/radio.hou.std2/icecast.audio",
-      "homepage": "",
-      "codec": "MP3",
-      "bitrate": 109,
-      "hls": false,
-      "tags": "news",
-      "votes": 269,
       "countrycode": "VN"
     },
     {
@@ -9245,17 +8541,6 @@
   ],
   "ID": [
     {
-      "name": "V Radio",
-      "url": "http://202.147.199.100:8000/;stream.nsv",
-      "homepage": "http://www.vradiofm.com/",
-      "codec": "MP3",
-      "bitrate": 256,
-      "hls": false,
-      "tags": "80s,90s",
-      "votes": 4225,
-      "countrycode": "ID"
-    },
-    {
       "name": "CNN Indonesia",
       "url": "https://live.cnnindonesia.com/livecnn/smil:cnntv/chunklist.m3u8",
       "homepage": "https://cnnindonesia.com/",
@@ -9264,28 +8549,6 @@
       "hls": true,
       "tags": "news",
       "votes": 6759,
-      "countrycode": "ID"
-    },
-    {
-      "name": "RDI 97.1 FM",
-      "url": "http://202.147.199.99:8000/;stream/1",
-      "homepage": "http://www.rdifm.co.id/",
-      "codec": "MP3",
-      "bitrate": 192,
-      "hls": false,
-      "tags": "dangdut",
-      "votes": 10945,
-      "countrycode": "ID"
-    },
-    {
-      "name": "Radio Dangdut 97.1 FM Jakarta",
-      "url": "http://202.147.199.99:8000/;",
-      "homepage": "http://www.rdifm.co.id/",
-      "codec": "MP3",
-      "bitrate": 192,
-      "hls": false,
-      "tags": "",
-      "votes": 8145,
       "countrycode": "ID"
     },
     {
@@ -9335,17 +8598,6 @@
   ],
   "MY": [
     {
-      "name": "Jazz Lounge",
-      "url": "http://eu8.fastcast4u.com:5068/;",
-      "homepage": "http://shoutcast.flashradio.info/#/Jazz/1292701/",
-      "codec": "MP3",
-      "bitrate": 320,
-      "hls": false,
-      "tags": "320kbps,classic jazz,jazz,smooth jazz",
-      "votes": 17766,
-      "countrycode": "MY"
-    },
-    {
       "name": "Jei FM Klang Tamil Radio",
       "url": "https://usa3.fastcast4u.com/proxy/jeifm?mp=/1",
       "homepage": "http://www.jeifm.com/",
@@ -9358,7 +8610,7 @@
     },
     {
       "name": "Klasik FM 101,1 MHz",
-      "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_KLASIK.mp3",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_KLASIK.mp3",
       "homepage": "https://radioklasik.rtm.gov.my/",
       "codec": "MP3",
       "bitrate": 96,
@@ -9390,19 +8642,8 @@
       "countrycode": "MY"
     },
     {
-      "name": "Gegar Musik FM",
-      "url": "http://167.114.131.90:5316/stream/1/",
-      "homepage": "https://gegarmuzikfm.blogspot.com/2018/04/gegarmuzikfm.html?m=1",
-      "codec": "AAC+",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 1799,
-      "countrycode": "MY"
-    },
-    {
       "name": "Nasional FM 88,5 MHz",
-      "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/NASIONAL_FM.mp3",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/NASIONAL_FM.mp3",
       "homepage": "https://nasionalfm.rtm.gov.my/",
       "codec": "MP3",
       "bitrate": 96,
@@ -9470,7 +8711,7 @@
     },
     {
       "name": "Tunog Pinoy Power FM",
-      "url": "http://streamnavs.net:8143/live",
+      "url": "https://streamnavs.net:8143/live",
       "homepage": "https://tppfm.weebly.com/",
       "codec": "AAC",
       "bitrate": 128,
@@ -9491,17 +8732,6 @@
       "countrycode": "PH"
     },
     {
-      "name": "Barangay LS 97.1 Manila",
-      "url": "http://28093.live.streamtheworld.com:3690/MORFM_S01AAC_SC",
-      "homepage": "https://www.gmanetwork.com/radio/streaming/dwls",
-      "codec": "AAC+",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "opm,talk,top 40,variety",
-      "votes": 4180,
-      "countrycode": "PH"
-    },
-    {
       "name": "Christmas Radio Philippines - Powered By www.amfmph.net",
       "url": "https://us1.amfmph.com/ssl/christmasradio?mp=/stream&1641738050672",
       "homepage": "https://www.amfmph.com/",
@@ -9516,7 +8746,7 @@
   "SG": [
     {
       "name": "Jia 883 Radio",
-      "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/883JIAAAC.aac",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/883JIAAAC.aac",
       "homepage": "http://www.883jia.com.sg/",
       "codec": "AAC+",
       "bitrate": 96,
@@ -9527,7 +8757,7 @@
     },
     {
       "name": "UFM 100.3 Radio",
-      "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/UFM_1003AAC.aac",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/UFM_1003AAC.aac",
       "homepage": "http://www.ufm1003.sg/",
       "codec": "AAC+",
       "bitrate": 64,
@@ -9538,7 +8768,7 @@
     },
     {
       "name": "CNA 938 Live Singapore",
-      "url": "http://28373.live.streamtheworld.com/938NOW_PREM_SC",
+      "url": "https://28373.live.streamtheworld.com/938NOW_PREM_SC",
       "homepage": "https://www.channelnewsasia.com/news/cna938",
       "codec": "AAC+",
       "bitrate": 64,
@@ -9549,7 +8779,7 @@
     },
     {
       "name": "YES 933 Radio",
-      "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/YES933AAC.aac",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/YES933AAC.aac",
       "homepage": "http://www.meradio.sg/radio/yes-933",
       "codec": "AAC+",
       "bitrate": 48,
@@ -9560,7 +8790,7 @@
     },
     {
       "name": "Warna 942 Radio",
-      "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/WARNA942FMAAC.aac",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/WARNA942FMAAC.aac",
       "homepage": "http://www.meradio.sg/radio/warna-942fm",
       "codec": "AAC+",
       "bitrate": 48,
@@ -9571,7 +8801,7 @@
     },
     {
       "name": "Love 972 Radio",
-      "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/LOVE972FMAAC.aac",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOVE972FMAAC.aac",
       "homepage": "http://www.meradio.sg/radio/love-972",
       "codec": "AAC+",
       "bitrate": 48,
@@ -9582,7 +8812,7 @@
     },
     {
       "name": "Capital 958 Radio",
-      "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/CAPITAL958FMAAC.aac",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/CAPITAL958FMAAC.aac",
       "homepage": "http://www.meradio.sg/radio/capital-958",
       "codec": "AAC+",
       "bitrate": 48,
@@ -9593,7 +8823,7 @@
     },
     {
       "name": "Class 95 Radio",
-      "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/CLASS95AAC.aac",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/CLASS95AAC.aac",
       "homepage": "http://www.meradio.sg/radio/class-95",
       "codec": "AAC+",
       "bitrate": 48,
@@ -9604,7 +8834,7 @@
     },
     {
       "name": "SPH 963 Radio",
-      "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/HAO_963AAC.aac",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/HAO_963AAC.aac",
       "homepage": "http://www.963haofm.sg/",
       "codec": "AAC+",
       "bitrate": 64,
@@ -9615,7 +8845,7 @@
     },
     {
       "name": "Gold 905 Radio",
-      "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/GOLD905AAC.aac",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/GOLD905AAC.aac",
       "homepage": "http://www.meradio.sg/radio/gold-905",
       "codec": "AAC+",
       "bitrate": 48,
@@ -9637,7 +8867,7 @@
     },
     {
       "name": "Oli 968 Radio",
-      "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/OLI968FMAAC.aac",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/OLI968FMAAC.aac",
       "homepage": "http://www.meradio.sg/radio/oli968",
       "codec": "AAC+",
       "bitrate": 48,
@@ -9673,17 +8903,6 @@
   ],
   "KH": [
     {
-      "name": "National Radio of Kampuchea",
-      "url": "http://119.82.252.6:8080/broadwave.mp3",
-      "homepage": "http://rnk.gov.kh/",
-      "codec": "MP3",
-      "bitrate": 0,
-      "hls": false,
-      "tags": "",
-      "votes": 4971,
-      "countrycode": "KH"
-    },
-    {
       "name": "Family FM 99.5 (Witthyu Krousar)",
       "url": "https://s14.myradiostream.com/10064/;.mp3",
       "homepage": "https://www.facebook.com/Familyfm99.5/",
@@ -9692,17 +8911,6 @@
       "hls": false,
       "tags": "family,khmer,music,phnom penh",
       "votes": 32,
-      "countrycode": "KH"
-    },
-    {
-      "name": "RNK FM 96 (Radio National Kampuchea)",
-      "url": "http://119.82.252.6:8181/broadwave.mp3",
-      "homepage": "",
-      "codec": "MP3",
-      "bitrate": 0,
-      "hls": false,
-      "tags": "khmer,national,news,phnom penh,public",
-      "votes": 20,
       "countrycode": "KH"
     },
     {
@@ -10456,39 +9664,6 @@
   ],
   "AR": [
     {
-      "name": "Radio Nacional Folklorica 98.7",
-      "url": "http://sa.mp3.icecast.magma.edge-access.net:7200/sc_rad38",
-      "homepage": "http://www.nacionalfolklorica.com.ar/",
-      "codec": "MP3",
-      "bitrate": 160,
-      "hls": false,
-      "tags": "buenos aires,folk,public radio",
-      "votes": 2576,
-      "countrycode": "AR"
-    },
-    {
-      "name": "Feeling 91.9 FM",
-      "url": "http://turadioenvivo.com:8430/stream",
-      "homepage": "http://fmfeeling.com/",
-      "codec": "MP3",
-      "bitrate": 192,
-      "hls": false,
-      "tags": "aor,classic hits,classic pop,classic rock",
-      "votes": 1905,
-      "countrycode": "AR"
-    },
-    {
-      "name": "Radio Nacional Rock 93.7",
-      "url": "http://sa.mp3.icecast.magma.edge-access.net:7200/sc_rad39",
-      "homepage": "http://www.nacionalrock.com/",
-      "codec": "MP3",
-      "bitrate": 160,
-      "hls": false,
-      "tags": "public,pública,rock",
-      "votes": 1936,
-      "countrycode": "AR"
-    },
-    {
       "name": "Radio Rivadavia",
       "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/RIVADAVIA.mp3",
       "homepage": "",
@@ -10567,7 +9742,7 @@
     },
     {
       "name": "Radio Mitre",
-      "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/AM790_56AAC_SC",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/AM790_56AAC_SC",
       "homepage": "https://radiomitre.cienradios.com/espectaculos/de-que-murio-rodrigo-ruiz-el-actor-que-perdio-la-vida-a-los-49-anos/",
       "codec": "AAC+",
       "bitrate": 64,
@@ -10590,19 +9765,8 @@
   ],
   "BR": [
     {
-      "name": "Rádio Bossa Nova Brazil",
-      "url": "http://54.38.43.201:8009/stream-128kmp3-BossaNovaBrazil",
-      "homepage": "http://www.vip-radios.fm/station/bossa-nova-brazil/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "bossa nova,brazilian music",
-      "votes": 13873,
-      "countrycode": "BR"
-    },
-    {
       "name": "Máquina do Tempo (Internacional)",
-      "url": "http://servidor28.brlogic.com:8212/live",
+      "url": "https://servidor28.brlogic.com:8212/live",
       "homepage": "http://www.radiomaquinadotempo.com.br/",
       "codec": "MP3",
       "bitrate": 128,
@@ -10645,58 +9809,14 @@
       "countrycode": "BR"
     },
     {
-      "name": "Antena 1 São Paulo, SP (ZYD823 94,7 MHz FM) [aac]",
-      "url": "http://antena1.newradio.it/stream?ext=.mp3",
-      "homepage": "http://antena1.com.br/",
-      "codec": "AAC+",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "adult contemporary,jazz,pop,smooth jazz",
-      "votes": 33245,
-      "countrycode": "BR"
-    },
-    {
-      "name": "Antena 1 FM 94.7 São Paulo",
-      "url": "http://antena1.newradio.it/stream",
-      "homepage": "https://www.antena1.com.br/",
-      "codec": "AAC+",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "adult contemporary,lite",
-      "votes": 20969,
-      "countrycode": "BR"
-    },
-    {
-      "name": "Antena 1 FM 103.7 Rio de Janeiro",
-      "url": "http://a1rj.streams.com.br:7801/stream",
-      "homepage": "https://www.antena1rio.com.br/",
-      "codec": "AAC+",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "adult contemporary,lite",
-      "votes": 16324,
-      "countrycode": "BR"
-    },
-    {
       "name": "Máquina do Tempo (MPB Brasil)",
-      "url": "http://servidor28.brlogic.com:8032/live",
+      "url": "https://servidor28.brlogic.com:8032/live",
       "homepage": "http://mpbmaquinatempo.minhawebradio.net/",
       "codec": "MP3",
       "bitrate": 96,
       "hls": false,
       "tags": "",
       "votes": 9276,
-      "countrycode": "BR"
-    },
-    {
-      "name": "Antena 1 Rio de Janeiro, RJ (ZYD 463, 103,7 MHz FM)",
-      "url": "http://a1rj.streams.com.br:7801/sm",
-      "homepage": "http://www.antena1rio.com.br/",
-      "codec": "AAC+",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "adult contemporary,brazilian music,jazz,pop,smooth jazz",
-      "votes": 7081,
       "countrycode": "BR"
     },
     {
@@ -10714,7 +9834,7 @@
   "CL": [
     {
       "name": "Imagina",
-      "url": "http://24403.live.streamtheworld.com/IMAGINA_SC",
+      "url": "https://24403.live.streamtheworld.com/IMAGINA_SC",
       "homepage": "http://www.radioimagina.cl/",
       "codec": "MP3",
       "bitrate": 128,
@@ -10724,19 +9844,8 @@
       "countrycode": "CL"
     },
     {
-      "name": "Corazon",
-      "url": "http://27603.live.streamtheworld.com:3690/CORAZON_SC",
-      "homepage": "",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 3607,
-      "countrycode": "CL"
-    },
-    {
       "name": "Pudahuel",
-      "url": "http://26503.live.streamtheworld.com/PUDAHUEL_SC",
+      "url": "https://26503.live.streamtheworld.com/PUDAHUEL_SC",
       "homepage": "http://www.pudahuel.cl/",
       "codec": "MP3",
       "bitrate": 128,
@@ -10747,7 +9856,7 @@
     },
     {
       "name": "Los 40 Principales Chile",
-      "url": "http://27583.live.streamtheworld.com/LOS40_CHILE_SC",
+      "url": "https://27583.live.streamtheworld.com/LOS40_CHILE_SC",
       "homepage": "http://www.los40.cl/",
       "codec": "MP3",
       "bitrate": 128,
@@ -10758,7 +9867,7 @@
     },
     {
       "name": "Concierto",
-      "url": "http://26523.live.streamtheworld.com/CONCIERTO_SC",
+      "url": "https://26523.live.streamtheworld.com/CONCIERTO_SC",
       "homepage": "http://www.concierto.cl/",
       "codec": "MP3",
       "bitrate": 128,
@@ -10768,19 +9877,8 @@
       "countrycode": "CL"
     },
     {
-      "name": "Radio Definitiva",
-      "url": "http://192.198.83.230:8772/;",
-      "homepage": "https://www.definitiva.cl/",
-      "codec": "AAC+",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "80s",
-      "votes": 2221,
-      "countrycode": "CL"
-    },
-    {
       "name": "Rock and Pop",
-      "url": "http://26513.live.streamtheworld.com/ROCK_AND_POPAAC_SC",
+      "url": "https://26513.live.streamtheworld.com/ROCK_AND_POPAAC_SC",
       "homepage": "http://www.rockandpop.cl/",
       "codec": "AAC+",
       "bitrate": 56,
@@ -10804,35 +9902,13 @@
   "CO": [
     {
       "name": "Blu Radio, señal nacional (HJCK, 89.9 MHz FM, Bogotá / HJN42, 96.3 MHz, San Martín, Meta / HJH87, 103.1 MHz, Paipa, Boyacá / HJOM, 1090 KHz, Cartagena de Indias / HJM47 103.1 MHz, Algeciras, Huila / HJQ43, 94.1 MHz, Bugalagrande, Valle del Cauca)",
-      "url": "http://26483.live.streamtheworld.com/BLURADIO_SC",
+      "url": "https://26483.live.streamtheworld.com/BLURADIO_SC",
       "homepage": "http://www.bluradio.com/",
       "codec": "MP3",
       "bitrate": 256,
       "hls": false,
       "tags": "armenian,bogotá,caribbean music,live sports,neiva,news,news radio,pereira,sports news,sports talk,talk radio,tunja,villavicencio",
       "votes": 21416,
-      "countrycode": "CO"
-    },
-    {
-      "name": "La Kalle",
-      "url": "http://27343.live.streamtheworld.com:3690/LA_KALLE_SC",
-      "homepage": "http://lakalle.bluradio.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "folk music,local music,popular,ranchera,urban",
-      "votes": 11476,
-      "countrycode": "CO"
-    },
-    {
-      "name": "Tropicana Bogotá (HJRX 102.9) Caracol Radio",
-      "url": "http://24503.live.streamtheworld.com:3690/TROPICANA_SC",
-      "homepage": "http://www.tropicanafm.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "salsa,tropical,vallenato",
-      "votes": 7257,
       "countrycode": "CO"
     },
     {
@@ -10844,28 +9920,6 @@
       "hls": false,
       "tags": "entretenimiento,music,pop,reggaeton,urbano",
       "votes": 6672,
-      "countrycode": "CO"
-    },
-    {
-      "name": "Candela Estéreo Bogotá (HJPU 101.9)",
-      "url": "http://27343.live.streamtheworld.com:3690/CANDELAESTEREO_SC",
-      "homepage": "http://www.candelaestereo.com/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "bogota,latin,latino",
-      "votes": 7188,
-      "countrycode": "CO"
-    },
-    {
-      "name": "W Radio Colombia, Bogotá (HJCZ 690 AM; HJLN 99.9 MHz FM) Caracol Estéreo / Caracol Radio",
-      "url": "http://27383.live.streamtheworld.com:3690/WRADIO_SC",
-      "homepage": "http://wradio.com.co/",
-      "codec": "MP3",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "news,news and talk,talk radio",
-      "votes": 14276,
       "countrycode": "CO"
     },
     {
@@ -10902,19 +9956,8 @@
       "countrycode": "CO"
     },
     {
-      "name": "Radiónica (HJYM 99.1 Bogotá) RTVC",
-      "url": "http://shoutcast.rtvc.gov.co:8010/;",
-      "homepage": "http://www.radionica.rocks/",
-      "codec": "AAC+",
-      "bitrate": 48,
-      "hls": false,
-      "tags": "electronic,metal,rock,spanish rock",
-      "votes": 7478,
-      "countrycode": "CO"
-    },
-    {
       "name": "Vibra Bogotá 104.9 FM",
-      "url": "http://24493.live.streamtheworld.com/VIBRAAAC_SC",
+      "url": "https://24493.live.streamtheworld.com/VIBRAAAC_SC",
       "homepage": "https://www.vibra.fm/",
       "codec": "AAC+",
       "bitrate": 48,
@@ -10934,17 +9977,6 @@
       "hls": false,
       "tags": "electronic music,hip hop,k-pop,pop music,r&b",
       "votes": 2180,
-      "countrycode": "PE"
-    },
-    {
-      "name": "Radio Los Angeles - Chepen",
-      "url": "http://94.23.159.187:9950/;",
-      "homepage": "https://radiolosangeles.com.pe/",
-      "codec": "MP3",
-      "bitrate": 320,
-      "hls": false,
-      "tags": "variety",
-      "votes": 1730,
       "countrycode": "PE"
     },
     {
@@ -11003,28 +10035,6 @@
       "countrycode": "PE"
     },
     {
-      "name": "Top Latino",
-      "url": "http://online.radiodifusion.net:8020/stream",
-      "homepage": "https://www.toplatino.net/",
-      "codec": "AAC+",
-      "bitrate": 48,
-      "hls": false,
-      "tags": "hits,latino,peru,top 40",
-      "votes": 8150,
-      "countrycode": "PE"
-    },
-    {
-      "name": "Radio frecuencia 100 - Trujillo",
-      "url": "http://oyotunstream.com:7066/;",
-      "homepage": "http://www.radio.frecuencia100fm.com/",
-      "codec": "AAC+",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "variety",
-      "votes": 1838,
-      "countrycode": "PE"
-    },
-    {
       "name": "Radio Oxígeno",
       "url": "https://mdstrm.com/audio/5fab0687bcd6c2389ee9480c/live.m3u8",
       "homepage": "https://www.oxigeno.com.pe/",
@@ -11048,17 +10058,6 @@
     }
   ],
   "VE": [
-    {
-      "name": "Unión Radio 90.3 FM Caracas",
-      "url": "http://ur58.lorini.net:2080/stream",
-      "homepage": "https://unionradio.net/",
-      "codec": "MP3",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "news",
-      "votes": 3766,
-      "countrycode": "VE"
-    },
     {
       "name": "DJ Shaggy Venezuela Radio",
       "url": "https://laradiossl.online:9226/;",
@@ -11106,17 +10105,6 @@
   ],
   "UY": [
     {
-      "name": "Del Sol FM",
-      "url": "http://radio.dl.uy:9950/radio",
-      "homepage": "http://fmdelsol.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 5227,
-      "countrycode": "UY"
-    },
-    {
       "name": "Fm Inolvidable 93.1",
       "url": "https://inolvidable-2.nty.uy/",
       "homepage": "",
@@ -11125,17 +10113,6 @@
       "hls": false,
       "tags": "",
       "votes": 2022,
-      "countrycode": "UY"
-    },
-    {
-      "name": "CX12 Radio Oriental 770 AM",
-      "url": "http://radiolatina.live:7906/1",
-      "homepage": "https://oriental.com.uy/inicio/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "cx12 radio oriental 770 am",
-      "votes": 1044,
       "countrycode": "UY"
     },
     {
@@ -11225,17 +10202,6 @@
       "tags": "futbol,noticias",
       "votes": 300,
       "countrycode": "UY"
-    },
-    {
-      "name": "America FM",
-      "url": "http://emisiones.com.uy:8118/america",
-      "homepage": "http://americafm.com.uy/",
-      "codec": "AAC",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "salto uruguay",
-      "votes": 290,
-      "countrycode": "UY"
     }
   ],
   "EC": [
@@ -11263,7 +10229,7 @@
     },
     {
       "name": "La tukka Ec",
-      "url": "http://grupomundodigital.com:8673/live",
+      "url": "https://grupomundodigital.com:8673/live",
       "homepage": "http://latukka.com/",
       "codec": "AAC+",
       "bitrate": 48,
@@ -11285,24 +10251,13 @@
     },
     {
       "name": "JC La Bruja",
-      "url": "http://s7.yesstreaming.net:8040/stream?1655753305283",
+      "url": "https://s7.yesstreaming.net:8040/stream?1655753305283",
       "homepage": "http://www.jcradio.com.ec/",
       "codec": "MP3",
       "bitrate": 128,
       "hls": false,
       "tags": "música pop",
       "votes": 1509,
-      "countrycode": "EC"
-    },
-    {
-      "name": "Radio Sucumbíos 105.3 FM",
-      "url": "http://aler.org:8000/radiosucumbios.mp3",
-      "homepage": "https://radiosucumbios.org.ec/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "music,musica,news,noticias",
-      "votes": 1168,
       "countrycode": "EC"
     },
     {
@@ -11363,19 +10318,8 @@
       "countrycode": "BO"
     },
     {
-      "name": "Radio Fides Cbba",
-      "url": "http://149.56.175.167:5654/;",
-      "homepage": "http://online.radiofides.com/cochabamba.html",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "fides",
-      "votes": 1924,
-      "countrycode": "BO"
-    },
-    {
       "name": "Radio Ciudad",
-      "url": "http://streamingenbolivia.com/8002/stream",
+      "url": "https://streamingenbolivia.com/8002/stream",
       "homepage": "https://ciudad91.net/",
       "codec": "AAC+",
       "bitrate": 36,
@@ -11510,19 +10454,8 @@
   ],
   "AU": [
     {
-      "name": "Kiss FM 87.6, 87.8 & 88.0 Melbourne, VIC",
-      "url": "http://cc.net2streams.com:8565/kissfm.mp3",
-      "homepage": "https://kissfm.com.au/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "dance,electronica,melbourne",
-      "votes": 7581,
-      "countrycode": "AU"
-    },
-    {
       "name": "ABC NewsRadio MP3",
-      "url": "http://abc.streamguys1.com/live/newsradio/icecast.audio",
+      "url": "https://abc.streamguys1.com/live/newsradio/icecast.audio",
       "homepage": "http://www.abc.net.au/newsradio/",
       "codec": "AAC+",
       "bitrate": 56,
@@ -11533,7 +10466,7 @@
     },
     {
       "name": "ABC News Radio",
-      "url": "http://abc.streamguys1.com/live/newsradio/icecast.audio",
+      "url": "https://abc.streamguys1.com/live/newsradio/icecast.audio",
       "homepage": "http://www.abc.net.au/newsradio/",
       "codec": "AAC+",
       "bitrate": 56,
@@ -11544,7 +10477,7 @@
     },
     {
       "name": "ABC Radio National AAC+",
-      "url": "http://abc.streamguys1.com/live/rnnsw/icecast.audio",
+      "url": "https://abc.streamguys1.com/live/rnnsw/icecast.audio",
       "homepage": "http://www.abc.net.au/radionational/",
       "codec": "AAC+",
       "bitrate": 56,
@@ -11566,7 +10499,7 @@
     },
     {
       "name": "DiscoRhythm",
-      "url": "http://c3.radioboss.fm:8018/stream",
+      "url": "https://c3.radioboss.fm:8018/stream",
       "homepage": "http://www.discorhythm.com/",
       "codec": "MP3",
       "bitrate": 320,
@@ -11588,7 +10521,7 @@
     },
     {
       "name": "SBS Chill",
-      "url": "http://sbs-ice.streamguys1.com/sbschill",
+      "url": "https://sbs-ice.streamguys1.com/sbschill",
       "homepage": "https://www.sbs.com.au/radio/chill",
       "codec": "AAC+",
       "bitrate": 97,
@@ -11610,7 +10543,7 @@
     },
     {
       "name": "Smooth FM 95.3",
-      "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/SMOOTH953_AAC48.aac?src=neweb",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/SMOOTH953_AAC48.aac?src=neweb",
       "homepage": "https://www.smooth.com.au/smooth",
       "codec": "AAC+",
       "bitrate": 48,
@@ -11622,52 +10555,8 @@
   ],
   "NZ": [
     {
-      "name": "Easy 80s",
-      "url": "http://procyon.shoutca.st:8032/;",
-      "homepage": "https://www.auckland80s.com/easy-80s.html",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "80s,easy listening",
-      "votes": 2371,
-      "countrycode": "NZ"
-    },
-    {
-      "name": "RNZ National MP3",
-      "url": "http://radionz-ice.streamguys.com/national.mp3",
-      "homepage": "https://www.rnz.co.nz/national",
-      "codec": "MP3",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "features,national affairs,news",
-      "votes": 3441,
-      "countrycode": "NZ"
-    },
-    {
-      "name": "Sleep Radio",
-      "url": "http://65.109.81.84:9851/stream",
-      "homepage": "https://www.sleepradio.co.nz/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "ambient,meditation,new age,relax,sleep",
-      "votes": 815,
-      "countrycode": "NZ"
-    },
-    {
-      "name": "RNZ Pacific MP3",
-      "url": "http://radionz-ice.streamguys.com/international.mp3",
-      "homepage": "https://www.rnz.co.nz/international",
-      "codec": "MP3",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "features,national affairs,news,pacific",
-      "votes": 815,
-      "countrycode": "NZ"
-    },
-    {
       "name": "Gaia FM New Zealand",
-      "url": "http://s2.stationplaylist.com:9000/gaiafm.aac",
+      "url": "https://s2.stationplaylist.com:9000/gaiafm.aac",
       "homepage": "",
       "codec": "AAC+",
       "bitrate": 128,
@@ -11678,7 +10567,7 @@
     },
     {
       "name": "Newstalk ZB Wellington",
-      "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/NZME_31AAC.m3u8",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/NZME_31AAC.m3u8",
       "homepage": "https://www.newstalkzb.co.nz/",
       "codec": "AAC+",
       "bitrate": 64,
@@ -11700,35 +10589,13 @@
     },
     {
       "name": "Coast",
-      "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/NZME_07AAC.m3u8",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/NZME_07AAC.m3u8",
       "homepage": "http://www.thecoast.net.nz/",
       "codec": "AAC+",
       "bitrate": 64,
       "hls": true,
       "tags": "",
       "votes": 719,
-      "countrycode": "NZ"
-    },
-    {
-      "name": "Radio New Zealand National",
-      "url": "http://radionz-ice.streamguys.com/national.mp3",
-      "homepage": "https://www.rnz.co.nz/national",
-      "codec": "MP3",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "",
-      "votes": 491,
-      "countrycode": "NZ"
-    },
-    {
-      "name": "RNZ Concert AAC (128kbps)",
-      "url": "http://radionz-ice.streamguys.com/Concert_aac128",
-      "homepage": "https://www.rnz.co.nz/concert",
-      "codec": "AAC",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "classical,classical music",
-      "votes": 314,
       "countrycode": "NZ"
     }
   ],
@@ -11745,19 +10612,8 @@
       "countrycode": "MA"
     },
     {
-      "name": "Radio Aswat",
-      "url": "http://broadcast.ice.infomaniak.ch/aswat-high.mp3?.mp3",
-      "homepage": "http://www.radioaswat.ma/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 11954,
-      "countrycode": "MA"
-    },
-    {
       "name": "Only rai",
-      "url": "http://onlyrai.ice.infomaniak.ch/onlyrai-high.mp3",
+      "url": "https://onlyrai.ice.infomaniak.ch/onlyrai-high.mp3",
       "homepage": "http://www.urbanhit.fr/#",
       "codec": "MP3",
       "bitrate": 128,
@@ -11797,17 +10653,6 @@
       "hls": false,
       "tags": "",
       "votes": 5914,
-      "countrycode": "MA"
-    },
-    {
-      "name": "Adwaafm",
-      "url": "http://stream.zeno.fm/5bxh2nh0x1zuv?1681882617017",
-      "homepage": "https://www.adwaafm.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 3666,
       "countrycode": "MA"
     },
     {
@@ -11902,7 +10747,7 @@
     },
     {
       "name": "109.0 FM Christmas Kids",
-      "url": "http://stream.dar.fm/97821",
+      "url": "https://stream.dar.fm/97821",
       "homepage": "http://stream.dar.fm/97821",
       "codec": "MP3",
       "bitrate": 128,
@@ -11987,31 +10832,9 @@
       "tags": "classical",
       "votes": 2815,
       "countrycode": "DZ"
-    },
-    {
-      "name": "sleep",
-      "url": "http://65.109.81.84:9851/stream",
-      "homepage": "http://sleepradio.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "ff",
-      "votes": 1971,
-      "countrycode": "DZ"
     }
   ],
   "TN": [
-    {
-      "name": "oxygene fm",
-      "url": "http://stream.radios-arra.fr:8000/oxygenefm",
-      "homepage": "https://www.oxygenefm.com/",
-      "codec": "MP3",
-      "bitrate": 192,
-      "hls": false,
-      "tags": "",
-      "votes": 5249,
-      "countrycode": "TN"
-    },
     {
       "name": "Sabra FM",
       "url": "https://manager5.streamradio.fr:1905/stream",
@@ -12057,17 +10880,6 @@
       "countrycode": "TN"
     },
     {
-      "name": "KnOOz FM",
-      "url": "http://streaming.knoozfm.net:8000/knoozfm",
-      "homepage": "http://knoozfm.net/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 14928,
-      "countrycode": "TN"
-    },
-    {
       "name": "Mosaique FM Tarab",
       "url": "https://radio.mosaiquefm.net/mosatarab",
       "homepage": "http://mosaiquefm.net/",
@@ -12079,17 +10891,6 @@
       "countrycode": "TN"
     },
     {
-      "name": "Radio Tunisie Sfax",
-      "url": "http://rtstream.tanitweb.com/sfax",
-      "homepage": "http://www.radiosfax.tn/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "regional",
-      "votes": 9972,
-      "countrycode": "TN"
-    },
-    {
       "name": "Diwan FM",
       "url": "https://streaming.diwanfm.net/stream",
       "homepage": "https://diwanfm.net/",
@@ -12098,39 +10899,6 @@
       "hls": false,
       "tags": "",
       "votes": 9952,
-      "countrycode": "TN"
-    },
-    {
-      "name": "Radio Tunisie Nationale",
-      "url": "http://rtstream.tanitweb.com/nationale",
-      "homepage": "http://www.radionationale.tn/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 9690,
-      "countrycode": "TN"
-    },
-    {
-      "name": "Radio Tunisie Jeunes",
-      "url": "http://rtstream.tanitweb.com/jeunes",
-      "homepage": "http://www.radiojeunes.tn/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "youth",
-      "votes": 9207,
-      "countrycode": "TN"
-    },
-    {
-      "name": "Radio Tunisie Monastir",
-      "url": "http://rtstream.tanitweb.com/monastir",
-      "homepage": "http://www.radiomonastir.tn/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "monastir,regional",
-      "votes": 7634,
       "countrycode": "TN"
     }
   ],
@@ -12147,17 +10915,6 @@
       "countrycode": "LY"
     },
     {
-      "name": "Hala Sabratha",
-      "url": "http://stream.zeno.fm/1dy2395z3k8uv",
-      "homepage": "https://zeno.fm/hala-sabratha",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "80's,music",
-      "votes": 4815,
-      "countrycode": "LY"
-    },
-    {
       "name": "تفسير بن عثيمين",
       "url": "https://qurango.net/radio/tafseer",
       "homepage": "",
@@ -12166,17 +10923,6 @@
       "hls": false,
       "tags": "classical",
       "votes": 2267,
-      "countrycode": "LY"
-    },
-    {
-      "name": "Libyana Hits FM",
-      "url": "http://proxima.shoutca.st:8946/stream",
-      "homepage": "http://libyanahits.fm/#",
-      "codec": "AAC+",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "arabic,benghazi,libya,tripoli",
-      "votes": 6277,
       "countrycode": "LY"
     },
     {
@@ -12212,17 +10958,6 @@
       "hls": false,
       "tags": "",
       "votes": 11130,
-      "countrycode": "EG"
-    },
-    {
-      "name": "Tes3enat FM",
-      "url": "http://178.33.135.244:20095/;?DIST=TuneIn&TGT=TuneIn&maxServers=2&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTYzNjA1OTE3OCwiaXNzIjoidGlzcnYifQ.Me0snc2PBcQhvlzte9L7zQxa-IHgNinhu3XdNJ6_Xa8",
-      "homepage": "",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "classical",
-      "votes": 10932,
       "countrycode": "EG"
     },
     {
@@ -12281,19 +11016,8 @@
       "countrycode": "EG"
     },
     {
-      "name": "Diab FM",
-      "url": "http://stream-36.zeno.fm/rf64mx02qa0uv?zs=omRb6KEjQ3u0-JsaJKdhQg",
-      "homepage": "http://www.liveradiu.com/2018/04/amr-diab-fm-live-radio.html",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "pop",
-      "votes": 7254,
-      "countrycode": "EG"
-    },
-    {
       "name": "NRJ EGYPT",
-      "url": "http://nrjstreaming.ahmed-melege.com/nrjegypt",
+      "url": "https://nrjstreaming.ahmed-melege.com/nrjegypt",
       "homepage": "https://nrj.com/",
       "codec": "MP3",
       "bitrate": 128,
@@ -12373,39 +11097,6 @@
   ],
   "NG": [
     {
-      "name": "Radio East",
-      "url": "http://stream.zeno.fm/7f4w4us5wp8uv",
-      "homepage": "https://www.radioeast.com.ng/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "music,talk",
-      "votes": 2086,
-      "countrycode": "NG"
-    },
-    {
-      "name": "RFI Haoussa",
-      "url": "http://live02.rfi.fr/rfihaoussa-96k.mp3",
-      "homepage": "http://www.rfi.fr/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "",
-      "votes": 4800,
-      "countrycode": "NG"
-    },
-    {
-      "name": "MajorFM",
-      "url": "http://stream.zeno.fm/pkza99xshkhvv",
-      "homepage": "https://zeno.fm/radio/major-fm/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "80s,dj mixes,electro,hiphop,jazz,lounge,mix,r&b,smooth jazz",
-      "votes": 1875,
-      "countrycode": "NG"
-    },
-    {
       "name": "METRO FM LAGOS",
       "url": "https://go.webgateready.com/metrofm/radio.mp3",
       "homepage": "https://go.webgateready.com/metrofm/radio.mp3",
@@ -12428,17 +11119,6 @@
       "countrycode": "NG"
     },
     {
-      "name": "Inform Me Radio",
-      "url": "http://stream.zeno.fm/ta1fke6sz1zuv",
-      "homepage": "https://www.informmeradio.com/",
-      "codec": "MP3",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "business programs,family,farming,news,relationship,talk",
-      "votes": 1453,
-      "countrycode": "NG"
-    },
-    {
       "name": "URBAN RADIO ENUGU",
       "url": "https://edge.mixlr.com/channel/cfldr",
       "homepage": "https://www.urbanradio945.com/",
@@ -12447,17 +11127,6 @@
       "hls": false,
       "tags": "",
       "votes": 1471,
-      "countrycode": "NG"
-    },
-    {
-      "name": "Nagari Radio",
-      "url": "http://stream.zeno.fm/287z97ksdg8uv",
-      "homepage": "http://stream.zeno.fm/287z97ksdg8uv",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "http://stream.zeno.fm/287z97ksdg8uv",
-      "votes": 1095,
       "countrycode": "NG"
     },
     {
@@ -12492,17 +11161,6 @@
       "tags": "",
       "votes": 916,
       "countrycode": "NG"
-    },
-    {
-      "name": "Adamimogo FM",
-      "url": "http://stream.zeno.fm/sywy4vua6zhvv",
-      "homepage": "https://adamimogofm.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 719,
-      "countrycode": "NG"
     }
   ],
   "GH": [
@@ -12518,17 +11176,6 @@
       "countrycode": "GH"
     },
     {
-      "name": "Sweet Melodies",
-      "url": "http://sweetmelodies.tk/stream1",
-      "homepage": "http://sweetmelodies.tk/",
-      "codec": "AAC+",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 2132,
-      "countrycode": "GH"
-    },
-    {
       "name": "ChinaGhana Fm",
       "url": "https://stream.zeno.fm/3w43axr9mg0uv",
       "homepage": "https://www.chinaghana.com/",
@@ -12540,50 +11187,6 @@
       "countrycode": "GH"
     },
     {
-      "name": "ADUM RADIO",
-      "url": "http://stream.zeno.fm/dmn9atfb7ehvv",
-      "homepage": "http://stream.zeno.fm/dmn9atfb7ehvv",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "adom,ok fm,oyerep fm",
-      "votes": 1640,
-      "countrycode": "GH"
-    },
-    {
-      "name": "ADUM RADIO",
-      "url": "http://stream.zeno.fm/dmn9atfb7ehvv",
-      "homepage": "http://stream.zeno.fm/dmn9atfb7ehvv",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "adom fm,oyerepa fm",
-      "votes": 803,
-      "countrycode": "GH"
-    },
-    {
-      "name": "ADUM RADIO",
-      "url": "http://stream.zeno.fm/dmn9atfb7ehvv",
-      "homepage": "http://stream.zeno.fm/dmn9atfb7ehvv",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "adom,ok fm,oyerep fm",
-      "votes": 569,
-      "countrycode": "GH"
-    },
-    {
-      "name": "ADUM RADIO",
-      "url": "http://stream.zeno.fm/dmn9atfb7ehvv",
-      "homepage": "http://stream.zeno.fm/dmn9atfb7ehvv",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "adom fm,oyerepa fm",
-      "votes": 558,
-      "countrycode": "GH"
-    },
-    {
       "name": "057 radio",
       "url": "https://audio.alter-media.hr/9052/stream",
       "homepage": "https://www.057info.hr/emisije/",
@@ -12592,17 +11195,6 @@
       "hls": false,
       "tags": "",
       "votes": 95,
-      "countrycode": "GH"
-    },
-    {
-      "name": "Mereshena Radio",
-      "url": "http://stream.zeno.fm/gms1ucq58ehvv",
-      "homepage": "http://stream.zeno.fm/gms1ucq58ehvv",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 443,
       "countrycode": "GH"
     },
     {
@@ -12619,17 +11211,6 @@
   ],
   "SN": [
     {
-      "name": "Dakar Musique",
-      "url": "http://listen.senemultimedia.net:8090/stream",
-      "homepage": "https://dakarmusique.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "african music,music,senegal",
-      "votes": 5083,
-      "countrycode": "SN"
-    },
-    {
       "name": "FM Sénégal 103.1 Dakar",
       "url": "https://stream-154.zeno.fm/t8gcyq6ts0quv",
       "homepage": "https://www.facebook.com/profile.php?id=100063864529826",
@@ -12638,17 +11219,6 @@
       "hls": false,
       "tags": "african music",
       "votes": 2935,
-      "countrycode": "SN"
-    },
-    {
-      "name": "H24",
-      "url": "http://listen.senemultimedia.net:8070/stream",
-      "homepage": "https://h24.sn/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 2620,
       "countrycode": "SN"
     },
     {
@@ -12675,7 +11245,7 @@
     },
     {
       "name": "Sud FM Sen Radio",
-      "url": "http://stream.zenolive.com/rq40edfn3reuv",
+      "url": "https://stream.zenolive.com/rq40edfn3reuv",
       "homepage": "https://sudfmsenradio.com/",
       "codec": "MP3",
       "bitrate": 64,
@@ -12764,17 +11334,6 @@
       "countrycode": "ML"
     },
     {
-      "name": "Kalux FM Bamako",
-      "url": "http://stream.zeno.fm/kgadkjdbexqtv",
-      "homepage": "https://kaluxfm.blogspot.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "african music",
-      "votes": 1322,
-      "countrycode": "ML"
-    },
-    {
       "name": "Radio Neneba FM 97.7 Markala",
       "url": "https://stream.zeno.fm/e9xqg1ah22quv",
       "homepage": "https://nenebafm.info/",
@@ -12783,17 +11342,6 @@
       "hls": false,
       "tags": "african music",
       "votes": 1225,
-      "countrycode": "ML"
-    },
-    {
-      "name": "Radio Fréquence 3 93.8 Bamako",
-      "url": "http://ice.stream.frequence3.net/frequence3-64.aac",
-      "homepage": "https://www.facebook.com/profile.php?id=100063945637574",
-      "codec": "AAC",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "music",
-      "votes": 1342,
       "countrycode": "ML"
     },
     {
@@ -12877,7 +11425,7 @@
   "CI": [
     {
       "name": "Trace FM Côte d’Ivoire",
-      "url": "http://stream.trace.tv/trace_fm_ci-midfi.aac",
+      "url": "https://stream.trace.tv/trace_fm_ci-midfi.aac",
       "homepage": "http://trace.ci/",
       "codec": "AAC+",
       "bitrate": 256,
@@ -13089,30 +11637,7 @@
       "countrycode": "BF"
     }
   ],
-  "NE": [
-    {
-      "name": "Radio BLAU Leipzig (trocken 320kbps)",
-      "url": "http://icecast.radioblau.de:8000/blau_320_dry",
-      "homepage": "http://dasha.at/cxdashboard.html",
-      "codec": "MP3",
-      "bitrate": 320,
-      "hls": false,
-      "tags": "amateurfunk,bürgerradio",
-      "votes": 147,
-      "countrycode": "NE"
-    },
-    {
-      "name": "Wadata Radio 107.4 Niamey",
-      "url": "http://stream.zeno.fm/1y2c3qbgbchvv",
-      "homepage": "https://wadataradio.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "african music",
-      "votes": 522,
-      "countrycode": "NE"
-    }
-  ],
+  "NE": [],
   "BJ": [
     {
       "name": "Radio Cotonou 94.3",
@@ -13146,23 +11671,12 @@
       "tags": "music,news",
       "votes": 207,
       "countrycode": "BJ"
-    },
-    {
-      "name": "DIMusic Trance Club  🇧🇯",
-      "url": "http://stream1.dimusic.club:11534/rw?type=.aac",
-      "homepage": "http://dimusic.club/",
-      "codec": "AAC+",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "dance,electro,trance",
-      "votes": 299,
-      "countrycode": "BJ"
     }
   ],
   "TG": [
     {
       "name": "taxi fm",
-      "url": "http://streaming.radionomy.com/JamendoLounge?lang=fr%2cfr-FR%3bq%3d0.8%2cen-US%3bq%3d0.5%2cen%3bq%3d0.3",
+      "url": "https://streaming.radionomy.com/JamendoLounge?lang=fr%2cfr-FR%3bq%3d0.8%2cen-US%3bq%3d0.5%2cen%3bq%3d0.3",
       "homepage": "http://streaming.radionomy.com/JamendoLounge?lang=fr%2cfr-FR%3bq%3d0.8%2cen-US%3bq%3d0.5%2cen%3bq%3d0.3",
       "codec": "MP3",
       "bitrate": 128,
@@ -13180,17 +11694,6 @@
       "hls": false,
       "tags": "music",
       "votes": 2527,
-      "countrycode": "TG"
-    },
-    {
-      "name": "Radio Gameli",
-      "url": "http://usa1.fastcast4u.com:3190/stream/",
-      "homepage": "https://radiolebene.tg/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 752,
       "countrycode": "TG"
     },
     {
@@ -13216,41 +11719,7 @@
       "countrycode": "TG"
     }
   ],
-  "SL": [
-    {
-      "name": "Choice FM 93.3",
-      "url": "http://stream.zeno.fm/ct0gvk9149puv",
-      "homepage": "https://www.choicefmsl.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 869,
-      "countrycode": "SL"
-    },
-    {
-      "name": "Sierra Network Radio",
-      "url": "http://45.79.181.148:8004/;",
-      "homepage": "https://snradio.net/snradio/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "african music",
-      "votes": 637,
-      "countrycode": "SL"
-    },
-    {
-      "name": "Sierra Network Radio",
-      "url": "http://45.79.181.148:8004/;",
-      "homepage": "http://www.snradio.net/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 331,
-      "countrycode": "SL"
-    }
-  ],
+  "SL": [],
   "LR": [],
   "GM": [],
   "GW": [
@@ -13317,17 +11786,6 @@
       "homepage": "https://www.rtc.cv/rcv/direto",
       "codec": "MP3",
       "bitrate": 320,
-      "hls": false,
-      "tags": "",
-      "votes": 4,
-      "countrycode": "CV"
-    },
-    {
-      "name": "RADIO ALFA - CV",
-      "url": "http://uk6freenew.listen2myradio.com:10110/stream",
-      "homepage": "https://l.facebook.com/l.php?u=http%3A%2F%2Fwww.radioalfacv.com%2F&h=AUDP-CXES2NZH5BlLcYo78UgiQw1-ZHh66mXkaSvkRBwubIJQ4L6ou202buou_nn9ZhYjaZcF1gSshtyjtWZlkmiugor1hFeiqopElI-0lqUA7wloYcMf6gITjxTFazH_jo1F4pCXnpRXQ",
-      "codec": "MP3",
-      "bitrate": 192,
       "hls": false,
       "tags": "",
       "votes": 4,
@@ -13403,28 +11861,6 @@
   "MR": [],
   "ET": [
     {
-      "name": "fm addis 97.1",
-      "url": "http://stream.zeno.fm/7tzrhrap7yzuv",
-      "homepage": "https://vymaps.com/ET/FM-Addis-97-1-Home-page-Addis-mereja-and-entertainment-1707077486098841/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 6412,
-      "countrycode": "ET"
-    },
-    {
-      "name": "Mirt Internet Radio",
-      "url": "http://stream.zeno.fm/akmuznguawzuv",
-      "homepage": "http://www.mirtmirt.com/mirt-internet-radio/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 5208,
-      "countrycode": "ET"
-    },
-    {
       "name": "Ethio FM 107.8",
       "url": "https://stream.zeno.fm/72y045deqeruv",
       "homepage": "https://zeno.fm/radio/ethiofm107_8/",
@@ -13477,17 +11913,6 @@
       "hls": false,
       "tags": "music",
       "votes": 2082,
-      "countrycode": "ET"
-    },
-    {
-      "name": "jazz Ethiopia world",
-      "url": "http://mediaserv38.live-streams.nl:8006/live",
-      "homepage": "http://mediaserv38.live-streams.nl:8006/live",
-      "codec": "MP3",
-      "bitrate": 320,
-      "hls": false,
-      "tags": "jazz",
-      "votes": 1481,
       "countrycode": "ET"
     },
     {
@@ -13548,28 +11973,6 @@
       "countrycode": "KE"
     },
     {
-      "name": "REGGAE ROOTS",
-      "url": "http://relay5.181.fm:8096/",
-      "homepage": "http://relay5.181.fm:8096/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "classical",
-      "votes": 1651,
-      "countrycode": "KE"
-    },
-    {
-      "name": "KBC",
-      "url": "http://stream.zeno.fm/ud2u96xst5quv",
-      "homepage": "",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "classical",
-      "votes": 1619,
-      "countrycode": "KE"
-    },
-    {
       "name": "ghetto kenya",
       "url": "https://stream.zeno.fm/kvudezx1h2zuv",
       "homepage": "https://stream.zeno.fm/kvudezx1h2zuv",
@@ -13578,39 +11981,6 @@
       "hls": false,
       "tags": "classical",
       "votes": 1267,
-      "countrycode": "KE"
-    },
-    {
-      "name": "Radio Kaya",
-      "url": "http://usa9-vn.mixstream.net:8084/;",
-      "homepage": "https://radiokaya.co.ke/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "jazz,local news,local talk,talk radio,tarab",
-      "votes": 1082,
-      "countrycode": "KE"
-    },
-    {
-      "name": "GHETTOO KENYA",
-      "url": "http://stream.zeno.fm/cs4q33arb2zuv",
-      "homepage": "http://stream.zeno.fm/cs4q33arb2zuv",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "classical",
-      "votes": 1007,
-      "countrycode": "KE"
-    },
-    {
-      "name": "NATION KENYA",
-      "url": "http://stream.radiojar.com/3by7s8eg65quv",
-      "homepage": "http://stream.radiojar.com/3by7s8eg65quv",
-      "codec": "MP3",
-      "bitrate": 0,
-      "hls": false,
-      "tags": "classical",
-      "votes": 1161,
       "countrycode": "KE"
     },
     {
@@ -13626,7 +11996,7 @@
     },
     {
       "name": "classic",
-      "url": "http://media-ice.musicradio.com/ClassicFMMP3",
+      "url": "https://media-ice.musicradio.com/ClassicFMMP3",
       "homepage": "http://media-ice.musicradio.com/ClassicFMMP3",
       "codec": "MP3",
       "bitrate": 128,
@@ -13645,17 +12015,6 @@
       "tags": "classical",
       "votes": 678,
       "countrycode": "KE"
-    },
-    {
-      "name": "NATION FM",
-      "url": "http://stream.radiojar.com/3by7s8eg65quv",
-      "homepage": "http://stream.radiojar.com/3by7s8eg65quv",
-      "codec": "MP3",
-      "bitrate": 0,
-      "hls": false,
-      "tags": "classical",
-      "votes": 915,
-      "countrycode": "KE"
     }
   ],
   "TZ": [
@@ -13671,19 +12030,8 @@
       "countrycode": "TZ"
     },
     {
-      "name": "Clouds FM",
-      "url": "http://eu6.fastcast4u.com:5306/;",
-      "homepage": "https://www.cloudsfm.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "pop,top 40",
-      "votes": 13066,
-      "countrycode": "TZ"
-    },
-    {
       "name": "Wasafi Fm",
-      "url": "http://streaming.radionomy.com/JamendoLounge",
+      "url": "https://streaming.radionomy.com/JamendoLounge",
       "homepage": "https://www.wcbwasafi.com/",
       "codec": "MP3",
       "bitrate": 128,
@@ -13704,17 +12052,6 @@
       "countrycode": "TZ"
     },
     {
-      "name": "Clouds FM",
-      "url": "http://eu6.fastcast4u.com:5306/;",
-      "homepage": "https://cloudsmedia.co.tz/home/clouds-fm",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 1356,
-      "countrycode": "TZ"
-    },
-    {
       "name": "Capital Radio",
       "url": "https://capitalradio.radioca.st/stream",
       "homepage": "https://www.capitalradio.co.tz/",
@@ -13726,17 +12063,6 @@
       "countrycode": "TZ"
     },
     {
-      "name": "Radio Mbiu",
-      "url": "http://dreamsiteradiocp5.com:8004/stream.mp3",
-      "homepage": "https://www.radiombiu.co.tz/",
-      "codec": "MP3",
-      "bitrate": 48,
-      "hls": false,
-      "tags": "news,sport",
-      "votes": 595,
-      "countrycode": "TZ"
-    },
-    {
       "name": "Nuru FM",
       "url": "https://radiotadio.co.tz/nuru-fm-stream",
       "homepage": "https://radiotadio.co.tz/nurufm/",
@@ -13745,17 +12071,6 @@
       "hls": false,
       "tags": "",
       "votes": 434,
-      "countrycode": "TZ"
-    },
-    {
-      "name": "Heaven FM Radio",
-      "url": "http://stream.zeno.fm/eequgfw72hhvv",
-      "homepage": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FjVwXjJnAN_TFwdnscjgzoRtEirCylumB5_sOFRQUbDM%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvYWd4emZucGxibTh0YzNSaGRITnlNZ3NTQ2tGMWRHaERiR2xsYm5RWWdJQ0lsdGlDbUFvTUN4SU9VM1JoZEdsdmJsQnliMlpwYkdVWWdJQ0lscWlLb0FnTW9nRUVlbVZ1YncvaW1hZ2UvP3Jlc2l6ZT0yNDB4MjQwJnVwZGF0ZWQ9MTY1NzYwMTQzNDAwMA.webp&w=750&q=75",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 333,
       "countrycode": "TZ"
     },
     {
@@ -13805,17 +12120,6 @@
       "countrycode": "UG"
     },
     {
-      "name": "Capital FM",
-      "url": "http://5229.cloudrad.io:8316/;",
-      "homepage": "http://capitalradio-ug.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 10893,
-      "countrycode": "UG"
-    },
-    {
       "name": "Uganda DJs",
       "url": "https://stream.zeno.fm/muzrp86994zuv",
       "homepage": "http://ugandadjs.com/",
@@ -13824,28 +12128,6 @@
       "hls": false,
       "tags": "hiphop,rnb,rumba,soul",
       "votes": 6046,
-      "countrycode": "UG"
-    },
-    {
-      "name": "Beat FM - Kampala - 96.3 FM (MP3)",
-      "url": "http://5230.cloudrad.io:8354/live",
-      "homepage": "https://beatradio.co.ug/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "music",
-      "votes": 2175,
-      "countrycode": "UG"
-    },
-    {
-      "name": "KIIS Uganda",
-      "url": "http://14867.cloudrad.io:9224/live",
-      "homepage": "https://capitalradio.co.ug/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 2156,
       "countrycode": "UG"
     },
     {
@@ -13860,17 +12142,6 @@
       "countrycode": "UG"
     },
     {
-      "name": "Akaboozi FM 87.9",
-      "url": "http://162.244.80.52:8732/stream.mp3",
-      "homepage": "https://www.akaboozi.com/",
-      "codec": "MP3",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "news,talk",
-      "votes": 17799,
-      "countrycode": "UG"
-    },
-    {
       "name": "95.5 Radio Buddu",
       "url": "https://dc4.serverse.com/proxy/ccmxrgub/stream",
       "homepage": "https://radiobuddufm.com/",
@@ -13882,30 +12153,8 @@
       "countrycode": "UG"
     },
     {
-      "name": "Radio one",
-      "url": "http://162.244.80.52:8740/stream",
-      "homepage": "http://radioone.com/",
-      "codec": "MP3",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "music",
-      "votes": 2844,
-      "countrycode": "UG"
-    },
-    {
-      "name": "AKABOOZI FM",
-      "url": "http://162.244.80.52:8732/stream.mp3",
-      "homepage": "https://www.akaboozi.com/",
-      "codec": "MP3",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "music",
-      "votes": 2403,
-      "countrycode": "UG"
-    },
-    {
       "name": "Sanyu Fm",
-      "url": "http://s44.myradiostream.com:8138/stream",
+      "url": "https://s44.myradiostream.com:8138/stream",
       "homepage": "http://sanyufm.com/",
       "codec": "AAC+",
       "bitrate": 48,
@@ -13917,39 +12166,6 @@
   ],
   "RW": [
     {
-      "name": "Radio 1",
-      "url": "http://80.241.215.175:5000/;",
-      "homepage": "http://tv1.rw/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "local music,news,talk",
-      "votes": 6095,
-      "countrycode": "RW"
-    },
-    {
-      "name": "Heaven FM Radio Rwanda",
-      "url": "http://stream.zeno.fm/eequgfw72hhvv",
-      "homepage": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FjVwXjJnAN_TFwdnscjgzoRtEirCylumB5_sOFRQUbDM%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvYWd4emZucGxibTh0YzNSaGRITnlNZ3NTQ2tGMWRHaERiR2xsYm5RWWdJQ0lsdGlDbUFvTUN4SU9VM1JoZEdsdmJsQnliMlpwYkdVWWdJQ0lscWlLb0FnTW9nRUVlbVZ1YncvaW1hZ2UvP3Jlc2l6ZT0yNDB4MjQwJnVwZGF0ZWQ9MTY1NzYwMTQzNDAwMA.webp&w=750&q=75",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 2445,
-      "countrycode": "RW"
-    },
-    {
-      "name": "90.7 Magic FM",
-      "url": "http://listen.rba.co.rw:8080/;",
-      "homepage": "http://listen.rba.co.rw/radios/radiomagic.html",
-      "codec": "MP3",
-      "bitrate": 185,
-      "hls": false,
-      "tags": "",
-      "votes": 1720,
-      "countrycode": "RW"
-    },
-    {
       "name": "Radio Rwanda",
       "url": "https://listen.rba.co.rw:8008/rwanda/",
       "homepage": "https://rba.co.rw/",
@@ -13958,17 +12174,6 @@
       "hls": false,
       "tags": "",
       "votes": 871,
-      "countrycode": "RW"
-    },
-    {
-      "name": "90.7 Magic FM",
-      "url": "http://listen.rba.co.rw:8080/;",
-      "homepage": "http://listen.rba.co.rw/radios/radiomagic.html",
-      "codec": "MP3",
-      "bitrate": 185,
-      "hls": false,
-      "tags": "",
-      "votes": 530,
       "countrycode": "RW"
     },
     {
@@ -14005,30 +12210,7 @@
       "countrycode": "RW"
     }
   ],
-  "BI": [
-    {
-      "name": "Heaven FM Radio (Burundi)",
-      "url": "http://stream.zeno.fm/eequgfw72hhvv",
-      "homepage": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FjVwXjJnAN_TFwdnscjgzoRtEirCylumB5_sOFRQUbDM%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvYWd4emZucGxibTh0YzNSaGRITnlNZ3NTQ2tGMWRHaERiR2xsYm5RWWdJQ0lsdGlDbUFvTUN4SU9VM1JoZEdsdmJsQnliMlpwYkdVWWdJQ0lscWlLb0FnTW9nRUVlbVZ1YncvaW1hZ2UvP3Jlc2l6ZT0yNDB4MjQwJnVwZGF0ZWQ9MTY1NzYwMTQzNDAwMA.webp&w=750&q=75",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 1564,
-      "countrycode": "BI"
-    },
-    {
-      "name": "Radio Maria Burundi",
-      "url": "http://57.129.49.167:8082/stream",
-      "homepage": "https://www.radiomaria.bi/",
-      "codec": "AAC+",
-      "bitrate": 32,
-      "hls": false,
-      "tags": "",
-      "votes": 706,
-      "countrycode": "BI"
-    }
-  ],
+  "BI": [],
   "SO": [
     {
       "name": "Idaacadda Subaxnimo VOA",
@@ -14067,19 +12249,8 @@
       "countrycode": "ER"
     },
     {
-      "name": "Eritrean Music",
-      "url": "http://linuxfreelancer.com:8000/test.mp3",
-      "homepage": "https://linuxfreelancer.com/shoutcast-internet-radio",
-      "codec": "AAC+",
-      "bitrate": 56,
-      "hls": false,
-      "tags": "amharic,tigrigna",
-      "votes": 299,
-      "countrycode": "ER"
-    },
-    {
       "name": "hip hop",
-      "url": "http://stream.rtlradio.de/rnb/mp3-192/",
+      "url": "https://stream.rtlradio.de/rnb/mp3-192/",
       "homepage": "https://yonaskassahun011.wixsite.com/selamcoffee-1",
       "codec": "MP3",
       "bitrate": 0,
@@ -14159,86 +12330,8 @@
       "countrycode": "SC"
     }
   ],
-  "KM": [
-    {
-      "name": "Radio Domoni Inter",
-      "url": "http://www.domoni-inter.org:8000/live",
-      "homepage": "http://www.domoni-inter.org/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "",
-      "votes": 350,
-      "countrycode": "KM"
-    },
-    {
-      "name": "Radio Chifa",
-      "url": "http://164.132.107.52:8000/main",
-      "homepage": "http://164.132.107.52:8000/",
-      "codec": "MP3",
-      "bitrate": 256,
-      "hls": false,
-      "tags": "",
-      "votes": 3,
-      "countrycode": "KM"
-    },
-    {
-      "name": "Radio Chifa",
-      "url": "http://164.132.107.52:8000/main",
-      "homepage": "http://164.132.107.52:8000/",
-      "codec": "MP3",
-      "bitrate": 256,
-      "hls": false,
-      "tags": "",
-      "votes": 1,
-      "countrycode": "KM"
-    },
-    {
-      "name": "Radio Chifa",
-      "url": "http://164.132.107.52:8000/main",
-      "homepage": "http://164.132.107.52:8080/",
-      "codec": "MP3",
-      "bitrate": 256,
-      "hls": false,
-      "tags": "",
-      "votes": 1,
-      "countrycode": "KM"
-    }
-  ],
+  "KM": [],
   "MG": [
-    {
-      "name": "Radio des jeunes (RDJ)",
-      "url": "http://rdj966.net:8000/rdj966.mp3",
-      "homepage": "http://rdj.mg/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "96.6,antananarivo,rdj",
-      "votes": 7758,
-      "countrycode": "MG"
-    },
-    {
-      "name": "RNA Madagascar",
-      "url": "http://drs-live-rna.gasy-internet.info:9001/;",
-      "homepage": "http://www.rna-madagascar.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 4964,
-      "countrycode": "MG"
-    },
-    {
-      "name": "RDJ",
-      "url": "http://rdj966.net:8000/rdj966.mp3",
-      "homepage": "https://rdj.mg/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 2724,
-      "countrycode": "MG"
-    },
     {
       "name": "Radio Rock Madagascar",
       "url": "https://tanjona.radioca.st/stream",
@@ -14248,17 +12341,6 @@
       "hls": false,
       "tags": "",
       "votes": 373,
-      "countrycode": "MG"
-    },
-    {
-      "name": "Radio Don Bosco Madagascar",
-      "url": "http://onair15.xdevel.com:9248/;stream.mp3",
-      "homepage": "https://rdb.mg/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 381,
       "countrycode": "MG"
     },
     {
@@ -14442,28 +12524,6 @@
   ],
   "CM": [
     {
-      "name": "Balla Radio",
-      "url": "http://167.114.11.79:5730/;stream/1",
-      "homepage": "http://ballaradio.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "african music",
-      "votes": 1702,
-      "countrycode": "CM"
-    },
-    {
-      "name": "Globe 360 Radio",
-      "url": "http://139.84.240.171:8000/globe360",
-      "homepage": "http://139.84.240.171:8000/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "actualités,afrique international bilingue,geopolitique",
-      "votes": 42,
-      "countrycode": "CM"
-    },
-    {
       "name": "Mmuock Community Radio",
       "url": "https://a7.asurahosting.com/listen/mmuock_community_radio_/radio.mp3",
       "homepage": "https://radio.mmuock.info/",
@@ -14477,39 +12537,6 @@
   ],
   "CD": [
     {
-      "name": "Radio Okapi",
-      "url": "http://rs1.radiostreamer.com:8000/;",
-      "homepage": "http://radiookapi.net/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "",
-      "votes": 14885,
-      "countrycode": "CD"
-    },
-    {
-      "name": "Radio Okapi",
-      "url": "http://rs1.radiostreamer.com:8000/listen.pls;?type=http&nocache=1353",
-      "homepage": "http://www.radiookapi.net/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "informations",
-      "votes": 4327,
-      "countrycode": "CD"
-    },
-    {
-      "name": "Radio Okapi",
-      "url": "http://rs1.radiostreamer.com:8000/;",
-      "homepage": "https://www.radiookapi.net/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "actualites,current affairs,ecole,education,monusco,nations unis,news,nouvelles,nu,politics,school,un,united nations",
-      "votes": 2730,
-      "countrycode": "CD"
-    },
-    {
       "name": "Top Congo FM",
       "url": "https://topcongofm2.ice.infomaniak.ch/topcongofm2-64.mp3",
       "homepage": "http://domain.com/",
@@ -14522,24 +12549,13 @@
     },
     {
       "name": "Top Congo FM 88.4 Kinshasa",
-      "url": "http://topcongofm2.ice.infomaniak.ch/topcongofm2-64.mp3",
+      "url": "https://topcongofm2.ice.infomaniak.ch/topcongofm2-64.mp3",
       "homepage": "http://www.topcongoinfo.com/",
       "codec": "MP3",
       "bitrate": 96,
       "hls": false,
       "tags": "african music,kinshasa,local news,news",
       "votes": 1666,
-      "countrycode": "CD"
-    },
-    {
-      "name": "MILLENIUM RADIO",
-      "url": "http://stream.zeno.fm/471pmgfd5f8uv",
-      "homepage": "https://zeno.fm/millenium-radioh1tmcgfd5f8uv/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 863,
       "countrycode": "CD"
     },
     {
@@ -14562,39 +12578,6 @@
       "hls": false,
       "tags": "",
       "votes": 499,
-      "countrycode": "CD"
-    },
-    {
-      "name": "Radio Okapi",
-      "url": "http://rs1.radiostreamer.com:8000/;",
-      "homepage": "https://www.radiookapi.net/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "",
-      "votes": 547,
-      "countrycode": "CD"
-    },
-    {
-      "name": "Radio Okapi",
-      "url": "http://rs1.radiostreamer.com:8000/;",
-      "homepage": "https://www.radiookapi.net/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "",
-      "votes": 353,
-      "countrycode": "CD"
-    },
-    {
-      "name": "LAVDC",
-      "url": "http://stream.zeno.fm/6ya7cvxnff9uv",
-      "homepage": "http://www.lavdc.net/",
-      "codec": "AAC",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "rumba",
-      "votes": 216,
       "countrycode": "CD"
     },
     {
@@ -14622,31 +12605,8 @@
       "countrycode": "CG"
     }
   ],
-  "GA": [
-    {
-      "name": "EBEN RADIO",
-      "url": "http://s8.voscast.com:7558/;stream.ogg",
-      "homepage": "http://www.ebenradio.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 19,
-      "countrycode": "GA"
-    }
-  ],
+  "GA": [],
   "CF": [
-    {
-      "name": "Radio Ndeke Luka FM",
-      "url": "http://stream.radiondekeluka.org:8001/ndekeluka",
-      "homepage": "https://www.radiondekeluka.org/",
-      "codec": "MP3",
-      "bitrate": 28,
-      "hls": false,
-      "tags": "talk",
-      "votes": 2135,
-      "countrycode": "CF"
-    },
     {
       "name": "Mambokadzi DreamRadio",
       "url": "https://cast3.asurahosting.com/proxy/dreamradio/stream.mp3",
@@ -14700,7 +12660,7 @@
   "AO": [
     {
       "name": "Rádio Fé Angola",
-      "url": "http://stream-284.surfernetwork.com/gsndh1xvczetv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJnc25kaDF4dmN6ZXR2IiwiaG9zdCI6InN0cmVhbS0yODQuc3VyZmVybmV0d29yay5jb20iLCJ0bSI6ZmFsc2UsInJ0dGwiOjUsImp0aSI6IjJBRkg2Zm5NVFd5elZMemM2UGZYQ2ciLCJpYXQiOjE3OTA0MjkxMDIsImV4cCI6MTc5MDQyOTE2Mn0.47peskc_qTvqmvKssq2UBke7t9sYwCSB1JGRTgpuljE",
+      "url": "https://stream-284.surfernetwork.com/gsndh1xvczetv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJnc25kaDF4dmN6ZXR2IiwiaG9zdCI6InN0cmVhbS0yODQuc3VyZmVybmV0d29yay5jb20iLCJ0bSI6ZmFsc2UsInJ0dGwiOjUsImp0aSI6IjJBRkg2Zm5NVFd5elZMemM2UGZYQ2ciLCJpYXQiOjE3OTA0MjkxMDIsImV4cCI6MTc5MDQyOTE2Mn0.47peskc_qTvqmvKssq2UBke7t9sYwCSB1JGRTgpuljE",
       "homepage": "https://zeno.fm/radio/radio-fe-angola/",
       "codec": "MP3",
       "bitrate": 128,
@@ -14711,7 +12671,7 @@
     },
     {
       "name": "Absolute country",
-      "url": "http://strm112.1.fm/acountry_mobile_mp3",
+      "url": "https://strm112.1.fm/acountry_mobile_mp3",
       "homepage": "http://strm112.1.fm/acountry_mobile_mp3",
       "codec": "MP3",
       "bitrate": 256,
@@ -14733,7 +12693,7 @@
     },
     {
       "name": "Absolute country",
-      "url": "http://strm112.1.fm/acountry_mobile_mp3",
+      "url": "https://strm112.1.fm/acountry_mobile_mp3",
       "homepage": "http://strm112.1.fm/acountry_mobile_mp3",
       "codec": "MP3",
       "bitrate": 256,
@@ -14833,28 +12793,6 @@
       "countrycode": "ZA"
     },
     {
-      "name": "Bosveld Stereo",
-      "url": "http://capeant.antfarm.co.za:8000/Bosveld",
-      "homepage": "http://www.bosveldstereo.co.za/",
-      "codec": "AAC",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "pop,rock",
-      "votes": 4951,
-      "countrycode": "ZA"
-    },
-    {
-      "name": "702 Johannesburg",
-      "url": "http://25703.live.streamtheworld.com:3690/FM702_SC",
-      "homepage": "http://www.702.co.za/",
-      "codec": "MP3",
-      "bitrate": 64,
-      "hls": false,
-      "tags": "johannesburg,news talk",
-      "votes": 4256,
-      "countrycode": "ZA"
-    },
-    {
       "name": "Lekker FM",
       "url": "https://zas3.ndx.co.za:8002/stream",
       "homepage": "https://www.lekkerfm.com/",
@@ -14874,17 +12812,6 @@
       "hls": false,
       "tags": "80s",
       "votes": 1865,
-      "countrycode": "ZA"
-    },
-    {
-      "name": "Radio 786",
-      "url": "http://stream.krypton.co.za:8040/stream/",
-      "homepage": "https://www.radio786.co.za/",
-      "codec": "MP3",
-      "bitrate": 56,
-      "hls": false,
-      "tags": "",
-      "votes": 2013,
       "countrycode": "ZA"
     },
     {
@@ -14921,17 +12848,6 @@
       "countrycode": "ZA"
     },
     {
-      "name": "94.7",
-      "url": "http://28553.live.streamtheworld.com:3690/FM947AAC_SC",
-      "homepage": "http://www.947.co.za/",
-      "codec": "AAC+",
-      "bitrate": 32,
-      "hls": false,
-      "tags": "classic hits,hiphop,hits,pop,rock",
-      "votes": 4294,
-      "countrycode": "ZA"
-    },
-    {
       "name": "Kaya FM",
       "url": "https://edge.iono.fm/xice/82_medium.aac",
       "homepage": "https://www.kayafm.co.za/",
@@ -14944,7 +12860,7 @@
     },
     {
       "name": "Bokradio",
-      "url": "http://bokradio.highquality.radiostream.co.za/",
+      "url": "https://bokradio.highquality.radiostream.co.za/",
       "homepage": "http://bokradio.co.za/",
       "codec": "MP3",
       "bitrate": 0,
@@ -14990,7 +12906,7 @@
     },
     {
       "name": "Desert FM",
-      "url": "http://s2.stationplaylist.com:7154/listen.aac",
+      "url": "https://s2.stationplaylist.com:7154/listen.aac",
       "homepage": "https://stream.namibian.com.na/",
       "codec": "AAC+",
       "bitrate": 64,
@@ -15088,63 +13004,7 @@
       "countrycode": "NA"
     }
   ],
-  "BW": [
-    {
-      "name": "DumaFM",
-      "url": "http://s3.voscast.com:10076/;",
-      "homepage": "https://dumafm.co.bw/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "african music",
-      "votes": 1753,
-      "countrycode": "BW"
-    },
-    {
-      "name": "Gabz FM 96.2 Gaberone",
-      "url": "http://fmt01.egihosting.com:17721/;",
-      "homepage": "http://www.gabzfm.com/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "african music,gaberone,pop",
-      "votes": 1327,
-      "countrycode": "BW"
-    },
-    {
-      "name": "Duma FM",
-      "url": "http://s3.voscast.com:10076/stream",
-      "homepage": "https://dumafm.co.bw/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "",
-      "votes": 338,
-      "countrycode": "BW"
-    },
-    {
-      "name": "Yarona FM",
-      "url": "http://capeant.antfarm.co.za:8000/yarona",
-      "homepage": "https://yaronafm.co.bw/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 180,
-      "countrycode": "BW"
-    },
-    {
-      "name": "Gabz-FM",
-      "url": "http://fmt01.egihosting.com:17721/;",
-      "homepage": "https://www.gabzfm.com/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "",
-      "votes": 181,
-      "countrycode": "BW"
-    }
-  ],
+  "BW": [],
   "LS": [],
   "SZ": [],
   "ZW": [
@@ -15196,24 +13056,13 @@
   "ZM": [
     {
       "name": "Hot FM 87.7",
-      "url": "http://s2.yesstreaming.net:7091/stream?type=.mp3%2F%3Bstream.mp3&_=1",
+      "url": "https://s2.yesstreaming.net:7091/stream?type=.mp3%2F%3Bstream.mp3&_=1",
       "homepage": "http://www.hot877.com/",
       "codec": "MP3",
       "bitrate": 128,
       "hls": false,
       "tags": "african music,zambian music",
       "votes": 4230,
-      "countrycode": "ZM"
-    },
-    {
-      "name": "Sun Fm Zambia",
-      "url": "http://11233.cloudrad.io:9102/live",
-      "homepage": "https://www.zambia.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 2671,
       "countrycode": "ZM"
     },
     {
@@ -15274,17 +13123,6 @@
       "countrycode": "MW"
     },
     {
-      "name": "MBC Radio 2FM",
-      "url": "http://radiostream.mbc.mw:86/broadwavehigh.mp3?src=1",
-      "homepage": "https://mbc.mw/",
-      "codec": "MP3",
-      "bitrate": 0,
-      "hls": false,
-      "tags": "",
-      "votes": 435,
-      "countrycode": "MW"
-    },
-    {
       "name": "Groove100 FM",
       "url": "https://stream.zeno.fm/0r0xa792kwzuv",
       "homepage": "https://groove100.mw/",
@@ -15328,17 +13166,6 @@
       "hls": false,
       "tags": "news",
       "votes": 9880,
-      "countrycode": "MZ"
-    },
-    {
-      "name": "Super FM 101.9",
-      "url": "http://41.223.153.14:8000/;stream/1",
-      "homepage": "https://superfm.folhademaputo.co.mz/",
-      "codec": "MP3",
-      "bitrate": 96,
-      "hls": false,
-      "tags": "",
-      "votes": 1604,
       "countrycode": "MZ"
     },
     {
@@ -15398,28 +13225,6 @@
     }
   ],
   "MN": [
-    {
-      "name": "MGL Radio",
-      "url": "http://stream17.shoutcastsolutions.com:8096/",
-      "homepage": "http://mglradio.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "",
-      "votes": 1424,
-      "countrycode": "MN"
-    },
-    {
-      "name": "Mongolian Music Radio",
-      "url": "http://65.108.143.81:7700/1",
-      "homepage": "https://www.radiosons.com/",
-      "codec": "MP3",
-      "bitrate": 128,
-      "hls": false,
-      "tags": "electro,pop,rock,top 40",
-      "votes": 299,
-      "countrycode": "MN"
-    },
     {
       "name": "Elgen Nutag",
       "url": "https://a6.asurahosting.com:7210/radio.mp3",
