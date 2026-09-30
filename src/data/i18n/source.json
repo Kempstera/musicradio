@@ -4969,8 +4969,14 @@
         "desc": "以歌舞吟诵讲述传说与历史的斐济传统表演。"
       }
     ],
-    "radios": [],
-    "radioNote": "斐济的广播以综合与旅游节目为主，目前无稳定可访问的在线音乐流。"
+    "radios": [
+      {
+        "name": "The Vox Populi",
+        "genre": "校园 / 综合",
+        "note": "斐济大学（UniFiji）的校园电台。"
+      }
+    ],
+    "radioNote": ""
   },
   "papua-new-guinea": {
     "name": "巴布亚新几内亚",
@@ -4989,8 +4995,14 @@
         "desc": "以掏空树干制成的大型木鼓演奏的巴布亚新几内亚仪式音乐。"
       }
     ],
-    "radios": [],
-    "radioNote": "巴布亚新几内亚的广播以部落语言与综合节目为主，目前无稳定可访问的在线音乐流。"
+    "radios": [
+      {
+        "name": "FM 100",
+        "genre": "流行 / 综合",
+        "note": "巴布亚新几内亚的商业流行音乐电台。"
+      }
+    ],
+    "radioNote": ""
   },
   "solomon-islands": {
     "name": "所罗门群岛",
@@ -5029,8 +5041,24 @@
         "desc": "瓦努阿图妇女以拍打水面奏出节奏的独特表演，被列入人类非遗。"
       }
     ],
-    "radios": [],
-    "radioNote": "瓦努阿图的广播以综合节目为主，目前无稳定可访问的在线音乐流。"
+    "radios": [
+      {
+        "name": "Paradise 98FM",
+        "genre": "综合 / 音乐",
+        "note": "瓦努阿图广播公司（VBTC）旗下的综合音乐电台。"
+      },
+      {
+        "name": "Femme Pawa FM",
+        "genre": "社区 / 女性",
+        "note": "瓦努阿图广播公司（VBTC）旗下以女性与社区节目为主的电台。"
+      },
+      {
+        "name": "BUZZ FM 96.3",
+        "genre": "流行",
+        "note": "瓦努阿图《每日邮报》（Vanuatu Daily Post）旗下的流行音乐电台。"
+      }
+    ],
+    "radioNote": ""
   },
   "micronesia": {
     "name": "密克罗尼西亚联邦",
@@ -5069,8 +5097,14 @@
         "desc": "以棍舞与手鼓为核心、节奏明快的基里巴斯传统表演。"
       }
     ],
-    "radios": [],
-    "radioNote": "基里巴斯的广播以综合节目为主，目前无稳定可访问的在线音乐流。"
+    "radios": [
+      {
+        "name": "Radio Kiribati",
+        "genre": "综合 / 文化",
+        "note": "基里巴斯的国家广播电台。"
+      }
+    ],
+    "radioNote": ""
   },
   "marshall-islands": {
     "name": "马绍尔群岛",
@@ -5089,8 +5123,14 @@
         "desc": "以多声部合唱演绎马绍尔传统歌谣的团体。"
       }
     ],
-    "radios": [],
-    "radioNote": "马绍尔群岛的广播以综合节目为主，目前无稳定可访问的在线音乐流。"
+    "radios": [
+      {
+        "name": "Offshore Radio",
+        "genre": "摇滚",
+        "note": "马绍尔群岛的网络电台，播放经典与另类摇滚。"
+      }
+    ],
+    "radioNote": ""
   },
   "nauru": {
     "name": "瑙鲁",
@@ -5129,8 +5169,14 @@
         "desc": "以棍舞与合唱演绎帕劳传统的表演团体。"
       }
     ],
-    "radios": [],
-    "radioNote": "帕劳的广播以综合节目为主，目前无稳定可访问的在线音乐流。"
+    "radios": [
+      {
+        "name": "UpBeat.pw",
+        "genre": "流行 / 当代",
+        "note": "帕劳的网络电台，播放当代流行音乐。"
+      }
+    ],
+    "radioNote": ""
   },
   "samoa": {
     "name": "萨摩亚",
@@ -5149,8 +5195,14 @@
         "desc": "萨摩亚人多声部合唱，声音洪亮而和谐。"
       }
     ],
-    "radios": [],
-    "radioNote": "萨摩亚的广播以综合节目为主，目前无稳定可访问的在线音乐流。"
+    "radios": [
+      {
+        "name": "Radio 2AP",
+        "genre": "综合 / 文化",
+        "note": "萨摩亚广播公司（SBC）的全国电台。"
+      }
+    ],
+    "radioNote": ""
   },
   "tonga": {
     "name": "汤加",
@@ -5169,8 +5221,19 @@
         "desc": "汤加数百人规模的集体歌舞，被列入人类非物质文化遗产。"
       }
     ],
-    "radios": [],
-    "radioNote": "汤加的广播以综合节目为主，目前无稳定可访问的在线音乐流。"
+    "radios": [
+      {
+        "name": "Kalofiama 'O E 'Amanaki",
+        "genre": "社区",
+        "note": "汤加的社区电台。"
+      },
+      {
+        "name": "Letio Tonga",
+        "genre": "综合",
+        "note": "以汤加语播音的社区电台。"
+      }
+    ],
+    "radioNote": ""
   },
   "tuvalu": {
     "name": "图瓦卢",

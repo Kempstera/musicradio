@@ -81,7 +81,9 @@ export const oceania: Country[] = [
     musicians: [
       { name: '梅克歌舞团', nameEn: 'Meke Ensemble', role: '传统歌舞团', desc: '以歌舞吟诵讲述传说与历史的斐济传统表演。' },
     ],
-    radioNote: '斐济的广播以综合与旅游节目为主，目前无稳定可访问的在线音乐流。',
+    notableRadios: [
+      { name: 'The Vox Populi', genre: '校园 / 综合', note: '斐济大学（UniFiji）的校园电台。', url: 'https://s5.radio.co/s9ccc1e3bd/listen', hls: false },
+    ],
   },
   {
     slug: 'papua-new-guinea',
@@ -104,7 +106,9 @@ export const oceania: Country[] = [
     musicians: [
       { name: '加兰穆特鼓乐团', nameEn: 'Garamut Drum Ensemble', role: '传统乐团', desc: '以掏空树干制成的大型木鼓演奏的巴布亚新几内亚仪式音乐。' },
     ],
-    radioNote: '巴布亚新几内亚的广播以部落语言与综合节目为主，目前无稳定可访问的在线音乐流。',
+    notableRadios: [
+      { name: 'FM 100', genre: '流行 / 综合', note: '巴布亚新几内亚的商业流行音乐电台。', url: 'https://online.fm100.com.pg/stream', hls: false },
+    ],
   },
   {
     slug: 'solomon-islands',
@@ -150,7 +154,11 @@ export const oceania: Country[] = [
     musicians: [
       { name: '水乐表演团', nameEn: 'Water Music Ensemble', role: '传统表演团', desc: '瓦努阿图妇女以拍打水面奏出节奏的独特表演，被列入人类非遗。' },
     ],
-    radioNote: '瓦努阿图的广播以综合节目为主，目前无稳定可访问的在线音乐流。',
+    notableRadios: [
+      { name: 'Paradise 98FM', genre: '综合 / 音乐', note: '瓦努阿图广播公司（VBTC）旗下的综合音乐电台。', url: 'https://radio.vbtc.vu/paradisefm', hls: false },
+      { name: 'Femme Pawa FM', genre: '社区 / 女性', note: '瓦努阿图广播公司（VBTC）旗下以女性与社区节目为主的电台。', url: 'https://radio.vbtc.vu/femmefm', hls: false },
+      { name: 'BUZZ FM 96.3', genre: '流行', note: '瓦努阿图《每日邮报》（Vanuatu Daily Post）旗下的流行音乐电台。', url: 'https://streamer.dailypost.vu/live', hls: false },
+    ],
   },
   {
     slug: 'micronesia',
@@ -196,7 +204,9 @@ export const oceania: Country[] = [
     musicians: [
       { name: '基里巴斯歌舞团', nameEn: 'Kiribati Dance Ensemble', role: '传统歌舞团', desc: '以棍舞与手鼓为核心、节奏明快的基里巴斯传统表演。' },
     ],
-    radioNote: '基里巴斯的广播以综合节目为主，目前无稳定可访问的在线音乐流。',
+    notableRadios: [
+      { name: 'Radio Kiribati', genre: '综合 / 文化', note: '基里巴斯的国家广播电台。', url: 'https://streamer5.rightclickitservices.com:19790/stream', hls: false },
+    ],
   },
   {
     slug: 'marshall-islands',
@@ -219,7 +229,9 @@ export const oceania: Country[] = [
     musicians: [
       { name: '马绍尔合唱团', nameEn: 'Marshallese Choir', role: '合唱团', desc: '以多声部合唱演绎马绍尔传统歌谣的团体。' },
     ],
-    radioNote: '马绍尔群岛的广播以综合节目为主，目前无稳定可访问的在线音乐流。',
+    notableRadios: [
+      { name: 'Offshore Radio', genre: '摇滚', note: '马绍尔群岛的网络电台，播放经典与另类摇滚。', url: 'https://live.offshoreradio.net/listen/offshore_radio/radio.mp3', hls: false },
+    ],
   },
   {
     slug: 'nauru',
@@ -265,7 +277,9 @@ export const oceania: Country[] = [
     musicians: [
       { name: '帕劳棍舞团', nameEn: 'Palauan Stick Dance Ensemble', role: '传统歌舞团', desc: '以棍舞与合唱演绎帕劳传统的表演团体。' },
     ],
-    radioNote: '帕劳的广播以综合节目为主，目前无稳定可访问的在线音乐流。',
+    notableRadios: [
+      { name: 'UpBeat.pw', genre: '流行 / 当代', note: '帕劳的网络电台，播放当代流行音乐。', url: 'https://live.upbeat.pw/', hls: false },
+    ],
   },
   {
     slug: 'samoa',
@@ -288,7 +302,9 @@ export const oceania: Country[] = [
     musicians: [
       { name: '萨摩亚合唱团', nameEn: 'Samoan Choir', role: '合唱团', desc: '萨摩亚人多声部合唱，声音洪亮而和谐。' },
     ],
-    radioNote: '萨摩亚的广播以综合节目为主，目前无稳定可访问的在线音乐流。',
+    notableRadios: [
+      { name: 'Radio 2AP', genre: '综合 / 文化', note: '萨摩亚广播公司（SBC）的全国电台。', url: 'https://stream.zeno.fm/vupcb07gc2zuv', hls: false },
+    ],
   },
   {
     slug: 'tonga',
@@ -311,7 +327,10 @@ export const oceania: Country[] = [
     musicians: [
       { name: '拉卡拉卡歌舞团', nameEn: 'Lakalaka Ensemble', role: '传统歌舞团', desc: '汤加数百人规模的集体歌舞，被列入人类非物质文化遗产。' },
     ],
-    radioNote: '汤加的广播以综合节目为主，目前无稳定可访问的在线音乐流。',
+    notableRadios: [
+      { name: 'Kalofiama \'O E \'Amanaki', genre: '社区', note: '汤加的社区电台。', url: 'https://stream.zeno.fm/v4kaet5ab1ntv', hls: false },
+      { name: 'Letio Tonga', genre: '综合', note: '以汤加语播音的社区电台。', url: 'https://stream.zeno.fm/wnd22q3485quv', hls: false },
+    ],
   },
   {
     slug: 'tuvalu',
