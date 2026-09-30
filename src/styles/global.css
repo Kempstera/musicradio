@@ -820,6 +820,110 @@ p {
 .radio-card--descriptive {
   opacity: 0.88;
 }
+.fav-btn {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--ink-faint);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: all 0.2s ease;
+}
+.fav-btn:hover {
+  color: var(--gold-deep);
+  background: var(--gold-pale);
+}
+.fav-btn.is-fav {
+  color: #e0245e;
+}
+.fav-btn.is-fav:hover {
+  background: #fdecef;
+}
+.fav-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 0.7rem;
+  margin-top: 1.1rem;
+}
+.fav-item {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  transition: all 0.2s ease;
+}
+.fav-item.is-playing {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-md);
+}
+.fav-item__play {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  background: var(--surface);
+  color: var(--gold-deep);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: all 0.2s ease;
+}
+.fav-item__play:hover {
+  background: var(--gold);
+  color: #fff;
+}
+.fav-item.is-playing .fav-item__play {
+  background: var(--gold);
+  color: #fff;
+}
+.fav-item__body {
+  min-width: 0;
+  flex: 1;
+}
+.fav-item__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fav-item__country {
+  font-size: 0.76rem;
+  color: var(--ink-faint);
+  margin-top: 0.1rem;
+}
+.fav-item__country a {
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+.fav-item__country a:hover {
+  color: var(--gold-deep);
+}
+.fav-item__remove {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  color: #e0245e;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+.fav-item__remove:hover {
+  background: #fdecef;
+}
 .radio-card__live {
   display: inline-flex;
   align-items: center;

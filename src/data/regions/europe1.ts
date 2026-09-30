@@ -86,7 +86,7 @@ export const europe1: Country[] = [
       { name: '赫伯特·冯·卡拉扬', nameEn: 'Herbert von Karajan', role: '指挥家', desc: '20 世纪最具影响力的指挥家之一，长期执掌柏林爱乐，留下海量经典录音。' },
     ],
     notableRadios: [
-      { name: 'Ö1', genre: '古典 / 文化', note: '奥地利广播集团 ORF 的文化与古典频道，欧洲最权威的公共文化电台之一。' },
+      { name: 'Ö1', genre: '古典 / 文化', note: '奥地利广播集团 ORF 的文化与古典频道，欧洲最权威的公共文化电台之一。', url: 'https://orf-live.ors-shoutcast.at/campus-q2a', hls: false},
     ],
   },
   {
@@ -170,7 +170,7 @@ export const europe1: Country[] = [
       { name: 'Mostar Sevdah Reunion', nameEn: 'Mostar Sevdah Reunion', role: '民谣乐团', desc: '来自莫斯塔尔的塞夫达琳卡乐团，以原汁原味的演绎复兴了这一古老情歌传统。' },
       { name: '迪诺·梅林', nameEn: 'Dino Merlin', role: '流行歌手', desc: '波黑最成功的流行音乐人之一，多次代表波黑登上欧洲歌唱大赛。' },
     ],
-    notableRadios: [{ name: 'BH Radio 1', genre: '综合 / 塞夫达琳卡', note: '波黑国家广播主频道，播放大量塞夫达琳卡与传统音乐。' }],
+    notableRadios: [{ name: 'BH Radio 1', genre: '综合 / 塞夫达琳卡', note: '波黑国家广播主频道，播放大量塞夫达琳卡与传统音乐。', url: 'https://webtvstream.bhtelecom.ba/bh_radio1.m3u8', hls: true}],
   },
   {
     slug: 'bulgaria',
@@ -283,7 +283,7 @@ export const europe1: Country[] = [
     ],
     notableRadios: [
       { name: 'ČRo Vltava', genre: '古典 / 文化', note: '捷克广播的文化与古典频道，欧洲最优质的公共文化电台之一。' },
-      { name: 'ČRo D-dur', genre: '古典', note: '捷克广播的纯古典频道。' },
+      { name: 'ČRo D-dur', genre: '古典', note: '捷克广播的纯古典频道。', url: 'https://rozhlas.stream/ddur.mp3', hls: false},
     ],
   },
   {
@@ -312,8 +312,8 @@ export const europe1: Country[] = [
       { name: '迪特里希·布克斯特胡德', nameEn: 'Dieterich Buxtehude', role: '管风琴家 / 作曲家', desc: '巴洛克管风琴大师，年轻时的巴赫曾徒步数百里前来聆听其演奏。' },
     ],
     notableRadios: [
-      { name: 'DR P2', genre: '古典 / 文化', note: '丹麦广播的古典与文化频道。' },
-      { name: 'DR P8 Jazz', genre: '爵士', note: '丹麦广播的爵士频道，尽显北欧爵士风情。' },
+      { name: 'DR P2', genre: '古典 / 文化', note: '丹麦广播的古典与文化频道。', url: 'https://drliveradio1.akamaized.net/hls/live/2097651/p2/masterab.m3u8', hls: true},
+      { name: 'DR P8 Jazz', genre: '爵士', note: '丹麦广播的爵士频道，尽显北欧爵士风情。', url: 'https://drliveradio1.akamaized.net/hls/live/2097651/p8jazz/masterab.m3u8', hls: true},
     ],
   },
   {
@@ -369,7 +369,7 @@ export const europe1: Country[] = [
       { name: '夜愿', nameEn: 'Nightwish', role: '金属乐队', desc: '「交响金属」的开拓者，把歌剧女声与金属乐融合，全球销量逾千万。' },
     ],
     notableRadios: [
-      { name: 'Yle Klassinen', genre: '古典', note: '芬兰广播公司 YLE 的古典频道。' },
+      { name: 'Yle Klassinen', genre: '古典', note: '芬兰广播公司 YLE 的古典频道。', url: 'https://icecast.live.yle.fi/radio/YleKlassinen/icecast.audio', hls: false},
       { name: 'Yle Radio 1', genre: '文化 / 古典', note: 'YLE 的文化频道，播放大量古典与艺术节目。' },
     ],
   },
@@ -403,7 +403,7 @@ export const europe1: Country[] = [
     notableRadios: [
       { name: 'France Musique', genre: '古典 / 爵士', note: '法国最权威的古典音乐电台，节目品质极高。' },
       { name: 'FIP', genre: '多元 / 爵士 / 世界', note: '以极致品味著称的「小资」电台，无广告、跨界选曲，全球乐迷心中的圣地。' },
-      { name: 'Radio Classique', genre: '古典', note: '法国知名古典电台。' },
+      { name: 'Radio Classique', genre: '古典', note: '法国知名古典电台。', url: 'https://str0.creacast.com/classique1', hls: false},
       { name: 'TSF Jazz', genre: '爵士', note: '法国最纯粹的爵士电台之一。' },
     ],
   },
@@ -435,10 +435,10 @@ export const europe1: Country[] = [
       { name: '罗伯特·舒曼', nameEn: 'Robert Schumann', role: '作曲家', desc: '浪漫主义音乐与音乐评论的双重巨匠，钢琴与艺术歌曲成就极高。' },
     ],
     notableRadios: [
-      { name: 'BR-Klassik', genre: '古典', note: '巴伐利亚广播的古典频道，欧洲古典电台的标杆。' },
-      { name: 'Deutschlandfunk Kultur', genre: '文化 / 古典', note: '德国国家文化电台，音乐、戏剧与思想并重。' },
+      { name: 'BR-Klassik', genre: '古典', note: '巴伐利亚广播的古典频道，欧洲古典电台的标杆。', url: 'https://dispatcher.rndfnk.com/br/brklassik/live/mp3/high', hls: false},
+      { name: 'Deutschlandfunk Kultur', genre: '文化 / 古典', note: '德国国家文化电台，音乐、戏剧与思想并重。', url: 'https://st02.sslstream.dlf.de/dlf/02/128/mp3/stream.mp3?aggregator=web', hls: false},
       { name: 'WDR 3', genre: '古典 / 文化', note: '西德广播的文化频道。' },
-      { name: 'hr2-kultur', genre: '古典 / 文化', note: '黑森广播文化频道。' },
+      { name: 'hr2-kultur', genre: '古典 / 文化', note: '黑森广播文化频道。', url: 'https://dispatcher.rndfnk.com/hr/hr2/live/mp3/high', hls: false},
     ],
   },
   {
@@ -469,7 +469,7 @@ export const europe1: Country[] = [
     ],
     notableRadios: [
       { name: 'ERT Third Programme', genre: '古典 / 文化', note: '希腊广播电视的文化频道，古典音乐与艺术节目。' },
-      { name: 'Kosmos 93.6', genre: '世界音乐', note: 'ERT 的世界音乐频道，可听到大量雷贝蒂卡与地中海之声。' },
+      { name: 'Kosmos 93.6', genre: '世界音乐', note: 'ERT 的世界音乐频道，可听到大量雷贝蒂卡与地中海之声。', url: 'https://radiostreaming.ert.gr/ert-kosmos', hls: false},
     ],
   },
   {
@@ -500,7 +500,7 @@ export const europe1: Country[] = [
     ],
     notableRadios: [
       { name: 'Bartók Rádió (MR3)', genre: '古典', note: '匈牙利广播的古典频道，以巴托克命名。' },
-      { name: 'Kossuth Rádió (MR1)', genre: '综合 / 民族', note: '匈牙利广播主频道，兼顾民族音乐与新闻。' },
+      { name: 'Kossuth Rádió (MR1)', genre: '综合 / 民族', note: '匈牙利广播主频道，兼顾民族音乐与新闻。', url: 'https://icast.connectmedia.hu/4736/mr1.mp3', hls: false},
     ],
   },
   {
@@ -593,8 +593,8 @@ export const europe1: Country[] = [
       { name: '恩尼奥·莫里康内', nameEn: 'Ennio Morricone', role: '电影配乐家', desc: '意大利西部片配乐大师，《黄金三镖客》的口哨旋律无人不晓。' },
     ],
     notableRadios: [
-      { name: 'Rai Radio 3 Classica', genre: '古典', note: '意大利国家广播的古典频道。' },
-      { name: 'Radio Classica', genre: '古典', note: '意大利知名古典电台。' },
+      { name: 'Rai Radio 3 Classica', genre: '古典', note: '意大利国家广播的古典频道。', url: 'https://icecdn-19d24861e90342cc8decb03c24c8a419.msvdn.net/icecastRelay/S53422322/bTdUFhYMnnra/icecast', hls: false},
+      { name: 'Radio Classica', genre: '古典', note: '意大利知名古典电台。', url: 'https://stream10.xdevel.com/audio0s978096-2470/stream/icecast.audio', hls: false},
       { name: 'Rai Radio 3', genre: '文化 / 古典', note: '意大利国家广播的文化频道。' },
     ],
   },

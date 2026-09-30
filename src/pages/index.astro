@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import MyFavorites from '../components/MyFavorites.tsx';
 import { CONTINENTS, SUBREGIONS, CONTINENT_MAP } from '../lib/country';
 import { allCountries, countriesByContinent, countriesBySubregion } from '../data';
 import { getAllCompact } from '../data/i18n';
@@ -27,6 +28,8 @@ const compactJson = JSON.stringify(getAllCompact()).replace(/</g, '\\u003c');
       </div>
     </div>
   </section>
+
+  <MyFavorites client:load />
 
   <section class="section" id="continents">
     <div class="container">

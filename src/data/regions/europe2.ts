@@ -173,7 +173,7 @@ export const europe2: Country[] = [
     ],
     notableRadios: [
       { name: 'NPO Radio 4', genre: '古典', note: '荷兰公共广播的古典频道。' },
-      { name: 'Sublime', genre: '爵士 / 灵魂', note: '荷兰最著名的爵士与灵魂乐电台。' },
+      { name: 'Sublime', genre: '爵士 / 灵魂', note: '荷兰最著名的爵士与灵魂乐电台。', url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/SUBLIME.mp3?dist=sublime_website', hls: false},
     ],
   },
   {
@@ -226,7 +226,7 @@ export const europe2: Country[] = [
       { name: '奥勒·布尔', nameEn: 'Ole Bull', role: '小提琴家', desc: '19 世纪的天才小提琴家，被誉为「北方的帕格尼尼」。' },
     ],
     notableRadios: [
-      { name: 'NRK Klassisk', genre: '古典', note: '挪威广播的古典频道。' },
+      { name: 'NRK Klassisk', genre: '古典', note: '挪威广播的古典频道。', url: 'https://cdn0-47115-liveicecast0.dna.contentdelivery.net/klassisk_mp3_h', hls: false},
       { name: 'NRK Jazz', genre: '爵士', note: '挪威广播的爵士频道。' },
     ],
   },
@@ -287,7 +287,7 @@ export const europe2: Country[] = [
       { name: '卡洛斯·塞沙斯', nameEn: 'Carlos Seixas', role: '作曲家', desc: '葡萄牙巴洛克键盘音乐的代表，与斯卡拉蒂同时代而风格独具。' },
     ],
     notableRadios: [
-      { name: 'Antena 2', genre: '古典', note: '葡萄牙广播的古典与文化频道。' },
+      { name: 'Antena 2', genre: '古典', note: '葡萄牙广播的古典与文化频道。', url: 'https://streaming-live.rtp.pt/liveradio/antena280a/playlist.m3u8?DVR', hls: true },
       { name: 'Rádio Amália', genre: '法朵', note: '专门播放法朵音乐的电台。' },
     ],
   },
@@ -319,7 +319,7 @@ export const europe2: Country[] = [
     ],
     notableRadios: [
       { name: 'Radio România Muzical', genre: '古典', note: '罗马尼亚广播的古典音乐频道。' },
-      { name: 'Radio România Cultural', genre: '文化 / 古典', note: '罗马尼亚广播的文化频道。' },
+      { name: 'Radio România Cultural', genre: '文化 / 古典', note: '罗马尼亚广播的文化频道。', url: 'https://stream4.srr.ro:8443/romania-cultural', hls: false},
     ],
   },
   {
@@ -376,7 +376,7 @@ export const europe2: Country[] = [
     musicians: [
       { name: '圣马力诺国际音乐节', nameEn: 'San Marino International Music Festival', role: '音乐节', desc: '在古堡环绕的共和国举办的国际音乐节，涵盖古典与室内乐。' },
     ],
-    notableRadios: [{ name: 'Radio San Marino', genre: '综合', note: '圣马力诺国家广播，播放本土与意大利语节目。' }],
+    notableRadios: [{ name: 'Radio San Marino', genre: '综合', note: '圣马力诺国家广播，播放本土与意大利语节目。', url: 'https://d18ufyp3q60j7u.cloudfront.net/radio-ch01/radio-ch01/playlist.m3u8', hls: true}],
   },
   {
     slug: 'serbia',
@@ -425,7 +425,7 @@ export const europe2: Country[] = [
     musicians: [
       { name: '斯洛伐克爱乐乐团', nameEn: 'Slovak Philharmonic', role: '管弦乐团', desc: '斯洛伐克最主要的古典乐团，总部位于布拉迪斯拉发。' },
     ],
-    notableRadios: [{ name: 'RTVS Rádio Devín', genre: '文化 / 古典', note: '斯洛伐克广播电视的文化频道。' }],
+    notableRadios: [{ name: 'RTVS Rádio Devín', genre: '文化 / 古典', note: '斯洛伐克广播电视的文化频道。', url: 'https://icecast.stv.livebox.sk/devin_128.mp3', hls: false}],
   },
   {
     slug: 'slovenia',
@@ -481,8 +481,8 @@ export const europe2: Country[] = [
       { name: '帕科·德·卢西亚', nameEn: 'Paco de Lucía', role: '弗拉门戈吉他手', desc: '把弗拉门戈吉他推向世界的传奇，技术与情感兼备。' },
     ],
     notableRadios: [
-      { name: 'RNE Radio Clásica', genre: '古典', note: '西班牙国家广播的古典频道。' },
-      { name: 'Catalunya Música', genre: '古典 / 加泰罗尼亚', note: '加泰罗尼亚的古典音乐电台。' },
+      { name: 'RNE Radio Clásica', genre: '古典', note: '西班牙国家广播的古典频道。', url: 'https://rtvelivestream.rtve.es/rtvesec/rne/rne_r2_main.m3u8', hls: true},
+      { name: 'Catalunya Música', genre: '古典 / 加泰罗尼亚', note: '加泰罗尼亚的古典音乐电台。', url: 'https://directes-radio-int.3catdirectes.cat/live-content/catalunya-musica-hls/bitrate_1.m3u8', hls: true},
     ],
   },
   {
@@ -512,7 +512,7 @@ export const europe2: Country[] = [
     ],
     notableRadios: [
       { name: 'SR P2', genre: '古典 / 爵士 / 文化', note: '瑞典广播的古典与爵士频道。' },
-      { name: 'Sveriges Radio P1', genre: '文化 / 综合', note: '瑞典广播的文化频道。' },
+      { name: 'Sveriges Radio P1', genre: '文化 / 综合', note: '瑞典广播的文化频道。', url: 'https://live1.sr.se/p1-aac-320', hls: false},
     ],
   },
   {
@@ -542,7 +542,7 @@ export const europe2: Country[] = [
     ],
     notableRadios: [
       { name: 'RTS Espace 2', genre: '古典 / 文化', note: '瑞士法语广播的古典与文化频道。' },
-      { name: 'SRF 2 Kultur', genre: '古典 / 文化', note: '瑞士德语广播的文化频道。' },
+      { name: 'SRF 2 Kultur', genre: '古典 / 文化', note: '瑞士德语广播的文化频道。', url: 'https://stream.srg-ssr.ch/m/drs2/aacp_32', hls: false},
     ],
   },
   {
@@ -604,7 +604,7 @@ export const europe2: Country[] = [
     ],
     notableRadios: [
       { name: 'BBC Radio 3', genre: '古典 / 爵士 / 文化', note: '世界最权威的古典音乐电台，BBC 逍遥音乐会的直播平台。' },
-      { name: 'Classic FM', genre: '古典', note: '英国最受欢迎的古典电台。' },
+      { name: 'Classic FM', genre: '古典', note: '英国最受欢迎的古典电台。', url: 'https://media-ice.musicradio.com/ClassicFMMP3', hls: false },
       { name: 'Jazz FM', genre: '爵士', note: '英国著名的爵士电台。' },
     ],
   },

@@ -28,9 +28,9 @@ export const americas: Country[] = [
       { name: '鲍勃·迪伦', nameEn: 'Bob Dylan', role: '唱作人', desc: '民谣与摇滚的诗人，2016 年获诺贝尔文学奖。' },
     ],
     notableRadios: [
-      { name: 'WQXR (New York)', genre: '古典', note: '纽约的旗舰古典电台，美国最著名的古典音乐广播。' },
-      { name: 'NPR Classical / KUSC', genre: '古典', note: '美国公共广播的古典音乐节目网络。' },
-      { name: 'Jazz24 / WBGO', genre: '爵士', note: '美国著名的爵士电台。' },
+      { name: 'WQXR (New York)', genre: '古典', note: '纽约的旗舰古典电台，美国最著名的古典音乐广播。', url: 'https://stream.wqxr.org/wqxr-web?nyprBrowserId=32c67956bf1d5600', hls: false},
+      { name: 'NPR Classical / KUSC', genre: '古典', note: '美国公共广播的古典音乐节目网络。', url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/KUSCAAC64.aac', hls: false},
+      { name: 'Jazz24 / WBGO', genre: '爵士', note: '美国著名的爵士电台。', url: 'https://knkx-live-a.edge.audiocdn.com/6285_256k', hls: false},
     ],
   },
   {
@@ -60,7 +60,7 @@ export const americas: Country[] = [
       { name: '席琳·迪翁', nameEn: 'Céline Dion', role: '歌手', desc: '来自魁北克的国际天后，《我心永恒》家喻户晓。' },
     ],
     notableRadios: [
-      { name: 'CBC Music', genre: '古典 / 多元', note: '加拿大广播公司的音乐频道，兼播古典、爵士与本土音乐。' },
+      { name: 'CBC Music', genre: '古典 / 多元', note: '加拿大广播公司的音乐频道，兼播古典、爵士与本土音乐。', url: 'https://cbcradiolive.akamaized.net/hls/live/2041057/ES_R2ETR/master.m3u8', hls: true},
       { name: 'ICI Musique', genre: '法语 / 多元', note: '加拿大广播的法语音乐频道。' },
     ],
   },
@@ -91,7 +91,7 @@ export const americas: Country[] = [
       { name: '罗兰多·比利亚松', nameEn: 'Rolando Villazón', role: '男高音', desc: '墨西哥出生的世界级男高音，也是著名的歌剧导演。' },
     ],
     notableRadios: [
-      { name: 'Radio UNAM', genre: '古典 / 文化', note: '墨西哥国立自治大学的古典与文化电台。' },
+      { name: 'Radio UNAM', genre: '古典 / 文化', note: '墨西哥国立自治大学的古典与文化电台。', url: 'https://tv.radiohosting.online:9484/stream', hls: false},
       { name: 'Opus 94 (IMER)', genre: '古典', note: '墨西哥的古典音乐电台。' },
     ],
   },
@@ -122,8 +122,8 @@ export const americas: Country[] = [
       { name: '丹尼尔·巴伦博伊姆', nameEn: 'Daniel Barenboim', role: '指挥家 / 钢琴家', desc: '阿根廷出身的音乐巨匠，长期执掌柏林国家歌剧院。' },
     ],
     notableRadios: [
-      { name: 'Radio Nacional Clásica (96.7)', genre: '古典', note: '阿根廷的古典音乐电台。' },
-      { name: 'La 2x4 (FM 92.7)', genre: '探戈', note: '布宜诺斯艾利斯的探戈电台，全天候播放探戈。' },
+      { name: 'Radio Nacional Clásica (96.7)', genre: '古典', note: '阿根廷的古典音乐电台。', url: 'https://sa.mp3.icecast.magma.edge-access.net/sc_rad37', hls: false},
+      { name: 'La 2x4 (FM 92.7)', genre: '探戈', note: '布宜诺斯艾利斯的探戈电台，全天候播放探戈。', url: 'https://media.radios.ar:9270/', hls: false},
     ],
   },
   {
@@ -153,8 +153,8 @@ export const americas: Country[] = [
       { name: '埃利斯·雷吉纳', nameEn: 'Elis Regina', role: '歌手', desc: 'MPB 时代最具表现力的女歌手，被誉为「巴西之声」。' },
     ],
     notableRadios: [
-      { name: 'Rádio Cultura FM', genre: '古典', note: '圣保罗的古典音乐电台，巴西最重要的古典广播。' },
-      { name: 'Rádio MEC FM', genre: '古典 / 文化', note: '里约的公共古典电台。' },
+      { name: 'Rádio Cultura FM', genre: '古典', note: '圣保罗的古典音乐电台，巴西最重要的古典广播。', url: 'https://ssl1.transmissaodigital.com:20028/live', hls: false},
+      { name: 'Rádio MEC FM', genre: '古典 / 文化', note: '里约的公共古典电台。', url: 'https://radiomecfm-stream.ebc.com.br/ebc/radiomecfm/MEC_FM-mp4a_277200_eng=20000.m3u8', hls: true},
     ],
   },
   {
@@ -183,7 +183,7 @@ export const americas: Country[] = [
       { name: '维克托·哈拉', nameEn: 'Víctor Jara', role: '民谣歌手', desc: '新歌运动的象征，其音乐与悲壮人生成为拉美的记忆。' },
     ],
     notableRadios: [
-      { name: 'Radio Beethoven', genre: '古典', note: '圣地亚哥的古典音乐电台。' },
+      { name: 'Radio Beethoven', genre: '古典', note: '圣地亚哥的古典音乐电台。', url: 'https://unlimited5-us.dps.live/beethovenfm/gotardis/audio/now/livestream1.m3u8', hls: true},
       { name: 'Radio Universidad de Chile', genre: '文化 / 古典', note: '智利大学的文化电台。' },
     ],
   },
@@ -214,7 +214,7 @@ export const americas: Country[] = [
     ],
     notableRadios: [
       { name: 'Señal Clásica', genre: '古典', note: '哥伦比亚的公共古典电台。' },
-      { name: 'Radiónica', genre: '多元 / 本土', note: '哥伦比亚公共广播，播放本土与独立音乐。' },
+      { name: 'Radiónica', genre: '多元 / 本土', note: '哥伦比亚公共广播，播放本土与独立音乐。', url: 'https://streaming.rtvc.gov.co/Radio_Radionica/Radionica.stream/playlist.m3u8', hls: true},
     ],
   },
   {
@@ -242,7 +242,7 @@ export const americas: Country[] = [
       { name: '苏珊娜·巴卡', nameEn: 'Susana Baca', role: '歌手', desc: '秘鲁非洲裔音乐的代表，把克里奥尔与卡洪节奏带给世界。' },
     ],
     notableRadios: [
-      { name: 'Radio Filarmonía', genre: '古典', note: '利马的古典音乐电台。' },
+      { name: 'Radio Filarmonía', genre: '古典', note: '利马的古典音乐电台。', url: 'https://c22.radioboss.fm:8100/stream', hls: false},
       { name: 'Radio Nacional del Perú', genre: '综合 / 安第斯', note: '秘鲁国家广播，播放安第斯与本土音乐。' },
     ],
   },
@@ -557,7 +557,7 @@ export const americas: Country[] = [
       { name: '西莉亚·克鲁兹', nameEn: 'Celia Cruz', role: '歌手', desc: '「萨尔萨女王」，古巴音乐的全球象征。' },
       { name: '莱奥·布劳威尔', nameEn: 'Leo Brouwer', role: '作曲家 / 吉他手', desc: '古巴最伟大的古典吉他作曲家之一。' },
     ],
-    notableRadios: [{ name: 'Radio Musical Nacional', genre: '古典 / 综合', note: '古巴国家音乐电台。' }],
+    notableRadios: [{ name: 'Radio Musical Nacional', genre: '古典 / 综合', note: '古巴国家音乐电台。', url: 'https://securestreams7.autopo.st/?uri=https://icecast.teveo.cu/XjfW7qWN', hls: false }],
   },
   {
     slug: 'dominican-republic',
@@ -629,7 +629,7 @@ export const americas: Country[] = [
       { name: '鲍勃·马利', nameEn: 'Bob Marley', role: '雷鬼歌手', desc: '雷鬼音乐的全球象征，其音乐与精神影响深远。' },
       { name: '吉米·克里夫', nameEn: 'Jimmy Cliff', role: '歌手', desc: '雷鬼先驱之一，以《The Harder They Come》闻名。' },
     ],
-    notableRadios: [{ name: 'Irie FM / KOOL 97', genre: '雷鬼', note: '牙买加的雷鬼音乐电台。' }],
+    notableRadios: [{ name: 'Irie FM / KOOL 97', genre: '雷鬼', note: '牙买加的雷鬼音乐电台。', url: 'https://usa19.fastcast4u.com:7430/;', hls: false}],
   },
   {
     slug: 'trinidad-and-tobago',

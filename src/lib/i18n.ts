@@ -94,6 +94,12 @@ export interface Translation {
   // 访客计数
   visitorLabel: string;
   visitorTitle: string;
+  // 收藏 / 点赞
+  favKicker: string;
+  favTitle: string;
+  favCountUnit: string;
+  favAdd: string;
+  favRemove: string;
 }
 
 const zhCN: Translation = {
@@ -165,6 +171,11 @@ const zhCN: Translation = {
   boardHoursAgo: '小时前',
   visitorLabel: '访客',
   visitorTitle: '累计访客',
+  favKicker: 'My Favorites',
+  favTitle: '我的最爱',
+  favCountUnit: '个电台',
+  favAdd: '收藏',
+  favRemove: '取消收藏',
 };
 
 const zhTW: Translation = {
@@ -236,6 +247,11 @@ const zhTW: Translation = {
   boardHoursAgo: '小時前',
   visitorLabel: '訪客',
   visitorTitle: '累計訪客',
+  favKicker: 'My Favorites',
+  favTitle: '我的最愛',
+  favCountUnit: '個電台',
+  favAdd: '收藏',
+  favRemove: '取消收藏',
 };
 
 const en: Translation = {
@@ -307,6 +323,11 @@ const en: Translation = {
   boardHoursAgo: 'h ago',
   visitorLabel: 'Visitors',
   visitorTitle: 'Total visitors',
+  favKicker: 'My Favorites',
+  favTitle: 'My Favorites',
+  favCountUnit: 'stations',
+  favAdd: 'Add to favorites',
+  favRemove: 'Remove from favorites',
 };
 
 const cy: Translation = {
@@ -378,6 +399,11 @@ const cy: Translation = {
   boardHoursAgo: 'awr yn ôl',
   visitorLabel: 'Ymwelwyr',
   visitorTitle: 'Cyfanswm ymwelwyr',
+  favKicker: 'My Favorites',
+  favTitle: 'Fy Ffefrynnau',
+  favCountUnit: 'gorsaf',
+  favAdd: 'Ychwanegu at ffefrynnau',
+  favRemove: 'Tynnu o ffefrynnau',
 };
 
 const fr: Translation = {
@@ -449,6 +475,11 @@ const fr: Translation = {
   boardHoursAgo: 'h',
   visitorLabel: 'Visiteurs',
   visitorTitle: 'Visiteurs au total',
+  favKicker: 'My Favorites',
+  favTitle: 'Mes favoris',
+  favCountUnit: 'stations',
+  favAdd: 'Ajouter aux favoris',
+  favRemove: 'Retirer des favoris',
 };
 
 const de: Translation = {
@@ -520,6 +551,11 @@ const de: Translation = {
   boardHoursAgo: 'Std.',
   visitorLabel: 'Besucher',
   visitorTitle: 'Besucher insgesamt',
+  favKicker: 'My Favorites',
+  favTitle: 'Meine Favoriten',
+  favCountUnit: 'Sender',
+  favAdd: 'Zu Favoriten hinzufügen',
+  favRemove: 'Aus Favoriten entfernen',
 };
 
 const it: Translation = {
@@ -591,6 +627,11 @@ const it: Translation = {
   boardHoursAgo: 'h fa',
   visitorLabel: 'Visitatori',
   visitorTitle: 'Visitatori totali',
+  favKicker: 'My Favorites',
+  favTitle: 'I miei preferiti',
+  favCountUnit: 'stazioni',
+  favAdd: 'Aggiungi ai preferiti',
+  favRemove: 'Rimuovi dai preferiti',
 };
 
 const es: Translation = {
@@ -662,6 +703,11 @@ const es: Translation = {
   boardHoursAgo: 'h',
   visitorLabel: 'Visitantes',
   visitorTitle: 'Visitantes totales',
+  favKicker: 'My Favorites',
+  favTitle: 'Mis favoritos',
+  favCountUnit: 'emisoras',
+  favAdd: 'Añadir a favoritos',
+  favRemove: 'Quitar de favoritos',
 };
 
 export const TRANSLATIONS: Record<Lang, Translation> = {

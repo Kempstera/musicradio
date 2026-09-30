@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getCurrentUrl, isPlaying, play, stop, subscribe } from '../lib/audio';
+import { isFavorite, subscribe as subscribeFavs } from '../lib/favorites';
+import FavoriteButton from './FavoriteButton';
 
 export interface Station {
   id: string;
@@ -48,6 +50,7 @@ function Eq() {
 export default function RadioPlayer({ stations, countryName, flag, emptyNote, slug }: Props) {
   const [currentUrl, setCurrentUrl] = useState<string | null>(null);
   const [playing, setPlaying] = useState<boolean>(false);
+  const [favTick, setFavTick] = useState(0);
 
   useEffect(() => {
     const refresh = () => {
@@ -58,6 +61,19 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
     const unsub = subscribe(refresh);
     return unsub;
   }, []);
+
+  useEffect(() => {
+    const refresh = () => setFavTick((n) => n + 1);
+    return subscribeFavs(refresh);
+  }, []);
+
+  // 收藏的电台排在最前（居于顶端）
+  const ordered = [...stations].sort((a, b) => {
+    const af = isFavorite(a.url) ? 1 : 0;
+    const bf = isFavorite(b.url) ? 1 : 0;
+    return bf - af;
+  });
+  void favTick;
 
   if (!stations.length) {
     return (
@@ -72,7 +88,7 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
   return (
     <>
       <div className="radio-grid">
-        {stations.map((s) => {
+        {ordered.map((s) => {
           const isCurrent = s.url === currentUrl;
           const isPlayingNow = isCurrent && playing;
           const tags = (s.tags || '')
@@ -122,6 +138,16 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
                   ))}
                 </div>
               </div>
+              <FavoriteButton
+                station={{
+                  url: s.url,
+                  name: s.name,
+                  genre: s.tags,
+                  country: countryName,
+                  countrySlug: slug,
+                  hls: s.hls,
+                }}
+              />
             </div>
           );
         })}
