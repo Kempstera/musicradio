@@ -789,6 +789,7 @@ p {
 }
 .radio-card__name--link {
   display: inline-block;
+  max-width: 100%;
   color: var(--ink);
   text-decoration: none;
   border-bottom: 1px dashed transparent;
@@ -816,6 +817,12 @@ p {
 .radio-tag--muted {
   background: var(--surface-deep);
   color: var(--ink-faint);
+}
+.radio-card__note {
+  margin-top: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+  line-height: 1.6;
 }
 .radio-card--descriptive {
   opacity: 0.88;

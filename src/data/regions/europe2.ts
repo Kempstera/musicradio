@@ -603,8 +603,9 @@ export const europe2: Country[] = [
       { name: '古斯塔夫·霍尔斯特', nameEn: 'Gustav Holst', role: '作曲家', desc: '《行星组曲》作者，管弦乐色彩绚烂而宏大。' },
     ],
     notableRadios: [
-      { name: 'BBC Radio 3', genre: '古典 / 爵士 / 文化', note: '世界最权威的古典音乐电台，BBC 逍遥音乐会的直播平台。' },
+      { name: 'BBC Radio 3', genre: '古典 / 爵士 / 文化', note: '世界最权威的古典音乐电台，BBC 逍遥音乐会的直播平台。', url: 'https://as-hls-ww-live.akamaized.net/pool_23461179/live/ww/bbc_radio_three/bbc_radio_three.isml/bbc_radio_three-audio=320000.norewind.m3u8', hls: true },
       { name: 'Classic FM', genre: '古典', note: '英国最受欢迎的古典电台。', url: 'https://media-ice.musicradio.com/ClassicFMMP3', hls: false },
+      { name: 'Classic FM Calm', genre: '古典 / 放松', note: '英国 Classic FM 的放松副频道，精选舒缓古典与氛围曲目。', url: 'https://media-ice.musicradio.com/ClassicFMCalmMP3', hls: false },
       { name: 'Jazz FM', genre: '爵士', note: '英国著名的爵士电台。' },
     ],
   },

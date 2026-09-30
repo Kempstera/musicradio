@@ -12,6 +12,8 @@ export interface Station {
   bitrate?: number;
   tags?: string;
   homepage?: string;
+  /** 电台简介（精选电台的客观介绍，可选） */
+  note?: string;
 }
 
 interface Props {
@@ -137,6 +139,7 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
                     <span key={t} className="radio-tag">{t}</span>
                   ))}
                 </div>
+                {s.note && <div className="radio-card__note">{s.note}</div>}
               </div>
               <FavoriteButton
                 station={{

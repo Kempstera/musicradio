@@ -401,10 +401,10 @@ export const europe1: Country[] = [
       { name: '埃里克·萨蒂', nameEn: 'Erik Satie', role: '作曲家', desc: '以《吉诺佩蒂》等简约而怪诞的钢琴小品著称，影响了后来的极简主义。' },
     ],
     notableRadios: [
-      { name: 'France Musique', genre: '古典 / 爵士', note: '法国最权威的古典音乐电台，节目品质极高。' },
-      { name: 'FIP', genre: '多元 / 爵士 / 世界', note: '以极致品味著称的「小资」电台，无广告、跨界选曲，全球乐迷心中的圣地。' },
+      { name: 'France Musique', genre: '古典 / 爵士', note: '法国最权威的古典音乐电台，节目品质极高。', url: 'https://icecast.radiofrance.fr/francemusique-midfi.mp3', hls: false },
+      { name: 'FIP', genre: '多元 / 爵士 / 世界', note: '以极致品味著称的「小资」电台，无广告、跨界选曲，全球乐迷心中的圣地。', url: 'https://icecast.radiofrance.fr/fip-midfi.mp3', hls: false },
       { name: 'Radio Classique', genre: '古典', note: '法国知名古典电台。', url: 'https://str0.creacast.com/classique1', hls: false},
-      { name: 'TSF Jazz', genre: '爵士', note: '法国最纯粹的爵士电台之一。' },
+      { name: 'TSF Jazz', genre: '爵士', note: '法国最纯粹的爵士电台之一。', url: 'https://tsfjazz.ice.infomaniak.ch/tsfjazz-high.mp3', hls: false },
     ],
   },
   {
@@ -437,7 +437,7 @@ export const europe1: Country[] = [
     notableRadios: [
       { name: 'BR-Klassik', genre: '古典', note: '巴伐利亚广播的古典频道，欧洲古典电台的标杆。', url: 'https://dispatcher.rndfnk.com/br/brklassik/live/mp3/high', hls: false},
       { name: 'Deutschlandfunk Kultur', genre: '文化 / 古典', note: '德国国家文化电台，音乐、戏剧与思想并重。', url: 'https://st02.sslstream.dlf.de/dlf/02/128/mp3/stream.mp3?aggregator=web', hls: false},
-      { name: 'WDR 3', genre: '古典 / 文化', note: '西德广播的文化频道。' },
+      { name: 'WDR 3', genre: '古典 / 文化', note: '西德广播的文化频道。', url: 'https://wdr-wdr3-live.icecastssl.wdr.de/wdr/wdr3/live/mp3/128/stream.mp3', hls: false },
       { name: 'hr2-kultur', genre: '古典 / 文化', note: '黑森广播文化频道。', url: 'https://dispatcher.rndfnk.com/hr/hr2/live/mp3/high', hls: false},
     ],
   },

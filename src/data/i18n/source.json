@@ -1909,6 +1909,11 @@
         "note": "英国最受欢迎的古典电台。"
       },
       {
+        "name": "Classic FM Calm",
+        "genre": "古典 / 放松",
+        "note": "英国 Classic FM 的放松副频道，精选舒缓古典与氛围曲目。"
+      },
+      {
         "name": "Jazz FM",
         "genre": "爵士",
         "note": "英国著名的爵士电台。"

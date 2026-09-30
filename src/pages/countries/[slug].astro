@@ -39,6 +39,7 @@ const notablePlayable: Station[] = (country.notableRadios || [])
     codec: r.hls ? 'HLS' : 'MP3',
     tags: r.genre,
     homepage: r.homepage,
+    note: r.note,
   }));
 
 // 描述性电台（无在线流），保留其在 notableRadios 中的原始下标，用于对齐译文
