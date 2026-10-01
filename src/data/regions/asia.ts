@@ -725,7 +725,11 @@ export const asia: Country[] = [
     musicians: [
       { name: '穆罕默德·阿卜杜', nameEn: 'Mohammed Abdu', role: '歌手', desc: '被称为「阿拉伯艺术家」，沙特最具影响力的歌手之一。' },
     ],
-    notableRadios: [{ name: 'Saudi Radio / MBC FM', genre: '综合 / 阿拉伯', note: '沙特广播与 MBC 集团的音乐频道，播放阿拉伯音乐。' }],
+    notableRadios: [
+      { name: 'MBC Mood', genre: '舒缓 / 阿拉伯', note: 'MBC 集团的舒缓音乐频道，播放柔和的阿拉伯与当代曲目。', url: 'https://radio-mbc-mood.mbc.net/radio-mbc-mood.m3u8', hls: true },
+      { name: 'MBC Loud', genre: 'Top 40 / 流行', note: 'MBC 集团的流行音乐频道，播放阿拉伯与国际 Top 40 金曲。', url: 'https://radio-loud-fm.mbc.net/radio-loud-fm.m3u8', hls: true },
+      { name: 'MBC FM', genre: '阿拉伯流行', note: 'MBC 集团的旗舰阿拉伯语音乐电台。' },
+    ],
   },
   {
     slug: 'yemen',
@@ -750,7 +754,10 @@ export const asia: Country[] = [
     musicians: [
       { name: '艾哈迈德·法提', nameEn: 'Ahmed Fathi', role: '乌德琴演奏家', desc: '也门裔乌德琴大师，其演奏充满阿拉伯音乐的深情与即兴。' },
     ],
-    radioNote: '受多年战乱影响，也门的广播基础设施受损严重，目前无稳定可访问的在线音乐流。',
+    notableRadios: [
+      { name: 'Huna Aden FM', genre: '综合 / 阿拉伯', note: '亚丁的电台，播放阿拉伯与也门音乐。', url: 'https://c30.radioboss.fm:18267/stream', hls: false },
+      { name: "Sana'a Radio", genre: '综合 / 民歌', note: '萨那的广播电台，播放也门民歌与传统音乐。', url: 'https://dc5.serverse.com/proxy/pbmhbvxs/stream', hls: false },
+    ],
   },
   {
     slug: 'oman',
@@ -774,7 +781,10 @@ export const asia: Country[] = [
     musicians: [
       { name: '阿曼皇家交响乐团', nameEn: 'Royal Oman Symphony Orchestra', role: '管弦乐团', desc: '阿拉伯半岛最早成立的交响乐团之一，常驻马斯喀特皇家歌剧院。' },
     ],
-    notableRadios: [{ name: 'Oman FM / Sultanate of Oman Radio', genre: '综合 / 传统', note: '阿曼国家广播，播放传统音乐与文化节目。' }],
+    notableRadios: [
+      { name: 'Hala FM', genre: '阿拉伯流行', note: '马斯喀特最受欢迎的阿拉伯语音乐电台。', url: 'https://listen-halafm.sharp-stream.com/halafmlow.mp3', hls: false },
+      { name: 'Oman FM / Sultanate of Oman Radio', genre: '综合 / 传统', note: '阿曼国家广播，播放传统音乐与文化节目。' },
+    ],
   },
   {
     slug: 'united-arab-emirates',
@@ -798,7 +808,13 @@ export const asia: Country[] = [
     musicians: [
       { name: '侯赛因·阿勒·贾斯米', nameEn: 'Hussain Al Jassmi', role: '歌手', desc: '阿联酋最具代表性的歌手，其演唱在阿拉伯世界家喻户晓。' },
     ],
-    notableRadios: [{ name: 'Abu Dhabi Classic FM', genre: '古典', note: '阿布扎比的古典音乐电台，是海湾地区少数专注古典的频道。' }],
+    notableRadios: [
+      { name: 'Abu Dhabi FM', genre: '阿拉伯流行', note: '阿布扎比的阿拉伯语音乐电台。', url: 'https://admn-radio-cdn-lb.starzplayarabia.com/out/v1/admn_radio_enc/abudhabi_fm/abudhabi_fm_hls_nd/index.m3u8', hls: true },
+      { name: 'Emarat FM', genre: '阿拉伯 / 综合', note: '阿联酋的阿拉伯语综合音乐电台。', url: 'https://admn-radio-cdn-lb.starzplayarabia.com/out/v1/admn_radio_enc/emarat_fm/emarat_fm_hls_nd/index.m3u8', hls: true },
+      { name: 'Radio Mirchi Dubai', genre: '宝莱坞 / 印度流行', note: '迪拜的印度音乐电台。', url: 'https://eu8.fastcast4u.com/proxy/clyedupq/?mp=/1', hls: false },
+      { name: 'Big FM 106.2 UAE', genre: '印度 / 亚洲流行', note: '阿联酋的亚洲流行音乐电台。', url: 'https://funasia.streamguys1.com/live4', hls: false },
+      { name: 'Abu Dhabi Classic FM', genre: '古典', note: '阿布扎比的古典音乐电台，是海湾地区少数专注古典的频道。' },
+    ],
   },
   {
     slug: 'qatar',
@@ -822,7 +838,11 @@ export const asia: Country[] = [
     musicians: [
       { name: '卡塔尔爱乐乐团', nameEn: 'Qatar Philharmonic Orchestra', role: '管弦乐团', desc: '阿拉伯世界最负盛名的交响乐团之一，常驻多哈。' },
     ],
-    notableRadios: [{ name: 'Qatar Radio / QBS', genre: '综合 / 传统', note: '卡塔尔广播，播放阿拉伯与传统音乐。' }],
+    notableRadios: [
+      { name: 'Radio Olive 106.3', genre: '印度 / 亚洲流行', note: '卡塔尔的印度语音乐电台。', url: 'https://osrnstream.olivesuno.com/olive1063.mp3', hls: false },
+      { name: 'Qabayan Radio 94.3', genre: '菲律宾 / 综合', note: '卡塔尔的菲律宾社区电台。', url: 'https://c2.radioboss.fm:8478/live', hls: false },
+      { name: 'Qatar Radio / QBS', genre: '综合 / 传统', note: '卡塔尔广播，播放阿拉伯与传统音乐。' },
+    ],
   },
   {
     slug: 'kuwait',
@@ -846,7 +866,9 @@ export const asia: Country[] = [
     musicians: [
       { name: '阿卜杜勒·卡里姆·阿卜杜勒·卡迪尔', nameEn: 'Abdul Karim Abdul Qadir', role: '歌手', desc: '科威特与海湾地区的传奇歌手，其演唱影响了几代人。' },
     ],
-    notableRadios: [{ name: 'Kuwait Radio', genre: '综合 / 萨乌特', note: '科威特国家广播，播放海湾与阿拉伯音乐。' }],
+    notableRadios: [
+      { name: 'Kuwait General Radio', genre: '综合 / 萨乌特', note: '科威特国家广播，播放海湾与阿拉伯音乐。', url: 'https://kwtkrdota.cdn.mangomolo.com/k1rdo/k1rdo.stream_aac/chunklist.m3u8', hls: true },
+    ],
   },
   {
     slug: 'bahrain',
@@ -870,7 +892,10 @@ export const asia: Country[] = [
     musicians: [
       { name: '巴林传统乐团', nameEn: 'Bahrain Folk Music Ensemble', role: '民族乐团', desc: '传承菲杰里采珠歌谣与海湾打击乐传统的巴林音乐团体。' },
     ],
-    notableRadios: [{ name: 'Bahrain Radio', genre: '综合 / 传统', note: '巴林国家广播，播放海湾传统音乐。' }],
+    notableRadios: [
+      { name: 'Bahrain FM 93.3', genre: '阿拉伯 / 海湾', note: '巴林国家广播的音乐频道。', url: 'https://5c7b683162943.streamlock.net/live/ngrp:radio-93-3_all/playlist.m3u8', hls: true },
+      { name: 'Traditional Radio 95.0', genre: '传统 / 海湾', note: '巴林的传统音乐频道。', url: 'https://5c7b683162943.streamlock.net/live/ngrp:radio-95-0_all/chunklist_w1641860732_b981072.m3u8', hls: true },
+    ],
   },
   {
     slug: 'iraq',
@@ -895,7 +920,11 @@ export const asia: Country[] = [
       { name: '穆尼尔·巴希尔', nameEn: 'Munir Bashir', role: '乌德琴大师', desc: '被誉为「乌德琴之王」，把伊拉克马卡姆传统带向国际舞台。' },
       { name: '纳西尔·沙马', nameEn: 'Naseer Shamma', role: '乌德琴演奏家', desc: '当代最著名的乌德琴演奏家之一，创办阿拉伯乌德琴之家。' },
     ],
-    notableRadios: [{ name: 'Iraqi Media Network', genre: '综合 / 马卡姆', note: '伊拉克国家媒体网络，播放伊拉克马卡姆与阿拉伯音乐。' }],
+    notableRadios: [
+      { name: 'Sumer FM', genre: '阿拉伯流行', note: '伊拉克的阿拉伯语流行音乐电台。', url: 'https://l3.itworkscdn.net/itwaudio/9012/stream', hls: false },
+      { name: 'Al Rasheed FM', genre: '综合 / 伊拉克', note: '巴格达的广播电台，播放伊拉克与阿拉伯音乐。', url: 'https://streaming.shoutcast.com/alrasheed-fm', hls: false },
+      { name: 'Iraqi Media Network', genre: '综合 / 马卡姆', note: '伊拉克国家媒体网络，播放伊拉克马卡姆与阿拉伯音乐。' },
+    ],
   },
   {
     slug: 'syria',
@@ -920,7 +949,12 @@ export const asia: Country[] = [
       { name: '法里德·阿特拉什', nameEn: 'Farid al-Atrash', role: '乌德琴大师 / 歌手', desc: '叙利亚裔音乐巨匠，乌德琴技艺与演唱影响深远的阿拉伯乐坛。' },
       { name: '萨巴赫·法赫里', nameEn: 'Sabah Fakhri', role: '声乐家', desc: '阿勒颇卡杜德歌谣的大师，其恢弘的演唱震撼了整个阿拉伯世界。' },
     ],
-    notableRadios: [{ name: 'Syrian Radio', genre: '综合 / 穆瓦沙赫', note: '叙利亚广播，播放穆瓦沙赫与传统阿拉伯音乐。' }],
+    notableRadios: [
+      { name: 'Sham FM', genre: '阿拉伯流行', note: '大马士革最受欢迎的阿拉伯语电台。', url: 'https://radioshamfm.grtvstream.com:8400/;', hls: false },
+      { name: 'Farah FM', genre: '阿拉伯流行', note: '叙利亚的阿拉伯流行音乐电台。', url: 'https://radio.farah.fm/', hls: false },
+      { name: 'Al Karma FM', genre: '阿拉伯 / 综合', note: '叙利亚的阿拉伯音乐电台。', url: 'https://broadcast.shoutstream.co.uk/stream/8112', hls: false },
+      { name: 'Syrian Radio', genre: '综合 / 穆瓦沙赫', note: '叙利亚广播，播放穆瓦沙赫与传统阿拉伯音乐。' },
+    ],
   },
   {
     slug: 'lebanon',
@@ -945,7 +979,14 @@ export const asia: Country[] = [
       { name: '费鲁兹', nameEn: 'Fairuz', role: '歌手', desc: '阿拉伯世界最具标志性的歌唱家，被誉为「黎巴嫩的声音」。' },
       { name: '拉赫巴尼兄弟', nameEn: 'Rahbani Brothers', role: '作曲家', desc: '阿西与曼苏尔·拉赫巴尼，为费鲁兹创作的歌剧式歌曲定义了现代阿拉伯音乐。' },
     ],
-    notableRadios: [{ name: 'Radio Liban / Voice of Lebanon', genre: '综合 / 阿拉伯', note: '黎巴嫩广播与黎巴嫩之声，播放阿拉伯音乐与文化节目。', url: 'https://media2.streambrothers.com:2020/stream/8194', hls: false}],
+    notableRadios: [
+      { name: 'Virgin Radio Lebanon', genre: '流行', note: '黎巴嫩的 Virgin 电台，播放国际与阿拉伯流行。', url: 'https://stream.zeno.fm/dwxw3p9vea0uv', hls: false },
+      { name: 'One FM', genre: '流行 / 舞曲', note: '黎巴嫩著名的流行音乐电台。', url: 'https://hms.pfs.gdn/v1/broadcast/onefmaudio/playlist.m3u8', hls: true },
+      { name: 'Aghani Aghani 87.9 FM', genre: '阿拉伯流行', note: '黎巴嫩的阿拉伯流行音乐电台。', url: 'https://streaming.nrjaudio.fm/ou6pfgxp336f', hls: false },
+      { name: 'LBI Radio', genre: '国际 / 中东', note: '黎巴嫩国际广播电台。', url: 'https://live.lbiradio.com/listen/station_1/1', hls: false },
+      { name: 'Fairuz', genre: '费鲁兹 / 阿拉伯经典', note: '全天播放费鲁兹与阿拉伯经典歌曲的专题电台。', url: 'https://stream.zeno.fm/xkhnk4vee18uv', hls: false },
+      { name: 'Radio Liban / Voice of Lebanon', genre: '综合 / 阿拉伯', note: '黎巴嫩广播与黎巴嫩之声，播放阿拉伯音乐与文化节目。', url: 'https://media2.streambrothers.com:2020/stream/8194', hls: false },
+    ],
   },
   {
     slug: 'jordan',
@@ -969,7 +1010,13 @@ export const asia: Country[] = [
     musicians: [
       { name: '奥马尔·阿卜杜拉特', nameEn: 'Omar Al-Abdallat', role: '歌手', desc: '约旦最具代表性的歌手之一，演唱贝都因与民族歌曲。' },
     ],
-    notableRadios: [{ name: 'Jordan Radio', genre: '综合 / 贝都因', note: '约旦广播电视，播放贝都因与阿拉伯音乐。' }],
+    notableRadios: [
+      { name: 'Mazaj FM', genre: '阿拉伯流行', note: '约旦最受欢迎的音乐电台。', url: 'https://mazajfm.ice.infomaniak.ch/mazajfm-192.mp3', hls: false },
+      { name: 'Radio Dahab', genre: '阿拉伯 / 经典', note: '约旦的阿拉伯音乐电台。', url: 'https://dahab.ice.infomaniak.ch/dahab-192.mp3', hls: false },
+      { name: 'Mood FM', genre: '流行', note: '安曼的流行音乐电台。', url: 'https://securestreams2.autopo.st:1241/live', hls: false },
+      { name: 'Beat FM', genre: '流行 / 舞曲', note: '安曼的流行音乐电台。', url: 'https://securestreams2.autopo.st:1242/live', hls: false },
+      { name: 'Jordan Radio', genre: '综合 / 贝都因', note: '约旦广播电视，播放贝都因与阿拉伯音乐。' },
+    ],
   },
   {
     slug: 'israel',
@@ -995,7 +1042,15 @@ export const asia: Country[] = [
       { name: '丹尼尔·巴伦博伊姆', nameEn: 'Daniel Barenboim', role: '指挥家 / 钢琴家', desc: '出生于阿根廷、拥有以色列国籍的音乐巨匠，推动以巴音乐合作。' },
       { name: '祖宾·梅塔', nameEn: 'Zubin Mehta', role: '指挥家', desc: '曾长期执掌以色列爱乐乐团，是其最亲密的艺术伙伴。' },
     ],
-    notableRadios: [{ name: 'Kol HaMusica', genre: '古典', note: '以色列广播的古典音乐频道。' }],
+    notableRadios: [
+      { name: 'Galgalatz', genre: '流行 / 当代', note: '以色列最受欢迎的流行音乐电台。', url: 'https://glzicylv01.bynetcdn.com/glglz_mp3', hls: false },
+      { name: '88FM', genre: '成人当代 / 爵士', note: '以色列公共广播 KAN 的音乐频道。', url: 'https://29073.live.streamtheworld.com/KAN_88.mp3', hls: false },
+      { name: 'KAN Gimel', genre: '希伯来音乐', note: '以色列公共广播的希伯来语音乐频道。', url: 'https://27873.live.streamtheworld.com/KAN_GIMMEL.mp3', hls: false },
+      { name: 'ECO99FM', genre: '流行 / Top 40', note: '以色列的流行音乐电台。', url: 'https://eco-live.mediacast.co.il/99fm_aac', hls: false },
+      { name: 'Radio 103FM', genre: '音乐 / 综合', note: '特拉维夫的综合性音乐电台。', url: 'https://cdn.cybercdn.live/103FM/Live/icecast.audio', hls: false },
+      { name: 'Ze Rock Radio', genre: '摇滚', note: '以色列的摇滚音乐电台。', url: 'https://icecast.live/proxy/zerock/zerock', hls: false },
+      { name: 'Kol HaMusica', genre: '古典', note: '以色列广播的古典音乐频道。', url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/KAN_KOL_HAMUSICA.mp3', hls: false },
+    ],
   },
   {
     slug: 'palestine',
@@ -1020,7 +1075,11 @@ export const asia: Country[] = [
       { name: '赛义德·西尔巴格', nameEn: 'Simon Shaheen', role: '乌德琴 / 小提琴家', desc: '巴勒斯坦裔音乐大师，把阿拉伯古典与爵士、西方古典融合。' },
       { name: '里姆·凯拉尼', nameEn: 'Reem Kelani', role: '歌手 / 音乐学家', desc: '搜集并传唱巴勒斯坦民歌的英国籍巴勒斯坦歌唱家。' },
     ],
-    notableRadios: [{ name: 'Voice of Palestine', genre: '综合 / 民歌', note: '巴勒斯坦之声广播，播放巴勒斯坦民歌与阿拉伯音乐。' }],
+    notableRadios: [
+      { name: 'Ajyal', genre: '阿拉伯流行', note: '巴勒斯坦的阿拉伯流行音乐电台。', url: 'https://streamer.mada.ps:8208/ajyal', hls: false },
+      { name: 'Raya FM', genre: '阿拉伯 / 综合', note: '巴勒斯坦的阿拉伯语综合电台。', url: 'https://rstream.hadara.ps/proxy/raya/stream', hls: false },
+      { name: 'Voice of Palestine', genre: '综合 / 民歌', note: '巴勒斯坦之声广播，播放巴勒斯坦民歌与阿拉伯音乐。' },
+    ],
   },
   {
     slug: 'afghanistan',
