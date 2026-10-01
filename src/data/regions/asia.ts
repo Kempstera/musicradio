@@ -609,6 +609,7 @@ export const asia: Country[] = [
       { name: 'Radio Classic', genre: '古典', note: '哈萨克国家广播的古典音乐频道，播放交响与室内乐。', url: 'https://radio-streams.kaztrk.kz/classic/classic/icecast.audio', hls: false },
       { name: 'Darhan Radio', genre: '哈萨克流行', note: '哈萨克斯坦的哈萨克语流行音乐电台。', url: 'https://stream.darhanradio.com/live', hls: false },
       { name: 'Beu FM', genre: '哈萨克 / 民族流行', note: '阿拉木图的哈萨克音乐电台，播放民族与流行曲目。', url: 'https://stream.beufm.kz/beufm', hls: false },
+      { name: 'Tengri FM', genre: '流行 / 经典金曲', note: '哈萨克斯坦的流行音乐电台，主打当代热单与经典金曲。', url: 'http://91.201.214.229:8000/tengrifm', hls: false, homepage: 'https://tengrifm.kz/' },
     ],
   },
   {

@@ -818,6 +818,13 @@ p {
   background: var(--surface-deep);
   color: var(--ink-faint);
 }
+.radio-tag--http {
+  background: var(--surface-deep);
+  color: var(--ink-soft);
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  letter-spacing: 0.03em;
+  cursor: help;
+}
 .radio-card__note {
   margin-top: 0.4rem;
   font-size: 0.82rem;
@@ -1017,6 +1024,33 @@ p {
 .now-playing__country {
   font-size: 0.75rem;
   color: rgba(246, 241, 231, 0.7);
+}
+.now-playing__status {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: rgba(246, 241, 231, 0.9);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.now-playing__status--lost {
+  color: #f0c674;
+}
+.now-playing__retry {
+  margin-left: 0.5rem;
+  padding: 0.05rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(240, 198, 116, 0.6);
+  background: transparent;
+  color: #f0c674;
+  font-size: 0.72rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+.now-playing__retry:hover {
+  background: #f0c674;
+  color: #211d15;
 }
 .now-playing__eq .eq span {
   background: #f6f1e7;

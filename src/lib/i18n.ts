@@ -61,6 +61,12 @@ export interface Translation {
   capitalLabel: string;
   wikiTitle: string;
   radioEmptyFallback: string;
+  // 播放器状态与 HTTP 流标签
+  httpTagHint: string;
+  streamConnecting: string;
+  streamLost: string;
+  streamLostHint: string;
+  streamRetry: string;
   // 登录 / 注册
   authLoginRegister: string;
   authLogout: string;
@@ -141,6 +147,11 @@ const zhCN: Translation = {
   capitalLabel: '首都',
   wikiTitle: '维基百科',
   radioEmptyFallback: '暂未收录该地区的在线电台流，敬请期待。',
+  httpTagHint: '该电台仅提供 HTTP 协议流，本站已自动经边缘转发，让它可在安全页面播放。',
+  streamConnecting: '正在连线…',
+  streamLost: '电波暂歇，歌声飘散在风里。',
+  streamLostHint: '稍候再试一次，或换个电台。',
+  streamRetry: '重试',
   authLoginRegister: '登录 / 注册',
   authLogout: '退出',
   authClose: '关闭',
@@ -217,6 +228,11 @@ const zhTW: Translation = {
   capitalLabel: '首都',
   wikiTitle: '維基百科',
   radioEmptyFallback: '暫未收錄該地區的線上電台串流，敬請期待。',
+  httpTagHint: '該電台僅提供 HTTP 協定串流，本站已自動經邊緣轉發，讓它能在安全頁面播放。',
+  streamConnecting: '正在連線…',
+  streamLost: '電波暫歇，歌聲飄散在風裡。',
+  streamLostHint: '稍候再試一次，或換個電台。',
+  streamRetry: '重試',
   authLoginRegister: '登入 / 註冊',
   authLogout: '登出',
   authClose: '關閉',
@@ -293,6 +309,11 @@ const en: Translation = {
   capitalLabel: 'Capital',
   wikiTitle: 'Wikipedia',
   radioEmptyFallback: 'No online streams are available for this region yet. Stay tuned.',
+  httpTagHint: 'This station only offers an HTTP stream; it is relayed through our edge so it can play on this secure page.',
+  streamConnecting: 'Connecting…',
+  streamLost: 'The signal has drifted — the song cannot reach us right now.',
+  streamLostHint: 'Wait a moment and try again, or pick another station.',
+  streamRetry: 'Retry',
   authLoginRegister: 'Log in / Sign up',
   authLogout: 'Log out',
   authClose: 'Close',
@@ -369,6 +390,11 @@ const cy: Translation = {
   capitalLabel: 'Prifddinas',
   wikiTitle: 'Wicipedia',
   radioEmptyFallback: 'Nid oes ffrydiau ar-lein ar gael eto ar gyfer y rhanbarth hwn. Arhoswch am ragor.',
+  httpTagHint: 'Dim ond ffrwd HTTP sydd gan yr orsaf hon; caiff ei throsglwyddo trwy ein hymyl er mwyn iddi allu chwarae ar y dudalen ddiogel hon.',
+  streamConnecting: 'Yn cysylltu…',
+  streamLost: 'Mae\'r signal wedi crwydro — ni all y gân ein cyrraedd ar hyn o bryd.',
+  streamLostHint: 'Arhoswch funud a cheisiwch eto, neu dewiswch orsaf arall.',
+  streamRetry: 'Ceisio eto',
   authLoginRegister: 'Mewngofnodi / Cofrestru',
   authLogout: 'Allgofnodi',
   authClose: 'Cau',
@@ -445,6 +471,11 @@ const fr: Translation = {
   capitalLabel: 'Capitale',
   wikiTitle: 'Wikipédia',
   radioEmptyFallback: 'Aucun flux en ligne n\'est encore disponible pour cette région. À bientôt.',
+  httpTagHint: 'Cette station ne propose qu\'un flux HTTP ; il est relayé via notre périphérie pour être lu sur cette page sécurisée.',
+  streamConnecting: 'Connexion…',
+  streamLost: 'Le signal s\'est estompé — la chanson ne nous atteint plus pour l\'instant.',
+  streamLostHint: 'Patientez un instant puis réessayez, ou choisissez une autre station.',
+  streamRetry: 'Réessayer',
   authLoginRegister: 'Connexion / Inscription',
   authLogout: 'Se déconnecter',
   authClose: 'Fermer',
@@ -521,6 +552,11 @@ const de: Translation = {
   capitalLabel: 'Hauptstadt',
   wikiTitle: 'Wikipedia',
   radioEmptyFallback: 'Für diese Region sind noch keine Online-Streams verfügbar. Bleiben Sie dran.',
+  httpTagHint: 'Dieser Sender bietet nur einen HTTP-Stream an; er wird über unsere Edge weitergeleitet, damit er auf dieser sicheren Seite abspielbar ist.',
+  streamConnecting: 'Verbinde…',
+  streamLost: 'Das Signal ist verweht — das Lied erreicht uns gerade nicht.',
+  streamLostHint: 'Warten Sie kurz und versuchen Sie es erneut, oder wählen Sie einen anderen Sender.',
+  streamRetry: 'Erneut versuchen',
   authLoginRegister: 'Anmelden / Registrieren',
   authLogout: 'Abmelden',
   authClose: 'Schließen',
@@ -597,6 +633,11 @@ const it: Translation = {
   capitalLabel: 'Capitale',
   wikiTitle: 'Wikipedia',
   radioEmptyFallback: 'Non sono ancora disponibili flussi online per questa regione. A presto.',
+  httpTagHint: 'Questa emittente offre solo un flusso HTTP; viene inoltrato attraverso il nostro edge per poterlo ascoltare su questa pagina sicura.',
+  streamConnecting: 'Connessione…',
+  streamLost: 'Il segnale si è affievolito — la canzone non ci raggiunge in questo momento.',
+  streamLostHint: 'Attendi un attimo e riprova, oppure scegli un\'altra emittente.',
+  streamRetry: 'Riprova',
   authLoginRegister: 'Accedi / Registrati',
   authLogout: 'Esci',
   authClose: 'Chiudi',
@@ -673,6 +714,11 @@ const es: Translation = {
   capitalLabel: 'Capital',
   wikiTitle: 'Wikipedia',
   radioEmptyFallback: 'Aún no hay flujos en línea disponibles para esta región. Próximamente.',
+  httpTagHint: 'Esta emisora solo ofrece un flujo HTTP; se retransmite a través de nuestro edge para que suene en esta página segura.',
+  streamConnecting: 'Conectando…',
+  streamLost: 'La señal se ha desvanecido — la canción no nos alcanza ahora mismo.',
+  streamLostHint: 'Espera un momento y vuelve a intentarlo, o elige otra emisora.',
+  streamRetry: 'Reintentar',
   authLoginRegister: 'Iniciar sesión / Registrarse',
   authLogout: 'Cerrar sesión',
   authClose: 'Cerrar',

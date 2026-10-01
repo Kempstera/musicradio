@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import { getCurrentUrl, isPlaying, play, stop, subscribe } from '../lib/audio';
+import { getCurrentUrl, getStatus, isPlaying, play, retry, stop, subscribe, type PlaybackStatus } from '../lib/audio';
 import { isFavorite, subscribe as subscribeFavs } from '../lib/favorites';
+import { getTranslation, getInitialLang, LANG_CHANGE_EVENT } from '../lib/i18n';
+import type { Lang } from '../lib/i18n';
 import FavoriteButton from './FavoriteButton';
 
 export interface Station {
@@ -56,12 +58,16 @@ function Eq() {
 export default function RadioPlayer({ stations, countryName, flag, emptyNote, slug }: Props) {
   const [currentUrl, setCurrentUrl] = useState<string | null>(null);
   const [playing, setPlaying] = useState<boolean>(false);
+  const [status, setStatus] = useState<PlaybackStatus>(() => getStatus());
   const [favTick, setFavTick] = useState(0);
+  const [lang, setLang] = useState<Lang>(() => getInitialLang());
+  const t = getTranslation(lang);
 
   useEffect(() => {
     const refresh = () => {
       setCurrentUrl(getCurrentUrl());
       setPlaying(isPlaying());
+      setStatus(getStatus());
     };
     refresh();
     const unsub = subscribe(refresh);
@@ -71,6 +77,12 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
   useEffect(() => {
     const refresh = () => setFavTick((n) => n + 1);
     return subscribeFavs(refresh);
+  }, []);
+
+  useEffect(() => {
+    const onLang = (e: Event) => setLang((e as CustomEvent<Lang>).detail);
+    window.addEventListener(LANG_CHANGE_EVENT, onLang);
+    return () => window.removeEventListener(LANG_CHANGE_EVENT, onLang);
   }, []);
 
   // 收藏的电台排在最前（居于顶端）
@@ -142,6 +154,9 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
                   {tags.map((t) => (
                     <span key={t} className="radio-tag">{t}</span>
                   ))}
+                  {s.url.startsWith('http://') && (
+                    <span className="radio-tag radio-tag--http" title={t.httpTagHint}>HTTP</span>
+                  )}
                 </div>
                 {s.note && (
                   <div
@@ -177,7 +192,16 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
           </button>
           <div className="now-playing__info">
             <div className="now-playing__name">{flag} {current.name}</div>
-            <div className="now-playing__country">{countryName}</div>
+            {status === 'error' ? (
+              <div className="now-playing__status now-playing__status--lost">
+                {t.streamLost}
+                <button className="now-playing__retry" onClick={() => retry()} title={t.streamLostHint}>{t.streamRetry}</button>
+              </div>
+            ) : status === 'loading' || status === 'stalled' ? (
+              <div className="now-playing__status">{t.streamConnecting}</div>
+            ) : (
+              <div className="now-playing__country">{countryName}</div>
+            )}
           </div>
           <span className="now-playing__eq">
             <Eq />
