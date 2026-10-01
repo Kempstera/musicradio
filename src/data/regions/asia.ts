@@ -523,7 +523,10 @@ export const asia: Country[] = [
       { name: '阿夫兰迪奥·雷登托尔·阿拉乌若', nameEn: 'Afonso Redentor Araújo', role: '作曲家', desc: '为《Pátria》谱曲，其旋律成为东帝汶民族觉醒的声音。' },
       { name: '泰贝代舞蹈合唱团', nameEn: 'Tebedai Ensemble', role: '传统歌舞团体', desc: '以围圈击鼓与对唱为核心的东帝汶传统歌舞，常见于婚礼与庆典。' },
     ],
-    notableRadios: [{ name: 'RTTL（东帝汶广播电视）', genre: '综合 / 传统', note: '东帝汶国家广播电视，总部位于帝力，是了解本土德顿音乐与葡萄牙语节目的主要窗口。' }],
+    notableRadios: [
+      { name: 'RZO East Timor', genre: '流行 / 音乐', note: '东帝汶的音乐电台。', url: 'https://stream.zeno.fm/tsghtncm2p8uv', hls: false },
+      { name: 'RTTL（东帝汶广播电视）', genre: '综合 / 传统', note: '东帝汶国家广播电视，总部位于帝力，是了解本土德顿音乐与葡萄牙语节目的主要窗口。' },
+    ],
   },
   {
     slug: 'mongolia',

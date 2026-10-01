@@ -198,7 +198,10 @@ export const africa: Country[] = [
     history: ['利比里亚是非洲最古老的共和国之一，由获释的美国黑奴建立，其国旗与制度深受美国影响，同时也保留了本土族群丰富的音乐传统。'],
     music: ['利比里亚的音乐融合了非洲本土节奏与美洲的影响，海莱弗（Highlife）在此也有深厚的根基；本土的鼓乐与合唱在乡村节庆中依然鲜活。'],
     musicians: [{ name: '利比里亚民间乐团', nameEn: 'Liberian Folk Ensemble', role: '传统乐团', desc: '传承利比里亚鼓乐与海莱弗传统的音乐团体。' }],
-    notableRadios: [{ name: 'ELBC Radio', genre: '非洲 / 海莱弗', note: '利比里亚国家广播。' }],
+    notableRadios: [
+      { name: 'Alternative Youth Radio', genre: '流行 / 青年', note: '利比里亚的青年音乐电台。', url: 'https://stream.zeno.fm/crzecfbn6tzuv', hls: false },
+      { name: 'ELBC Radio', genre: '非洲 / 海莱弗', note: '利比里亚国家广播。' },
+    ],
   },
   {
     slug: 'gambia', name: '冈比亚', nameEn: 'The Gambia',
@@ -207,7 +210,10 @@ export const africa: Country[] = [
     history: ['冈比亚是非洲大陆最小的国家，沿冈比亚河两岸狭长分布，曼丁卡（Mandinka）族群的格里奥传统在此延续千年。'],
     music: ['冈比亚的科拉琴（kora）演奏世界闻名，女性科拉琴大师索纳·乔巴特（Sona Jobarteh）正是冈比亚格里奥世家的传人；曼丁卡的吟唱与鼓乐同样深厚。'],
     musicians: [{ name: '索纳·乔巴特', nameEn: 'Sona Jobarteh', role: '科拉琴家 / 歌手', desc: '首位女性科拉琴大师，格里奥世家的传人。' }],
-    notableRadios: [{ name: 'GRTS Radio', genre: '非洲 / 科拉琴', note: '冈比亚国家广播。' }],
+    notableRadios: [
+      { name: 'Star FM 96.6', genre: '摇滚 / 当代', note: '班珠尔的摇滚与当代音乐电台。', url: 'https://ice.leviracloud.eu/star96-aac', hls: false },
+      { name: 'GRTS Radio', genre: '非洲 / 科拉琴', note: '冈比亚国家广播。' },
+    ],
   },
   {
     slug: 'guinea-bissau', name: '几内亚比绍', nameEn: 'Guinea-Bissau',
@@ -234,7 +240,11 @@ export const africa: Country[] = [
     history: ['毛里塔尼亚横跨西非与撒哈拉，摩尔（Moor）文化把阿拉伯与柏柏尔传统熔于一炉，游牧的图阿雷格与哈桑尼亚人也在此生息。'],
     music: ['毛里塔尼亚的沙漠音乐深沉而细腻，女歌手迪米·明特·阿巴（Dimi Mint Abba）被誉为「沙漠的歌后」，其吟唱与弦乐（tidinit）的结合令人沉醉；马卢马（Malouma）则把传统与现代融合。'],
     musicians: [{ name: '迪米·明特·阿巴', nameEn: 'Dimi Mint Abba', role: '歌手', desc: '「沙漠的歌后」，毛里塔尼亚音乐的象征。' }],
-    notableRadios: [{ name: 'Radio Mauritanie', genre: '阿拉伯 / 沙漠音乐', note: '毛里塔尼亚国家广播。' }],
+    notableRadios: [
+      { name: 'Salam FM', genre: '阿拉伯 / 音乐', note: '毛里塔尼亚的音乐电台。', url: 'https://stream.zeno.fm/ydsz0gx0gm0uv', hls: false },
+      { name: 'RADIOMA', genre: '阿拉伯 / 流行', note: '毛里塔尼亚的流行音乐电台。', url: 'https://stream.zeno.fm/du2izs2nmquvv', hls: false },
+      { name: 'Radio Mauritanie', genre: '阿拉伯 / 沙漠音乐', note: '毛里塔尼亚国家广播。' },
+    ],
   },
 
   // ===== 东非 =====
@@ -293,7 +303,10 @@ export const africa: Country[] = [
     history: ['布隆迪是东非的小山国，其皇家鼓乐团（Ingoma）以惊人的集体击鼓闻名，曾以这段节奏启发了西方的音乐家。'],
     music: ['布隆迪的皇家鼓（Ingoma）是其最骄傲的文化遗产——鼓手们头顶巨鼓、边舞边击，节奏之精确与气势令人震撼，被列入人类非物质文化遗产。'],
     musicians: [{ name: '布隆迪皇家鼓乐团', nameEn: 'The Royal Drummers of Burundi', role: '鼓乐团', desc: '以头顶巨鼓的集体击鼓闻名世界。' }],
-    notableRadios: [{ name: 'RTNB Radio', genre: '非洲 / 鼓乐', note: '布隆迪国家广播。' }],
+    notableRadios: [
+      { name: 'Heaven FM', genre: '流行 / 音乐', note: '布琼布拉的音乐电台。', url: 'https://stream.zeno.fm/eequgfw72hhvv', hls: false },
+      { name: 'RTNB Radio', genre: '非洲 / 鼓乐', note: '布隆迪国家广播。' },
+    ],
   },
   {
     slug: 'somalia', name: '索马里', nameEn: 'Somalia', nameLocal: 'Soomaaliya',
@@ -311,7 +324,10 @@ export const africa: Country[] = [
     history: ['吉布提扼守红海入海口曼德海峡，是非洲之角的战略要地，阿法尔（Afar）与索马里族群在此交融。'],
     music: ['吉布提的音乐融合了阿法尔、索马里与阿拉伯传统，游牧的吟唱与鼓乐是其底色，印度洋的海风也为它染上了斯瓦希里的气息。'],
     musicians: [{ name: '阿法尔民间乐团', nameEn: 'Afar Ensemble', role: '传统乐团', desc: '传承阿法尔游牧吟唱传统的音乐团体。' }],
-    notableRadios: [{ name: 'RTD Radio', genre: '非洲 / 传统', note: '吉布提国家广播。' }],
+    notableRadios: [
+      { name: 'Nomadincub Radio', genre: '综合 / 音乐', note: '吉布提的社区音乐电台。', url: 'https://stream.zeno.fm/g4a1tx1bxnhvv', hls: false },
+      { name: 'RTD Radio', genre: '非洲 / 传统', note: '吉布提国家广播。' },
+    ],
   },
   {
     slug: 'eritrea', name: '厄立特里亚', nameEn: 'Eritrea', nameLocal: 'ኤርትራ',
@@ -347,7 +363,11 @@ export const africa: Country[] = [
     history: ['科摩罗被称为「月亮群岛」，位于莫桑比克海峡北端，阿拉伯、非洲与印度洋的香料贸易在此交汇千年。'],
     music: ['科摩罗的音乐融合了阿拉伯马卡姆、斯瓦希里与马达加斯加元素，婚礼与宗教节庆中的鼓乐、弦乐与齐声吟唱是其特色。'],
     musicians: [{ name: '科摩罗民间乐团', nameEn: 'Comorian Ensemble', role: '传统乐团', desc: '传承科摩罗阿拉伯-非洲融合音乐的传统团体。' }],
-    notableRadios: [{ name: 'ORTC Radio', genre: '非洲 / 传统', note: '科摩罗国家广播。' }],
+    notableRadios: [
+      { name: 'M Radio', genre: '科摩罗 / 流行', note: '科摩罗的音乐电台。', url: 'https://stream.zeno.fm/b0y3da8zxqzuv', hls: false },
+      { name: 'TONIC FM', genre: '科摩罗 / 流行', note: '科摩罗的音乐电台。', url: 'https://stream.zeno.fm/5v6tc581mp8uv', hls: false },
+      { name: 'ORTC Radio', genre: '非洲 / 传统', note: '科摩罗国家广播。' },
+    ],
   },
   {
     slug: 'madagascar', name: '马达加斯加', nameEn: 'Madagascar', nameLocal: 'Madagasikara',
@@ -409,7 +429,10 @@ export const africa: Country[] = [
     history: ['加蓬横跨赤道，大部分国土为热带雨林覆盖，石油资源使其成为中非较为富裕的国家，利伯维尔是法语非洲的都市。'],
     music: ['加蓬的音乐与雨林中的仪式传统紧密相连，鼓乐与多声部合唱是其特色；皮埃尔·阿肯登格（Pierre Akendengué）把加蓬传统与法语香颂融合，赢得了国际声誉。'],
     musicians: [{ name: '皮埃尔·阿肯登格', nameEn: 'Pierre Akendengué', role: '歌手', desc: '加蓬最具代表性的音乐人。' }],
-    notableRadios: [{ name: 'Gabon 1ère', genre: '非洲 / 传统', note: '加蓬国家广播。' }],
+    notableRadios: [
+      { name: 'Africa No 1', genre: '非洲 / 流行', note: '始于利伯维尔的泛非法语音乐电台，非洲最具影响力的法语广播之一。', url: 'https://african1libreville.ice.infomaniak.ch/african1libreville-128.mp3', hls: false },
+      { name: 'Gabon 1ère', genre: '非洲 / 传统', note: '加蓬国家广播。' },
+    ],
   },
   {
     slug: 'central-african-republic', name: '中非共和国', nameEn: 'Central African Republic', nameLocal: 'République centrafricaine',
@@ -445,7 +468,11 @@ export const africa: Country[] = [
     history: ['圣多美和普林西比是几内亚湾的两座火山岛，曾是葡萄牙的殖民地，其克里奥尔文化与咖啡、可可种植园的历史紧密相连。'],
     music: ['圣多美的音乐以「蒂科阿」（tchiloli）戏剧与「索科佩」（socopé）舞曲为特色，融合了非洲节奏与葡萄牙遗产，轻松而热烈。'],
     musicians: [{ name: '圣多美民间乐团', nameEn: 'São Toméan Ensemble', role: '传统乐团', desc: '传承圣多美克里奥尔音乐的团体。' }],
-    notableRadios: [{ name: 'RTP África', genre: '非洲 / 克里奥尔', note: '覆盖圣多美的葡语非洲电台。' }],
+    notableRadios: [
+      { name: 'Rádio São Tomé e Príncipe', genre: '综合 / 音乐', note: '圣多美和普林西比国家广播。', url: 'https://stream.zeno.fm/3a84k7zg4p8uv', hls: false },
+      { name: 'Radio Pop Hits', genre: '流行 / 音乐', note: '圣多美的流行音乐电台。', url: 'https://stream.zeno.fm/wzkn8w4bs71vv', hls: false },
+      { name: 'FSW KÚA NÓN MÚSICA', genre: '圣多美 / 音乐', note: '圣多美的本地音乐电台。', url: 'https://stream.zeno.fm/v9y0s53rquhvv', hls: false },
+    ],
   },
   {
     slug: 'angola', name: '安哥拉', nameEn: 'Angola',
@@ -487,7 +514,11 @@ export const africa: Country[] = [
     history: ['博茨瓦纳是非洲最稳定繁荣的国家之一，奥卡万戈三角洲是地球上最独特的湿地生态系统，茨瓦纳族的音乐与舞蹈传统深厚。'],
     music: ['博茨瓦纳的音乐以茨瓦纳族的合唱、鼓乐与弦乐为核心，传统舞蹈（如塞塔帕 setapa）节奏明快，是其文化认同的重要符号。'],
     musicians: [{ name: '茨瓦纳合唱团', nameEn: 'Tswana Choir', role: '合唱团', desc: '传承茨瓦纳和声与舞蹈传统的团体。' }],
-    notableRadios: [{ name: 'RB1 / Duma FM', genre: '非洲 / 传统', note: '哈博罗内的主流电台。' }],
+    notableRadios: [
+      { name: 'Gabz FM 96.2', genre: '流行 / 成人当代', note: '哈博罗内的商业音乐电台，播放当代流行与怀旧金曲。', url: 'https://stream.zeno.fm/wsk9q9tfy4zuv', hls: false },
+      { name: 'Duma FM', genre: '非洲 / 流行', note: '博茨瓦纳的音乐电台。', url: 'https://stream.zeno.fm/v735v8sfy4zuv', hls: false },
+      { name: 'Yarona FM', genre: '流行 / 音乐', note: '博茨瓦纳的流行音乐电台。', url: 'https://stream.zeno.fm/025sdegbz4zuv', hls: false },
+    ],
   },
   {
     slug: 'lesotho', name: '莱索托', nameEn: 'Lesotho',
@@ -496,7 +527,10 @@ export const africa: Country[] = [
     history: ['莱索托是全世界唯一整个国土都在海拔 1000 米以上的国家，被称为「空中王国」，被南非完全环绕。'],
     music: ['莱索托的音乐以塞索托（Sesotho）族群的合唱与弦乐为主，特有的「马科罗」（makorolo）与吟唱传统在山地间回响，和声温暖动人。'],
     musicians: [{ name: '塞索托合唱团', nameEn: 'Sesotho Choir', role: '合唱团', desc: '传承塞索托和声传统的团体。' }],
-    notableRadios: [{ name: 'Radio Lesotho', genre: '非洲 / 传统', note: '莱索托国家广播。' }],
+    notableRadios: [
+      { name: 'MoAfrika FM', genre: '塞索托 / 音乐', note: '马塞卢的音乐电台，播放塞索托语与本地流行。', url: 'https://stream.zeno.fm/2ab34hwatckvv', hls: false },
+      { name: 'Radio Lesotho', genre: '非洲 / 传统', note: '莱索托国家广播。' },
+    ],
   },
   {
     slug: 'eswatini', name: '斯威士兰', nameEn: 'Eswatini', nameLocal: 'eSwatini',
@@ -505,7 +539,10 @@ export const africa: Country[] = [
     history: ['斯威士兰（现称埃斯瓦蒂尼）是非洲少数保留绝对君主制的国家，斯瓦蒂族的传统仪式（如芦苇舞节）至今仍是其文化核心。'],
     music: ['斯威士兰的音乐与王室仪式密不可分，鼓乐、吟唱与舞蹈在节庆中扮演核心角色，斯瓦蒂族的传统歌谣是其民族认同的声音。'],
     musicians: [{ name: '斯瓦蒂仪式乐团', nameEn: 'Swazi Ceremonial Ensemble', role: '传统乐团', desc: '传承斯瓦蒂王室仪式音乐传统的团体。' }],
-    notableRadios: [{ name: 'EBIS Radio', genre: '非洲 / 传统', note: '斯威士兰国家广播。' }],
+    notableRadios: [
+      { name: 'Blue Sky FM', genre: '氛围 / 世界音乐', note: '斯威士兰的氛围与世界音乐电台。', url: 'https://stream.zeno.fm/1w5ec6zfbxhvv', hls: false },
+      { name: 'EBIS Radio', genre: '非洲 / 传统', note: '斯威士兰国家广播。' },
+    ],
   },
   {
     slug: 'zimbabwe', name: '津巴布韦', nameEn: 'Zimbabwe',

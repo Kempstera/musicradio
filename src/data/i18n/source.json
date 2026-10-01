@@ -3027,6 +3027,11 @@
     ],
     "radios": [
       {
+        "name": "RZO East Timor",
+        "genre": "流行 / 音乐",
+        "note": "东帝汶的音乐电台。"
+      },
+      {
         "name": "RTTL（东帝汶广播电视）",
         "genre": "综合 / 传统",
         "note": "东帝汶国家广播电视，总部位于帝力，是了解本土德顿音乐与葡萄牙语节目的主要窗口。"
@@ -6044,6 +6049,11 @@
     ],
     "radios": [
       {
+        "name": "Alternative Youth Radio",
+        "genre": "流行 / 青年",
+        "note": "利比里亚的青年音乐电台。"
+      },
+      {
         "name": "ELBC Radio",
         "genre": "非洲 / 海莱弗",
         "note": "利比里亚国家广播。"
@@ -6069,6 +6079,11 @@
       }
     ],
     "radios": [
+      {
+        "name": "Star FM 96.6",
+        "genre": "摇滚 / 当代",
+        "note": "班珠尔的摇滚与当代音乐电台。"
+      },
       {
         "name": "GRTS Radio",
         "genre": "非洲 / 科拉琴",
@@ -6147,6 +6162,16 @@
       }
     ],
     "radios": [
+      {
+        "name": "Salam FM",
+        "genre": "阿拉伯 / 音乐",
+        "note": "毛里塔尼亚的音乐电台。"
+      },
+      {
+        "name": "RADIOMA",
+        "genre": "阿拉伯 / 流行",
+        "note": "毛里塔尼亚的流行音乐电台。"
+      },
       {
         "name": "Radio Mauritanie",
         "genre": "阿拉伯 / 沙漠音乐",
@@ -6310,6 +6335,11 @@
     ],
     "radios": [
       {
+        "name": "Heaven FM",
+        "genre": "流行 / 音乐",
+        "note": "布琼布拉的音乐电台。"
+      },
+      {
         "name": "RTNB Radio",
         "genre": "非洲 / 鼓乐",
         "note": "布隆迪国家广播。"
@@ -6361,6 +6391,11 @@
       }
     ],
     "radios": [
+      {
+        "name": "Nomadincub Radio",
+        "genre": "综合 / 音乐",
+        "note": "吉布提的社区音乐电台。"
+      },
       {
         "name": "RTD Radio",
         "genre": "非洲 / 传统",
@@ -6465,6 +6500,16 @@
       }
     ],
     "radios": [
+      {
+        "name": "M Radio",
+        "genre": "科摩罗 / 流行",
+        "note": "科摩罗的音乐电台。"
+      },
+      {
+        "name": "TONIC FM",
+        "genre": "科摩罗 / 流行",
+        "note": "科摩罗的音乐电台。"
+      },
       {
         "name": "ORTC Radio",
         "genre": "非洲 / 传统",
@@ -6634,6 +6679,11 @@
     ],
     "radios": [
       {
+        "name": "Africa No 1",
+        "genre": "非洲 / 流行",
+        "note": "始于利伯维尔的泛非法语音乐电台，非洲最具影响力的法语广播之一。"
+      },
+      {
         "name": "Gabon 1ère",
         "genre": "非洲 / 传统",
         "note": "加蓬国家广播。"
@@ -6738,9 +6788,19 @@
     ],
     "radios": [
       {
-        "name": "RTP África",
-        "genre": "非洲 / 克里奥尔",
-        "note": "覆盖圣多美的葡语非洲电台。"
+        "name": "Rádio São Tomé e Príncipe",
+        "genre": "综合 / 音乐",
+        "note": "圣多美和普林西比国家广播。"
+      },
+      {
+        "name": "Radio Pop Hits",
+        "genre": "流行 / 音乐",
+        "note": "圣多美的流行音乐电台。"
+      },
+      {
+        "name": "FSW KÚA NÓN MÚSICA",
+        "genre": "圣多美 / 音乐",
+        "note": "圣多美的本地音乐电台。"
       }
     ],
     "radioNote": ""
@@ -6854,9 +6914,19 @@
     ],
     "radios": [
       {
-        "name": "RB1 / Duma FM",
-        "genre": "非洲 / 传统",
-        "note": "哈博罗内的主流电台。"
+        "name": "Gabz FM 96.2",
+        "genre": "流行 / 成人当代",
+        "note": "哈博罗内的商业音乐电台，播放当代流行与怀旧金曲。"
+      },
+      {
+        "name": "Duma FM",
+        "genre": "非洲 / 流行",
+        "note": "博茨瓦纳的音乐电台。"
+      },
+      {
+        "name": "Yarona FM",
+        "genre": "流行 / 音乐",
+        "note": "博茨瓦纳的流行音乐电台。"
       }
     ],
     "radioNote": ""
@@ -6879,6 +6949,11 @@
       }
     ],
     "radios": [
+      {
+        "name": "MoAfrika FM",
+        "genre": "塞索托 / 音乐",
+        "note": "马塞卢的音乐电台，播放塞索托语与本地流行。"
+      },
       {
         "name": "Radio Lesotho",
         "genre": "非洲 / 传统",
@@ -6905,6 +6980,11 @@
       }
     ],
     "radios": [
+      {
+        "name": "Blue Sky FM",
+        "genre": "氛围 / 世界音乐",
+        "note": "斯威士兰的氛围与世界音乐电台。"
+      },
       {
         "name": "EBIS Radio",
         "genre": "非洲 / 传统",
