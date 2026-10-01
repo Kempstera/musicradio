@@ -601,7 +601,12 @@ export const asia: Country[] = [
       { name: '库尔曼哈孜', nameEn: 'Kurmangazy Sagyrbayuly', role: '冬不拉大师 / 作曲家', desc: '哈萨克最伟大的冬不拉演奏家与作曲家，其库伊作品传世至今。' },
       { name: '迪娜·努尔佩伊索娃', nameEn: 'Dina Nurpeisova', role: '冬不拉演奏家', desc: '哈萨克女冬不拉大师，师承库尔曼哈孜传统，技艺超群。' },
     ],
-    notableRadios: [{ name: 'Kazakh Radio / Radio Classic', genre: '综合 / 古典', note: '哈萨克国家广播及古典音乐频道，播放冬不拉与交响音乐。' }],
+    notableRadios: [
+      { name: 'Qazaq Radiosy', genre: '哈萨克语 / 民族', note: '哈萨克国家广播的哈萨克语主频道，播放民族音乐与冬不拉。', url: 'https://radio-streams.kaztrk.kz/qazradio/qazradio/icecast.audio', hls: false },
+      { name: 'Radio Classic', genre: '古典', note: '哈萨克国家广播的古典音乐频道，播放交响与室内乐。', url: 'https://radio-streams.kaztrk.kz/classic/classic/icecast.audio', hls: false },
+      { name: 'Darhan Radio', genre: '哈萨克流行', note: '哈萨克斯坦的哈萨克语流行音乐电台。', url: 'https://stream.darhanradio.com/live', hls: false },
+      { name: 'Beu FM', genre: '哈萨克 / 民族流行', note: '阿拉木图的哈萨克音乐电台，播放民族与流行曲目。', url: 'https://stream.beufm.kz/beufm', hls: false },
+    ],
   },
   {
     slug: 'uzbekistan',
@@ -627,7 +632,10 @@ export const asia: Country[] = [
       { name: '穆尼日亚特·尤尔奇耶娃', nameEn: 'Munojat Yulchieva', role: '声乐家', desc: '乌兹别克沙什玛卡姆与苏菲音乐的代表性女歌唱家，声线空灵纯净。' },
       { name: '尤尔杜兹·乌斯莫诺娃', nameEn: 'Yulduz Usmonova', role: '歌手', desc: '乌兹别克最受欢迎的流行歌手之一，融合传统与当代。' },
     ],
-    notableRadios: [{ name: 'Uzbekistan Radio', genre: '综合 / 玛卡姆', note: '乌兹别克国家广播，播放沙什玛卡姆与民族音乐。' }],
+    notableRadios: [
+      { name: 'rytmabad', genre: '乌兹别克流行', note: '乌兹别克斯坦的当代流行音乐电台。', url: 'https://radio.filmtastic.uz/listen/rytmabad/radio.mp3', hls: false },
+      { name: 'Uzbekistan Radio', genre: '综合 / 玛卡姆', note: '乌兹别克国家广播，播放沙什玛卡姆与民族音乐。' },
+    ],
   },
   {
     slug: 'kyrgyzstan',
@@ -651,7 +659,12 @@ export const asia: Country[] = [
     musicians: [
       { name: '萨亚克拜·卡拉拉耶夫', nameEn: 'Sayakbay Karalaev', role: '玛纳斯奇', desc: '20 世纪最伟大的《玛纳斯》吟唱者之一，能凭记忆吟唱数十万行史诗。' },
     ],
-    notableRadios: [{ name: 'Kyrgyz Radio', genre: '综合 / 史诗', note: '吉尔吉斯国家广播，播放《玛纳斯》与民族音乐。' }],
+    notableRadios: [
+      { name: 'Kyrgyzstan Obondoru', genre: '吉尔吉斯民歌', note: '吉尔吉斯民歌与民族音乐频道。', url: 'https://cdn.radioplayer.kg:8443/obondoru64', hls: false },
+      { name: 'Suiunchu FM', genre: '吉尔吉斯 / 流行', note: '比什凯克的吉尔吉斯语音乐电台。', url: 'https://cdn.radioplayer.kg:8443/suiunchu64', hls: false },
+      { name: 'Tumar FM', genre: '吉尔吉斯流行', note: '吉尔吉斯斯坦的流行音乐电台。', url: 'https://radio.tumar.fm:8005/stream', hls: false },
+      { name: 'Kyrgyz Radio', genre: '综合 / 史诗', note: '吉尔吉斯国家广播，播放《玛纳斯》与民族音乐。' },
+    ],
   },
   {
     slug: 'tajikistan',
@@ -677,6 +690,7 @@ export const asia: Country[] = [
       { name: '塔吉克沙什玛卡姆乐团', nameEn: 'Academy of Maqom', role: '民族乐团', desc: '传承沙什玛卡姆传统的塔吉克国家级音乐机构。' },
     ],
     notableRadios: [{ name: 'Radio Tajikistan', genre: '综合 / 玛卡姆', note: '塔吉克国家广播，播放沙什玛卡姆与波斯音乐。' }],
+    radioNote: '塔吉克斯坦的广播目前未提供稳定的 https 在线流，暂无法提供在线播放。',
   },
   {
     slug: 'turkmenistan',

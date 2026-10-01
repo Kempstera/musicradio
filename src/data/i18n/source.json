@@ -3123,9 +3123,24 @@
     ],
     "radios": [
       {
-        "name": "Kazakh Radio / Radio Classic",
-        "genre": "综合 / 古典",
-        "note": "哈萨克国家广播及古典音乐频道，播放冬不拉与交响音乐。"
+        "name": "Qazaq Radiosy",
+        "genre": "哈萨克语 / 民族",
+        "note": "哈萨克国家广播的哈萨克语主频道，播放民族音乐与冬不拉。"
+      },
+      {
+        "name": "Radio Classic",
+        "genre": "古典",
+        "note": "哈萨克国家广播的古典音乐频道，播放交响与室内乐。"
+      },
+      {
+        "name": "Darhan Radio",
+        "genre": "哈萨克流行",
+        "note": "哈萨克斯坦的哈萨克语流行音乐电台。"
+      },
+      {
+        "name": "Beu FM",
+        "genre": "哈萨克 / 民族流行",
+        "note": "阿拉木图的哈萨克音乐电台，播放民族与流行曲目。"
       }
     ],
     "radioNote": ""
@@ -3157,6 +3172,11 @@
     ],
     "radios": [
       {
+        "name": "rytmabad",
+        "genre": "乌兹别克流行",
+        "note": "乌兹别克斯坦的当代流行音乐电台。"
+      },
+      {
         "name": "Uzbekistan Radio",
         "genre": "综合 / 玛卡姆",
         "note": "乌兹别克国家广播，播放沙什玛卡姆与民族音乐。"
@@ -3183,6 +3203,21 @@
       }
     ],
     "radios": [
+      {
+        "name": "Kyrgyzstan Obondoru",
+        "genre": "吉尔吉斯民歌",
+        "note": "吉尔吉斯民歌与民族音乐频道。"
+      },
+      {
+        "name": "Suiunchu FM",
+        "genre": "吉尔吉斯 / 流行",
+        "note": "比什凯克的吉尔吉斯语音乐电台。"
+      },
+      {
+        "name": "Tumar FM",
+        "genre": "吉尔吉斯流行",
+        "note": "吉尔吉斯斯坦的流行音乐电台。"
+      },
       {
         "name": "Kyrgyz Radio",
         "genre": "综合 / 史诗",
@@ -3222,7 +3257,7 @@
         "note": "塔吉克国家广播，播放沙什玛卡姆与波斯音乐。"
       }
     ],
-    "radioNote": ""
+    "radioNote": "塔吉克斯坦的广播目前未提供稳定的 https 在线流，暂无法提供在线播放。"
   },
   "turkmenistan": {
     "name": "土库曼斯坦",
@@ -5895,6 +5930,11 @@
     ],
     "radios": [
       {
+        "name": "Wadata Radio 107.4",
+        "genre": "非洲 / 流行",
+        "note": "尼亚美的音乐电台，播放西非流行与图阿雷格音乐。"
+      },
+      {
         "name": "Voix du Sahel",
         "genre": "非洲 / 图阿雷格",
         "note": "尼日尔国家广播。"
@@ -5972,6 +6012,11 @@
       }
     ],
     "radios": [
+      {
+        "name": "Choice FM 93.3",
+        "genre": "非洲 / 流行",
+        "note": "弗里敦的音乐电台，播放西非流行与棕榈酒音乐。"
+      },
       {
         "name": "SLBC Radio",
         "genre": "非洲 / 棕榈酒",

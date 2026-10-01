@@ -156,7 +156,10 @@ export const africa: Country[] = [
       { name: '邦比诺', nameEn: 'Bombino', role: '吉他手', desc: '「图阿雷格蓝调」的旗手，撒哈拉之声。' },
       { name: '姆杜·莫克塔尔', nameEn: 'Mdou Moctar', role: '吉他手 / 歌手', desc: '把图阿雷格传统与摇滚吉他融合的天才。' },
     ],
-    notableRadios: [{ name: 'Voix du Sahel', genre: '非洲 / 图阿雷格', note: '尼日尔国家广播。' }],
+    notableRadios: [
+      { name: 'Wadata Radio 107.4', genre: '非洲 / 流行', note: '尼亚美的音乐电台，播放西非流行与图阿雷格音乐。', url: 'https://stream.zeno.fm/1y2c3qbgbchvv', hls: false },
+      { name: 'Voix du Sahel', genre: '非洲 / 图阿雷格', note: '尼日尔国家广播。' },
+    ],
   },
   {
     slug: 'benin', name: '贝宁', nameEn: 'Benin',
@@ -183,7 +186,10 @@ export const africa: Country[] = [
     history: ['塞拉利昂的弗里敦是西非最早的自由黑人定居地之一，克里奥尔（Krio）文化在此交融，形成了独特的音乐与语言。'],
     music: ['塞拉利昂是「棕榈酒音乐」（Palm-wine music）的故乡——这种以原声吉他为主的轻松曲风深刻影响了后来的海莱弗与西非流行乐。S.E. 罗吉（S.E. Rogie）把这一传统带向了世界。'],
     musicians: [{ name: 'S.E. 罗吉', nameEn: 'S.E. Rogie', role: '歌手 / 吉他手', desc: '棕榈酒音乐的代表，其吉他弹唱温暖动人。' }],
-    notableRadios: [{ name: 'SLBC Radio', genre: '非洲 / 棕榈酒', note: '塞拉利昂国家广播。' }],
+    notableRadios: [
+      { name: 'Choice FM 93.3', genre: '非洲 / 流行', note: '弗里敦的音乐电台，播放西非流行与棕榈酒音乐。', url: 'https://stream.zeno.fm/ct0gvk9149puv', hls: false },
+      { name: 'SLBC Radio', genre: '非洲 / 棕榈酒', note: '塞拉利昂国家广播。' },
+    ],
   },
   {
     slug: 'liberia', name: '利比里亚', nameEn: 'Liberia',
