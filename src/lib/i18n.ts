@@ -871,6 +871,31 @@ export const LANG_CHANGE_EVENT = 'mr:lang-changed';
 // （区别于初始化、bfcache 恢复时的自动应用）——供生日彩蛋等需要「用户切换」语义的逻辑使用
 export const LANG_USER_CHANGE_EVENT = 'mr:lang-user-changed';
 
+// —— 「用户主动切换」的跨岛补同步 ——————————————————————————————
+// Astro 会给每个 client:load 岛单独建 React root，各岛水合时序并不一致：
+// 若用户在某个岛挂载前就切换了语言，事件会「打空」。故额外把这次动作记录在
+// window 上（带时间戳），让晚挂载的岛在 mount 时补查一次。
+declare global {
+  interface Window {
+    __mrUserLangChange?: { lang: Lang; at: number };
+  }
+}
+
+/** 记录一次「用户主动切换语言」，并派发对应事件 */
+export function notifyUserLangChange(lang: Lang) {
+  if (typeof window === 'undefined') return;
+  window.__mrUserLangChange = { lang, at: Date.now() };
+  window.dispatchEvent(new CustomEvent(LANG_USER_CHANGE_EVENT, { detail: lang }));
+}
+
+/** 读取最近一次「用户主动切换语言」；超过 maxAgeMs 视为过期（避免站内跳转后误触发） */
+export function readRecentUserLangChange(maxAgeMs = 15000): Lang | null {
+  if (typeof window === 'undefined') return null;
+  const r = window.__mrUserLangChange;
+  if (!r || Date.now() - r.at > maxAgeMs) return null;
+  return r.lang;
+}
+
 /** 读取当前生效语言：优先 DOM 上的 lang 属性，其次 localStorage，最后默认 zh-CN */
 export function getCurrentLang(): Lang {
   if (typeof document !== 'undefined') {

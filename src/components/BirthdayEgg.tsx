@@ -6,10 +6,10 @@
 //
 // 触发信号：LANG_USER_CHANGE_EVENT（仅「用户主动切换」时派发，不含初始化 / bfcache 恢复）。
 import { useEffect, useRef, useState } from 'react';
-import { LANG_USER_CHANGE_EVENT } from '../lib/i18n';
+import { LANG_USER_CHANGE_EVENT, readRecentUserLangChange } from '../lib/i18n';
 import type { Lang } from '../lib/i18n';
 
-type ConfettiFn = typeof import('canvas-confetti')['default'];
+type ConfettiFn = typeof import('canvas-confetti');
 type PlayFn = (url: string, hlsStream: boolean) => void;
 
 // —— 参数 ————————————————————————————————————————————
@@ -87,6 +87,10 @@ export default function BirthdayEgg() {
     const onUserLang = (e: Event) => {
       const lang = (e as CustomEvent<Lang>).detail;
       if (lang !== TRIGGER_LANG) return; // 仅切到威尔士语时触发
+      trigger();
+    };
+
+    const trigger = () => {
       if (runningRef.current) return; // 正在庆祝，忽略重复触发
       runningRef.current = true;
 
@@ -144,6 +148,12 @@ export default function BirthdayEgg() {
     };
 
     window.addEventListener(LANG_USER_CHANGE_EVENT, onUserLang);
+
+    // 补触发：Astro 为每个 client:load 岛单独建 React root，各岛水合时序不一。
+    // 若用户在本岛挂载之前就把语言切成了威尔士语，事件早已派发完毕（监听器尚未挂上），
+    // 此时依据 i18n 记录在 window 上的「最近一次用户切换」补触发一次。
+    if (readRecentUserLangChange() === TRIGGER_LANG) trigger();
+
     return () => {
       aliveRef.current = false;
       window.removeEventListener(LANG_USER_CHANGE_EVENT, onUserLang);
@@ -161,7 +171,7 @@ export default function BirthdayEgg() {
 
   return (
     <div className={`bd-egg${closing ? ' bd-egg--out' : ''}`} aria-hidden="true">
-      <div className="bd-egg__title">Penblwydd Hapus Marie! 🎂🐉</div>
+      <div className="bd-egg__title">Penblwydd Hapus Marie! 🎂</div>
     </div>
   );
 }

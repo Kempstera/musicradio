@@ -21,15 +21,41 @@ const desc = description || SITE_DESCRIPTION;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script is:inline>
-      // 尽早按 localStorage 设置 <html lang>，避免 SSR 中文 → 用户已选语言的错位与闪烁
+      // 语言初始化 + 「水合竞速」防护：
+      // ① 尽早按 localStorage 设置 <html lang>，避免 SSR 中文 → 用户已选语言的错位与闪烁；
+      // ② React 岛（LanguageSwitcher）水合完成之前，用户若已在切换器里选了语言，
+      //    原生 change 监听器会先把选择落盘并暂存 —— 否则这次选择会被水合时的
+      //    初始 state 静默覆盖（表现为：切换器显示新语言，但页面文案没跟着变）。
       (function () {
+        var LANGS = ['zh-CN', 'zh-TW', 'en', 'cy', 'fr', 'de', 'it', 'es'];
         try {
           var s = window.localStorage.getItem('mr_lang');
-          var langs = ['zh-CN', 'zh-TW', 'en', 'cy', 'fr', 'de', 'it', 'es'];
-          if (s && langs.indexOf(s) >= 0) {
+          if (s && LANGS.indexOf(s) >= 0) {
             document.documentElement.setAttribute('lang', s);
           }
         } catch (e) {}
+
+        // 捕获阶段监听：早于 React 的合成事件处理器执行
+        document.addEventListener(
+          'change',
+          function (ev) {
+            var t = ev.target;
+            if (!t || t.tagName !== 'SELECT' || !t.closest || !t.closest('.lang-switcher')) return;
+            var lang = t.value;
+            if (LANGS.indexOf(lang) < 0) return;
+            try {
+              window.localStorage.setItem('mr_lang', lang);
+            } catch (e) {}
+            document.documentElement.setAttribute('lang', lang);
+            if (window.__mrLangReady) return; // 已水合：后续交给 LanguageSwitcher.onChange
+            window.__mrLangPending = lang; // 暂存，水合时由 LanguageSwitcher 采纳
+            // 同步记录「用户主动切换」动作：晚于本监听器挂载的岛（如水合较晚的
+            // BirthdayEgg）可据此补触发一次
+            window.__mrUserLangChange = { lang: lang, at: Date.now() };
+            if (typeof window.__mrApplyLang === 'function') window.__mrApplyLang(lang);
+          },
+          true
+        );
       })();
     </script>
     <title>{fullTitle}</title>
@@ -44,6 +70,18 @@ const desc = description || SITE_DESCRIPTION;
   </head>
   <body>
     <Header />
+    <script is:inline>
+      // 在 HTML 解析阶段就把切换器选中项对齐到已保存语言，
+      // 避免「HTML 已渲染 → React 水合完成」这段时间里下拉框显示错误的语言
+      (function () {
+        try {
+          var s = window.localStorage.getItem('mr_lang');
+          if (!s) return;
+          var sel = document.querySelector('.lang-switcher select');
+          if (sel && sel.querySelector('option[value="' + s + '"]')) sel.value = s;
+        } catch (e) {}
+      })();
+    </script>
     <BirthdayEgg client:load />
     <slot />
     <Footer />

@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent } from 'react';
+import { useEffect, useRef, useState, type ChangeEvent } from 'react';
 import {
   LANGS,
   TRANSLATIONS,
@@ -7,7 +7,7 @@ import {
   getInitialLang,
   saveLang,
   LANG_CHANGE_EVENT,
-  LANG_USER_CHANGE_EVENT,
+  notifyUserLangChange,
 } from '../lib/i18n';
 import type { Lang, Translation } from '../lib/i18n';
 
@@ -147,13 +147,60 @@ function applyLang(lang: Lang) {
   window.dispatchEvent(new CustomEvent(LANG_CHANGE_EVENT, { detail: lang }));
 }
 
+// —— 水合竞速防护 ——————————————————————————————————————
+// Base.astro 的 <head> 里有一个原生 change 监听器：在 React 尚未水合时，
+// 若用户已在语言切换器里做出选择，它会先把选择写入 localStorage 并暂存到
+// window.__mrLangPending。这里把 applyLang 提前暴露出去，让「JS 包已加载、
+// 但 React 还没水合」的窗口内也能立刻把语言应用上去。
+declare global {
+  interface Window {
+    /** 由本模块注册：把指定语言应用到页面（供水合前的原生监听器调用） */
+    __mrApplyLang?: (lang: Lang) => void;
+    /** 水合前用户在切换器里的选择（暂存，水合时被采纳后清空） */
+    __mrLangPending?: string;
+    /** 标记 LanguageSwitcher 已水合就绪 */
+    __mrLangReady?: boolean;
+  }
+}
+
+function isLang(v: unknown): v is Lang {
+  return typeof v === 'string' && LANGS.some((l) => l.id === v);
+}
+
+if (typeof window !== 'undefined') {
+  window.__mrApplyLang = (l: Lang) => {
+    if (isLang(l)) applyLang(l);
+  };
+}
+
 export default function LanguageSwitcher() {
   const [lang, setLang] = useState<Lang>('zh-CN');
+  const selectRef = useRef<HTMLSelectElement>(null);
 
   useEffect(() => {
-    const initial = getInitialLang();
+    // 水合时「采纳」用户在 React 就绪之前的操作：原生监听器已把它落盘到
+    // localStorage 并暂存于 __mrLangPending —— 这里优先采用，避免被初始 state 回滚。
+    const pending = window.__mrLangPending;
+
+    const initial = isLang(pending) ? pending : getInitialLang();
     setLang(initial);
+    saveLang(initial);
     applyLang(initial);
+    window.__mrLangReady = true;
+    window.__mrLangPending = undefined;
+
+    // 兜底对齐：受控 <select> 在水合时可能被初始值残留干扰，此处强制让
+    // 下拉框显示的语言与「已生效语言」保持一致
+    const sel = selectRef.current;
+    if (sel && sel.value !== initial) sel.value = initial;
+
+    // 若这次语言是用户在水合前主动切换的，补派发一次「用户主动切换」事件
+    // （生日彩蛋等依赖该语义；用宏任务延后到其它岛的水合副作用挂载完毕之后。
+    //   同时 i18n 会把这次动作记在 window 上，供更晚挂载的岛在 mount 时补查。）
+    if (isLang(pending)) {
+      const adopted: Lang = pending;
+      window.setTimeout(() => notifyUserLangChange(adopted), 0);
+    }
 
     // 处理浏览器「后退/前进」从 bfcache（往返缓存）恢复页面的情况：
     // 此时 React 不会重新水合、useEffect 不再执行，DOM 仍停留在缓存时的语言，
@@ -174,8 +221,8 @@ export default function LanguageSwitcher() {
     setLang(next);
     saveLang(next);
     applyLang(next);
-    // 仅此路径属于「用户主动切换」，派发专用事件（供生日彩蛋等使用）
-    window.dispatchEvent(new CustomEvent(LANG_USER_CHANGE_EVENT, { detail: next }));
+    // 仅此路径属于「用户主动切换」：记录并派发专用事件（供生日彩蛋等使用）
+    notifyUserLangChange(next);
   };
 
   return (
@@ -184,7 +231,12 @@ export default function LanguageSwitcher() {
         <circle cx="12" cy="12" r="10" />
         <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z" />
       </svg>
-      <select value={lang} onChange={onChange} aria-label="选择语言 / Choose language">
+      <select
+        ref={selectRef}
+        value={lang}
+        onChange={onChange}
+        aria-label="选择语言 / Choose language"
+      >
         {LANGS.map((l) => (
           <option key={l.id} value={l.id}>
             {l.label}
