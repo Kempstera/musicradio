@@ -3,6 +3,14 @@ import { getCurrentUrl, getStatus, isPlaying, play, retry, stop, subscribe, type
 import { isFavorite, subscribe as subscribeFavs } from '../lib/favorites';
 import { getTranslation, getInitialLang, LANG_CHANGE_EVENT } from '../lib/i18n';
 import type { Lang } from '../lib/i18n';
+import {
+  MARIE_JUKEBOX,
+  MARIE_JUKEBOX_ID,
+  isJukeboxActive,
+  isJukeboxUrl,
+  subscribe as subscribeMarie,
+  toggleJukebox,
+} from '../lib/marie';
 import FavoriteButton from './FavoriteButton';
 
 export interface Station {
@@ -61,6 +69,8 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
   const [status, setStatus] = useState<PlaybackStatus>(() => getStatus());
   const [favTick, setFavTick] = useState(0);
   const [lang, setLang] = useState<Lang>(() => getInitialLang());
+  // 生日彩蛋注入的「1946 Jukebox」是否已激活（会话级）
+  const [jukeboxOn, setJukeboxOn] = useState(false);
   const t = getTranslation(lang);
 
   useEffect(() => {
@@ -85,6 +95,13 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
     return () => window.removeEventListener(LANG_CHANGE_EVENT, onLang);
   }, []);
 
+  // 「1946 Jukebox」是会话级开关，激活后常驻于列表最顶部
+  useEffect(() => {
+    const refresh = () => setJukeboxOn(isJukeboxActive());
+    refresh();
+    return subscribeMarie(refresh);
+  }, []);
+
   // 收藏的电台排在最前（居于顶端）
   const ordered = [...stations].sort((a, b) => {
     const af = isFavorite(a.url) ? 1 : 0;
@@ -93,7 +110,11 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
   });
   void favTick;
 
-  if (!stations.length) {
+  // 生日彩蛋注入的电台插在**最顶部**（不再参与收藏排序）
+  const marieStation: Station = MARIE_JUKEBOX;
+  const list: Station[] = jukeboxOn ? [marieStation, ...ordered] : ordered;
+
+  if (!list.length) {
     return (
       <p className="empty" style={{ marginTop: '1.4rem' }} data-ct="radioNote" data-slug={slug} data-i18n="radioEmptyFallback">
         {emptyNote || '暂未收录该地区的在线电台流，敬请期待。'}
@@ -101,13 +122,17 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
     );
   }
 
-  const current = stations.find((s) => s.url === currentUrl);
+  const isCurrentStation = (s: Station) =>
+    s.id === MARIE_JUKEBOX_ID ? isJukeboxUrl(currentUrl) : s.url === currentUrl;
+
+  const current = list.find(isCurrentStation);
 
   return (
     <>
       <div className="radio-grid">
-        {ordered.map((s) => {
-          const isCurrent = s.url === currentUrl;
+        {list.map((s) => {
+          const isMarie = s.id === MARIE_JUKEBOX_ID;
+          const isCurrent = isCurrentStation(s);
           const isPlayingNow = isCurrent && playing;
           const tags = (s.tags || '')
             .split(',')
@@ -115,10 +140,13 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
             .filter(Boolean)
             .slice(0, 3);
           return (
-            <div key={s.id} className={`radio-card${isPlayingNow ? ' is-playing' : ''}`}>
+            <div
+              key={s.id}
+              className={`radio-card${isPlayingNow ? ' is-playing' : ''}${isMarie ? ' radio-card--marie' : ''}`}
+            >
               <button
                 className="radio-card__play"
-                onClick={() => play(s.url, s.hls)}
+                onClick={() => (isMarie ? void toggleJukebox() : play(s.url, s.hls))}
                 aria-label={isPlayingNow ? `暂停 ${s.name}` : `播放 ${s.name}`}
                 title={isPlayingNow ? '暂停' : '播放'}
               >
@@ -175,8 +203,9 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
                   url: s.url,
                   name: s.name,
                   genre: s.tags,
-                  country: countryName,
-                  countrySlug: slug,
+                  // 生日彩蛋注入的台不属于任何国家，避免被误标成当前国家
+                  country: isMarie ? 'Marie · 80' : countryName,
+                  countrySlug: isMarie ? undefined : slug,
                   hls: s.hls,
                 }}
               />

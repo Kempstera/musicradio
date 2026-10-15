@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import MarieJukebox from '../components/MarieJukebox.tsx';
 import MyFavorites from '../components/MyFavorites.tsx';
 import { CONTINENTS, SUBREGIONS, CONTINENT_MAP } from '../lib/country';
 import { allCountries, countriesByContinent, countriesBySubregion } from '../data';
@@ -28,6 +29,9 @@ const compactJson = JSON.stringify(getAllCompact()).replace(/</g, '\\u003c');
       </div>
     </div>
   </section>
+
+  {/* 生日彩蛋：切到威尔士语后，注入的「Marie's 1946 Jukebox」会出现在这里（未激活时不渲染任何内容） */}
+  <MarieJukebox client:load />
 
   <MyFavorites client:load />
 

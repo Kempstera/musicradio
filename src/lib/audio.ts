@@ -29,6 +29,9 @@ let status: PlaybackStatus = 'idle';
 type Listener = () => void;
 const listeners = new Set<Listener>();
 
+// 一次性音频（有终点的文件，如生日序曲）：非 null 表示当前处于「单次播放」模式
+let overtureAbort: (() => void) | null = null;
+
 function emit() {
   listeners.forEach((l) => l());
 }
@@ -86,6 +89,7 @@ function clearStallTimer() {
 
 // 原生流（非 hls.js）断流/缓冲不足时自动重连
 function scheduleReconnect() {
+  if (overtureAbort) return; // 一次性音频（生日序曲等）不做直播重连
   if (stallTimer !== null || !currentUrl || hls) return; // hls.js 由自身错误处理自愈
   stallTimer = window.setTimeout(() => {
     stallTimer = null;
@@ -157,7 +161,8 @@ function startStream(url: string, hlsStream: boolean): void {
   const a = ensureAudio();
   const src = resolveUrl(url);
 
-  // 停止上一路流
+  // 停止上一路流（含打断正在播放的一次性音频）
+  overtureAbort?.();
   clearStallTimer();
   stalled = false;
   reconnectCount = 0;
@@ -240,6 +245,7 @@ export function retry(): void {
 }
 
 export function stop(): void {
+  overtureAbort?.();
   clearStallTimer();
   stalled = false;
   reconnectCount = 0;
@@ -255,4 +261,55 @@ export function stop(): void {
   currentUrl = null;
   currentHls = false;
   setStatus('idle');
+}
+
+/**
+ * 播放一段「有终点」的音频文件（生日序曲等），并复用同一个 <audio> 单例。
+ *
+ * 这样能天然保证「同一时刻只响一路声音」——调用时若正在播电台，会先停掉它。
+ * 播放自然结束（或解码/加载失败）时回调 onDone，由调用方决定接下来播什么。
+ *
+ * @returns 初始 play() 的 Promise：被浏览器自动播放策略拒绝时会 reject，
+ *          调用方应在下一次用户手势里重试（见 BirthdayEgg）。
+ */
+export function playOverture(src: string, onDone: () => void): Promise<void> {
+  const a = ensureAudio();
+  overtureAbort?.();
+
+  const cleanup = () => {
+    a.removeEventListener('ended', onEnded);
+    a.removeEventListener('error', onError);
+    // 仅当自己仍是「当前」的一次性音频时才解除标记，避免清掉后来者的标记
+    if (overtureAbort === cleanup) overtureAbort = null;
+  };
+  const onEnded = () => {
+    cleanup();
+    onDone();
+  };
+  const onError = () => {
+    cleanup();
+    onDone();
+  };
+
+  overtureAbort = cleanup;
+  a.addEventListener('ended', onEnded);
+  a.addEventListener('error', onError);
+
+  clearStallTimer();
+  stalled = false;
+  reconnectCount = 0;
+  if (hls) {
+    hls.destroy();
+    hls = null;
+  }
+
+  setStatus('loading');
+  a.src = src; // 同源静态资源，无需 resolveUrl
+  currentUrl = src;
+  currentHls = false;
+  emit();
+
+  const started = a.play();
+  started.then(() => setStatus('playing')).catch(() => emit());
+  return started;
 }

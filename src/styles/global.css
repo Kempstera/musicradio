@@ -753,6 +753,37 @@ p {
   box-shadow: var(--shadow-md);
   background: linear-gradient(180deg, #fffdf7, var(--surface));
 }
+/* 生日彩蛋注入的「🎂 Marie's 1946 Jukebox」：金色描边 + 暖色柔光，明显区别于普通电台卡 */
+.radio-card--marie {
+  border: 1.5px solid var(--gold);
+  background: linear-gradient(135deg, #fffaf0 0%, #fff4dc 55%, #fdf0cd 100%);
+  animation: marie-glow 3.6s ease-in-out infinite;
+}
+.radio-card--marie .radio-card__name {
+  color: var(--gold-deep);
+}
+.radio-card--marie .radio-card__play {
+  background: var(--gold);
+  color: #fff;
+}
+.radio-card--marie .radio-card__play:hover {
+  background: var(--gold-deep);
+}
+@keyframes marie-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px rgba(176, 137, 58, 0.1), 0 6px 22px rgba(176, 137, 58, 0.16);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(176, 137, 58, 0.17), 0 9px 28px rgba(176, 137, 58, 0.26);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .radio-card--marie {
+    animation: none;
+    box-shadow: 0 0 0 4px rgba(176, 137, 58, 0.12), 0 6px 22px rgba(176, 137, 58, 0.18);
+  }
+}
 .radio-card__play {
   flex: none;
   width: 46px;

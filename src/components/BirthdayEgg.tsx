@@ -1,31 +1,32 @@
 // 生日彩蛋 —— 当用户把语言切换为「威尔士语（Cymraeg）」时触发。
-//   ① 红/绿/白（威尔士国旗三色）全屏烟花
-//   ② 电影感、金色发光的文字叠加
-//   ③ 自动播放威尔士电台 BBC Radio Cymru
-// 烟花与文字持续 10 秒，随后优雅淡出并从 DOM 移除；电台继续在后台播放。
+//   ① 立即停掉正在播放的电台，改播本地 1 分钟生日序曲（marie-birthday-song.mp3）
+//   ② 红/绿/白（威尔士国旗三色）全屏烟花 + 电影感金色发光文字
+//   ③ 序曲播完（onended）后自动切到「🎂 Marie's 1946 Jukebox」并开播
+//   ④ 视觉特效持续 20 秒后优雅淡出并从 DOM 移除，序曲/电台继续在后台播放
 //
 // 触发信号：LANG_USER_CHANGE_EVENT（仅「用户主动切换」时派发，不含初始化 / bfcache 恢复）。
+//
+// ⚠️ 包体约束：`../lib/audio` 内含 hls.js（577KB），**不能静态 import**，
+// 否则会把整个分包塞进所有页面。故只在挂载后 800ms 空闲预热、并把模块引用缓存下来，
+// 以便在用户手势的同步栈内直接调用 play。`../lib/marie` 是轻量模块（内部惰性加载音频），可静态引入。
 import { useEffect, useRef, useState } from 'react';
 import { LANG_USER_CHANGE_EVENT, readRecentUserLangChange } from '../lib/i18n';
 import type { Lang } from '../lib/i18n';
+import { BIRTHDAY_OVERTURE_SRC, activateJukebox, startJukebox } from '../lib/marie';
 
 type ConfettiFn = typeof import('canvas-confetti');
-type PlayFn = (url: string, hlsStream: boolean) => void;
+type AudioMod = typeof import('../lib/audio');
 
 // —— 参数 ————————————————————————————————————————————
 const TRIGGER_LANG: Lang = 'cy'; // 仅威尔士语触发
-const CELEBRATION_MS = 10_000; // 烟花 + 文字持续时长
+const CELEBRATION_MS = 20_000; // 烟花 + 文字持续时长
 const FADE_MS = 1400; // 淡出时长
 const CONFETTI_Z = 1200; // 烟花画布层级（低于文字层，保证文字浮于烟花之上）
-
-// 自动播放的威尔士电台：BBC Radio Cymru（威尔士语国家电台；HLS、CORS 开放、全球可播）
-const WELSH_STATION_URL =
-  'https://as-hls-ww-live.akamaized.net/pool_24792333/live/ww/bbc_radio_cymru/bbc_radio_cymru.isml/bbc_radio_cymru-audio%3d128000.norewind.m3u8';
 
 // 威尔士国旗三色：红 / 绿 / 白
 const WELSH_COLORS = ['#D30731', '#00AB39', '#FFFFFF'];
 
-// 10 秒「烟花」：左右错落地次第炸开，随机落点、随机时刻
+// 20 秒「烟花」：左右错落地次第炸开，随机落点、随机时刻
 function runFireworks(confetti: ConfettiFn): () => void {
   const end = Date.now() + CELEBRATION_MS;
   const rand = (min: number, max: number) => Math.random() * (max - min) + min;
@@ -60,10 +61,12 @@ export default function BirthdayEgg() {
 
   const runningRef = useRef(false);
   const aliveRef = useRef(true);
-  const playRef = useRef<PlayFn | null>(null);
+  const audioRef = useRef<AudioMod | null>(null);
   const stopFireworksRef = useRef<(() => void) | null>(null);
   const confettiRef = useRef<ConfettiFn | null>(null);
   const timersRef = useRef<number[]>([]);
+  const gestureRetryRef = useRef(false);
+  const gestureCleanupRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     aliveRef.current = true;
@@ -78,48 +81,77 @@ export default function BirthdayEgg() {
       window.setTimeout(() => {
         import('../lib/audio')
           .then((m) => {
-            if (aliveRef.current) playRef.current = m.play;
+            if (aliveRef.current) audioRef.current = m;
           })
           .catch(() => {});
       }, 800),
     );
 
-    const onUserLang = (e: Event) => {
-      const lang = (e as CustomEvent<Lang>).detail;
-      if (lang !== TRIGGER_LANG) return; // 仅切到威尔士语时触发
-      trigger();
+    // 序曲播放结束 → 自动切到 1946 Jukebox
+    const onOvertureEnd = () => {
+      if (!aliveRef.current) return;
+      void startJukebox();
+    };
+
+    // 自动播放被拦截（典型场景：用户在水合完成前就切了语言，手势已经过期）
+    // → 挂一次性监听，在用户下一次交互的同步栈里补播
+    const armGestureRetry = () => {
+      if (gestureRetryRef.current) return;
+      gestureRetryRef.current = true;
+
+      const onGesture = () => {
+        detach();
+        if (!aliveRef.current) return;
+        audioRef.current?.playOverture(BIRTHDAY_OVERTURE_SRC, onOvertureEnd).catch(() => {});
+      };
+      const detach = () => {
+        window.removeEventListener('pointerdown', onGesture, true);
+        window.removeEventListener('touchstart', onGesture, true);
+        window.removeEventListener('keydown', onGesture, true);
+        gestureRetryRef.current = false;
+        gestureCleanupRef.current = null;
+      };
+      window.addEventListener('pointerdown', onGesture, true);
+      window.addEventListener('touchstart', onGesture, true);
+      window.addEventListener('keydown', onGesture, true);
+      gestureCleanupRef.current = detach;
+    };
+
+    // ① 立即停掉正在播放的电台（playOverture 内部会销毁 hls 实例并接管 <audio>），
+    //    改为播放本地生日序曲；播完由 onOvertureEnd 接手
+    const startOverture = () => {
+      const begin = (m: AudioMod) => {
+        m.playOverture(BIRTHDAY_OVERTURE_SRC, onOvertureEnd).catch(armGestureRetry);
+      };
+      const mod = audioRef.current;
+      if (mod) {
+        begin(mod);
+      } else {
+        // 极端情况：预热尚未完成 → 模块加载后立刻播（仍处于浏览器瞬时激活窗口内）
+        import('../lib/audio')
+          .then((m) => {
+            audioRef.current = m;
+            if (aliveRef.current) begin(m);
+          })
+          .catch(() => {});
+      }
     };
 
     const trigger = () => {
       if (runningRef.current) return; // 正在庆祝，忽略重复触发
       runningRef.current = true;
 
-      // ① 立即播放威尔士电台（同步调用栈，确保自动播放不被拦截）
-      const warmed = playRef.current;
-      if (warmed) {
-        try {
-          warmed(WELSH_STATION_URL, true);
-        } catch {
-          /* 播放失败不影响烟花与文字 */
-        }
-      } else {
-        // 极端情况：预热尚未完成 → 加载后补播（仍在浏览器瞬时激活窗口内）
-        import('../lib/audio')
-          .then((m) => {
-            try {
-              m.play(WELSH_STATION_URL, true);
-            } catch {
-              /* noop */
-            }
-          })
-          .catch(() => {});
-      }
+      // ① 立刻把「🎂 Marie's 1946 Jukebox」注入电台列表（会话级常驻）
+      activateJukebox();
 
-      // ② 亮出电影感文字叠加
+      // ② 停当前电台 → 播 1 分钟生日序曲（序曲结束后自动接 Jukebox）
+      startOverture();
+
+      // ③ 亮出电影感文字叠加
       setClosing(false);
       setVisible(true);
 
-      // ③ 烟花：动态引入，正常访问页面时不会加载该库
+      // ④ 烟花：动态引入，正常访问页面时不会加载该库
       import('canvas-confetti')
         .then(({ default: confetti }) => {
           if (!aliveRef.current) return;
@@ -127,10 +159,10 @@ export default function BirthdayEgg() {
           stopFireworksRef.current = runFireworks(confetti);
         })
         .catch(() => {
-          /* 烟花加载失败也不影响文字与电台 */
+          /* 烟花加载失败也不影响文字与音乐 */
         });
 
-      // ④ 10 秒后优雅淡出，再从 DOM 移除
+      // ⑤ 20 秒后优雅淡出，再从 DOM 移除（序曲 / 电台继续在后台播放）
       timersRef.current.push(
         window.setTimeout(() => {
           setClosing(true);
@@ -147,6 +179,12 @@ export default function BirthdayEgg() {
       );
     };
 
+    const onUserLang = (e: Event) => {
+      const lang = (e as CustomEvent<Lang>).detail;
+      if (lang !== TRIGGER_LANG) return; // 仅切到威尔士语时触发
+      trigger();
+    };
+
     window.addEventListener(LANG_USER_CHANGE_EVENT, onUserLang);
 
     // 补触发：Astro 为每个 client:load 岛单独建 React root，各岛水合时序不一。
@@ -157,6 +195,7 @@ export default function BirthdayEgg() {
     return () => {
       aliveRef.current = false;
       window.removeEventListener(LANG_USER_CHANGE_EVENT, onUserLang);
+      gestureCleanupRef.current?.();
       clearTimers();
       stopFireworksRef.current?.();
       try {

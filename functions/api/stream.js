@@ -11,6 +11,8 @@
 const ALLOWED = new Set([
   // Radio Tengri FM —— 哈萨克斯坦（仅提供 http 流，128kbps MP3）
   'http://91.201.214.229:8000/tengrifm',
+  // The UK 1940s Radio Station —— 生日彩蛋「Marie's 1946 Jukebox」使用（官网公布的官方流，仅 http）
+  'http://solid2.streamupsolutions.com:24929/stream',
 ]);
 
 const UA =
