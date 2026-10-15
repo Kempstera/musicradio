@@ -867,6 +867,10 @@ export function saveLang(lang: Lang) {
 // 语言切换事件名：LanguageSwitcher 切换后派发，供 React 岛组件同步更新文案
 export const LANG_CHANGE_EVENT = 'mr:lang-changed';
 
+// 「用户主动切换」语言事件：仅当用户在切换器里手动选择语言时派发
+// （区别于初始化、bfcache 恢复时的自动应用）——供生日彩蛋等需要「用户切换」语义的逻辑使用
+export const LANG_USER_CHANGE_EVENT = 'mr:lang-user-changed';
+
 /** 读取当前生效语言：优先 DOM 上的 lang 属性，其次 localStorage，最后默认 zh-CN */
 export function getCurrentLang(): Lang {
   if (typeof document !== 'undefined') {

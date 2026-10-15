@@ -7,6 +7,7 @@ import {
   getInitialLang,
   saveLang,
   LANG_CHANGE_EVENT,
+  LANG_USER_CHANGE_EVENT,
 } from '../lib/i18n';
 import type { Lang, Translation } from '../lib/i18n';
 
@@ -173,6 +174,8 @@ export default function LanguageSwitcher() {
     setLang(next);
     saveLang(next);
     applyLang(next);
+    // 仅此路径属于「用户主动切换」，派发专用事件（供生日彩蛋等使用）
+    window.dispatchEvent(new CustomEvent(LANG_USER_CHANGE_EVENT, { detail: next }));
   };
 
   return (
