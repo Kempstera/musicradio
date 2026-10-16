@@ -1,26 +1,33 @@
-// 「Marie 80 岁生日」彩蛋 —— 会话级状态 + 1946 Jukebox 电台定义。
+// 「Marie 80 岁生日」彩蛋 —— 会话级状态 + 电台精选集定义。
 //
-// 两个概念分开：
+// 三个概念分开：
 //  1) **序曲**（BIRTHDAY_OVERTURE_SRC）：事件驱动。每次用户把语言切到威尔士语时都播一遍，
-//     播完自动接上 1946 Jukebox。时序逻辑在 BirthdayEgg.tsx。
-//  2) **1946 Jukebox 电台卡**：会话级常驻。一旦激活，本次会话内**跨页面导航**（本站是 MPA，
-//     每次跳转都是全新文档）依然出现在电台列表最顶部，直到关闭标签页。用 sessionStorage 承载。
+//     播完自动接上 Jukebox。时序逻辑在 BirthdayEgg.tsx。
+//  2) **电台精选集**（MARIE_STATIONS）：会话级常驻。一旦激活，本次会话内**跨页面导航**
+//     （本站是 MPA，每次跳转都是全新文档）依然出现在电台列表最顶部，直到关闭标签页。
+//     用 sessionStorage 承载。
+//  3) 第 1 个是默认台（1940 年代老歌），其余 4 个是给 Marie 的备选推荐，点哪个听哪个。
 //
 // 注意：本模块**不静态 import** `./audio`（该模块含 577KB 的 hls.js）。
 // 需要它的只有「真正开播」这一步，因此播放相关函数一律惰性加载，
 // 这样任何只用到电台元信息 / 会话标志的组件（如首页的 MarieJukebox 岛）都不会拖带音频分包。
 //
-// 流的可用性：官方流只有 http:// 协议，会被 HTTPS 页面按混合内容拦截，因此经本站
-// /api/stream 边缘代理播放（须在 functions/api/stream.js 白名单中登记）；
-// 另备一路 https 流，主用流起不来时自动切换。
+// 流的可用性（2026-10-16 逐条实测，见下表）：
+//   ┌ 默认台 The UK 1940s Radio Station —— 官方流仅 http://，会被 HTTPS 页面按混合内容拦截，
+//   │  故经本站 /api/stream 边缘代理播放（须在 functions/api/stream.js 白名单中登记）；
+//   │  另备一路 https 流，主用流起不来时自动切换。
+//   ├ Angel Radio (UK)   https://edge.clrmedia.co.uk/angel_hb            MP3 96
+//   ├ Swing Street (US)  http://s6.voscast.com:11312/                    MP3 128（http → 白名单）
+//   ├ FIP (FR)           https://icecast.radiofrance.fr/fip-midfi.mp3    MP3 128
+//   └ JAZZ24 (US)        https://knkx-live-a.edge.audiocdn.com/6285_256k AAC 256
 export const BIRTHDAY_OVERTURE_SRC = '/marie-birthday-song.mp3';
 
 export const MARIE_JUKEBOX_ID = 'marie-jukebox-1946';
 export const MARIE_JUKEBOX_NAME = "🎂 Marie's 1946 Jukebox";
 
-/** 主用流：The UK 1940s Radio Station 官网公布的官方流（仅 http，128kbps MP3） */
+/** 默认台主用流：The UK 1940s Radio Station 官网公布的官方流（仅 http，128kbps MP3） */
 export const JUKEBOX_PRIMARY = 'http://solid2.streamupsolutions.com:24929/stream';
-/** 备用流：同为英国 1940 年代老歌台（Pumpkin FM 1940s Radio），https 直连无需代理 */
+/** 默认台备用流：同为英国 1940 年代老歌台（Pumpkin FM 1940s Radio），https 直连无需代理 */
 export const JUKEBOX_FALLBACK = 'https://cast2.asurahosting.com/proxy/1940sradio/stream';
 
 export interface MarieStation {
@@ -32,22 +39,107 @@ export interface MarieStation {
   bitrate: number;
   tags: string;
   homepage: string;
+  /** 一句话推荐语（英文，默认） */
+  blurb: string;
+  /** 一句话推荐语（简体中文；繁体沿用中文，其余语言回落到英文） */
+  blurbZh: string;
 }
 
-export const MARIE_JUKEBOX: MarieStation = {
-  id: MARIE_JUKEBOX_ID,
-  name: MARIE_JUKEBOX_NAME,
-  url: JUKEBOX_PRIMARY,
-  hls: false,
-  codec: 'MP3',
-  bitrate: 128,
-  tags: '1940s,Oldies',
-  homepage: 'https://www.1940sukradio.co.uk/',
-};
+/** 精选集：第 1 个是默认台，其余为用户为 Marie 挑的备选 */
+export const MARIE_STATIONS: MarieStation[] = [
+  {
+    id: MARIE_JUKEBOX_ID,
+    name: MARIE_JUKEBOX_NAME,
+    url: JUKEBOX_PRIMARY,
+    hls: false,
+    codec: 'MP3',
+    bitrate: 128,
+    tags: 'UK,1940s,Oldies',
+    homepage: 'https://www.1940sukradio.co.uk/',
+    blurb: "The UK's 1940s Radio Station — big band, swing and wartime favourites, around the clock.",
+    blurbZh: '英国 1940 年代老歌台 —— 大乐队、摇摆乐与战时金曲，全天不间断。',
+  },
+  {
+    id: 'marie-angel-radio',
+    name: 'Angel Radio',
+    url: 'https://edge.clrmedia.co.uk/angel_hb',
+    hls: false,
+    codec: 'MP3',
+    bitrate: 96,
+    tags: 'UK,Nostalgia,Standards',
+    homepage: 'https://www.angelradio.co.uk/',
+    blurb: 'A British station made for listeners over 60 — gentle nostalgia, standards and memories.',
+    blurbZh: '英国专为 60 岁以上听众而设 —— 温柔的怀旧金曲与岁月回忆。',
+  },
+  {
+    id: 'marie-swing-street',
+    name: 'Swing Street Radio',
+    url: 'http://s6.voscast.com:11312/',
+    hls: false,
+    codec: 'MP3',
+    bitrate: 128,
+    tags: 'US,Swing,Big Band',
+    homepage: 'https://www.swingstreetradio.org/',
+    blurb: 'All swing, all the time — the golden age of big bands, from Goodman to Basie.',
+    blurbZh: '从早到晚都是摇摆乐 —— 大乐队黄金年代，从 Goodman 到 Basie。',
+  },
+  {
+    id: 'marie-fip',
+    name: 'FIP',
+    url: 'https://icecast.radiofrance.fr/fip-midfi.mp3',
+    hls: false,
+    codec: 'MP3',
+    bitrate: 128,
+    tags: 'FR,Jazz,Eclectic',
+    homepage: 'https://www.radiofrance.fr/fip',
+    blurb: "France's cult eclectic station — jazz, soul, world music and chanson, no ads, no chatter.",
+    blurbZh: '法国传奇的「杂食」电台 —— 爵士、灵魂乐、世界音乐与香颂，无广告、少口播。',
+  },
+  {
+    id: 'marie-jazz24',
+    name: 'JAZZ24',
+    url: 'https://knkx-live-a.edge.audiocdn.com/6285_256k',
+    hls: false,
+    codec: 'AAC',
+    bitrate: 256,
+    tags: 'US,Jazz,Smooth',
+    homepage: 'https://www.jazz24.org/',
+    blurb: "From Seattle's KNKX — classic and contemporary jazz, twenty-four hours a day.",
+    blurbZh: '来自西雅图 KNKX —— 经典与当代爵士，一天 24 小时不间断。',
+  },
+];
 
-/** 该 URL 是否属于 Jukebox（主用或备用流） */
+/** 默认台（精选集第一项），保留旧引用名 */
+export const MARIE_JUKEBOX: MarieStation = MARIE_STATIONS[0];
+
+const MARIE_ID_SET = new Set(MARIE_STATIONS.map((s) => s.id));
+
+/** 该 id 是否属于 Marie 精选集 */
+export function isMarieId(id: string): boolean {
+  return MARIE_ID_SET.has(id);
+}
+
+/** 按语言取推荐语：中文（简/繁）用 blurbZh，其余语言回落英文 */
+export function marieBlurb(s: MarieStation, lang: string): string {
+  return lang.toLowerCase().startsWith('zh') ? s.blurbZh || s.blurb : s.blurb;
+}
+
+/** 该 URL 是否正被这一张卡片播放（默认台要额外认它的备用流） */
+export function isMarieStationCurrent(s: MarieStation, url: string | null): boolean {
+  if (!url) return false;
+  if (s.id === MARIE_JUKEBOX_ID) return url === JUKEBOX_PRIMARY || url === JUKEBOX_FALLBACK;
+  return url === s.url;
+}
+
+/** 该 URL 是否属于精选集里的任意一台（含默认台的备用流） */
 export function isJukeboxUrl(url: string | null): boolean {
   return url === JUKEBOX_PRIMARY || url === JUKEBOX_FALLBACK;
+}
+
+/** 该 URL 是否属于精选集里的任意一台（含默认台的备用流） */
+export function isMarieUrl(url: string | null): boolean {
+  if (!url) return false;
+  return isJukeboxUrl(url) || MARIE_STATIONS.some((s) => s.url === url);
 }
 
 // —— 会话级激活标志 ————————————————————————————————————
@@ -94,7 +186,7 @@ function loadAudio(): Promise<AudioMod> {
 }
 
 /**
- * 开播 1946 Jukebox：先走官方 http 流（经边缘代理），
+ * 开播默认台：先走官方 http 流（经边缘代理），
  * 若 delayMs 内仍未进入播放态，自动切到 https 备用流。
  */
 export async function startJukebox(delayMs = 8000): Promise<void> {
@@ -119,7 +211,7 @@ export async function startJukebox(delayMs = 8000): Promise<void> {
   }, delayMs);
 }
 
-/** 点击 Jukebox 卡片：正在播它 → 暂停；否则（重新）开播并带兜底 */
+/** 点击默认台卡片：正在播它 → 暂停；否则（重新）开播并带兜底 */
 export async function toggleJukebox(): Promise<void> {
   const audio = await loadAudio();
   const cur = audio.getCurrentUrl();
@@ -128,4 +220,18 @@ export async function toggleJukebox(): Promise<void> {
     return;
   }
   await startJukebox();
+}
+
+/**
+ * 点击精选集里的任意一张卡片。
+ * 默认台走带兜底的 startJukebox；其余备选台直接走统一的 play()
+ * （http:// 的流由 audio.ts 自动改写为 /api/stream 同源代理）。
+ */
+export async function toggleMarieStation(s: MarieStation): Promise<void> {
+  if (s.id === MARIE_JUKEBOX_ID) {
+    await toggleJukebox();
+    return;
+  }
+  const audio = await loadAudio();
+  audio.play(s.url, s.hls);
 }

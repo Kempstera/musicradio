@@ -4,12 +4,15 @@ import { isFavorite, subscribe as subscribeFavs } from '../lib/favorites';
 import { getTranslation, getInitialLang, LANG_CHANGE_EVENT } from '../lib/i18n';
 import type { Lang } from '../lib/i18n';
 import {
-  MARIE_JUKEBOX,
   MARIE_JUKEBOX_ID,
+  MARIE_STATIONS,
   isJukeboxActive,
-  isJukeboxUrl,
+  isMarieId,
+  isMarieStationCurrent,
+  marieBlurb,
   subscribe as subscribeMarie,
-  toggleJukebox,
+  toggleMarieStation,
+  type MarieStation,
 } from '../lib/marie';
 import FavoriteButton from './FavoriteButton';
 
@@ -24,6 +27,8 @@ export interface Station {
   homepage?: string;
   /** 电台简介（精选电台的客观介绍，可选） */
   note?: string;
+  /** 一句话推荐语（仅生日彩蛋精选集使用，不参与 content-blob 多语言机制） */
+  blurb?: string;
   /** note 在 notableRadios 中的原始下标（用于 content-blob 的多语言对齐） */
   noteIdx?: number;
   /** 采集电台简介的索引键（流地址 url，用于 station-notes-blob 的多语言对齐） */
@@ -110,9 +115,10 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
   });
   void favTick;
 
-  // 生日彩蛋注入的电台插在**最顶部**（不再参与收藏排序）
-  const marieStation: Station = MARIE_JUKEBOX;
-  const list: Station[] = jukeboxOn ? [marieStation, ...ordered] : ordered;
+  // 生日彩蛋注入的精选集插在**最顶部**（不再参与收藏排序）：
+  // 第 1 张是默认台，其余 4 张是给 Marie 的备选推荐
+  const marieStations: Station[] = MARIE_STATIONS;
+  const list: Station[] = jukeboxOn ? [...marieStations, ...ordered] : ordered;
 
   if (!list.length) {
     return (
@@ -123,7 +129,9 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
   }
 
   const isCurrentStation = (s: Station) =>
-    s.id === MARIE_JUKEBOX_ID ? isJukeboxUrl(currentUrl) : s.url === currentUrl;
+    isMarieId(s.id)
+      ? isMarieStationCurrent(s as MarieStation, currentUrl)
+      : s.url === currentUrl;
 
   const current = list.find(isCurrentStation);
 
@@ -131,7 +139,9 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
     <>
       <div className="radio-grid">
         {list.map((s) => {
-          const isMarie = s.id === MARIE_JUKEBOX_ID;
+          const isMarie = isMarieId(s.id);
+          // 精选集首张 = 默认台：保留金色呼吸光晕；其余备选卡用收敛版本，避免一屏多张同时发光
+          const isMariePrimary = s.id === MARIE_JUKEBOX_ID;
           const isCurrent = isCurrentStation(s);
           const isPlayingNow = isCurrent && playing;
           const tags = (s.tags || '')
@@ -142,11 +152,13 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
           return (
             <div
               key={s.id}
-              className={`radio-card${isPlayingNow ? ' is-playing' : ''}${isMarie ? ' radio-card--marie' : ''}`}
+              className={`radio-card${isPlayingNow ? ' is-playing' : ''}${isMarie ? ' radio-card--marie' : ''}${
+                isMarie && !isMariePrimary ? ' radio-card--marie-alt' : ''
+              }`}
             >
               <button
                 className="radio-card__play"
-                onClick={() => (isMarie ? void toggleJukebox() : play(s.url, s.hls))}
+                onClick={() => (isMarie ? void toggleMarieStation(s as MarieStation) : play(s.url, s.hls))}
                 aria-label={isPlayingNow ? `暂停 ${s.name}` : `播放 ${s.name}`}
                 title={isPlayingNow ? '暂停' : '播放'}
               >
@@ -186,6 +198,9 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
                     <span className="radio-tag radio-tag--http" title={t.httpTagHint}>HTTP</span>
                   )}
                 </div>
+                {isMarie && (
+                  <div className="radio-card__blurb">{marieBlurb(s as MarieStation, lang)}</div>
+                )}
                 {s.note && (
                   <div
                     className="radio-card__note"

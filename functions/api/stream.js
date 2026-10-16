@@ -11,8 +11,12 @@
 const ALLOWED = new Set([
   // Radio Tengri FM —— 哈萨克斯坦（仅提供 http 流，128kbps MP3）
   'http://91.201.214.229:8000/tengrifm',
-  // The UK 1940s Radio Station —— 生日彩蛋「Marie's 1946 Jukebox」使用（官网公布的官方流，仅 http）
+  // The UK 1940s Radio Station —— 生日彩蛋「Marie's 1946 Jukebox」默认台（官网公布的官方流，仅 http）
   'http://solid2.streamupsolutions.com:24929/stream',
+  // Swing Street Radio —— 生日彩蛋备选台（美国摇摆乐/大乐队，仅提供 http 流，128kbps MP3）
+  // 列表里以带结尾斜杠的形式出现，这里两种写法都登记，避免末尾斜杠差异导致 403
+  'http://s6.voscast.com:11312/',
+  'http://s6.voscast.com:11312',
 ]);
 
 const UA =
