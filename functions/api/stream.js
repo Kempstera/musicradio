@@ -19,8 +19,12 @@ const ALLOWED = new Set([
   'http://s6.voscast.com:11312',
 ]);
 
-const UA =
-  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
+// ⚠️ UA 必须用「媒体播放器」而非浏览器 UA。
+// 原因：SHOUTcast v2（如 Swing Street Radio 的 s6.voscast.com）会检测浏览器 UA，
+// 对浏览器直接返回 302 → 服务器状态页（HTML），而不是音频流；
+// 换成播放器 UA 才会返回 200 + audio/mpeg。
+// 已实测：Winamp / VLC / curl 均可正常取流，Icecast 系（streamupsolutions、Tengri FM）不受影响。
+const UA = 'WinampMPEG/5.09';
 
 export async function onRequestGet({ request }) {
   const target = new URL(request.url).searchParams.get('u');
@@ -47,8 +51,16 @@ export async function onRequestGet({ request }) {
     return new Response(`Upstream error ${upstream.status}`, { status: 502 });
   }
 
+  // 兜底：极少数流在异常情况下会回吐 HTML（状态页 / 拦截页）。
+  // 与其把 HTML 当成音频喂给 <audio>（表现为「一直缓冲」），不如明确失败，
+  // 让前端走它已有的「失联」提示与重试流程。
+  const upstreamType = upstream.headers.get('content-type') || 'audio/mpeg';
+  if (/^text\/html/i.test(upstreamType)) {
+    return new Response('Upstream returned a non-audio page', { status: 502 });
+  }
+
   const headers = new Headers();
-  headers.set('Content-Type', upstream.headers.get('content-type') || 'audio/mpeg');
+  headers.set('Content-Type', upstreamType);
   headers.set('Cache-Control', 'no-store, no-cache, must-revalidate');
   headers.set('Access-Control-Allow-Origin', '*');
 
