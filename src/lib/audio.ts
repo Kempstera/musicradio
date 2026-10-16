@@ -304,7 +304,16 @@ export function playOverture(src: string, onDone: () => void): Promise<void> {
   }
 
   setStatus('loading');
-  a.src = src; // 同源静态资源，无需 resolveUrl
+  // 显式复位后再赋 src：把同一个 src 重新赋给 <audio> **不会**触发重新加载，
+  // 因此「重复触发」场景（如 Marie 连点几次生日入口）必须靠 load() 让播放头回到 0，
+  // 否则第二次点开只会从中断处继续，而不是从头播起。
+  try {
+    a.pause();
+    a.load();
+  } catch {
+    /* noop */
+  }
+  a.src = src;
   currentUrl = src;
   currentHls = false;
   emit();

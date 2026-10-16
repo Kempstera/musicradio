@@ -17,6 +17,10 @@ const ALLOWED = new Set([
   // 列表里以带结尾斜杠的形式出现，这里两种写法都登记，避免末尾斜杠差异导致 403
   'http://s6.voscast.com:11312/',
   'http://s6.voscast.com:11312',
+  // Serenade Radio UK —— 生日彩蛋备选台（英国 easy listening / 40-60 年代标准曲，192kbps MP3）
+  // 实测：https 在 8284 端口上握手失败（SSL_ERROR_SYSCALL），只有 http 可用
+  'http://4534.cloudrad.io:8284/',
+  'http://4534.cloudrad.io:8284',
 ]);
 
 // ⚠️ UA 必须用「媒体播放器」而非浏览器 UA。

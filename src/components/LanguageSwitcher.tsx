@@ -4,6 +4,8 @@ import {
   TRANSLATIONS,
   CONTINENT_LABELS,
   SUBREGION_LABELS,
+  DEFAULT_LANG,
+  getTranslation,
   getInitialLang,
   saveLang,
   LANG_CHANGE_EVENT,
@@ -114,6 +116,13 @@ function applyLabels(lang: Lang) {
     const list = (el.getAttribute('data-hide-langs') || '').split(',').map((s) => s.trim());
     el.style.display = list.includes(lang) ? 'none' : '';
   });
+  // 地理类字段（首都 / 语言名）：源数据是中文，静态 HTML 用英语预渲染，
+  // 这里在「中文界面 ⇄ 其它界面」之间来回切（对照表见 data/i18n/geo-en.ts）
+  const zhMode = lang === 'zh-CN' || lang === 'zh-TW';
+  document.querySelectorAll<HTMLElement>('[data-geo-zh]').forEach((el) => {
+    const v = zhMode ? el.getAttribute('data-geo-zh') : el.getAttribute('data-geo-en');
+    if (v) el.textContent = v;
+  });
 }
 
 function applyContent(lang: Lang) {
@@ -167,6 +176,11 @@ function isLang(v: unknown): v is Lang {
   return typeof v === 'string' && LANGS.some((l) => l.id === v);
 }
 
+// —— 一次性「语言可切换」轻提示 ————————————————————————————
+const TIP_KEY = 'mr_lang_hint';
+const TIP_DELAY_MS = 1600; // 等首屏稳定后再出现，避免和首屏渲染抢注意力
+const TIP_MS = 9000; // 停留时长
+
 if (typeof window !== 'undefined') {
   window.__mrApplyLang = (l: Lang) => {
     if (isLang(l)) applyLang(l);
@@ -174,7 +188,9 @@ if (typeof window !== 'undefined') {
 }
 
 export default function LanguageSwitcher() {
-  const [lang, setLang] = useState<Lang>('zh-CN');
+  const [lang, setLang] = useState<Lang>(DEFAULT_LANG);
+  // 一次性「语言可切换」轻提示：只对没提示过的访客展示一次
+  const [tipOn, setTipOn] = useState(false);
   const selectRef = useRef<HTMLSelectElement>(null);
 
   useEffect(() => {
@@ -184,7 +200,12 @@ export default function LanguageSwitcher() {
 
     const initial = isLang(pending) ? pending : getInitialLang();
     setLang(initial);
-    saveLang(initial);
+    // ⚠️ 这里**故意不调 saveLang(initial)**：
+    // 只有「用户主动选过语言」才把 mr_lang 落盘。落盘与否同时是「这位访客是否用过语言
+    // 切换器」的判据 —— Base.astro 的 <head> 脚本据此决定要不要显示「可切换」呼吸标识
+    // （首次来访的英语界面 + 一次轻提示）。若在首访就写入 mr_lang='en'，
+    // 第二次打开任意页面就会被误判成「老访客」，标识与提示都会消失。
+    // 用户主动切换的路径在 onChange 里落盘（水合前的那次则由 <head> 的原生监听器落盘）。
     applyLang(initial);
     window.__mrLangReady = true;
     window.__mrLangPending = undefined;
@@ -202,6 +223,23 @@ export default function LanguageSwitcher() {
       window.setTimeout(() => notifyUserLangChange(adopted), 0);
     }
 
+    // —— 一次性轻提示 ——
+    // 目的：让「语言可以切换」这件事被看见（默认界面是英语，很多人不会去找切换器）。
+    // 只提示一次（localStorage 记住），9 秒后自动收起，点击提示条也会立即收起。
+    let tipShowTimer = 0;
+    let tipHideTimer = 0;
+    try {
+      if (window.localStorage.getItem(TIP_KEY) !== '1') {
+        tipShowTimer = window.setTimeout(() => {
+          window.localStorage.setItem(TIP_KEY, '1');
+          setTipOn(true);
+          tipHideTimer = window.setTimeout(() => setTipOn(false), TIP_MS);
+        }, TIP_DELAY_MS);
+      }
+    } catch {
+      /* 隐私模式：静默跳过 */
+    }
+
     // 处理浏览器「后退/前进」从 bfcache（往返缓存）恢复页面的情况：
     // 此时 React 不会重新水合、useEffect 不再执行，DOM 仍停留在缓存时的语言，
     // 但 localStorage 可能已变化 —— 需按当前存储值重新应用语言。
@@ -213,36 +251,61 @@ export default function LanguageSwitcher() {
       }
     };
     window.addEventListener('pageshow', onShow);
-    return () => window.removeEventListener('pageshow', onShow);
+    return () => {
+      window.removeEventListener('pageshow', onShow);
+      window.clearTimeout(tipShowTimer);
+      window.clearTimeout(tipHideTimer);
+    };
   }, []);
+
+  // 用户一旦真的换过语言，「切换器可点」这件事就已经达成，撤掉呼吸标识。
+  // （Base.astro 的原生捕获监听器也会做同样的事 —— 这里只是补齐 React 侧，
+  //   且只在真正发生 change 时才撤，单纯的「点开看看」不会把标识弄丢。）
+  const markUsed = () => {
+    document.documentElement.classList.remove('mr-lang-fresh');
+  };
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const next = e.target.value as Lang;
     setLang(next);
     saveLang(next);
     applyLang(next);
+    markUsed();
+    setTipOn(false);
     // 仅此路径属于「用户主动切换」：记录并派发专用事件（供生日彩蛋等使用）
     notifyUserLangChange(next);
   };
 
   return (
-    <label className="lang-switcher" title="语言 / Language">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-        <circle cx="12" cy="12" r="10" />
-        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z" />
-      </svg>
-      <select
-        ref={selectRef}
-        value={lang}
-        onChange={onChange}
-        aria-label="选择语言 / Choose language"
-      >
-        {LANGS.map((l) => (
-          <option key={l.id} value={l.id}>
-            {l.label}
-          </option>
-        ))}
-      </select>
-    </label>
+    <span className="lang-switcher-wrap">
+      <label className="lang-switcher" title="Language">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+          <circle cx="12" cy="12" r="10" />
+          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z" />
+        </svg>
+        <select
+          ref={selectRef}
+          value={lang}
+          onChange={onChange}
+          aria-label="Choose language / 选择语言"
+        >
+          {LANGS.map((l) => (
+            <option key={l.id} value={l.id}>
+              {l.label}
+            </option>
+          ))}
+        </select>
+        {/* 「语言可以切换」的视觉标识：只在从未选过语言的访客身上出现，
+            由 <html class="mr-lang-fresh"> 控制，避免 React 水合带来的闪烁 */}
+        <span className="lang-switcher__dot" aria-hidden="true" />
+      </label>
+
+      {tipOn && (
+        <span className="lang-switcher__tip" role="note" onClick={() => setTipOn(false)}>
+          <span className="lang-switcher__tip-arrow" aria-hidden="true" />
+          {getTranslation(lang).langHint}
+        </span>
+      )}
+    </span>
   );
 }

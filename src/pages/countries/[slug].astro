@@ -9,6 +9,8 @@ import { CONTINENT_MAP, SUBREGION_MAP } from '../../lib/country';
 import type { Country } from '../../lib/country';
 import radiosData from '../../data/radios.json';
 import { STATION_NOTES } from '../../data/station-notes';
+import { capitalEn, languageEn } from '../../data/i18n/geo-en';
+import { t0, CONTINENT_LABELS, SUBREGION_LABELS } from '../../lib/i18n';
 import type { Lang } from '../../lib/i18n';
 
 export function getStaticPaths() {
@@ -19,6 +21,22 @@ const { country } = Astro.props as { country: Country };
 const continent = CONTINENT_MAP[country.continent];
 const subregion = SUBREGION_MAP[country.subregion];
 const radios = radiosData as Record<string, any[]>;
+
+// —— 静态 HTML 以默认语言（英语）预渲染 ————————————————
+// data-ct 元素上的多语言 blob 负责用户切换语言后的覆盖；首屏（未水合前）则一律显示英语，
+// 与 i18n 的 DEFAULT_LANG 对齐，任何人首次进入看到的都是英语且不会闪烁。
+const allLangs = getCountryAllLangs(country.slug);
+const enContent = allLangs.en;
+const enName = enContent?.name || country.nameEn || country.name;
+const enIntro = enContent?.intro || country.intro;
+/** 取英语译文数组的第 i 项，缺失则回退中文原文 */
+const pick = (a: string[] | undefined, b: string[], i: number): string =>
+  a && i < a.length ? a[i] : b[i];
+
+const continentLabel = (CONTINENT_LABELS['en'] as Record<string, string>)[country.continent] || continent.label;
+const subregionLabel = (SUBREGION_LABELS['en'] as Record<string, string>)[country.subregion] || subregion.label;
+
+const pageTitle = enName === country.nameEn ? enName : `${enName} · ${country.nameEn}`;
 
 const fetchedStations: Station[] = (radios[country.iso] || []).map((s, i) => {
   const sn = STATION_NOTES[s.url];
@@ -31,7 +49,7 @@ const fetchedStations: Station[] = (radios[country.iso] || []).map((s, i) => {
     bitrate: s.bitrate,
     tags: s.tags,
     homepage: s.homepage,
-    note: sn?.['zh-CN'],
+    note: sn?.['en'] || sn?.['zh-CN'],
     noteKey: sn ? s.url : undefined,
   };
 });
@@ -45,10 +63,12 @@ const notablePlayable: Station[] = (country.notableRadios || [])
     url: r.url as string,
     hls: !!r.hls,
     codec: r.hls ? 'HLS' : 'MP3',
-    tags: r.genre,
+    // 流派标签是中文数据，静态 HTML 用英语预渲染；切回中文时由 content-blob 覆盖
+    tags: enContent?.radios?.[i]?.genre || r.genre,
     homepage: r.homepage,
-    note: r.note,
+    note: enContent?.radios?.[i]?.note || r.note,
     noteIdx: i,
+    genreIdx: i,
   }));
 
 // 描述性电台（无在线流），保留其在 notableRadios 中的原始下标，用于对齐译文
@@ -59,8 +79,12 @@ const notableDescriptive = (country.notableRadios || [])
 const playable = country.radioMode === 'notable-only' ? notablePlayable : [...notablePlayable, ...fetchedStations];
 
 // 音乐家维基百科链接：优先使用手动指定，否则用英文名自动生成英文维基链接
-const musicians = country.musicians.map((m) => ({
+// nameEn 存在时，英语界面下直接把它当作主名字（避免英文页里出现中文名）
+const musicians = country.musicians.map((m, i) => ({
   ...m,
+  name: enContent?.musicians?.[i]?.name || m.nameEn || m.name,
+  role: enContent?.musicians?.[i]?.role || m.role,
+  desc: enContent?.musicians?.[i]?.desc || m.desc,
   wikiUrl:
     m.wikiUrl || (m.nameEn ? `https://en.wikipedia.org/wiki/${encodeURIComponent(m.nameEn.replace(/\s+/g, '_'))}` : undefined),
 }));
@@ -69,7 +93,7 @@ const musicians = country.musicians.map((m) => ({
 const contentBlob: Record<string, Record<string, unknown>> = {
   'zh-CN': { [country.slug]: toCountryContent(country) },
 };
-for (const [lang, c] of Object.entries(getCountryAllLangs(country.slug))) {
+for (const [lang, c] of Object.entries(allLangs)) {
   contentBlob[lang] = { [country.slug]: c };
 }
 const contentBlobJson = JSON.stringify(contentBlob).replace(/</g, '\\u003c');
@@ -87,44 +111,49 @@ for (const [url, notes] of Object.entries(STATION_NOTES)) {
 const stationNotesBlobJson = JSON.stringify(stationNotesBlob).replace(/</g, '\\u003c');
 ---
 
-<Base title={`${country.name} · ${country.nameEn}`} description={country.intro}>
+<Base title={pageTitle} description={enIntro}>
   <script type="application/json" id="content-blob" is:inline set:html={contentBlobJson}></script>
   <script type="application/json" id="station-notes-blob" is:inline set:html={stationNotesBlobJson}></script>
   <article data-region={country.continent}>
     <header class="country-hero">
       <div class="container container--narrow">
-        <nav class="breadcrumb" aria-label="面包屑">
-          <a href="/" data-i18n="navHome">首页</a><span class="sep">/</span>
-          <a href={`/#${country.continent}`} data-continent={country.continent}>{continent.label}</a><span class="sep">/</span>
-          <a href={`/#${country.continent}`} data-subregion={country.subregion}>{subregion.label}</a><span class="sep">/</span>
-          <span data-ct="name" data-slug={country.slug}>{country.name}</span>
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/" data-i18n="navHome">{t0.navHome}</a><span class="sep">/</span>
+          <a href={`/#${country.continent}`} data-continent={country.continent}>{continentLabel}</a><span class="sep">/</span>
+          <a href={`/#${country.continent}`} data-subregion={country.subregion}>{subregionLabel}</a><span class="sep">/</span>
+          <span data-ct="name" data-slug={country.slug}>{enName}</span>
         </nav>
         <div class="country-hero__flag" aria-hidden="true">{country.flag}</div>
-        <h1 class="country-hero__title" data-ct="name" data-slug={country.slug}>{country.name}</h1>
+        <h1 class="country-hero__title" data-ct="name" data-slug={country.slug}>{enName}</h1>
         <div class="country-hero__en">{country.nameEn}{country.nameLocal ? ` · ${country.nameLocal}` : ''}</div>
         <div class="country-hero__meta">
-          <span class="chip">📍 <span data-i18n="capitalLabel">首都</span> {country.capital}</span>
-          <span class="chip">🗣️ {country.languages.join(' / ')}</span>
+          <span class="chip">📍 <span data-i18n="capitalLabel">{t0.capitalLabel}</span> <span data-geo-zh={country.capital} data-geo-en={capitalEn(country.capital)}>{capitalEn(country.capital)}</span></span>
+          <span class="chip">🗣️ {
+            country.languages.map((l, i) => (<>
+              {i > 0 && ' / '}
+              <span data-geo-zh={l} data-geo-en={languageEn(l)}>{languageEn(l)}</span>
+            </>))
+          }</span>
           {country.isGroup
             ? <span class="chip">🌍 {country.groupCountries?.join('、')}</span>
-            : <span class="chip" data-subregion={country.subregion}>{subregion.label}</span>}
+            : <span class="chip" data-subregion={country.subregion}>{subregionLabel}</span>}
         </div>
         <p class="country-hero__intro" style="max-width: 62ch; margin-top: 1.4rem; font-size: 1.05rem; color: var(--ink-soft);" data-ct="intro" data-slug={country.slug}>
-          {country.intro}
+          {enIntro}
         </p>
       </div>
     </header>
 
     <div class="container container--narrow" style="padding-top: 2.5rem;">
       <div class="prose">
-        <h2><span class="num">I.</span><span data-i18n="histSection">历史人文</span></h2>
-        {country.history.map((p, i) => <p data-ct="history" data-idx={i} data-slug={country.slug} set:html={p} />)}
+        <h2><span class="num">I.</span><span data-i18n="histSection">{t0.histSection}</span></h2>
+        {country.history.map((p, i) => <p data-ct="history" data-idx={i} data-slug={country.slug} set:html={pick(enContent?.history, country.history, i)} />)}
 
-        <h2><span class="num">II.</span><span data-i18n="musicSection">音乐史</span></h2>
-        {country.music.map((p, i) => <p data-ct="music" data-idx={i} data-slug={country.slug} set:html={p} />)}
+        <h2><span class="num">II.</span><span data-i18n="musicSection">{t0.musicSection}</span></h2>
+        {country.music.map((p, i) => <p data-ct="music" data-idx={i} data-slug={country.slug} set:html={pick(enContent?.music, country.music, i)} />)}
       </div>
 
-      <h2 class="section__title" style="margin-top: 2.4rem; font-size: 1.7rem;" data-i18n="musiciansSection">音乐家及主要作品</h2>
+      <h2 class="section__title" style="margin-top: 2.4rem; font-size: 1.7rem;" data-i18n="musiciansSection">{t0.musiciansSection}</h2>
       <div class="musician-list">
         {musicians.map((m, i) => (
           <div class="musician">
@@ -142,15 +171,15 @@ const stationNotesBlobJson = JSON.stringify(stationNotesBlob).replace(/</g, '\\u
         ))}
       </div>
 
-      <h2 class="section__title" style="margin-top: 2.8rem; font-size: 1.7rem;" data-i18n="radiosSection">主要音乐电台</h2>
+      <h2 class="section__title" style="margin-top: 2.8rem; font-size: 1.7rem;" data-i18n="radiosSection">{t0.radiosSection}</h2>
 
-      <RadioPlayer client:load stations={playable} countryName={country.name} flag={country.flag} emptyNote={country.radioNote} slug={country.slug} />
+      <RadioPlayer client:load stations={playable} countryName={enName} flag={country.flag} emptyNote={enContent?.radioNote || country.radioNote} slug={country.slug} />
 
       {notableDescriptive.length > 0 && (
         <>
-          <div class="section__kicker" style="margin-top: 2.2rem;" data-i18n="radioIntroKicker">电台简介</div>
+          <div class="section__kicker" style="margin-top: 2.2rem;" data-i18n="radioIntroKicker">{t0.radioIntroKicker}</div>
           <p style="color: var(--ink-faint); font-size: 0.85rem; margin: 0.3rem 0 0.8rem;" data-i18n="radioNoStreamNote">
-            以下电台暂未收录可直接播放的在线流，仅作简介参考。
+            {t0.radioNoStreamNote}
           </p>
           <div class="radio-grid">
             {notableDescriptive.map(({ r, i }) => (
@@ -159,10 +188,10 @@ const stationNotesBlobJson = JSON.stringify(stationNotesBlob).replace(/</g, '\\u
                 <div class="radio-card__body">
                   <div class="radio-card__name">{r.name}</div>
                   <div class="radio-card__meta">
-                    <span class="radio-tag" data-ct="r-genre" data-idx={i} data-slug={country.slug}>{r.genre}</span>
-                    <span class="radio-tag radio-tag--muted" data-i18n="radioNoStreamTag">暂无在线流</span>
+                    <span class="radio-tag" data-ct="r-genre" data-idx={i} data-slug={country.slug}>{enContent?.radios?.[i]?.genre || r.genre}</span>
+                    <span class="radio-tag radio-tag--muted" data-i18n="radioNoStreamTag">{t0.radioNoStreamTag}</span>
                   </div>
-                  {r.note && <div style="font-size: 0.82rem; color: var(--ink-faint); line-height: 1.6; margin-top: 0.4rem;" data-ct="r-note" data-idx={i} data-slug={country.slug}>{r.note}</div>}
+                  {r.note && <div style="font-size: 0.82rem; color: var(--ink-faint); line-height: 1.6; margin-top: 0.4rem;" data-ct="r-note" data-idx={i} data-slug={country.slug}>{enContent?.radios?.[i]?.note || r.note}</div>}
                 </div>
               </div>
             ))}

@@ -11,11 +11,12 @@ export interface LangMeta {
   en: string;
 }
 
+// 顺序即切换器里的展示顺序：默认语言（英语）置顶，Cymraeg 紧随其后便于找到
 export const LANGS: LangMeta[] = [
-  { id: 'zh-CN', label: '简体中文', en: 'Simplified Chinese' },
-  { id: 'zh-TW', label: '繁體中文', en: 'Traditional Chinese' },
   { id: 'en', label: 'English', en: 'English' },
   { id: 'cy', label: 'Cymraeg', en: 'Welsh' },
+  { id: 'zh-CN', label: '简体中文', en: 'Simplified Chinese' },
+  { id: 'zh-TW', label: '繁體中文', en: 'Traditional Chinese' },
   { id: 'fr', label: 'Français', en: 'French' },
   { id: 'de', label: 'Deutsch', en: 'German' },
   { id: 'it', label: 'Italiano', en: 'Italian' },
@@ -61,6 +62,10 @@ export interface Translation {
   capitalLabel: string;
   wikiTitle: string;
   radioEmptyFallback: string;
+  radioPlaying: string;
+  radioVisitSite: string;
+  radioPlay: string;
+  radioPause: string;
   // 播放器状态与 HTTP 流标签
   httpTagHint: string;
   streamConnecting: string;
@@ -86,6 +91,8 @@ export interface Translation {
   authErrorFallback: string;
   // 留言板
   boardLabel: string;
+  boardPageDesc: string;
+  langHint: string;
   boardPlaceholder: string;
   boardPublishing: string;
   boardPublish: string;
@@ -187,6 +194,12 @@ const zhCN: Translation = {
   favCountUnit: '个电台',
   favAdd: '收藏',
   favRemove: '取消收藏',
+  boardPageDesc: '分享你此刻正在收听的国度与旋律，也看看其他乐友的足迹。',
+  langHint: '8 种语言，点这里切换',
+  radioPlaying: '正在播放',
+  radioVisitSite: '访问官网',
+  radioPlay: '播放',
+  radioPause: '暂停',
 };
 
 const zhTW: Translation = {
@@ -268,6 +281,12 @@ const zhTW: Translation = {
   favCountUnit: '個電台',
   favAdd: '收藏',
   favRemove: '取消收藏',
+  boardPageDesc: '分享你此刻正在收聽的國度與旋律，也看看其他樂友的足跡。',
+  langHint: '8 種語言，點這裡切換',
+  radioPlaying: '正在播放',
+  radioVisitSite: '造訪官網',
+  radioPlay: '播放',
+  radioPause: '暫停',
 };
 
 const en: Translation = {
@@ -309,6 +328,10 @@ const en: Translation = {
   capitalLabel: 'Capital',
   wikiTitle: 'Wikipedia',
   radioEmptyFallback: 'No online streams are available for this region yet. Stay tuned.',
+  radioPlaying: 'Now playing',
+  radioVisitSite: 'Visit the official site',
+  radioPlay: 'Play',
+  radioPause: 'Pause',
   httpTagHint: 'This station only offers an HTTP stream; it is relayed through our edge so it can play on this secure page.',
   streamConnecting: 'Connecting…',
   streamLost: 'The signal has drifted — the song cannot reach us right now.',
@@ -349,6 +372,8 @@ const en: Translation = {
   favCountUnit: 'stations',
   favAdd: 'Add to favorites',
   favRemove: 'Remove from favorites',
+  boardPageDesc: 'Share the country and the melody you are listening to right now — and see where other listeners have been.',
+  langHint: '8 languages — tap to switch',
 };
 
 const cy: Translation = {
@@ -390,6 +415,10 @@ const cy: Translation = {
   capitalLabel: 'Prifddinas',
   wikiTitle: 'Wicipedia',
   radioEmptyFallback: 'Nid oes ffrydiau ar-lein ar gael eto ar gyfer y rhanbarth hwn. Arhoswch am ragor.',
+  radioPlaying: 'Yn chwarae nawr',
+  radioVisitSite: 'Ewch i\'r wefan swyddogol',
+  radioPlay: 'Chwarae',
+  radioPause: 'Seibio',
   httpTagHint: 'Dim ond ffrwd HTTP sydd gan yr orsaf hon; caiff ei throsglwyddo trwy ein hymyl er mwyn iddi allu chwarae ar y dudalen ddiogel hon.',
   streamConnecting: 'Yn cysylltu…',
   streamLost: 'Mae\'r signal wedi crwydro — ni all y gân ein cyrraedd ar hyn o bryd.',
@@ -430,6 +459,8 @@ const cy: Translation = {
   favCountUnit: 'gorsaf',
   favAdd: 'Ychwanegu at ffefrynnau',
   favRemove: 'Tynnu o ffefrynnau',
+  boardPageDesc: 'Rhannwch y wlad a\'r alaw rydych yn gwrando arni nawr — a gwelwch ble mae gwrandawyr eraill wedi bod.',
+  langHint: '8 iaith — tapiwch i newid',
 };
 
 const fr: Translation = {
@@ -471,6 +502,10 @@ const fr: Translation = {
   capitalLabel: 'Capitale',
   wikiTitle: 'Wikipédia',
   radioEmptyFallback: 'Aucun flux en ligne n\'est encore disponible pour cette région. À bientôt.',
+  radioPlaying: 'En lecture',
+  radioVisitSite: 'Visiter le site officiel',
+  radioPlay: 'Écouter',
+  radioPause: 'Pause',
   httpTagHint: 'Cette station ne propose qu\'un flux HTTP ; il est relayé via notre périphérie pour être lu sur cette page sécurisée.',
   streamConnecting: 'Connexion…',
   streamLost: 'Le signal s\'est estompé — la chanson ne nous atteint plus pour l\'instant.',
@@ -511,6 +546,8 @@ const fr: Translation = {
   favCountUnit: 'stations',
   favAdd: 'Ajouter aux favoris',
   favRemove: 'Retirer des favoris',
+  boardPageDesc: 'Partagez le pays et la mélodie que vous écoutez en ce moment — et découvrez où sont passés les autres auditeurs.',
+  langHint: '8 langues — appuyez pour changer',
 };
 
 const de: Translation = {
@@ -552,6 +589,10 @@ const de: Translation = {
   capitalLabel: 'Hauptstadt',
   wikiTitle: 'Wikipedia',
   radioEmptyFallback: 'Für diese Region sind noch keine Online-Streams verfügbar. Bleiben Sie dran.',
+  radioPlaying: 'Läuft jetzt',
+  radioVisitSite: 'Offizielle Website besuchen',
+  radioPlay: 'Abspielen',
+  radioPause: 'Pause',
   httpTagHint: 'Dieser Sender bietet nur einen HTTP-Stream an; er wird über unsere Edge weitergeleitet, damit er auf dieser sicheren Seite abspielbar ist.',
   streamConnecting: 'Verbinde…',
   streamLost: 'Das Signal ist verweht — das Lied erreicht uns gerade nicht.',
@@ -592,6 +633,8 @@ const de: Translation = {
   favCountUnit: 'Sender',
   favAdd: 'Zu Favoriten hinzufügen',
   favRemove: 'Aus Favoriten entfernen',
+  boardPageDesc: 'Teilen Sie das Land und die Melodie, die Sie gerade hören — und sehen Sie, wo andere Hörer waren.',
+  langHint: '8 Sprachen — zum Wechseln tippen',
 };
 
 const it: Translation = {
@@ -633,6 +676,10 @@ const it: Translation = {
   capitalLabel: 'Capitale',
   wikiTitle: 'Wikipedia',
   radioEmptyFallback: 'Non sono ancora disponibili flussi online per questa regione. A presto.',
+  radioPlaying: 'In riproduzione',
+  radioVisitSite: 'Visita il sito ufficiale',
+  radioPlay: 'Riproduci',
+  radioPause: 'Pausa',
   httpTagHint: 'Questa emittente offre solo un flusso HTTP; viene inoltrato attraverso il nostro edge per poterlo ascoltare su questa pagina sicura.',
   streamConnecting: 'Connessione…',
   streamLost: 'Il segnale si è affievolito — la canzone non ci raggiunge in questo momento.',
@@ -673,6 +720,8 @@ const it: Translation = {
   favCountUnit: 'stazioni',
   favAdd: 'Aggiungi ai preferiti',
   favRemove: 'Rimuovi dai preferiti',
+  boardPageDesc: 'Condividi il paese e la melodia che stai ascoltando adesso — e scopri dove sono stati gli altri ascoltatori.',
+  langHint: '8 lingue — tocca per cambiare',
 };
 
 const es: Translation = {
@@ -714,6 +763,10 @@ const es: Translation = {
   capitalLabel: 'Capital',
   wikiTitle: 'Wikipedia',
   radioEmptyFallback: 'Aún no hay flujos en línea disponibles para esta región. Próximamente.',
+  radioPlaying: 'Reproduciendo',
+  radioVisitSite: 'Visitar el sitio oficial',
+  radioPlay: 'Reproducir',
+  radioPause: 'Pausar',
   httpTagHint: 'Esta emisora solo ofrece un flujo HTTP; se retransmite a través de nuestro edge para que suene en esta página segura.',
   streamConnecting: 'Conectando…',
   streamLost: 'La señal se ha desvanecido — la canción no nos alcanza ahora mismo.',
@@ -754,6 +807,8 @@ const es: Translation = {
   favCountUnit: 'emisoras',
   favAdd: 'Añadir a favoritos',
   favRemove: 'Quitar de favoritos',
+  boardPageDesc: 'Comparte el país y la melodía que estás escuchando ahora mismo, y descubre por dónde han pasado otros oyentes.',
+  langHint: '8 idiomas — toca para cambiar',
 };
 
 export const TRANSLATIONS: Record<Lang, Translation> = {
@@ -849,15 +904,23 @@ export const SUBREGION_LABELS: Record<Lang, Record<SubregionId, string>> = {
 
 const STORAGE_KEY = 'mr_lang';
 
+/**
+ * 站点默认语言：**英语**。
+ *
+ * 无论访客来自哪里、浏览器/系统是什么语言，首次进入看到的界面都是英语；
+ * 只有当访客**主动**在语言切换器里选过语言之后，才会按 localStorage 记住的选择显示。
+ * （静态 HTML 也已用同一语言预渲染，见下方的 `t0`，因此首屏不会出现语言闪烁。）
+ */
+export const DEFAULT_LANG: Lang = 'en';
+
+/** 静态 HTML 预渲染所用文案（即默认语言）；.astro 模板里的初始文案统一取自它 */
+export const t0: Translation = TRANSLATIONS[DEFAULT_LANG];
+
 export function getInitialLang(): Lang {
-  if (typeof window === 'undefined') return 'zh-CN';
+  if (typeof window === 'undefined') return DEFAULT_LANG;
   const saved = window.localStorage.getItem(STORAGE_KEY);
   if (saved && saved in TRANSLATIONS) return saved as Lang;
-  const nav = window.navigator.language;
-  if (nav && nav.toLowerCase().startsWith('zh')) {
-    return nav.toLowerCase().includes('tw') || nav.toLowerCase().includes('hk') ? 'zh-TW' : 'zh-CN';
-  }
-  return 'zh-CN';
+  return DEFAULT_LANG;
 }
 
 export function saveLang(lang: Lang) {
@@ -896,7 +959,7 @@ export function readRecentUserLangChange(maxAgeMs = 15000): Lang | null {
   return r.lang;
 }
 
-/** 读取当前生效语言：优先 DOM 上的 lang 属性，其次 localStorage，最后默认 zh-CN */
+/** 读取当前生效语言：优先 DOM 上的 lang 属性，其次 localStorage，最后默认语言（英语） */
 export function getCurrentLang(): Lang {
   if (typeof document !== 'undefined') {
     const dom = document.documentElement.getAttribute('lang') as Lang | null;
@@ -905,7 +968,7 @@ export function getCurrentLang(): Lang {
   return getInitialLang();
 }
 
-/** 取某语言文案（缺失时回退 zh-CN） */
+/** 取某语言文案（缺失时回退默认语言 = 英语） */
 export function getTranslation(lang: Lang): Translation {
-  return TRANSLATIONS[lang] || TRANSLATIONS['zh-CN'];
+  return TRANSLATIONS[lang] || TRANSLATIONS[DEFAULT_LANG];
 }

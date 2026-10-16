@@ -254,6 +254,101 @@ p {
 }
 
 /* --------------------------------------------------------------------------
+   「语言可以切换」的可见标识
+   —— 站点默认界面是英语，多数访客（包括 Marie）不会主动去找语言切换器。
+   三层得体、不喧宾夺主的信号：
+     ① 从未选过语言时，切换器外圈有一圈极轻的金色呼吸光（<html class="mr-lang-fresh"> 控制）；
+     ② 右上角一颗脉动的小金点；
+     ③ 首屏稳定后出现一次性的轻提示条（文案见 i18n 的 langHint，逻辑见 LanguageSwitcher.tsx）。
+   -------------------------------------------------------------------------- */
+.lang-switcher-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.lang-switcher__dot {
+  display: none;
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 2px var(--paper);
+  pointer-events: none;
+}
+html.mr-lang-fresh .lang-switcher__dot {
+  display: block;
+  animation: lang-dot 2.6s ease-in-out infinite;
+}
+html.mr-lang-fresh .lang-switcher {
+  border-color: var(--gold);
+  animation: lang-ring 3.4s ease-in-out infinite;
+}
+@keyframes lang-dot {
+  0%,
+  100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.55); opacity: 1; }
+}
+@keyframes lang-ring {
+  0%,
+  100% { box-shadow: 0 0 0 3px rgba(176, 137, 58, 0.08); }
+  50% { box-shadow: 0 0 0 6px rgba(176, 137, 58, 0.18); }
+}
+.lang-switcher__tip {
+  position: absolute;
+  top: calc(100% + 11px);
+  right: 0;
+  z-index: 60;
+  white-space: nowrap;
+  padding: 0.42rem 0.75rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.76rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  animation: tip-in 0.45s ease-out both;
+}
+.lang-switcher__tip-arrow {
+  position: absolute;
+  top: -4px;
+  right: 22px;
+  width: 8px;
+  height: 8px;
+  background: var(--ink);
+  transform: rotate(45deg);
+  border-radius: 1px;
+}
+@keyframes tip-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 🎂 「再放一次生日惊喜」按钮 —— 只在见过彩蛋的访客页面上出现，
+   与语言无关：点一次就把整场庆祝从头重放一次（理由见 MarieReplayButton.tsx） */
+.site-nav .marie-replay {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  border: 1px solid rgba(176, 137, 58, 0.5);
+  background: linear-gradient(135deg, #fffdf6, #fff5e0);
+  color: var(--gold-deep);
+  font-weight: 600;
+}
+.site-nav .marie-replay:hover {
+  border-color: var(--gold);
+  background: var(--gold-pale);
+  color: var(--gold-deep);
+}
+.marie-replay__cake {
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
    首页 Hero
    -------------------------------------------------------------------------- */
 .hero {
@@ -716,6 +811,17 @@ p {
   color: var(--ink-faint);
   margin-bottom: 0.5rem;
 }
+/* 静态 HTML 以英语预渲染（主名字已是英文名），此时「英文名」那一行是重复的；
+   在非中文界面下隐藏它。水合后由 LanguageSwitcher.applyLabels 的
+   data-hide-langs 接管（inline style 优先级高于本规则，两者结论一致）。 */
+html[lang='en'] .musician__en,
+html[lang='cy'] .musician__en,
+html[lang='fr'] .musician__en,
+html[lang='de'] .musician__en,
+html[lang='it'] .musician__en,
+html[lang='es'] .musician__en {
+  display: none;
+}
 .musician__role {
   display: inline-block;
   font-size: 0.75rem;
@@ -737,6 +843,18 @@ p {
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1rem;
   margin-top: 1.4rem;
+}
+/* 首页「🎂 Marie's Jukebox」区块：6 张卡固定三列 = 两行 × 每行三个，视觉对称。
+   国家详情页里注入的同一批卡片仍走上面的 auto-fill 网格（和其它电台混排，不该被固定列数）。
+   用 id 提高优先级，避免被 .radio-grid 在窄屏的 1fr 规则覆盖。 */
+#marie-jukebox .radio-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media (max-width: 920px) {
+  #marie-jukebox .radio-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  #marie-jukebox .radio-grid { grid-template-columns: minmax(0, 1fr); }
 }
 .radio-card {
   display: flex;
@@ -1472,6 +1590,10 @@ p {
     font-size: 0.85rem;
   }
   .lang-switcher { padding: 0.24rem 0.5rem 0.24rem 0.6rem; }
+  /* 窄屏导航一行放不下太多胶囊：🎂 按钮只留图标，提示条贴左侧避免溢出屏幕 */
+  .marie-replay__text { display: none; }
+  .lang-switcher__tip { right: auto; left: 0; }
+  .lang-switcher__tip-arrow { right: auto; left: 16px; }
 
   /* Hero 与国别标题适度缩小，避免长文案/长国名溢出 */
   .hero { padding: 3rem 0 2.4rem; }

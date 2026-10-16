@@ -8,6 +8,7 @@ import {
   MARIE_STATIONS,
   isJukeboxActive,
   isMarieId,
+  isMarieLang,
   isMarieStationCurrent,
   marieBlurb,
   subscribe as subscribeMarie,
@@ -31,6 +32,8 @@ export interface Station {
   blurb?: string;
   /** note 在 notableRadios 中的原始下标（用于 content-blob 的多语言对齐） */
   noteIdx?: number;
+  /** genre 在 notableRadios 中的原始下标（用于 content-blob 的多语言对齐） */
+  genreIdx?: number;
   /** 采集电台简介的索引键（流地址 url，用于 station-notes-blob 的多语言对齐） */
   noteKey?: string;
 }
@@ -43,6 +46,34 @@ interface Props {
   emptyNote?: string;
   /** 国家 slug（用于无在线流提示的正文多语言切换） */
   slug?: string;
+}
+
+// 正文多语言 blob（与服务端 <script id="content-blob"> 同源）：
+// 精选电台的「流派」标签（如「古典 / 爵士」）是中文数据，静态 HTML 里给的是英语，
+// 用户切到中文后需要再换回来 —— 复用同一份 blob 即可，无需额外的数据文件。
+type ContentBlob = Record<string, Record<string, { radios?: { genre?: string; note?: string }[] }>>;
+let cachedBlob: ContentBlob | null = null;
+
+function readBlob(): ContentBlob | null {
+  if (cachedBlob) return cachedBlob;
+  // 服务端预渲染时没有 document：此时一律用静态值（已是英语），
+  // 客户端水合后才会读 blob 做多语言切换。
+  if (typeof document === 'undefined') return null;
+  const el = document.getElementById('content-blob');
+  if (!el) return null;
+  try {
+    cachedBlob = JSON.parse(el.textContent || '{}') as ContentBlob;
+  } catch {
+    cachedBlob = null;
+  }
+  return cachedBlob;
+}
+
+/** 取某电台在指定语言下的流派文本；没有多语言数据时回退到静态值 */
+function resolveGenre(lang: Lang, slug: string | undefined, s: Station): string | undefined {
+  if (s.genreIdx === undefined || !slug) return s.tags;
+  const v = readBlob()?.[lang]?.[slug]?.radios?.[s.genreIdx]?.genre;
+  return v || s.tags;
 }
 
 function PlayIcon() {
@@ -116,14 +147,15 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
   void favTick;
 
   // 生日彩蛋注入的精选集插在**最顶部**（不再参与收藏排序）：
-  // 第 1 张是默认台，其余 4 张是给 Marie 的备选推荐
+  // 第 1 张是默认台，其余 5 张是给 Marie 的备选推荐。
+  // 语言门控：只在英语 / 威尔士语下出现（与首页 MarieJukebox 区块一致）。
   const marieStations: Station[] = MARIE_STATIONS;
-  const list: Station[] = jukeboxOn ? [...marieStations, ...ordered] : ordered;
+  const list: Station[] = jukeboxOn && isMarieLang(lang) ? [...marieStations, ...ordered] : ordered;
 
   if (!list.length) {
     return (
       <p className="empty" style={{ marginTop: '1.4rem' }} data-ct="radioNote" data-slug={slug} data-i18n="radioEmptyFallback">
-        {emptyNote || '暂未收录该地区的在线电台流，敬请期待。'}
+        {emptyNote || t.radioEmptyFallback}
       </p>
     );
   }
@@ -144,7 +176,8 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
           const isMariePrimary = s.id === MARIE_JUKEBOX_ID;
           const isCurrent = isCurrentStation(s);
           const isPlayingNow = isCurrent && playing;
-          const tags = (s.tags || '')
+          const rawTags = resolveGenre(lang, slug, s) || '';
+          const tags = rawTags
             .split(',')
             .map((t) => t.trim())
             .filter(Boolean)
@@ -159,8 +192,8 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
               <button
                 className="radio-card__play"
                 onClick={() => (isMarie ? void toggleMarieStation(s as MarieStation) : play(s.url, s.hls))}
-                aria-label={isPlayingNow ? `暂停 ${s.name}` : `播放 ${s.name}`}
-                title={isPlayingNow ? '暂停' : '播放'}
+                aria-label={isPlayingNow ? `${t.radioPause} ${s.name}` : `${t.radioPlay} ${s.name}`}
+                title={isPlayingNow ? t.radioPause : t.radioPlay}
               >
                 {isPlayingNow ? <PauseIcon /> : <PlayIcon />}
               </button>
@@ -171,7 +204,7 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
                     href={s.homepage}
                     target="_blank"
                     rel="noopener noreferrer"
-                    title={`${s.name} · 访问官网`}
+                    title={`${s.name} · ${t.radioVisitSite}`}
                     onClick={(e) => e.stopPropagation()}
                   >
                     {s.name}
@@ -184,7 +217,7 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
                 <div className="radio-card__meta">
                   {isPlayingNow ? (
                     <span className="radio-card__live">
-                      <Eq /> 正在播放
+                      <Eq /> {t.radioPlaying}
                     </span>
                   ) : (
                     <span className="radio-card__live">LIVE</span>
@@ -217,7 +250,7 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
                 station={{
                   url: s.url,
                   name: s.name,
-                  genre: s.tags,
+                  genre: rawTags,
                   // 生日彩蛋注入的台不属于任何国家，避免被误标成当前国家
                   country: isMarie ? 'Marie · 80' : countryName,
                   countrySlug: isMarie ? undefined : slug,

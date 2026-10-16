@@ -1,9 +1,11 @@
 // 「🎂 Marie's Jukebox」首页置顶区块。
 //
-// 仅在生日彩蛋被触发过（本次会话内）才渲染；国家详情页里的同名精选集由 RadioPlayer 注入。
+// 仅在生日彩蛋被触发过（本次会话内）**且当前语言是英语/威尔士语**时才渲染；
+// 国家详情页里的同名精选集由 RadioPlayer 注入（同样受语言门控，见 isMarieLang）。
 // 首页本来没有「电台列表」，所以这里单独给一个置顶区块，保证用户在首页也能看到并点播它们。
 //
-// 内容 = MARIE_STATIONS：第 1 张是默认台（1940 年代老歌），其余 4 张是备选推荐。
+// 内容 = MARIE_STATIONS：第 1 张是默认台（1940 年代老歌），其余 5 张是备选推荐。
+// 共 6 台，配合 .radio-grid--marie 的三列网格 = 「两行 × 每行三个」。
 //
 // ⚠️ 包体约束：不静态 import `../lib/audio`（内含 hls.js 577KB）。只有在该区块真正出现后
 // （即彩蛋已被触发），才惰性加载音频模块来订阅播放状态。
@@ -11,6 +13,7 @@ import { useEffect, useState } from 'react';
 import {
   MARIE_STATIONS,
   isJukeboxActive,
+  isMarieLang,
   isMarieStationCurrent,
   marieBlurb,
   subscribe,
@@ -49,8 +52,6 @@ export default function MarieJukebox() {
   const [playing, setPlaying] = useState(false);
   const [lang, setLang] = useState<Lang>(() => getInitialLang());
 
-  const isZh = lang.toLowerCase().startsWith('zh');
-
   useEffect(() => {
     const refresh = () => setActive(isJukeboxActive());
     refresh();
@@ -64,7 +65,7 @@ export default function MarieJukebox() {
   }, []);
 
   useEffect(() => {
-    if (!active) return;
+    if (!active || !isMarieLang(lang)) return;
     let cancelled = false;
     let off: (() => void) | null = null;
     import('../lib/audio')
@@ -82,9 +83,10 @@ export default function MarieJukebox() {
       cancelled = true;
       off?.();
     };
-  }, [active]);
+  }, [active, lang]);
 
-  if (!active) return null;
+  // 语言门控：只在英语 / 威尔士语下出现（Marie 的私人礼物，不打扰其它语言界面）
+  if (!active || !isMarieLang(lang)) return null;
 
   return (
     <section className="section" id="marie-jukebox" style={{ paddingTop: '2.4rem', paddingBottom: '0.4rem' }}>
@@ -94,18 +96,13 @@ export default function MarieJukebox() {
             <div className="section__kicker">Happy 80th, Marie</div>
             <h2 className="section__title">🎂 Marie's Jukebox</h2>
           </div>
-          <span style={{ color: 'var(--ink-faint)' }}>
-            {MARIE_STATIONS.length} stations · {isZh ? '挑一个试试' : 'pick any one'}
-          </span>
         </div>
 
         <p className="marie-intro">
-          {isZh
-            ? '除了默认的 1940 年代老歌台，这里还有另外几个为你挑的备选 —— 随便点开哪个都行。'
-            : 'Besides the default 1940s jukebox, here are a few more I picked for you — tap whichever you like.'}
+          Echoes of 1946: A dedicated collection of vintage melodies and classic jazz.
         </p>
 
-        <div className="radio-grid">
+        <div className="radio-grid radio-grid--marie">
           {MARIE_STATIONS.map((s: MarieStation) => {
             const isPrimary = s.id === MARIE_STATIONS[0].id;
             const playingNow = isMarieStationCurrent(s, currentUrl) && playing;
@@ -119,8 +116,8 @@ export default function MarieJukebox() {
                 <button
                   className="radio-card__play"
                   onClick={() => void toggleMarieStation(s)}
-                  aria-label={playingNow ? `暂停 ${s.name}` : `播放 ${s.name}`}
-                  title={playingNow ? '暂停' : '播放'}
+                  aria-label={playingNow ? `Pause ${s.name}` : `Play ${s.name}`}
+                  title={playingNow ? 'Pause' : 'Play'}
                 >
                   {playingNow ? <PauseIcon /> : <PlayIcon />}
                 </button>
@@ -130,14 +127,14 @@ export default function MarieJukebox() {
                     href={s.homepage}
                     target="_blank"
                     rel="noopener noreferrer"
-                    title={`${s.name} · 访问官网`}
+                    title={`${s.name} · Visit the official site`}
                   >
                     {s.name}
                   </a>
                   <div className="radio-card__meta">
                     {playingNow ? (
                       <span className="radio-card__live">
-                        <Eq /> 正在播放
+                        <Eq /> Now playing
                       </span>
                     ) : (
                       <span className="radio-card__live">LIVE</span>

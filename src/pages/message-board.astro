@@ -1,17 +1,21 @@
 ---
 import Base from '../layouts/Base.astro';
 import MessageBoard from '../components/MessageBoard.tsx';
+import { t0 } from '../lib/i18n';
+
+const title = t0.navGuestbook;
+const description = t0.boardPageDesc;
 ---
 
-<Base title="留言板" description="分享你的听乐感悟——世界音乐电台巡礼留言板">
+<Base title={title} description={description}>
   <section class="section" style="padding-top: clamp(2.5rem, 6vw, 4rem);">
     <div class="container container--narrow">
       <div class="section__head">
         <div>
           <div class="section__kicker">Guestbook</div>
-          <h1 class="section__title">留言板</h1>
-          <p style="color: var(--ink-soft); margin-top: 0.5rem;">
-            分享你此刻正在收听的国度与旋律，也看看其他乐友的足迹。
+          <h1 class="section__title" data-i18n="navGuestbook">{t0.navGuestbook}</h1>
+          <p style="color: var(--ink-soft); margin-top: 0.5rem;" data-i18n="boardPageDesc">
+            {t0.boardPageDesc}
           </p>
         </div>
       </div>

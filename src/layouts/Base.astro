@@ -3,7 +3,8 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import BirthdayEgg from '../components/BirthdayEgg.tsx';
-import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from '../lib/config';
+import { SITE_NAME, SITE_URL } from '../lib/config';
+import { t0 } from '../lib/i18n';
 
 interface Props {
   title?: string;
@@ -11,29 +12,36 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
-const fullTitle = title ? `${title} · ${SITE_NAME}` : `${SITE_NAME} · 世界音乐电台巡礼`;
-const desc = description || SITE_DESCRIPTION;
+// 静态 HTML 一律以**默认语言（英语）**预渲染，与 i18n 的 DEFAULT_LANG 保持一致：
+// 首屏不会出现「先中文再跳英语」的闪烁，任何人从任何地方首次进入看到的都是英语。
+const fullTitle = title ? `${title} · ${SITE_NAME}` : `${SITE_NAME} · World Music Radio`;
+const desc = description || t0.heroDesc;
 ---
 
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script is:inline>
       // 语言初始化 + 「水合竞速」防护：
-      // ① 尽早按 localStorage 设置 <html lang>，避免 SSR 中文 → 用户已选语言的错位与闪烁；
+      // ① 尽早按 localStorage 设置 <html lang>，避免 SSR 英语 → 用户已选语言的错位与闪烁；
+      //    没有存过语言（首次来访）就保持默认的 en。
       // ② React 岛（LanguageSwitcher）水合完成之前，用户若已在切换器里选了语言，
       //    原生 change 监听器会先把选择落盘并暂存 —— 否则这次选择会被水合时的
       //    初始 state 静默覆盖（表现为：切换器显示新语言，但页面文案没跟着变）。
       (function () {
-        var LANGS = ['zh-CN', 'zh-TW', 'en', 'cy', 'fr', 'de', 'it', 'es'];
+        var LANGS = ['en', 'cy', 'zh-CN', 'zh-TW', 'fr', 'de', 'it', 'es'];
+        var DEFAULT = 'en';
+        var saved = null;
         try {
-          var s = window.localStorage.getItem('mr_lang');
-          if (s && LANGS.indexOf(s) >= 0) {
-            document.documentElement.setAttribute('lang', s);
-          }
+          saved = window.localStorage.getItem('mr_lang');
         } catch (e) {}
+        var ok = saved && LANGS.indexOf(saved) >= 0;
+        document.documentElement.setAttribute('lang', ok ? saved : DEFAULT);
+        // 从没选过语言的访客：给语言切换器挂一个「可切换」的呼吸标识
+        // （用 class 而非 React state，首屏即可显示，不依赖水合）
+        if (!ok) document.documentElement.classList.add('mr-lang-fresh');
 
         // 捕获阶段监听：早于 React 的合成事件处理器执行
         document.addEventListener(
@@ -47,6 +55,7 @@ const desc = description || SITE_DESCRIPTION;
               window.localStorage.setItem('mr_lang', lang);
             } catch (e) {}
             document.documentElement.setAttribute('lang', lang);
+            document.documentElement.classList.remove('mr-lang-fresh');
             if (window.__mrLangReady) return; // 已水合：后续交给 LanguageSwitcher.onChange
             window.__mrLangPending = lang; // 暂存，水合时由 LanguageSwitcher 采纳
             // 同步记录「用户主动切换」动作：晚于本监听器挂载的岛（如水合较晚的
@@ -66,7 +75,7 @@ const desc = description || SITE_DESCRIPTION;
     <meta property="og:description" content={desc} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE_NAME} />
-    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:locale" content="en_US" />
   </head>
   <body>
     <Header />

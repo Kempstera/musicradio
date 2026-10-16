@@ -6,7 +6,11 @@
 //  2) **电台精选集**（MARIE_STATIONS）：会话级常驻。一旦激活，本次会话内**跨页面导航**
 //     （本站是 MPA，每次跳转都是全新文档）依然出现在电台列表最顶部，直到关闭标签页。
 //     用 sessionStorage 承载。
-//  3) 第 1 个是默认台（1940 年代老歌），其余 4 个是给 Marie 的备选推荐，点哪个听哪个。
+//  3) 第 1 个是默认台（1940 年代老歌），其余 5 个是给 Marie 的备选推荐，点哪个听哪个。
+//     共 6 台 = 首页精选集「两行 × 每行三个」。
+//
+// ⚠️ 精选集**只在英语 / 威尔士语**下渲染（见 isMarieLang）：
+// 其它语言下首页区块、国家页置顶卡片、页头 🎂 入口全部不出现。
 //
 // 注意：本模块**不静态 import** `./audio`（该模块含 577KB 的 hls.js）。
 // 需要它的只有「真正开播」这一步，因此播放相关函数一律惰性加载，
@@ -19,7 +23,8 @@
 //   ├ Angel Radio (UK)   https://edge.clrmedia.co.uk/angel_hb            MP3 96
 //   ├ Swing Street (US)  http://s6.voscast.com:11312/                    MP3 128（http → 白名单）
 //   ├ FIP (FR)           https://icecast.radiofrance.fr/fip-midfi.mp3    MP3 128
-//   └ JAZZ24 (US)        https://knkx-live-a.edge.audiocdn.com/6285_256k AAC 256
+//   ├ JAZZ24 (US)        https://knkx-live-a.edge.audiocdn.com/6285_256k AAC 256
+//   └ Serenade Radio UK  http://4534.cloudrad.io:8284/                   MP3 192（http → 白名单）
 export const BIRTHDAY_OVERTURE_SRC = '/marie-birthday-song.mp3';
 
 export const MARIE_JUKEBOX_ID = 'marie-jukebox-1946';
@@ -107,10 +112,33 @@ export const MARIE_STATIONS: MarieStation[] = [
     blurb: "From Seattle's KNKX — classic and contemporary jazz, twenty-four hours a day.",
     blurbZh: '来自西雅图 KNKX —— 经典与当代爵士，一天 24 小时不间断。',
   },
+  {
+    id: 'marie-serenade',
+    name: 'Serenade Radio UK',
+    url: 'http://4534.cloudrad.io:8284/',
+    hls: false,
+    codec: 'MP3',
+    bitrate: 192,
+    tags: 'UK,Easy Listening,Standards',
+    homepage: 'https://www.serenade-radio.com/',
+    blurb:
+      'The best in easy listening — standards, big bands and crooners of the 40s, 50s and 60s, and not a single advert.',
+    blurbZh: '英国轻松聆听名台 —— 40/50/60 年代的标准曲、大乐队与低吟歌手，全程无广告。',
+  },
 ];
 
 /** 默认台（精选集第一项），保留旧引用名 */
 export const MARIE_JUKEBOX: MarieStation = MARIE_STATIONS[0];
+
+/**
+ * 生日精选集只在**英语与威尔士语**下出现。
+ * 理由：这是一份写给 Marie 的、以英语命名的私人礼物，混在其它语言界面里既不协调也喧宾夺主。
+ * 其它语言下整块内容（首页区块 / 国家页置顶卡片 / 页头 🎂 入口）一律不渲染。
+ */
+export function isMarieLang(lang: string): boolean {
+  const l = (lang || '').toLowerCase();
+  return l === 'en' || l === 'cy';
+}
 
 const MARIE_ID_SET = new Set(MARIE_STATIONS.map((s) => s.id));
 
@@ -160,7 +188,33 @@ export function isJukeboxActive(): boolean {
   return active;
 }
 
+// —— 「她来过」的长期标记 ————————————————————————————————
+// 只要彩蛋被触发过一次，就在 localStorage 里留一枚脚印。之后（跨会话、跨页面、
+// 即使她后来把界面切回英语）她都能在页头看到一个 🎂 入口，一点即重放。
+// 没触发过彩蛋的普通访客永远看不到这个按钮。
+const SEEN_KEY = 'mr_marie_seen';
+
+export function markMarieSeen(): void {
+  try {
+    window.localStorage.setItem(SEEN_KEY, '1');
+  } catch {
+    /* 隐私模式下可能不可写 */
+  }
+}
+
+export function isMarieKnown(): boolean {
+  try {
+    return typeof window !== 'undefined' && window.localStorage.getItem(SEEN_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
 export function activateJukebox(): void {
+  // 先落「她来过」的脚印，再判断是否需要注入电台列表。
+  // 顺序很重要：同一会话内第二次触发彩蛋时 active 已为 true，若把 markMarieSeen()
+  // 放在提前返回之后，就会漏记（曾导致「清掉 localStorage 后再触发，页头 🎂 按钮不出现」）。
+  markMarieSeen();
   if (active) return;
   active = true;
   try {
@@ -174,6 +228,39 @@ export function activateJukebox(): void {
 export function subscribe(fn: () => void): () => void {
   listeners.add(fn);
   return () => listeners.delete(fn);
+}
+
+// —— 「从头再来一次」：手动重播彩蛋 ————————————————————————
+// 为什么需要它：把语言切换器的 value 设成「已经是」的那个值不会派发 change 事件，
+// 而且 iOS/Safari 的原生选择器根本不给 <option> 派发任何 DOM 事件。
+// 所以只要 Marie 已经在威尔士语页面，她再点一次「Cymraeg」是检测不到的。
+// 结论：给她一个**永远可点**的入口（🎂 按钮），每次点击都把整场庆祝从头重放一遍。
+export const MARIE_REPLAY_EVENT = 'mr:marie-replay';
+
+declare global {
+  interface Window {
+    /** 最近一次「重放彩蛋」请求的时间戳（供水合较晚的岛补查） */
+    __mrMarieReplayAt?: number;
+  }
+}
+
+/** 请求把生日彩蛋从头重放一次（不论当前是否已在庆祝、不论当前语言） */
+export function requestMarieReplay(): void {
+  if (typeof window === 'undefined') return;
+  window.__mrMarieReplayAt = Date.now();
+  window.dispatchEvent(new Event(MARIE_REPLAY_EVENT));
+}
+
+/** 读取「刚刚是否有人请求重放彩蛋」（用于岛挂载晚于点击时的补触发） */
+export function readRecentMarieReplay(maxAgeMs = 10000): boolean {
+  if (typeof window === 'undefined') return false;
+  const at = window.__mrMarieReplayAt;
+  return typeof at === 'number' && Date.now() - at <= maxAgeMs;
+}
+
+/** 消费掉重放请求标记（避免同一请求被补触发两次） */
+export function clearMarieReplay(): void {
+  if (typeof window !== 'undefined') window.__mrMarieReplayAt = undefined;
 }
 
 // —— 播放控制（音频模块惰性加载）——————————————————————————

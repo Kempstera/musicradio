@@ -4,7 +4,14 @@
 //   ③ 序曲播完（onended）后自动切到「🎂 Marie's 1946 Jukebox」并开播
 //   ④ 视觉特效持续 20 秒后优雅淡出并从 DOM 移除，序曲/电台继续在后台播放
 //
-// 触发信号：LANG_USER_CHANGE_EVENT（仅「用户主动切换」时派发，不含初始化 / bfcache 恢复）。
+// 触发信号（两者等价，且**都可以重复触发**）：
+//   · LANG_USER_CHANGE_EVENT  —— 用户在语言切换器里选了 Cymraeg
+//   · MARIE_REPLAY_EVENT      —— 页头的 🎂 按钮被点（见 MarieReplayButton.tsx）
+//
+// 「重复触发」为什么要支持：原生 <select> 在「选中的就是当前那一项」时不会派发 change，
+// iOS/Safari 的原生选择器更是不给 <option> 派发任何 DOM 事件。所以只要 Marie 已经在
+// 威尔士语页面，她再点一次「Cymraeg」在 Web 上是检测不到的。给她一个永远可点的 🎂 入口，
+// 每次点击都把整场庆祝（音乐 + 烟花 + 文字）从头重放一遍。
 //
 // ⚠️ 包体约束：`../lib/audio` 内含 hls.js（577KB），**不能静态 import**，
 // 否则会把整个分包塞进所有页面。故只在挂载后 800ms 空闲预热、并把模块引用缓存下来，
@@ -12,7 +19,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { LANG_USER_CHANGE_EVENT, readRecentUserLangChange } from '../lib/i18n';
 import type { Lang } from '../lib/i18n';
-import { BIRTHDAY_OVERTURE_SRC, activateJukebox, startJukebox } from '../lib/marie';
+import {
+  BIRTHDAY_OVERTURE_SRC,
+  MARIE_REPLAY_EVENT,
+  activateJukebox,
+  clearMarieReplay,
+  readRecentMarieReplay,
+  startJukebox,
+} from '../lib/marie';
 
 type ConfettiFn = typeof import('canvas-confetti');
 type AudioMod = typeof import('../lib/audio');
@@ -58,13 +72,17 @@ function runFireworks(confetti: ConfettiFn): () => void {
 export default function BirthdayEgg() {
   const [visible, setVisible] = useState(false);
   const [closing, setClosing] = useState(false);
+  // 每轮庆祝递增一次，作为叠加层的 key —— 强制 React 重建节点，
+  // 这样连点重播时入场动画（bd-egg-in）也会跟着从头播一遍
+  const [runId, setRunId] = useState(0);
 
   const runningRef = useRef(false);
   const aliveRef = useRef(true);
   const audioRef = useRef<AudioMod | null>(null);
   const stopFireworksRef = useRef<(() => void) | null>(null);
   const confettiRef = useRef<ConfettiFn | null>(null);
-  const timersRef = useRef<number[]>([]);
+  const timersRef = useRef<number[]>([]); // 模块预热等「一生只跑一次」的定时器
+  const celebTimersRef = useRef<number[]>([]); // 单轮庆祝的定时器（重播时整组作废）
   const gestureRetryRef = useRef(false);
   const gestureCleanupRef = useRef<(() => void) | null>(null);
 
@@ -73,6 +91,8 @@ export default function BirthdayEgg() {
     const clearTimers = () => {
       timersRef.current.forEach((t) => window.clearTimeout(t));
       timersRef.current = [];
+      celebTimersRef.current.forEach((t) => window.clearTimeout(t));
+      celebTimersRef.current = [];
     };
 
     // 预热音频模块：该模块含 hls.js（较重），故不静态引入、空闲时再静默加载。
@@ -117,8 +137,8 @@ export default function BirthdayEgg() {
       gestureCleanupRef.current = detach;
     };
 
-    // ① 立即停掉正在播放的电台（playOverture 内部会销毁 hls 实例并接管 <audio>），
-    //    改为播放本地生日序曲；播完由 onOvertureEnd 接手
+    // ① 立即停掉正在播放的电台（playOverture 内部会销毁 hls 实例并接管 <audio>，
+    //    且会把播放头复位到 0），改为播放本地生日序曲；播完由 onOvertureEnd 接手
     const startOverture = () => {
       const begin = (m: AudioMod) => {
         m.playOverture(BIRTHDAY_OVERTURE_SRC, onOvertureEnd).catch(armGestureRetry);
@@ -137,8 +157,26 @@ export default function BirthdayEgg() {
       }
     };
 
+    /** 把上一轮庆祝整体复位（清定时器 / 停烟花 / 清画布 / 撤一次性手势监听） */
+    const resetCelebration = () => {
+      celebTimersRef.current.forEach((t) => window.clearTimeout(t));
+      celebTimersRef.current = [];
+      stopFireworksRef.current?.();
+      stopFireworksRef.current = null;
+      try {
+        confettiRef.current?.reset();
+      } catch {
+        /* noop */
+      }
+      gestureCleanupRef.current?.();
+      runningRef.current = false;
+      setVisible(false);
+      setClosing(false);
+    };
+
     const trigger = () => {
-      if (runningRef.current) return; // 正在庆祝，忽略重复触发
+      // 已在庆祝中（Marie 连点🎂 / 先切语言又点按钮）→ 先复位，保证「从头再激活一次」
+      if (runningRef.current) resetCelebration();
       runningRef.current = true;
 
       // ① 立刻把「🎂 Marie's 1946 Jukebox」注入电台列表（会话级常驻）
@@ -147,9 +185,10 @@ export default function BirthdayEgg() {
       // ② 停当前电台 → 播 1 分钟生日序曲（序曲结束后自动接 Jukebox）
       startOverture();
 
-      // ③ 亮出电影感文字叠加
+      // ③ 亮出电影感文字叠加（换 key 让入场动画重新播放）
       setClosing(false);
       setVisible(true);
+      setRunId((n) => n + 1);
 
       // ④ 烟花：动态引入，正常访问页面时不会加载该库
       import('canvas-confetti')
@@ -163,12 +202,12 @@ export default function BirthdayEgg() {
         });
 
       // ⑤ 20 秒后优雅淡出，再从 DOM 移除（序曲 / 电台继续在后台播放）
-      timersRef.current.push(
+      celebTimersRef.current.push(
         window.setTimeout(() => {
           setClosing(true);
           stopFireworksRef.current?.();
           stopFireworksRef.current = null;
-          timersRef.current.push(
+          celebTimersRef.current.push(
             window.setTimeout(() => {
               setVisible(false);
               setClosing(false);
@@ -185,16 +224,26 @@ export default function BirthdayEgg() {
       trigger();
     };
 
+    // 页头 🎂 按钮：与语言无关，点一次重放一次
+    const onReplay = () => {
+      clearMarieReplay();
+      trigger();
+    };
+
     window.addEventListener(LANG_USER_CHANGE_EVENT, onUserLang);
+    window.addEventListener(MARIE_REPLAY_EVENT, onReplay);
 
     // 补触发：Astro 为每个 client:load 岛单独建 React root，各岛水合时序不一。
-    // 若用户在本岛挂载之前就把语言切成了威尔士语，事件早已派发完毕（监听器尚未挂上），
-    // 此时依据 i18n 记录在 window 上的「最近一次用户切换」补触发一次。
-    if (readRecentUserLangChange() === TRIGGER_LANG) trigger();
+    // 若用户在「本岛挂载之前」就切了语言（或点了 🎂），事件早已派发完毕（监听器尚未挂上），
+    // 此时依据记录在 window 上的线索补触发一次。
+    const replayPending = readRecentMarieReplay();
+    if (replayPending) clearMarieReplay();
+    if (replayPending || readRecentUserLangChange() === TRIGGER_LANG) trigger();
 
     return () => {
       aliveRef.current = false;
       window.removeEventListener(LANG_USER_CHANGE_EVENT, onUserLang);
+      window.removeEventListener(MARIE_REPLAY_EVENT, onReplay);
       gestureCleanupRef.current?.();
       clearTimers();
       stopFireworksRef.current?.();
@@ -209,7 +258,7 @@ export default function BirthdayEgg() {
   if (!visible) return null;
 
   return (
-    <div className={`bd-egg${closing ? ' bd-egg--out' : ''}`} aria-hidden="true">
+    <div key={runId} className={`bd-egg${closing ? ' bd-egg--out' : ''}`} aria-hidden="true">
       <div className="bd-egg__title">Penblwydd Hapus Marie! 🎂</div>
     </div>
   );

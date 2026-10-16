@@ -1,5 +1,6 @@
 ---
-import { SITE_NAME, SITE_SLOGAN, SITE_DESCRIPTION } from '../lib/config';
+import { SITE_NAME, SITE_SLOGAN } from '../lib/config';
+import { t0 } from '../lib/i18n';
 import { allCountries } from '../data';
 import radiosData from '../data/radios.json';
 import VisitorCounter from './VisitorCounter.tsx';
@@ -19,32 +20,32 @@ const totalRadios = allCountries.reduce((sum, c) => {
     <div class="site-footer__grid">
       <div>
         <div class="site-footer__brand">{SITE_NAME}</div>
-        <p>{SITE_DESCRIPTION}</p>
+        <p style="color: var(--ink-soft);" data-i18n="subtitle">{t0.subtitle}</p>
         <p style="color: var(--ink-faint); font-size: 0.82rem;">
-          <span data-i18n="footerIncluded">已收录</span> <b>{allCountries.length}</b> <span data-i18n="footerStats">个国家与地区，</span> <b>{totalRadios}</b> <span data-i18n="footerStats2">个可在线收听的音乐电台。</span>
+          <span data-i18n="footerIncluded">{t0.footerIncluded}</span> <b>{allCountries.length}</b> <span data-i18n="footerStats">{t0.footerStats}</span> <b>{totalRadios}</b> <span data-i18n="footerStats2">{t0.footerStats2}</span>
         </p>
       </div>
       <div>
-        <h4 data-i18n="footerExplore">巡礼</h4>
+        <h4 data-i18n="footerExplore">{t0.footerExplore}</h4>
         <ul>
-          <li><a href="/#regions" data-i18n="footerBrowse">按大洲浏览</a></li>
-          <li><a href="/message-board" data-i18n="navGuestbook">留言板</a></li>
+          <li><a href="/#regions" data-i18n="footerBrowse">{t0.footerBrowse}</a></li>
+          <li><a href="/message-board" data-i18n="navGuestbook">{t0.navGuestbook}</a></li>
         </ul>
       </div>
       <div>
         <details class="footer-about">
-          <summary data-i18n="footerAbout">关于</summary>
-          <p class="footer-about__line" data-i18n="footerAboutLine">跨越时区与语言，将散落在全球的优质电台一一打捞 @Jeff 2026.09</p>
+          <summary data-i18n="footerAbout">{t0.footerAbout}</summary>
+          <p class="footer-about__line" data-i18n="footerAboutLine">{t0.footerAboutLine}</p>
         </details>
         <ul>
-          <li><a href="/#regions" data-i18n="footerIndex">音乐电台索引</a></li>
-          <li><a href="/" data-i18n="footerHome">返回首页</a></li>
+          <li><a href="/#regions" data-i18n="footerIndex">{t0.footerIndex}</a></li>
+          <li><a href="/" data-i18n="footerHome">{t0.footerHome}</a></li>
         </ul>
       </div>
     </div>
     <div class="site-footer__fine">
       <span>© {new Date().getFullYear()} {SITE_NAME} · {SITE_SLOGAN}</span>
-      <span data-i18n="footerRadioNote">电台流地址来自公开的互联网数据库，版权归各电台所有。</span>
+      <span data-i18n="footerRadioNote">{t0.footerRadioNote}</span>
       <VisitorCounter client:load />
     </div>
   </div>
