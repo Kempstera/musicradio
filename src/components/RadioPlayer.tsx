@@ -191,7 +191,12 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
             >
               <button
                 className="radio-card__play"
-                onClick={() => (isMarie ? void toggleMarieStation(s as MarieStation) : play(s.url, s.hls))}
+                onClick={() => {
+                  // 广播播放行为，供访客埋点记录「哪个电台被点了」（public/js/track.js 监听）
+                  window.dispatchEvent(new CustomEvent('mr:play', { detail: { name: s.name, id: s.id } }));
+                  if (isMarie) void toggleMarieStation(s as MarieStation);
+                  else play(s.url, s.hls);
+                }}
                 aria-label={isPlayingNow ? `${t.radioPause} ${s.name}` : `${t.radioPlay} ${s.name}`}
                 title={isPlayingNow ? t.radioPause : t.radioPlay}
               >

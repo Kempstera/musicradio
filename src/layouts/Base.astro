@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import VisitorPanel from '../components/VisitorPanel.astro';
 import BirthdayEgg from '../components/BirthdayEgg.tsx';
 import { SITE_NAME, SITE_URL } from '../lib/config';
 import { t0 } from '../lib/i18n';
@@ -94,5 +95,8 @@ const desc = description || t0.heroDesc;
     <BirthdayEgg client:load />
     <slot />
     <Footer />
+    <VisitorPanel />
+    <!-- 访客埋点：页面浏览 / 停留 / 点击 / 播放（详见 public/js/track.js） -->
+    <script is:inline src="/js/track.js" defer></script>
   </body>
 </html>
