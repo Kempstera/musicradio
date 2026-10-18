@@ -38,6 +38,10 @@
             <h5 data-vp="clicks">点击与播放</h5>
             <ul class="vp__bars" id="vp-clicks"></ul>
           </div>
+          <div class="vp__block">
+            <h5 data-vp="ips">高频 IP</h5>
+            <ul class="vp__bars" id="vp-ips"></ul>
+          </div>
         </div>
 
         <div class="vp__block vp__block--wide">
@@ -141,7 +145,7 @@
 
   .vp__cols {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 0.9rem;
     margin-bottom: 1.2rem;
   }
@@ -233,6 +237,9 @@
     line-height: 1.6;
   }
 
+  @media (max-width: 1100px) {
+    .vp__cols { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
   @media (max-width: 900px) {
     .vp__kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .vp__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -262,6 +269,7 @@
         geo: '地区',
         pages: '热门页面',
         clicks: '点击与播放',
+        ips: '高频 IP',
         recent: '最近访问',
         note: 'IP 已脱敏，仅统计访问行为；不记录任何输入内容，也不使用广告 Cookie。',
         today: '今日访客',
@@ -288,6 +296,7 @@
         geo: 'Locations',
         pages: 'Top pages',
         clicks: 'Clicks & plays',
+        ips: 'IP frequency',
         recent: 'Recent visits',
         note: 'IPs are masked. Behaviour only — no input content is recorded, no ad cookies.',
         today: 'Today',
@@ -348,13 +357,13 @@
       }
     }
 
-    function dur(ms) {
+    function dur(ms, zh) {
       if (!ms || ms < 1000) return '—';
       var s = Math.round(ms / 1000);
-      if (s < 60) return s + 's';
+      if (s < 60) return zh ? s + ' 秒' : s + 's';
       var m = Math.floor(s / 60);
-      if (m < 60) return m + 'm ' + (s % 60) + 's';
-      return Math.floor(m / 60) + 'h ' + (m % 60) + 'm';
+      if (m < 60) return zh ? m + ' 分 ' + (s % 60) + ' 秒' : m + 'm ' + (s % 60) + 's';
+      return zh ? Math.floor(m / 60) + ' 时 ' + (m % 60) + ' 分' : Math.floor(m / 60) + 'h ' + (m % 60) + 'm';
     }
 
     function time(iso) {
@@ -423,12 +432,13 @@
 
     function kpis(el, t, d) {
       el.textContent = '';
+      var zh = d === I18N.zh;
       var items = [
         { v: t.day_visitors != null ? t.day_visitors : t.day || 0, unit: d.people, l: d.today },
         { v: t.week || 0, unit: d.times, l: d.week },
         { v: t.visitors || 0, unit: d.people, l: d.total },
         { v: t.sessions || 0, unit: d.times, l: d.sessions },
-        { v: dur((t.avg_stay_sec || 0) * 1000), unit: '', l: d.avgStay },
+        { v: dur((t.avg_stay_sec || 0) * 1000, zh), unit: '', l: d.avgStay },
       ];
       items.forEach(function (it) {
         var box = document.createElement('div');
@@ -450,6 +460,7 @@
 
     function feed(el, rows, d) {
       el.textContent = '';
+      var zh = d === I18N.zh;
       var head = document.createElement('div');
       head.className = 'vp__row vp__row--head';
       [d.colTime, d.colWhere, d.colSource, d.colStay, d.colDev].forEach(function (txt) {
@@ -490,7 +501,7 @@
 
         var st = document.createElement('span');
         st.className = 'st';
-        st.textContent = dur(r.stay_ms);
+        st.textContent = dur(r.stay_ms, zh);
 
         var dv = document.createElement('span');
         dv.className = 'd';
@@ -518,6 +529,7 @@
       bars(document.getElementById('vp-geo'), s.geo, d);
       bars(document.getElementById('vp-pages'), s.pages, d);
       bars(document.getElementById('vp-clicks'), s.clicks, d);
+      bars(document.getElementById('vp-ips'), s.ips, d);
       feed(document.getElementById('vp-feed'), payload.feed, d);
 
       var cnt = document.getElementById('vp-count');

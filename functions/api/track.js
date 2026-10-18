@@ -38,7 +38,12 @@ function parseUA(ua) {
   }
 
   let browser = 'Other';
-  if (/Edg\//i.test(u)) browser = 'Edge';
+  // 国内入口优先识别：微信/QQ/微博的内置浏览器 UA 里都带 Chrome 或 Safari 字样，
+  // 必须先判断，否则全被归成 Chrome/Safari，看不出真实来源。
+  if (/MicroMessenger/i.test(u)) browser = 'WeChat';
+  else if (/MQQBrowser/i.test(u)) browser = 'QQBrowser';
+  else if (/Weibo/i.test(u)) browser = 'Weibo';
+  else if (/Edg\//i.test(u)) browser = 'Edge';
   else if (/OPR\/|Opera/i.test(u)) browser = 'Opera';
   else if (/Firefox\/|FxiOS/i.test(u)) browser = 'Firefox';
   else if (/CriOS/i.test(u)) browser = 'Chrome';

@@ -122,7 +122,9 @@ from (
   from public.visit_logs l
   where l.event in ('view', 'beat', 'leave')
   group by coalesce(nullif(l.visit_id, ''), 'log-' || l.id::text)
-) s;
+) s
+-- 剔除爬虫/AI 抓取：它们不产生真实收听，混进「今日访客」会虚高
+where coalesce(s.device, '') <> 'bot';
 
 comment on view public.visit_sessions is '按会话聚合的访客视图（IP 已脱敏），供前端面板读取';
 
