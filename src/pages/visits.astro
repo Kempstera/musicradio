@@ -1,0 +1,10 @@
+---
+// 站长专用访客数据页：不在任何导航中出现，且 noindex
+// 真正的门槛在 /api/visitors 的口令校验上 —— 这个页面本身不含任何数据
+import Base from '../layouts/Base.astro';
+import VisitorDashboard from '../components/VisitorDashboard.astro';
+---
+
+<Base title="访客数据" description="站长专用" noindex>
+  <VisitorDashboard />
+</Base>

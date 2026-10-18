@@ -2,7 +2,6 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import VisitorPanel from '../components/VisitorPanel.astro';
 import BirthdayEgg from '../components/BirthdayEgg.tsx';
 import { SITE_NAME, SITE_URL } from '../lib/config';
 import { t0 } from '../lib/i18n';
@@ -10,9 +9,11 @@ import { t0 } from '../lib/i18n';
 interface Props {
   title?: string;
   description?: string;
+  /** 站长专用页面（如 /visits）：加 noindex，避免被搜索引擎收录 */
+  noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 // 静态 HTML 一律以**默认语言（英语）**预渲染，与 i18n 的 DEFAULT_LANG 保持一致：
 // 首屏不会出现「先中文再跳英语」的闪烁，任何人从任何地方首次进入看到的都是英语。
 const fullTitle = title ? `${title} · ${SITE_NAME}` : `${SITE_NAME} · World Music Radio`;
@@ -70,6 +71,7 @@ const desc = description || t0.heroDesc;
     </script>
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={SITE_URL} />
     <meta property="og:title" content={fullTitle} />
@@ -95,8 +97,8 @@ const desc = description || t0.heroDesc;
     <BirthdayEgg client:load />
     <slot />
     <Footer />
-    <VisitorPanel />
-    <!-- 访客埋点：页面浏览 / 停留 / 点击 / 播放（详见 public/js/track.js） -->
+    <!-- 访客埋点：页面浏览 / 停留 / 点击 / 播放（详见 public/js/track.js）
+         采集是静默的，页面不展示任何访客数据；查看入口在 /visits（仅站长持有口令） -->
     <script is:inline src="/js/track.js" defer></script>
   </body>
 </html>

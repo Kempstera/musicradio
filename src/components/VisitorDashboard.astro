@@ -1,0 +1,334 @@
+---
+// 访客数据看板 —— 仅站长可见（挂在 /visits，不在任何导航里出现）
+//
+// 三重防护：
+//   1. 页面不在 Header/Footer 里出现，访客无从发现
+//   2. 页面本身 noindex，搜索引擎不收录
+//   3. 真正的数据接口 /api/visitors 需要口令（Cloudflare 环境变量 VISITS_TOKEN），
+//      口令错或未配置一律拒绝 —— 所以即使有人猜到 /visits 也看不到任何数字
+---
+
+<section class="vd">
+  <div class="vd__gate" id="vd-gate">
+    <div class="vd__gate-card">
+      <h2>站长专用</h2>
+      <p>这里只有网站所有者能看。输入口令后才会加载访客数据。</p>
+      <div class="vd__gate-row">
+        <input id="vd-key" type="password" autocomplete="current-password" placeholder="访问口令" />
+        <button id="vd-go">解锁</button>
+      </div>
+      <p class="vd__msg" id="vd-msg"></p>
+    </div>
+  </div>
+
+  <div class="vd__body" id="vd-body" hidden>
+    <div class="vd__head">
+      <div>
+        <h2>访客数据</h2>
+        <p class="vd__sub">IP 已脱敏 · 爬虫已剔除 · 数据存在你自己的 Supabase</p>
+      </div>
+      <div class="vd__actions">
+        <button class="vd__btn vd__btn--ghost" id="vd-refresh">刷新</button>
+        <button class="vd__btn vd__btn--ghost" id="vd-exit">退出</button>
+      </div>
+    </div>
+
+    <div class="vd__kpis" id="vd-kpis"></div>
+
+    <div class="vd__cols">
+      <div class="vd__block">
+        <h5>来源</h5>
+        <ul class="vd__bars" id="vd-sources"></ul>
+      </div>
+      <div class="vd__block">
+        <h5>地区</h5>
+        <ul class="vd__bars" id="vd-geo"></ul>
+      </div>
+      <div class="vd__block">
+        <h5>热门页面</h5>
+        <ul class="vd__bars" id="vd-pages"></ul>
+      </div>
+      <div class="vd__block">
+        <h5>点击与播放</h5>
+        <ul class="vd__bars" id="vd-clicks"></ul>
+      </div>
+      <div class="vd__block">
+        <h5>高频 IP</h5>
+        <ul class="vd__bars" id="vd-ips"></ul>
+      </div>
+    </div>
+
+    <div class="vd__block vd__block--wide">
+      <h5>最近访问</h5>
+      <div class="vd__feed" id="vd-feed"></div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .vd { max-width: 1180px; margin: 0 auto; padding: 2.4rem var(--gutter) 4rem; color: var(--ink-soft); }
+  .vd h2 { font-family: var(--font-display); font-size: 1.5rem; color: var(--ink); margin: 0 0 0.3rem; }
+  .vd__sub { font-size: 0.78rem; color: var(--ink-faint); margin: 0; }
+
+  .vd__gate { display: flex; justify-content: center; padding: 6vh 0 10vh; }
+  .vd__gate-card {
+    background: var(--surface); border: 1px solid var(--line-soft); border-radius: var(--radius);
+    padding: 2rem 2rem 1.6rem; max-width: 420px; width: 100%; box-shadow: var(--shadow-sm);
+  }
+  .vd__gate-card p { font-size: 0.86rem; color: var(--ink-faint); margin: 0.4rem 0 1.2rem; line-height: 1.7; }
+  .vd__gate-row { display: flex; gap: 0.5rem; }
+  .vd__gate-row input {
+    flex: 1; min-width: 0; padding: 0.6rem 0.8rem; font-size: 0.9rem; font-family: var(--font-body);
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-sm); color: var(--ink);
+  }
+  .vd__gate-row input:focus { outline: 2px solid var(--gold-pale); border-color: var(--gold); }
+  .vd__gate-row button, .vd__btn {
+    background: var(--ink); color: var(--paper); border: none; border-radius: var(--radius-sm);
+    padding: 0.6rem 1.2rem; font-size: 0.86rem; font-family: var(--font-body); cursor: pointer;
+  }
+  .vd__gate-row button:hover { background: #3a3225; }
+  .vd__btn--ghost { background: transparent; color: var(--gold-deep); border: 1px solid var(--line); }
+  .vd__btn--ghost:hover { background: var(--paper-2); }
+  .vd__msg { font-size: 0.78rem !important; color: var(--wine) !important; margin: 0.8rem 0 0 !important; min-height: 1.1em; }
+  .vd__msg.ok { color: var(--verde) !important; }
+
+  .vd__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.6rem; flex-wrap: wrap; }
+  .vd__actions { display: flex; gap: 0.5rem; }
+
+  .vd__kpis { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.8rem; margin-bottom: 1.2rem; }
+  .vd__kpi { background: var(--surface); border: 1px solid var(--line-soft); border-radius: var(--radius-sm); padding: 0.9rem 1rem; }
+  .vd__kpi b { display: block; font-family: var(--font-display); font-size: 1.5rem; color: var(--ink); font-variant-numeric: tabular-nums; line-height: 1.2; }
+  .vd__kpi b small { font-size: 0.72rem; font-weight: 400; color: var(--ink-faint); margin-left: 2px; }
+  .vd__kpi span { font-size: 0.72rem; color: var(--ink-faint); }
+
+  .vd__cols { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.8rem; margin-bottom: 1rem; }
+  .vd__block { background: var(--surface); border: 1px solid var(--line-soft); border-radius: var(--radius-sm); padding: 0.9rem 1rem; }
+  .vd__block h5 {
+    margin: 0 0 0.6rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint);
+  }
+  .vd__bars { list-style: none; margin: 0; padding: 0; }
+  .vd__bars li {
+    display: grid; grid-template-columns: 1fr 42px; grid-template-areas: 'name num' 'bar bar';
+    gap: 2px 6px; padding: 0.26rem 0; font-size: 0.78rem;
+  }
+  .vd__bars .n { grid-area: name; color: var(--ink-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .vd__bars .c { grid-area: num; text-align: right; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+  .vd__bars .b { grid-area: bar; height: 3px; background: var(--line-soft); border-radius: 2px; overflow: hidden; }
+  .vd__bars .b i { display: block; height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-pale)); border-radius: 2px; }
+  .vd__empty { color: var(--ink-faint); font-size: 0.76rem; padding: 0.3rem 0; }
+
+  .vd__feed { display: grid; gap: 1px; background: var(--line-soft); border-radius: 6px; overflow: hidden; font-size: 0.78rem; }
+  .vd__row { display: grid; grid-template-columns: 88px 1fr 1fr 88px 84px; gap: 0.5rem; background: var(--surface); padding: 0.55rem 0.7rem; align-items: center; }
+  .vd__row--head { background: var(--surface-deep); color: var(--ink-faint); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  .vd__row > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .vd__row .t { color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+  .vd__row .g { color: var(--ink); }
+  .vd__row .s { color: var(--ink-soft); }
+  .vd__row .st { color: var(--verde); font-variant-numeric: tabular-nums; }
+  .vd__row .d { color: var(--ink-faint); text-align: right; }
+
+  @media (max-width: 1100px) { .vd__cols { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 900px) {
+    .vd__kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .vd__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .vd__row { grid-template-columns: 72px 1fr 82px; }
+    .vd__row .s, .vd__row .d { display: none; }
+  }
+  @media (max-width: 560px) {
+    .vd__kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .vd__cols { grid-template-columns: 1fr; }
+    .vd__row { grid-template-columns: 64px 1fr 68px; font-size: 0.74rem; }
+  }
+</style>
+
+<script>
+  (function () {
+    var gate = document.getElementById('vd-gate');
+    var body = document.getElementById('vd-body');
+    var msg = document.getElementById('vd-msg');
+    var input = document.getElementById('vd-key');
+    var KEY_STORE = 'mr_visits_key';
+    var isZh = true;
+
+    function fail(text) {
+      msg.textContent = text;
+      msg.classList.remove('ok');
+    }
+    function okay(text) {
+      msg.textContent = text;
+      msg.classList.add('ok');
+    }
+
+    function dur(ms) {
+      if (!ms || ms < 1000) return '—';
+      var s = Math.round(ms / 1000);
+      if (s < 60) return s + ' 秒';
+      var m = Math.floor(s / 60);
+      if (m < 60) return m + ' 分 ' + (s % 60) + ' 秒';
+      return Math.floor(m / 60) + ' 时 ' + (m % 60) + ' 分';
+    }
+
+    function time(iso) {
+      var t = new Date(iso);
+      var p = function (n) { return n < 10 ? '0' + n : '' + n; };
+      return p(t.getMonth() + 1) + '-' + p(t.getDate()) + ' ' + p(t.getHours()) + ':' + p(t.getMinutes());
+    }
+
+    function flag(cc) {
+      if (!cc || cc.length !== 2) return '🌐';
+      try {
+        return String.fromCodePoint.apply(null, cc.toUpperCase().split('').map(function (c) {
+          return 0x1f1e6 - 65 + c.charCodeAt(0);
+        }));
+      } catch (e) { return '🌐'; }
+    }
+
+    function devIcon(d) {
+      if (d === 'mobile' || d === 'tablet') return '📱';
+      if (d === 'bot') return '🤖';
+      return '🖥';
+    }
+
+    function pretty(k) {
+      if (k === '(direct)') return '直接访问';
+      if (k === '(站内)') return '站内跳转';
+      return k || '未知';
+    }
+
+    function bars(el, arr) {
+      el.textContent = '';
+      if (!arr || !arr.length) {
+        var p = document.createElement('li');
+        p.className = 'vd__empty';
+        p.textContent = '暂无数据';
+        el.appendChild(p);
+        return;
+      }
+      var max = 1;
+      arr.forEach(function (x) { if (x.c > max) max = x.c; });
+      arr.forEach(function (x) {
+        var li = document.createElement('li');
+        var n = document.createElement('span'); n.className = 'n'; n.textContent = pretty(x.k); n.title = pretty(x.k);
+        var c = document.createElement('span'); c.className = 'c'; c.textContent = x.c;
+        var b = document.createElement('span'); b.className = 'b';
+        var i = document.createElement('i'); i.style.width = Math.max((x.c / max) * 100, 4) + '%';
+        b.appendChild(i);
+        li.appendChild(n); li.appendChild(c); li.appendChild(b);
+        el.appendChild(li);
+      });
+    }
+
+    function kpis(el, t) {
+      el.textContent = '';
+      [
+        { v: t.day_visitors != null ? t.day_visitors : t.day || 0, u: '位', l: '今日访客' },
+        { v: t.week || 0, u: '次', l: '近七日访问' },
+        { v: t.visitors || 0, u: '位', l: '累计访客' },
+        { v: t.sessions || 0, u: '次', l: '累计访问' },
+        { v: dur((t.avg_stay_sec || 0) * 1000), u: '', l: '平均停留' },
+      ].forEach(function (it) {
+        var box = document.createElement('div'); box.className = 'vd__kpi';
+        var b = document.createElement('b'); b.textContent = it.v;
+        if (it.u) { var s = document.createElement('small'); s.textContent = it.u; b.appendChild(s); }
+        var sp = document.createElement('span'); sp.textContent = it.l;
+        box.appendChild(b); box.appendChild(sp); el.appendChild(box);
+      });
+    }
+
+    function feed(el, rows) {
+      el.textContent = '';
+      var head = document.createElement('div');
+      head.className = 'vd__row vd__row--head';
+      ['时间', '来自', '来源', '停留', '设备'].forEach(function (txt) {
+        var s = document.createElement('span'); s.textContent = txt; head.appendChild(s);
+      });
+      el.appendChild(head);
+
+      if (!rows || !rows.length) {
+        var e = document.createElement('div'); e.className = 'vd__row';
+        var s = document.createElement('span'); s.textContent = '还没有数据，等有人访问后这里会出现记录';
+        e.appendChild(s); el.appendChild(e); return;
+      }
+
+      rows.forEach(function (r) {
+        var row = document.createElement('div'); row.className = 'vd__row';
+        var t = document.createElement('span'); t.className = 't'; t.textContent = time(r.started_at);
+        var g = document.createElement('span'); g.className = 'g';
+        g.textContent = flag(r.country_code) + ' ' + (r.city || r.region || r.country || '未知');
+        g.title = [r.country, r.region, r.city, r.ip_masked].filter(Boolean).join(' · ');
+        var src = document.createElement('span'); src.className = 's'; src.textContent = pretty(r.ref_host);
+        var st = document.createElement('span'); st.className = 'st'; st.textContent = dur(r.stay_ms);
+        var dv = document.createElement('span'); dv.className = 'd'; dv.textContent = devIcon(r.device) + ' ' + (r.browser || '');
+        row.appendChild(t); row.appendChild(g); row.appendChild(src); row.appendChild(st); row.appendChild(dv);
+        el.appendChild(row);
+      });
+    }
+
+    function load(key) {
+      fetch('/api/visitors?limit=30&key=' + encodeURIComponent(key))
+        .then(function (r) {
+          return r.json().then(function (j) { return { status: r.status, body: j }; });
+        })
+        .then(function (res) {
+          var j = res.body || {};
+          if (res.status === 401) {
+            fail('口令不对。');
+            try { sessionStorage.removeItem(KEY_STORE); } catch (e) {}
+            gate.hidden = false; body.hidden = true;
+            return;
+          }
+          if (res.status === 403 && j.error === 'not_configured') {
+            fail('接口还没配口令：请先在 Cloudflare 添加环境变量 VISITS_TOKEN。');
+            return;
+          }
+          if (j.error === 'stats_unavailable') {
+            fail('数据表还没建：请先执行 supabase/analytics.sql。（' + (j.hint || '') + '）');
+            gate.hidden = false; body.hidden = true;
+            return;
+          }
+          if (!j.stats) {
+            fail('加载失败，稍后再试。');
+            return;
+          }
+          try { sessionStorage.setItem(KEY_STORE, key); } catch (e) {}
+          gate.hidden = true; body.hidden = false;
+          var t = j.stats.totals || {};
+          kpis(document.getElementById('vd-kpis'), t);
+          bars(document.getElementById('vd-sources'), j.stats.sources);
+          bars(document.getElementById('vd-geo'), j.stats.geo);
+          bars(document.getElementById('vd-pages'), j.stats.pages);
+          bars(document.getElementById('vd-clicks'), j.stats.clicks);
+          bars(document.getElementById('vd-ips'), j.stats.ips);
+          feed(document.getElementById('vd-feed'), j.feed);
+        })
+        .catch(function () { fail('网络错误，稍后再试。'); });
+    }
+
+    document.getElementById('vd-go').addEventListener('click', function () {
+      var v = (input.value || '').trim();
+      if (!v) { fail('请先输入口令。'); return; }
+      okay('验证中…');
+      load(v);
+    });
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') document.getElementById('vd-go').click();
+    });
+    document.getElementById('vd-exit').addEventListener('click', function () {
+      try { sessionStorage.removeItem(KEY_STORE); } catch (e) {}
+      body.hidden = true; gate.hidden = false; input.value = '';
+      msg.textContent = '';
+    });
+    document.getElementById('vd-refresh').addEventListener('click', function () {
+      try {
+        var k = sessionStorage.getItem(KEY_STORE);
+        if (k) load(k);
+      } catch (e) {}
+    });
+
+    try {
+      var saved = sessionStorage.getItem(KEY_STORE);
+      if (saved) load(saved);
+    } catch (e) {}
+  })();
+</script>
