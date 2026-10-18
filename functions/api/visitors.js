@@ -55,10 +55,24 @@ export async function onRequestGet({ request }) {
     const feed = feedRes.ok ? await feedRes.json() : [];
 
     if (!stats) {
-      return new Response(JSON.stringify({ error: 'stats_unavailable', feed }), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
-      });
+      // 把上游状态码带出来，便于区分「表还没建」和「权限没配好」
+      let hint = 'run supabase/analytics.sql first';
+      if (statsRes.status === 404) hint = 'visit_logs / visitor_stats() 不存在，请先执行 supabase/analytics.sql';
+      else if (statsRes.status === 401 || statsRes.status === 403) hint = '权限不足，检查 analytics.sql 里的 GRANT 是否执行成功';
+      return new Response(
+        JSON.stringify({
+          error: 'stats_unavailable',
+          status: statsRes.status,
+          hint,
+          feed_ok: feedRes.ok,
+          feed_status: feedRes.status,
+          feed,
+        }),
+        {
+          status: 200,
+          headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+        }
+      );
     }
 
     return new Response(JSON.stringify({ stats, feed }), {
