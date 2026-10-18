@@ -71,6 +71,8 @@
   .vd__sub { font-size: 0.78rem; color: var(--ink-faint); margin: 0; }
 
   .vd__gate { display: flex; justify-content: center; padding: 6vh 0 10vh; }
+  /* hidden 属性会被上面的 display 覆盖，必须显式压回去 */
+  .vd__gate[hidden], .vd__body[hidden] { display: none !important; }
   .vd__gate-card {
     background: var(--surface); border: 1px solid var(--line-soft); border-radius: var(--radius);
     padding: 2rem 2rem 1.6rem; max-width: 420px; width: 100%; box-shadow: var(--shadow-sm);
@@ -293,6 +295,8 @@
           }
           try { sessionStorage.setItem(KEY_STORE, key); } catch (e) {}
           gate.hidden = true; body.hidden = false;
+          msg.textContent = '';
+          msg.classList.remove('ok');
           var t = j.stats.totals || {};
           kpis(document.getElementById('vd-kpis'), t);
           bars(document.getElementById('vd-sources'), j.stats.sources);
