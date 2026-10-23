@@ -1,0 +1,200 @@
+---
+// 大洲巡礼 —— 电台总览页
+//
+// 从首页迁移过来的内容：
+//   · 我的最爱电台列表 + 播放按钮（MyFavorites）
+//   · 生日彩蛋精选集（MarieJukebox，仅彩蛋触发后渲染）
+//   · 六大洲 → 子区域 → 国家卡片完整清单
+//
+// 首页只保留核心视觉与大洲入口，这一页承接全部「电台列表与播放器」。
+import Base from '../layouts/Base.astro';
+import MarieJukebox from '../components/MarieJukebox.tsx';
+import MyFavorites from '../components/MyFavorites.tsx';
+import { CONTINENTS, SUBREGIONS } from '../lib/country';
+import { allCountries, countriesByContinent, countriesBySubregion } from '../data';
+import { getAllCompact } from '../data/i18n';
+import { t0, CONTINENT_LABELS, SUBREGION_LABELS } from '../lib/i18n';
+import radiosData from '../data/radios.json';
+
+const compact = getAllCompact();
+const compactJson = JSON.stringify(compact).replace(/</g, '\\u003c');
+
+const en = compact['en'] || {};
+const enLabel = (id: string) => (CONTINENT_LABELS['en'] as Record<string, string>)?.[id];
+const subLabel = (id: string) => (SUBREGION_LABELS['en'] as Record<string, string>)?.[id];
+
+// 可在线收听的电台总数（与页脚统计口径一致）
+const radios = radiosData as Record<string, any[]>;
+const totalRadios = allCountries.reduce((sum, c) => {
+  const notable = (c.notableRadios || []).filter((r) => r.url).length;
+  const fetched = c.radioMode === 'notable-only' ? 0 : (radios[c.iso] || []).length;
+  return sum + notable + fetched;
+}, 0);
+---
+
+<Base title={t0.navExplore}>
+  <script type="application/json" id="content-blob" is:inline set:html={compactJson}></script>
+
+  <section class="section explore-head">
+    <div class="container">
+      <div class="explore-head__inner">
+        <div class="section__kicker" data-i18n="exploreKicker">{t0.exploreKicker}</div>
+        <h1 class="explore-head__title" data-i18n="exploreTitle">{t0.exploreTitle}</h1>
+        <p class="explore-head__desc" data-i18n="heroDesc">{t0.heroDesc}</p>
+        <div class="explore-head__stats">
+          <span><b>{allCountries.length}</b> <span data-i18n="regionUnit">{t0.regionUnit}</span></span>
+          <span class="explore-head__sep" aria-hidden="true">·</span>
+          <span><b>{totalRadios}</b> <span data-i18n="footerStats2">{t0.footerStats2}</span></span>
+        </div>
+      </div>
+
+      {/* 大洲快捷跳转：移动端横向滚动，桌面端一行铺开 */}
+      <nav class="explore-jump" aria-label="Continents">
+        {
+          CONTINENTS.map((c) => (
+            <a class="explore-jump__item" href={`#${c.id}`} data-region={c.id}>
+              <span data-continent={c.id}>{enLabel(c.id) || c.label}</span>
+              <small>{countriesByContinent(c.id).length}</small>
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+  </section>
+
+  {/* 生日彩蛋：切到威尔士语后被注入的「Marie's 1946 Jukebox」出现在这里（未激活时不渲染） */}
+  <MarieJukebox client:load />
+
+  <MyFavorites client:load />
+
+  {
+    CONTINENTS.map((c) => {
+      const continentCountries = countriesByContinent(c.id);
+      if (!continentCountries.length) return null;
+      const subs = SUBREGIONS.filter((s) => s.continent === c.id);
+      return (
+        <section class="section" id={c.id} data-region={c.id} style="padding-top: 1.6rem;">
+          <div class="container">
+            <div class="section__head">
+              <div>
+                <div class="section__kicker">{c.en}</div>
+                <h2 class="section__title" data-continent={c.id}>{enLabel(c.id) || c.label}</h2>
+              </div>
+              <span style="color: var(--ink-faint);">{continentCountries.length} <span data-i18n="regionUnit">{t0.regionUnit}</span></span>
+            </div>
+
+            {
+              subs.map((s) => {
+                const list = countriesBySubregion(s.id);
+                if (!list.length) return null;
+                return (
+                  <div class="subregion" id={s.id} style="margin-top: 1.6rem;">
+                    <div class="subregion__head">
+                      <h3 class="subregion__title" data-subregion={s.id}>{subLabel(s.id) || s.label}</h3>
+                      <span class="subregion__en">{s.en}</span>
+                      <span class="subregion__count">{list.length} <span data-i18n="subregionUnit">{t0.subregionUnit}</span></span>
+                    </div>
+                    <div class="country-grid">
+                      {
+                        list.map((country) => (
+                          <a class="country-card" href={`/countries/${country.slug}`} data-region={c.id}>
+                            <span class="country-card__flag" aria-hidden="true">{country.flag}</span>
+                            <div class="country-card__name" data-ct="name" data-slug={country.slug}>{en[country.slug]?.name || country.name}</div>
+                            <div class="country-card__en">{country.nameEn}</div>
+                            <p class="country-card__intro" data-ct="intro" data-slug={country.slug}>{en[country.slug]?.intro || country.intro}</p>
+                            <span class="country-card__more" data-i18n="listenRadio">{t0.listenRadio}</span>
+                          </a>
+                        ))
+                      }
+                    </div>
+                  </div>
+                );
+              })
+            }
+          </div>
+        </section>
+      );
+    })
+  }
+</Base>
+
+<style is:global>
+  .explore-head { padding-top: clamp(2.2rem, 5vw, 3.4rem); padding-bottom: 0.4rem; }
+  .explore-head__inner { max-width: 46rem; }
+  .explore-head__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5.5vw, 3.1rem);
+    line-height: 1.14;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0.5rem 0 0.8rem;
+  }
+  .explore-head__desc {
+    color: var(--ink-soft);
+    font-size: 1rem;
+    line-height: 1.75;
+    margin: 0;
+  }
+  .explore-head__stats {
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    margin-top: 1rem;
+    font-size: 0.86rem;
+    color: var(--ink-faint);
+    flex-wrap: wrap;
+  }
+  .explore-head__stats b {
+    font-family: var(--font-display);
+    font-size: 1.06rem;
+    color: var(--gold-deep);
+    font-variant-numeric: tabular-nums;
+  }
+  .explore-head__sep { color: var(--line); }
+
+  .explore-jump {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.8rem;
+    padding-bottom: 0.9rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .explore-jump::-webkit-scrollbar { display: none; }
+  .explore-jump__item {
+    flex: 1 1 0;
+    min-width: 6.6rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.4rem;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+  }
+  .explore-jump__item small {
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.72rem;
+  }
+  .explore-jump__item:hover {
+    border-color: var(--gold-pale);
+    background: var(--paper-2);
+    color: var(--ink);
+  }
+
+  @media (max-width: 640px) {
+    .explore-jump__item { min-width: 5.4rem; flex: 0 0 auto; }
+  }
+
+  /* 从国家页面包屑跳进来时，别让 sticky 头部盖住标题 */
+  .explore-head,
+  section[id],
+  .subregion[id] { scroll-margin-top: 5.2rem; }
+</style>

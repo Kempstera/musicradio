@@ -119,8 +119,8 @@ const stationNotesBlobJson = JSON.stringify(stationNotesBlob).replace(/</g, '\\u
       <div class="container container--narrow">
         <nav class="breadcrumb" aria-label="Breadcrumb">
           <a href="/" data-i18n="navHome">{t0.navHome}</a><span class="sep">/</span>
-          <a href={`/#${country.continent}`} data-continent={country.continent}>{continentLabel}</a><span class="sep">/</span>
-          <a href={`/#${country.continent}`} data-subregion={country.subregion}>{subregionLabel}</a><span class="sep">/</span>
+          <a href={`/explore#${country.continent}`} data-continent={country.continent}>{continentLabel}</a><span class="sep">/</span>
+          <a href={`/explore#${country.subregion}`} data-subregion={country.subregion}>{subregionLabel}</a><span class="sep">/</span>
           <span data-ct="name" data-slug={country.slug}>{enName}</span>
         </nav>
         <div class="country-hero__flag" aria-hidden="true">{country.flag}</div>
