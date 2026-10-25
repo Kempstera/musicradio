@@ -27,7 +27,9 @@ const svg = wrap?.querySelector<SVGSVGElement>('svg');
 const dataEl = document.getElementById('globe-data');
 const gridEl = wrap?.querySelector<SVGGElement>('.globe__grid');
 const landEl = wrap?.querySelector<SVGGElement>('.globe__land');
+const isleEl = wrap?.querySelector<SVGGElement>('.globe__isles');
 const landRaw = document.getElementById('land-data');
+const isleRaw = document.getElementById('isles-data');
 // 点位在 DOM 里按大洲分组，下标靠 data-i 对回数据行，别依赖 DOM 顺序
 const dotEls: SVGCircleElement[] = [];
 wrap?.querySelectorAll<SVGCircleElement>('.globe__dot').forEach((el) => {
@@ -50,6 +52,9 @@ if (wrap && svg && dataEl && gridEl && dotEls.length && readout && readoutText) 
   // 海岸线：数据和元素都是 SSR 出来的，这里只接管「每帧重投影」
   const landShape = landRaw ? parseLand(JSON.parse(landRaw.textContent || '""')) : null;
   const landEls = landEl ? Array.from(landEl.querySelectorAll('path')) : [];
+  // 岛国符号走同一套投影，只是换了个填充
+  const isleShape = isleRaw ? parseLand(JSON.parse(isleRaw.textContent || '""')) : null;
+  const isleEls = isleEl ? Array.from(isleEl.querySelectorAll('path')) : [];
 
   // 六大洲的颜色直接从 CSS 变量读，不在 JS 里再抄一份调色板
   const colors: Record<string, string> = {};
@@ -111,6 +116,10 @@ if (wrap && svg && dataEl && gridEl && dotEls.length && readout && readoutText) 
     if (landShape) {
       const land = landPaths(landShape, yaw, INITIAL_PITCH);
       for (let i = 0; i < landEls.length; i++) landEls[i].setAttribute('d', land[i] || '');
+    }
+    if (isleShape) {
+      const isles = landPaths(isleShape, yaw, INITIAL_PITCH);
+      for (let i = 0; i < isleEls.length; i++) isleEls[i].setAttribute('d', isles[i] || '');
     }
 
     const cosP = Math.cos(INITIAL_PITCH * RAD);

@@ -22,7 +22,7 @@ export interface LandShape {
 
 /**
  * 解析 `land.ts` 里那串「段|点;点;点」的增量编码。
- * 单位 0.1°，每段首点相对 (0,0)，即绝对值。
+ * 单位 0.1°，每段首点相对 (0,0)，即绝对值；每个点写的是「经度,纬度」。
  */
 export function parseLand(src: string): LandShape {
   const segs = src.split('|');
@@ -37,16 +37,19 @@ export function parseLand(src: string): LandShape {
   let i = 0;
   for (let k = 0; k < segs.length; k++) {
     start[k] = i;
-    let a = 0;
-    let b = 0;
+    // ⚠️ 顺序是「经度,纬度」—— 跟 GeoJSON / Natural Earth 的原始次序一致。
+    // 之前这里写反了，整张地图被转置（球面上看起来仍然「像」一张地图，
+    // 所以肉眼一时没发现），结果 195 个国家点全落在海上。
+    let lon = 0;
+    let lat0 = 0;
     const pts = segs[k].split(';');
     for (let j = 0; j < pts.length; j++) {
       const p = pts[j];
       const c = p.indexOf(',');
-      a += +p.slice(0, c);
-      b += +p.slice(c + 1);
-      lat[i] = a / 10;
-      lng[i] = b / 10;
+      lon += +p.slice(0, c);
+      lat0 += +p.slice(c + 1);
+      lat[i] = lat0 / 10;
+      lng[i] = lon / 10;
       i++;
     }
     count[k] = pts.length;

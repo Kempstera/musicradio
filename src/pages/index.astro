@@ -14,7 +14,7 @@ import { allCountries, countriesByContinent } from '../data';
 import { GLOBE_POINTS } from '../data/globe-points';
 import { graticule, project, CX, CY, R, VIEWBOX, INITIAL_YAW } from '../lib/globe';
 import { parseLand, landPaths } from '../lib/land';
-import { LAND } from '../data/land';
+import { LAND, ISLES } from '../data/land';
 import { t0, CONTINENT_LABELS } from '../lib/i18n';
 import radiosData from '../data/radios.json';
 
@@ -32,6 +32,8 @@ const totalRadios = allCountries.reduce((sum, c) => {
 const gridPaths = graticule(INITIAL_YAW);
 // 海岸线同样在构建期算好首帧
 const landD = landPaths(parseLand(LAND), INITIAL_YAW);
+// 极小岛国的「岛屿符号」（数据里根本没有的环礁，用一块淡色小圆盘代替）
+const isleD = landPaths(parseLand(ISLES), INITIAL_YAW);
 const globeDots = GLOBE_POINTS.map((p, i) => {
   const [x, y, z] = project(p[2], p[3], INITIAL_YAW);
   return { i, continent: p[1], x, y, front: z > 0 };
@@ -113,6 +115,11 @@ const globeData = JSON.stringify(GLOBE_POINTS);
             <g class="globe__land">
               {landD.map((d) => <path d={d}></path>)}
             </g>
+            {/* 岛国符号：数据里连一块多边形都没有的环礁，画成一小块淡色陆地，
+                否则它的点就真的是「浮在空海上」 */}
+            <g class="globe__isles">
+              {isleD.map((d) => <path d={d}></path>)}
+            </g>
             <g class="globe__dots">
               {
                 CONTINENTS.map((c) => (
@@ -180,6 +187,7 @@ const globeData = JSON.stringify(GLOBE_POINTS);
 
       <script type="application/json" id="globe-data" set:html={globeData}></script>
       <script type="application/json" id="land-data" set:html={JSON.stringify(LAND)}></script>
+      <script type="application/json" id="isles-data" set:html={JSON.stringify(ISLES)}></script>
     </div>
   </section>
 </Base>

@@ -1009,6 +1009,13 @@ html[lang='zh-TW'] .hero__title {
   stroke-linejoin: round;
   stroke-linecap: round;
 }
+/* 极小岛国：数据里没有多边形，只好画一小块淡色陆地。
+   填而不描 —— 描边会变成一圈「靶心」，填成一块才像一座岛。 */
+.globe__isles path {
+  fill: color-mix(in srgb, var(--ink) 30%, transparent);
+  stroke: none;
+}
+
 .globe__grid path {
   fill: none;
   /* 经纬网带一点海色，才像一颗印出来的地球仪，而不是白纸上的灰线 */
