@@ -269,7 +269,7 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
 
       {current && (
         <div className="now-playing" role="status">
-          <button className="now-playing__btn" onClick={() => stop()} aria-label="停止播放">
+          <button className="now-playing__btn" onClick={() => stop()} aria-label={t.radioPause}>
             <PauseIcon />
           </button>
           <div className="now-playing__info">

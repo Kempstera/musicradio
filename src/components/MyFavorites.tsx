@@ -53,11 +53,11 @@ export default function MyFavorites() {
       <div className="container">
         <div className="section__head">
           <div>
-            <div className="section__kicker" data-i18n="favKicker">My Favorites</div>
-            <h2 className="section__title" data-i18n="favTitle">我的最爱</h2>
+            <div className="section__kicker" data-i18n="favKicker">{t.favKicker}</div>
+            <h2 className="section__title" data-i18n="favTitle">{t.favTitle}</h2>
           </div>
           <span style={{ color: 'var(--ink-faint)' }}>
-            {favs.length} <span data-i18n="favCountUnit">个电台</span>
+            {favs.length} <span data-i18n="favCountUnit">{t.favCountUnit}</span>
           </span>
         </div>
         <div className="fav-list">
@@ -69,8 +69,8 @@ export default function MyFavorites() {
                 <button
                   className="fav-item__play"
                   onClick={() => play(f.url, !!f.hls)}
-                  aria-label={isPlayingNow ? `暂停 ${f.name}` : `播放 ${f.name}`}
-                  title={isPlayingNow ? '暂停' : '播放'}
+                  aria-label={`${isPlayingNow ? t.radioPause : t.radioPlay} ${f.name}`}
+                  title={isPlayingNow ? t.radioPause : t.radioPlay}
                 >
                   {isPlayingNow ? (
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
