@@ -982,178 +982,178 @@ html[lang='zh-TW'] .hero__title {
   font-weight: 600;
 }
 
-/* ── 六大洲：不是六行表格，而是六根高低不同的柱子 ──────────────────
-   柱高 = 该洲的国家数（构建期算好，写在 --h 上）。柱顶那条发丝线是「刻度」，
-   六根柱子的底边落在同一条基线上 —— 于是这块读起来像天际线，而不是目录。
-   数据本身就是版式，不需要再加装饰。 */
-.regions {
+/* ── 大洲巡礼：桌上的一颗地球 ────────────────────────────────────────
+   这里以前是六根柱子（柱高＝国家数）。问题不在好不好看，而在「高度」这个编码
+   天然会被读成「主次」：国家最多的非洲被画得最高，于是看起来像「非洲是整站的
+   中心」。可这站按大洲平铺，本来不分主次。
+   换成地球之后就没有这件事了 —— 每个国家都是球面上一样大的一个点，
+   没有大小、没有排序。规模只写在右边六行索引里，六行等高，同样不分主次。 */
+
+.atlas {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  align-items: end;
-  gap: 0 clamp(0.7rem, 1.4vw, 1.5rem);
-  padding-top: clamp(1.4rem, 2.6vw, 2.4rem);
-  border-bottom: 1px solid var(--rule);
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  align-items: center;
+  gap: clamp(1.6rem, 5vw, 4.5rem);
+  padding-top: clamp(1rem, 2.2vw, 1.8rem);
 }
 
-.plate {
-  position: relative;
+.atlas__globe {
+  min-width: 0;
+}
+
+.globe {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  cursor: grab;
+  /* 竖着划仍然是滚页面，横着拖才是转球 —— 手机上不能把滚动抢掉 */
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+.is-dragging .globe {
+  cursor: grabbing;
+}
+
+/* 海：几乎看不出来的一层藍，只为了让那颗球有「面」 */
+.globe__sea {
+  fill: color-mix(in srgb, var(--ai) 12%, transparent);
+}
+/* 晨光打在球左上角 —— 只有这一层，球就立起来了 */
+.globe__sheen {
+  fill: url(#globe-sheen);
+  pointer-events: none;
+}
+.globe__grid path {
+  fill: none;
+  /* 经纬网带一点海色，才像一颗印出来的地球仪，而不是白纸上的灰线 */
+  stroke: color-mix(in srgb, var(--ai) 30%, transparent);
+  stroke-width: 0.75;
+}
+.globe__limb {
+  fill: none;
+  stroke: color-mix(in srgb, var(--ink) 20%, transparent);
+  stroke-width: 1.1;
+}
+.globe__dot {
+  fill: var(--region, var(--ai));
+  /* 命中判定在脚本里按距离算，比给 195 个点各挂一次监听准，也便宜 */
+  pointer-events: none;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+/* 背面那一半：留一点点，球才有体积 */
+.globe__dot.is-back {
+  opacity: 0.1;
+}
+
+/* 球下的读数行：指到哪个国家就报哪个，没指到时是一句提示 */
+.atlas__readout {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: var(--h, 160px);
-  padding: 0.55rem 0 1.1rem;
-  /* 柱体本身：极淡的洲色从顶线往下褪尽 —— 有体积，但不抢纸色 */
-  background: linear-gradient(
-    to bottom,
-    color-mix(in srgb, var(--region, var(--ai)) 7%, transparent),
-    color-mix(in srgb, var(--region, var(--ai)) 2.5%, transparent) 72%,
-    transparent
-  );
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--region, var(--ai)) 34%, transparent);
+  align-items: center;
+  justify-content: center;
+  min-height: 1.7rem;
+  margin: 0.1rem 0 0;
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+  text-align: center;
+}
+.atlas__readout-text {
   color: var(--ink);
-  transition:
-    background-color var(--dur-3) var(--ease-out),
-    box-shadow var(--dur-3) var(--ease-out);
 }
-.plate:hover {
-  background: linear-gradient(
-    to bottom,
-    color-mix(in srgb, var(--region, var(--ai)) 15%, transparent),
-    color-mix(in srgb, var(--region, var(--ai)) 5%, transparent) 72%,
-    transparent
-  );
-  box-shadow: inset 0 2px 0 var(--region, var(--ai));
+.atlas__readout.is-live .atlas__readout-hint {
+  display: none;
+}
+.atlas__readout:not(.is-live) .atlas__readout-text {
+  display: none;
 }
 
-/* 柱顶的数值：它浮得有多高，就是这一列的数据 */
-.plate__value {
-  display: flex;
-  align-items: baseline;
-  gap: 0.25rem;
+/* 六行索引：等高、等重，读起来是一份目录，不是一张排行榜 */
+.atlas__index {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+.atlas__index li + li {
+  border-top: 1px solid var(--rule-3);
+}
+.atlas__row {
+  display: grid;
+  grid-template-columns: 0.42rem 1.5rem minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 0.8rem;
+  padding: 0.76rem 0.3rem;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background-color var(--dur-2) var(--ease-out);
+}
+.atlas__row:hover {
+  background: color-mix(in srgb, var(--region, var(--ai)) 5%, transparent);
+}
+.atlas__mark {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: var(--region, var(--ai));
+  opacity: 0.9;
+}
+.atlas__num {
   font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.14em;
   color: var(--ink-3);
-  transition: color var(--dur-3) var(--ease-out);
 }
-.plate__value b {
-  font-size: 0.92rem;
-  font-weight: 500;
-  color: var(--ink-2);
-  font-variant-numeric: tabular-nums;
-  transition: color var(--dur-3) var(--ease-out);
-}
-.plate__value span {
-  font-size: 0.56rem;
-  letter-spacing: 0.06em;
-}
-
-.plate__base {
+.atlas__body {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.08rem;
+  min-width: 0;
 }
-.plate__num {
-  font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.18em;
-  color: var(--ink-3);
-  transition: color var(--dur-3) var(--ease-out);
-}
-.plate__name {
+.atlas__name {
   font-family: var(--f-display);
-  font-weight: 500;
-  font-size: clamp(1.45rem, 2.3vw, 2.05rem);
-  line-height: 1.04;
+  font-size: clamp(1.08rem, 1.5vw, 1.32rem);
+  line-height: 1.15;
   letter-spacing: 0.02em;
-  transition:
-    color var(--dur-3) var(--ease-out),
-    transform var(--dur-3) var(--ease-out);
+  transition: color var(--dur-2) var(--ease-out);
 }
-.plate__sub {
-  font-family: var(--f-mono);
-  font-size: var(--t--2);
-  letter-spacing: 0.04em;
-  color: var(--ink-3);
-}
-
-.plate:hover .plate__num,
-.plate:hover .plate__name,
-.plate:hover .plate__value b {
+.atlas__row:hover .atlas__name,
+.atlas__row.is-hot .atlas__name {
   color: var(--region, var(--ai));
 }
-.plate:hover .plate__name {
-  transform: translateY(-2px);
+.atlas__sub {
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  color: var(--ink-3);
+}
+.atlas__count {
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  color: var(--ink-3);
+  text-align: right;
+  white-space: nowrap;
+}
+.atlas__count b {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
 }
 
-/* 窄屏：竖柱子会读成六块空白，所以整块转 90° ——
-   一个洲一行，柱子的长度就是国家数，从左边往右长。
-   读法变了（竖看 → 横看），但「数据即版式」这件事没变。 */
-@media (max-width: 980px) {
-  .regions {
-    display: flex;
-    flex-direction: column;
-    /* 桌面版是 align-items:end（柱子要对齐基线），竖排时必须改回 stretch，
-       否则每一行都会缩成内容的宽度、贴到右边去 */
-    align-items: stretch;
-    gap: 0;
-    padding-top: 0.5rem;
+/* 窄屏：地球在上，索引在下。球缩到 22rem —— 再小点就点不中了。 */
+@media (max-width: 900px) {
+  .atlas {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.4rem;
+    justify-items: center;
+    padding-top: 0.4rem;
   }
-  .plate,
-  .plate:hover {
-    height: auto;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 0.72rem 0 0.72rem 0.95rem;
-    background: none;
-    box-shadow: none;
-    border-top: 1px solid var(--rule-3);
+  .atlas__globe {
+    width: min(100%, 21rem);
   }
-  .plate:first-child,
-  .plate:first-child:hover {
-    border-top: 0;
-  }
-  /* 横过来的柱子：--w 是归一化后的百分比，同样由构建期算好 */
-  .plate::before {
-    content: '';
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: var(--w, 50%);
-    background: linear-gradient(
-      to right,
-      color-mix(in srgb, var(--region, var(--ai)) 10%, transparent),
-      color-mix(in srgb, var(--region, var(--ai)) 4%, transparent)
-    );
-    border-left: 2px solid color-mix(in srgb, var(--region, var(--ai)) 46%, transparent);
-    transition: background var(--dur-3) var(--ease-out);
-  }
-  .plate:hover::before {
-    background: linear-gradient(
-      to right,
-      color-mix(in srgb, var(--region, var(--ai)) 20%, transparent),
-      color-mix(in srgb, var(--region, var(--ai)) 5%, transparent)
-    );
-    border-left-color: var(--region, var(--ai));
-  }
-  .plate > * {
-    position: relative;
-    z-index: 1;
-  }
-  .plate__value {
-    order: 2;
-    flex: none;
-  }
-  .plate__value b {
-    font-size: 1rem;
-  }
-  .plate__value span {
-    font-size: 0.62rem;
-  }
-  .plate__base {
-    gap: 0.22rem;
-  }
-  .plate__name {
-    font-size: clamp(1.24rem, 3.4vw, 1.6rem);
+  .atlas__index {
+    width: 100%;
   }
 }
 

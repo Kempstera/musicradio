@@ -3,7 +3,7 @@
 //
 // 只保留三件事：
 //   1. 核心视觉：清晨窗边的一张纸（晨光、毛笔题字、竖排书脊、读数行）
-//   2. 六大洲目次（点线引导，像一本书的目录）
+//   2. 大洲巡礼：桌上的一颗地球 + 一份六行的索引
 //   3. 页脚（站点简介、关于、统计、声明，由 Footer 组件承担）
 //
 // 电台列表、播放器、国家卡片全部在 /explore，首页不加载 content-blob，
@@ -11,6 +11,8 @@
 import Base from '../layouts/Base.astro';
 import { CONTINENTS, SUBREGIONS } from '../lib/country';
 import { allCountries, countriesByContinent } from '../data';
+import { GLOBE_POINTS } from '../data/globe-points';
+import { graticule, project, CX, CY, R, VIEWBOX, INITIAL_YAW } from '../lib/globe';
 import { t0, CONTINENT_LABELS } from '../lib/i18n';
 import radiosData from '../data/radios.json';
 
@@ -24,8 +26,13 @@ const totalRadios = allCountries.reduce((sum, c) => {
   return sum + notable + fetched;
 }, 0);
 
-// 柱高归一化用：取国家数最多的那个洲当满刻度
-const maxCount = Math.max(...CONTINENTS.map((c) => countriesByContinent(c.id).length), 1);
+// 地球的首帧在构建期就算好 —— JS 没跑起来时也是一颗完整的地球，只是不转。
+const gridPaths = graticule(INITIAL_YAW);
+const globeDots = GLOBE_POINTS.map((p, i) => {
+  const [x, y, z] = project(p[2], p[3], INITIAL_YAW);
+  return { i, continent: p[1], x, y, front: z > 0 };
+});
+const globeData = JSON.stringify(GLOBE_POINTS);
 ---
 
 <Base>
@@ -82,37 +89,89 @@ const maxCount = Math.max(...CONTINENTS.map((c) => countriesByContinent(c.id).le
         </p>
       </div>
 
-      {/* 六大洲：一排柱子，柱高就是该洲的国家数。数据本身即版式。
-          --h 在构建期算好写进内联样式，CSS 不猜数字。 */}
-      <div class="regions" data-reveal>
-        {
-          CONTINENTS.map((c, i) => {
-            const n = countriesByContinent(c.id).length;
-            const subs = SUBREGIONS.filter((s) => s.continent === c.id);
-            return (
-              <a
-                class="plate"
-                href={`/explore#${c.id}`}
-                data-region={c.id}
-                style={`--h:${Math.round(96 + (n / maxCount) * 224)}px;--w:${Math.round((n / maxCount) * 100)}%`}
-              >
-                {/* 数值钉在柱顶：柱有多高，数字就浮多高，这一列本身就是刻度 */}
-                <span class="plate__value">
-                  <b>{n}</b>
-                  <span data-i18n="regionUnit">{t0.regionUnit}</span>
-                </span>
-                <span class="plate__base">
-                  <span class="plate__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-                  <span class="plate__name" data-continent={c.id}>{enLabel(c.id) || c.label}</span>
-                  <span class="plate__sub">
-                    {subs.length} <span data-i18n="subdivisionUnit">{t0.subdivisionUnit}</span>
-                  </span>
-                </span>
-              </a>
-            );
-          })
-        }
+      {/* 桌上的地球。
+          以前这里是六根柱子（柱高＝国家数）—— 但「高低」天然会被读成「主次」，
+          于是国家最多的非洲看起来像整站的中心。地球不排座次：每个国家都是球面上
+          一样大的一个点，转动它、指到它、点进去。规模只写在右边的索引里。 */}
+      <div class="atlas" data-globe data-reveal>
+        <div class="atlas__globe">
+          <svg class="globe" viewBox={`0 0 ${VIEWBOX} ${VIEWBOX}`} aria-hidden="true" focusable="false">
+            <defs>
+              <radialGradient id="globe-sheen" cx="36%" cy="28%" r="82%">
+                <stop offset="0%" stop-color="#fffdf8" stop-opacity="0.72"></stop>
+                <stop offset="46%" stop-color="#fffdf8" stop-opacity="0.26"></stop>
+                <stop offset="100%" stop-color="#fffdf8" stop-opacity="0"></stop>
+              </radialGradient>
+            </defs>
+            <circle class="globe__sea" cx={CX} cy={CY} r={R}></circle>
+            <circle class="globe__sheen" cx={CX} cy={CY} r={R}></circle>
+            <g class="globe__grid">
+              {gridPaths.map((d) => <path d={d}></path>)}
+            </g>
+            <g class="globe__dots">
+              {
+                CONTINENTS.map((c) => (
+                  <g data-region={c.id}>
+                    {globeDots
+                      .filter((d) => d.continent === c.id)
+                      .map((d) => (
+                        <circle
+                          class:list={['globe__dot', !d.front && 'is-back']}
+                          data-i={d.i}
+                          cx={d.x.toFixed(1)}
+                          cy={d.y.toFixed(1)}
+                          r={d.front ? '3.1' : '2.2'}
+                        />
+                      ))}
+                  </g>
+                ))
+              }
+            </g>
+            <circle class="globe__limb" cx={CX} cy={CY} r={R}></circle>
+          </svg>
+
+          <p class="atlas__readout">
+            <span class="atlas__readout-hint" data-i18n="globeHint">{t0.globeHint}</span>
+            <span class="atlas__readout-text"></span>
+          </p>
+        </div>
+
+        <ol class="atlas__index">
+          {
+            CONTINENTS.map((c, i) => {
+              const n = countriesByContinent(c.id).length;
+              const subs = SUBREGIONS.filter((s) => s.continent === c.id);
+              return (
+                <li>
+                  <a class="atlas__row" href={`/explore#${c.id}`} data-region={c.id}>
+                    <span class="atlas__mark" aria-hidden="true" />
+                    <span class="atlas__num" aria-hidden="true">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span class="atlas__body">
+                      <span class="atlas__name" data-continent={c.id}>
+                        {enLabel(c.id) || c.label}
+                      </span>
+                      <span class="atlas__sub">
+                        {subs.length} <span data-i18n="subdivisionUnit">{t0.subdivisionUnit}</span>
+                      </span>
+                    </span>
+                    <span class="atlas__count">
+                      <b>{n}</b> <span data-i18n="regionUnit">{t0.regionUnit}</span>
+                    </span>
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ol>
       </div>
+
+      <script type="application/json" id="globe-data" set:html={globeData}></script>
     </div>
   </section>
 </Base>
+
+<script>
+  import '../scripts/globe';
+</script>
