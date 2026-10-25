@@ -13,6 +13,8 @@ import { CONTINENTS, SUBREGIONS } from '../lib/country';
 import { allCountries, countriesByContinent } from '../data';
 import { GLOBE_POINTS } from '../data/globe-points';
 import { graticule, project, CX, CY, R, VIEWBOX, INITIAL_YAW } from '../lib/globe';
+import { parseLand, landPaths } from '../lib/land';
+import { LAND } from '../data/land';
 import { t0, CONTINENT_LABELS } from '../lib/i18n';
 import radiosData from '../data/radios.json';
 
@@ -28,6 +30,8 @@ const totalRadios = allCountries.reduce((sum, c) => {
 
 // 地球的首帧在构建期就算好 —— JS 没跑起来时也是一颗完整的地球，只是不转。
 const gridPaths = graticule(INITIAL_YAW);
+// 海岸线同样在构建期算好首帧
+const landD = landPaths(parseLand(LAND), INITIAL_YAW);
 const globeDots = GLOBE_POINTS.map((p, i) => {
   const [x, y, z] = project(p[2], p[3], INITIAL_YAW);
   return { i, continent: p[1], x, y, front: z > 0 };
@@ -37,9 +41,6 @@ const globeData = JSON.stringify(GLOBE_POINTS);
 
 <Base>
   <section class="hero">
-    {/* 晨光：右上角一团极淡的暖白，纸上唯一的光源 */}
-    <div class="hero__light" aria-hidden="true"></div>
-
     <div class="container hero__wrap">
       {/* 竖排书脊：只在宽屏出现，给左边缘一条可以「读」的线 */}
       <div class="hero__side" aria-hidden="true">
@@ -108,6 +109,10 @@ const globeData = JSON.stringify(GLOBE_POINTS);
             <g class="globe__grid">
               {gridPaths.map((d) => <path d={d}></path>)}
             </g>
+            {/* 海岸线：细过经纬网一点点，压在点下面 —— 点才是主角 */}
+            <g class="globe__land">
+              {landD.map((d) => <path d={d}></path>)}
+            </g>
             <g class="globe__dots">
               {
                 CONTINENTS.map((c) => (
@@ -130,8 +135,9 @@ const globeData = JSON.stringify(GLOBE_POINTS);
             <circle class="globe__limb" cx={CX} cy={CY} r={R}></circle>
           </svg>
 
+          {/* 这里平时是空的：只有指针停在某个国家的点上才报名字。
+              高度是固定的，所以文字出现/消失不会把下面的索引顶动。 */}
           <p class="atlas__readout">
-            <span class="atlas__readout-hint" data-i18n="globeHint">{t0.globeHint}</span>
             <span class="atlas__readout-text"></span>
           </p>
         </div>
@@ -173,6 +179,7 @@ const globeData = JSON.stringify(GLOBE_POINTS);
       </div>
 
       <script type="application/json" id="globe-data" set:html={globeData}></script>
+      <script type="application/json" id="land-data" set:html={JSON.stringify(LAND)}></script>
     </div>
   </section>
 </Base>

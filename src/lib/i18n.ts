@@ -34,7 +34,6 @@ export interface Translation {
   searchPlaceholder: string;
   noResults: string;
   exploreTitle: string;
-  globeHint: string;
   exploreCount: string;
   continentsTitle: string;
   navHome: string;
@@ -132,7 +131,6 @@ const zhCN: Translation = {
   searchPlaceholder: '搜索国家或地区…',
   noResults: '没有匹配的国家或地区',
   exploreTitle: '按大洲巡礼',
-  globeHint: '拖动地球转动 · 点一个国家',
   exploreCount: '个国家与地区',
   continentsTitle: '按大洲巡礼',
   navHome: '首页',
@@ -222,7 +220,6 @@ const zhTW: Translation = {
   searchPlaceholder: '搜尋國家或地區…',
   noResults: '沒有匹配的國家或地區',
   exploreTitle: '按大洲巡禮',
-  globeHint: '拖動地球轉動 · 點一個國家',
   exploreCount: '個國家與地區',
   continentsTitle: '按大洲巡禮',
   navHome: '首頁',
@@ -312,7 +309,6 @@ const en: Translation = {
   searchPlaceholder: 'Search a country…',
   noResults: 'No country matched that search',
   exploreTitle: 'Explore by Continent',
-  globeHint: 'Drag to spin · tap a country',
   exploreCount: 'countries & regions',
   continentsTitle: 'Explore by Continent',
   navHome: 'Home',
@@ -403,7 +399,6 @@ const cy: Translation = {
   searchPlaceholder: 'Chwilio gwlad…',
   noResults: 'Dim gwlad yn cyfateb i\'r chwiliad',
   exploreTitle: 'Archwilio yn ôl Cyfandir',
-  globeHint: 'Llusgwch i droi · tapiwch wlad',
   exploreCount: 'gwlad a rhanbarth',
   continentsTitle: 'Archwilio yn ôl Cyfandir',
   navHome: 'Hafan',
@@ -493,7 +488,6 @@ const fr: Translation = {
   searchPlaceholder: 'Rechercher un pays…',
   noResults: 'Aucun pays ne correspond',
   exploreTitle: 'Explorer par continent',
-  globeHint: 'Faites tourner · touchez un pays',
   exploreCount: 'pays et régions',
   continentsTitle: 'Explorer par continent',
   navHome: 'Accueil',
@@ -584,7 +578,6 @@ const de: Translation = {
   searchPlaceholder: 'Land suchen…',
   noResults: 'Kein Land gefunden',
   exploreTitle: 'Nach Kontinent entdecken',
-  globeHint: 'Ziehen zum Drehen · Land antippen',
   exploreCount: 'Länder & Regionen',
   continentsTitle: 'Nach Kontinent entdecken',
   navHome: 'Startseite',
@@ -675,7 +668,6 @@ const it: Translation = {
   searchPlaceholder: 'Cerca un paese…',
   noResults: 'Nessun paese trovato',
   exploreTitle: 'Esplora per continente',
-  globeHint: 'Trascina per ruotare · tocca un paese',
   exploreCount: 'paesi e regioni',
   continentsTitle: 'Esplora per continente',
   navHome: 'Home',
@@ -766,7 +758,6 @@ const es: Translation = {
   searchPlaceholder: 'Buscar un país…',
   noResults: 'Ningún país coincide',
   exploreTitle: 'Explorar por continente',
-  globeHint: 'Arrastra para girar · toca un país',
   exploreCount: 'países y regiones',
   continentsTitle: 'Explorar por continente',
   navHome: 'Inicio',

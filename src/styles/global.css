@@ -750,31 +750,6 @@ html.mr-lang-fresh .lang-switcher {
   padding: clamp(3rem, 7vw, 5.6rem) 0 clamp(2.6rem, 5vw, 4.2rem);
 }
 
-/* 晨光：右上角一枚极淡的圆，边界是一道更淡的环 —— 像窗帘缝里漏进来的光 */
-.hero__light {
-  position: absolute;
-  top: -14vw;
-  right: -10vw;
-  width: min(58vw, 760px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(255, 252, 244, 0.6) 42%,
-    transparent 68%
-  );
-}
-.hero__light::after {
-  content: '';
-  position: absolute;
-  inset: 12%;
-  border-radius: 50%;
-  border: 1px solid var(--rule-3);
-}
-
 .hero__wrap {
   position: relative;
   z-index: 1;
@@ -1024,11 +999,21 @@ html[lang='zh-TW'] .hero__title {
   fill: url(#globe-sheen);
   pointer-events: none;
 }
+.globe__land path {
+  fill: none;
+  /* 比经纬网重一档、比点轻一档：一眼能认出大陆，又不抢国家点 */
+  /* viewBox 500 显示到 ~430px，1 单位 ≈ 0.86px；0.9 会落在亚像素上被摊薄，
+     要 1.2 以上才是一条实心的发丝线 */
+  stroke: color-mix(in srgb, var(--ink) 45%, transparent);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
 .globe__grid path {
   fill: none;
   /* 经纬网带一点海色，才像一颗印出来的地球仪，而不是白纸上的灰线 */
-  stroke: color-mix(in srgb, var(--ai) 30%, transparent);
-  stroke-width: 0.75;
+  stroke: color-mix(in srgb, var(--ai) 20%, transparent);
+  stroke-width: 0.7;
 }
 .globe__limb {
   fill: none;
@@ -1046,7 +1031,8 @@ html[lang='zh-TW'] .hero__title {
   opacity: 0.1;
 }
 
-/* 球下的读数行：指到哪个国家就报哪个，没指到时是一句提示 */
+/* 球下的读数行：平时是空的，指到哪个国家就报哪个。
+   min-height 必须留着 —— 文字出现/消失不能把下面的索引顶动。 */
 .atlas__readout {
   display: flex;
   align-items: center;
@@ -1062,11 +1048,9 @@ html[lang='zh-TW'] .hero__title {
 .atlas__readout-text {
   color: var(--ink);
 }
-.atlas__readout.is-live .atlas__readout-hint {
-  display: none;
-}
-.atlas__readout:not(.is-live) .atlas__readout-text {
-  display: none;
+.atlas__readout-text:empty::before {
+  /* 空的时候不占内容，只保留高度 */
+  content: '';
 }
 
 /* 六行索引：等高、等重，读起来是一份目录，不是一张排行榜 */

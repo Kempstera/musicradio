@@ -16,6 +16,7 @@ import {
   INITIAL_YAW,
   INITIAL_PITCH,
 } from '../lib/globe';
+import { parseLand, landPaths } from '../lib/land';
 import { LANG_CHANGE_EVENT } from '../lib/i18n';
 
 /** [slug, continent, lat, lng, nameZh, nameEn, iso] */
@@ -25,6 +26,8 @@ const wrap = document.querySelector<HTMLElement>('[data-globe]');
 const svg = wrap?.querySelector<SVGSVGElement>('svg');
 const dataEl = document.getElementById('globe-data');
 const gridEl = wrap?.querySelector<SVGGElement>('.globe__grid');
+const landEl = wrap?.querySelector<SVGGElement>('.globe__land');
+const landRaw = document.getElementById('land-data');
 // 点位在 DOM 里按大洲分组，下标靠 data-i 对回数据行，别依赖 DOM 顺序
 const dotEls: SVGCircleElement[] = [];
 wrap?.querySelectorAll<SVGCircleElement>('.globe__dot').forEach((el) => {
@@ -43,6 +46,10 @@ if (wrap && svg && dataEl && gridEl && dotEls.length && readout && readoutText) 
   const lngRad = rows.map((r) => r[3] * RAD);
 
   const gridEls = Array.from(gridEl.querySelectorAll('path'));
+
+  // 海岸线：数据和元素都是 SSR 出来的，这里只接管「每帧重投影」
+  const landShape = landRaw ? parseLand(JSON.parse(landRaw.textContent || '""')) : null;
+  const landEls = landEl ? Array.from(landEl.querySelectorAll('path')) : [];
 
   // 六大洲的颜色直接从 CSS 变量读，不在 JS 里再抄一份调色板
   const colors: Record<string, string> = {};
@@ -100,6 +107,11 @@ if (wrap && svg && dataEl && gridEl && dotEls.length && readout && readoutText) 
   function draw() {
     const paths = graticule(yaw, INITIAL_PITCH);
     for (let i = 0; i < gridEls.length; i++) gridEls[i].setAttribute('d', paths[i] || '');
+
+    if (landShape) {
+      const land = landPaths(landShape, yaw, INITIAL_PITCH);
+      for (let i = 0; i < landEls.length; i++) landEls[i].setAttribute('d', land[i] || '');
+    }
 
     const cosP = Math.cos(INITIAL_PITCH * RAD);
     const sinP = Math.sin(INITIAL_PITCH * RAD);
