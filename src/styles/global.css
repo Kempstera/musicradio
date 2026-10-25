@@ -153,6 +153,31 @@
   --link: var(--ai);
 }
 
+/* ── 中文字面：中文必须排在日文字体前面 ──────────────────────────────
+   macOS 自带的 Hiragino Sans / Mincho 是日文字体，简体字里有一批它没有
+   （乐 电 罗 纲 带 让 历 严 热 …），浏览器会「逐字」回退到 PingFang SC。
+   于是一行字里混了两套字面：笔形不同、字身在 em 框里的位置也不同，
+   看上去就是「不在一个水平面上、有轻微高低错落」。
+   实测（本机 150 个中文常用字）：Hiragino Sans 缺 24 字，Hiragino Sans GB 缺 0 字
+   —— GB 就是冬青黑体的简体中文版，与 Hiragino Sans 同一套设计，观感几乎不变。
+   所以中文界面把中文字体提到最前，一行字只出一套字面。
+   ※ 新增语言时若正文含中文，务必同样处理，否则会重新出现混排。 */
+html[lang='zh-CN'] {
+  --f-body: 'Hiragino Sans GB', 'PingFang SC', 'Microsoft YaHei',
+    'Noto Sans SC', 'Hiragino Sans', 'Yu Gothic', system-ui, sans-serif;
+  /* 等宽栈里也要塞一个中文字面，否则「首页 / 大洲巡礼 / 留言板」这类
+     由 mono 排的中文会退到随机的系统字体 */
+  --f-mono: ui-monospace, 'SF Mono', 'SFMono-Regular', 'JetBrains Mono', Menlo,
+    Consolas, 'Hiragino Sans GB', 'PingFang SC', 'Microsoft YaHei', monospace;
+}
+html[lang='zh-TW'] {
+  --f-body: 'PingFang TC', 'Microsoft JhengHei', 'Hiragino Sans GB',
+    'PingFang SC', 'Noto Sans TC', 'Hiragino Sans', 'Yu Gothic', system-ui,
+    sans-serif;
+  --f-mono: ui-monospace, 'SF Mono', 'SFMono-Regular', 'JetBrains Mono', Menlo,
+    Consolas, 'PingFang TC', 'Microsoft JhengHei', 'PingFang SC', monospace;
+}
+
 /* 六大洲：同一明度、同一饱和度，只换色相 —— 放在一起才不吵 */
 [data-region='europe'] { --region: #33608f; --region-glow: rgba(51, 96, 143, 0.16); }
 [data-region='asia'] { --region: #b1503a; --region-glow: rgba(177, 80, 58, 0.16); }
