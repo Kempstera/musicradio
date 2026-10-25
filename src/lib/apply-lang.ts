@@ -105,8 +105,11 @@ export function applyUI(lang: Lang, opt: ApplyOptions = {}) {
   const t: Translation = TRANSLATIONS[lang];
   document.documentElement.setAttribute('lang', lang);
   each('[data-i18n]', opt, (el) => {
-    const key = el.getAttribute('data-i18n');
-    if (!key || !(key in t)) return;
+    let key = el.getAttribute('data-i18n');
+    if (!key) return;
+    // 数量为 1 时换单数形：「1 subregion」而不是「1 subregions」
+    if (el.getAttribute('data-n') === '1' && key + 'One' in t) key += 'One';
+    if (!(key in t)) return;
     const v = (t as unknown as Record<string, string>)[key];
     // 输入框没有「文本内容」可言，同样的键要落到 placeholder 上
     if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {

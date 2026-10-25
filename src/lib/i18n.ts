@@ -53,6 +53,8 @@ export interface Translation {
   regionUnit: string;
   subregionUnit: string;
   subdivisionUnit: string;
+  /** 数量为 1 时的单数形（中文等没有单复数的语言可以不写） */
+  subdivisionUnitOne?: string;
   listenRadio: string;
   // 国家详情页
   histSection: string;
@@ -329,6 +331,7 @@ const en: Translation = {
   regionUnit: 'countries/regions',
   subregionUnit: 'countries',
   subdivisionUnit: 'subregions',
+  subdivisionUnitOne: 'subregion',
   listenRadio: 'Listen →',
   histSection: 'History & Culture',
   musicSection: 'Music History',
@@ -509,6 +512,7 @@ const fr: Translation = {
   regionUnit: 'pays/régions',
   subregionUnit: 'pays',
   subdivisionUnit: 'sous-régions',
+  subdivisionUnitOne: 'sous-région',
   listenRadio: 'Écouter →',
   histSection: 'Histoire et culture',
   musicSection: 'Histoire de la musique',
@@ -599,6 +603,7 @@ const de: Translation = {
   regionUnit: 'Länder/Regionen',
   subregionUnit: 'Länder',
   subdivisionUnit: 'Subregionen',
+  subdivisionUnitOne: 'Subregion',
   listenRadio: 'Hören →',
   histSection: 'Geschichte & Kultur',
   musicSection: 'Musikgeschichte',
@@ -689,6 +694,7 @@ const it: Translation = {
   regionUnit: 'paesi/regioni',
   subregionUnit: 'paesi',
   subdivisionUnit: 'sottoregioni',
+  subdivisionUnitOne: 'sottoregione',
   listenRadio: 'Ascolta →',
   histSection: 'Storia e cultura',
   musicSection: 'Storia della musica',
@@ -779,6 +785,7 @@ const es: Translation = {
   regionUnit: 'países/regiones',
   subregionUnit: 'países',
   subdivisionUnit: 'subregiones',
+  subdivisionUnitOne: 'subregión',
   listenRadio: 'Escuchar →',
   histSection: 'Historia y cultura',
   musicSection: 'Historia de la música',

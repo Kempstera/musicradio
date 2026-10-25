@@ -153,7 +153,12 @@ const globeData = JSON.stringify(GLOBE_POINTS);
                         {enLabel(c.id) || c.label}
                       </span>
                       <span class="atlas__sub">
-                        {subs.length} <span data-i18n="subdivisionUnit">{t0.subdivisionUnit}</span>
+                        {subs.length}{' '}
+                        <span data-i18n="subdivisionUnit" data-n={subs.length}>
+                          {subs.length === 1 && t0.subdivisionUnitOne
+                            ? t0.subdivisionUnitOne
+                            : t0.subdivisionUnit}
+                        </span>
                       </span>
                     </span>
                     <span class="atlas__count">
