@@ -38,6 +38,12 @@ const subregionLabel = (SUBREGION_LABELS['en'] as Record<string, string>)[countr
 
 const pageTitle = enName === country.nameEn ? enName : `${enName} · ${country.nameEn}`;
 
+// 拉丁转写行：本地名与英文名相同时（France / France）不重复显示成「FRANCE · FRANCE」
+const heroLatin =
+  country.nameLocal && country.nameLocal !== country.nameEn
+    ? `${country.nameEn} · ${country.nameLocal}`
+    : country.nameEn;
+
 const fetchedStations: Station[] = (radios[country.iso] || []).map((s, i) => {
   const sn = STATION_NOTES[s.url];
   return {
@@ -125,7 +131,7 @@ const stationNotesBlobJson = JSON.stringify(stationNotesBlob).replace(/</g, '\\u
         </nav>
         <div class="country-hero__flag" aria-hidden="true">{country.flag}</div>
         <h1 class="country-hero__title" data-ct="name" data-slug={country.slug}>{enName}</h1>
-        <div class="country-hero__en">{country.nameEn}{country.nameLocal ? ` · ${country.nameLocal}` : ''}</div>
+        <div class="country-hero__en">{heroLatin}</div>
         <div class="country-hero__meta">
           <span class="chip">📍 <span data-i18n="capitalLabel">{t0.capitalLabel}</span> <span data-geo-zh={country.capital} data-geo-en={capitalEn(country.capital)}>{capitalEn(country.capital)}</span></span>
           <span class="chip">🗣️ {

@@ -9,7 +9,8 @@ const description = t0.boardPageDesc;
 
 <Base title={title} description={description}>
   <section class="explore-head">
-    <div class="container">
+    <!-- 抬头与正文用同一根窄栏，否则标题甩在最左、卡片浮在正中，像版式出错 -->
+    <div class="container container--narrow">
       <div class="explore-head__inner">
         <div class="section__kicker">Guestbook</div>
         <h1 class="explore-head__title" data-i18n="navGuestbook">{t0.navGuestbook}</h1>

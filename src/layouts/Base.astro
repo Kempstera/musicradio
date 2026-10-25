@@ -25,7 +25,7 @@ const desc = description || t0.heroDesc;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#06080b" />
+    <meta name="theme-color" content="#f6f2e9" />
     <script is:inline>
       // ① 标记 JS 可用：滚动进场等「先隐藏后显现」的效果只在这个类存在时生效，
       //    脚本一旦失效，内容会以正常状态呈现，而不是永远透明。
@@ -100,50 +100,23 @@ const desc = description || t0.heroDesc;
     <slot />
     <Footer />
 
-    <!-- 氛围层：光标辉光 + 频率读数。纯装饰，aria-hidden，不参与交互 -->
-    <div class="cursor-glow" aria-hidden="true"></div>
-    <div class="hud" aria-hidden="true">
-      <span class="hud__bars"><i></i><i></i><i></i><i></i><i></i></span>
-      <span class="hud__freq">088.0</span>
-      <span>MHz</span>
-    </div>
+    <!-- 阅读进度：顶部一道藍色细线，随读到哪儿生长。纯装饰，aria-hidden -->
+    <div class="readline" aria-hidden="true"><i></i></div>
 
     <script is:inline>
-      // ── 氛围与动效 ────────────────────────────────────────────────
-      // 全部用 rAF 合并到同一帧，避免滚动时反复触发布局读取。
+      // ── 阅读进度 ──────────────────────────────────────────────────
+      // 用 transform: scaleX 而不是 width，避免每帧触发布局。
       (function () {
-        var glow = document.querySelector('.cursor-glow');
-        var hud = document.querySelector('.hud');
-        var freq = document.querySelector('.hud__freq');
+        var bar = document.querySelector('.readline i');
         var docEl = document.documentElement;
-
-        var pointer = { x: -999, y: -999, active: false };
         var ticking = false;
 
         function render() {
           ticking = false;
-
-          // 光标辉光：transform 位移，不触发重排
-          if (glow && pointer.active) {
-            glow.style.transform = 'translate3d(' + pointer.x + 'px,' + pointer.y + 'px,0)';
-          }
-
-          // 频率读数：把整页滚动进度映射到 88.0–108.0 MHz。
-          // 这不是装饰性的随机数 —— 它确实随你读到页面哪一段而变化。
-          if (hud && freq) {
-            var max = docEl.scrollHeight - window.innerHeight;
-            var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
-            var v = 88 + p * 20;
-            freq.textContent = (v < 100 ? '0' : '') + v.toFixed(1);
-            // 首屏之内不显示，避免和 Hero 抢注意力；
-            // 滚到页脚时也收起 —— 否则会压在版权小字上。
-            var nearBottom = window.scrollY + window.innerHeight > docEl.scrollHeight - 180;
-            if (!nearBottom && window.scrollY > window.innerHeight * 0.7) {
-              hud.classList.add('is-on');
-            } else {
-              hud.classList.remove('is-on');
-            }
-          }
+          if (!bar) return;
+          var max = docEl.scrollHeight - window.innerHeight;
+          var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+          bar.style.transform = 'scaleX(' + p + ')';
         }
 
         function request() {
@@ -153,17 +126,6 @@ const desc = description || t0.heroDesc;
           }
         }
 
-        window.addEventListener(
-          'pointermove',
-          function (e) {
-            if (e.pointerType === 'touch') return;
-            pointer.x = e.clientX;
-            pointer.y = e.clientY;
-            pointer.active = true;
-            request();
-          },
-          { passive: true }
-        );
         window.addEventListener('scroll', request, { passive: true });
         window.addEventListener('resize', request);
         request();
