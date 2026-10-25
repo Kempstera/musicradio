@@ -2,7 +2,7 @@
 // 极简首页 —— MORNING WINDOW / 朝の窓辺
 //
 // 只保留三件事：
-//   1. 核心视觉：清晨窗边的一张纸（晨光、明朝大标题、竖排书脊、读数行）
+//   1. 核心视觉：清晨窗边的一张纸（晨光、毛笔题字、竖排书脊、读数行）
 //   2. 六大洲目次（点线引导，像一本书的目录）
 //   3. 页脚（站点简介、关于、统计、声明，由 Footer 组件承担）
 //
@@ -61,14 +61,6 @@ const totalRadios = allCountries.reduce((sum, c) => {
           <i aria-hidden="true"></i>
           <span>FM 88.0 – 108.0</span>
         </div>
-      </div>
-
-      {/* 扉页题词：站名出处那两句，用毛笔字竖排落在纸的右半边。
-          每句单独一列（row-reverse 让第一句在最右），这样两列的顶边由盒模型对齐，
-          不依赖 <br> 折行后的行盒推算。纯装饰，读屏跳过；窄屏整块隐藏。 */}
-      <div class="hero__verse" aria-hidden="true">
-        <p class="hero__verse-line">今夜闻君琵琶语</p>
-        <p class="hero__verse-line">如听仙乐耳暂明</p>
       </div>
     </div>
   </section>

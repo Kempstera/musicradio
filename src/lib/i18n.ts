@@ -118,7 +118,7 @@ export interface Translation {
 }
 
 const zhCN: Translation = {
-  slogan: '如听仙乐耳暂明',
+  slogan: '如聽仙樂耳暫明',
   sloganAttr: '白居易《琵琶行》',
   subtitle: 'World Music Radio · 一场横跨六大洲的耳朵之旅',
   heroDesc:

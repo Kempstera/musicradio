@@ -15,11 +15,8 @@ const isBoard = path === '/message-board';
 <header class="site-header">
   <div class="container site-header__inner">
     <a class="brand" href="/" aria-label={t0.navHome}>
-      <span class="brand__mark" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M9 18V5.5c0-.6.5-1 1.1-1l8.4 1.6c.5.1.9.6.9 1.1V16a2 2 0 1 1-2-2V8.3l-6.4-1.2V18a2 2 0 1 1-2-2V18Zm-2-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" />
-        </svg>
-      </span>
+      {/* 页眉不放图形标记：匾左边再缀一枚印，字就成了「配图说明」，抢了匾的读法。
+          印只留在浏览器标签页（favicon.svg），页眉是纯粹的一行题字。 */}
       <span>
         {SITE_NAME}
         <span class="brand__sub">World Music Radio</span>
