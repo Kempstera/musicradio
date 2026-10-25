@@ -71,6 +71,29 @@ const desc = description || t0.heroDesc;
         );
       })();
     </script>
+    <style is:inline>
+      /* 老访客带着「非英语」的选择进来时，HTML 里预渲染的仍是英语。
+         先把内容压住（body 占位不变、不会跳动），等语言落地再由脚本撤掉，
+         否则打开任何一页都会先闪一大片英文。脚本失效时下面有 2.5s 兜底。 */
+      html.mr-i18n-pending body {
+        opacity: 0;
+      }
+      body {
+        transition: opacity 0.18s ease;
+      }
+    </style>
+    <script is:inline>
+      (function () {
+        try {
+          var s = window.localStorage.getItem('mr_lang');
+          if (!s || s === 'en') return;
+          document.documentElement.classList.add('mr-i18n-pending');
+          window.__mrI18nTimer = setTimeout(function () {
+            document.documentElement.classList.remove('mr-i18n-pending');
+          }, 2500);
+        } catch (e) {}
+      })();
+    </script>
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
@@ -86,6 +109,12 @@ const desc = description || t0.heroDesc;
   </head>
   <body>
     <Header />
+    <script>
+      // 页面一解析完就把「已选语言」铺到全站文案上 —— 不等 React 水合。
+      // 这段是整个语言一致性的主力：即使某个岛加载失败，页面也已经是正确语言。
+      import { applySavedLang } from '../lib/apply-lang';
+      applySavedLang();
+    </script>
     <script is:inline>
       // 在 HTML 解析阶段就把切换器选中项对齐到已保存语言，
       // 避免「HTML 已渲染 → React 水合完成」这段时间里下拉框显示错误的语言

@@ -90,8 +90,6 @@ const totalRadios = allCountries.reduce((sum, c) => {
               <div class="explore-sec__lead">
                 <span class="explore-sec__num" aria-hidden="true">{String(ci + 1).padStart(2, '0')}</span>
                 <div>
-                  {/* 英文界面下大洲英文名与标题重复，由 CSS 收起（见 global.css） */}
-                  <div class="section__kicker section__kicker--region">{c.en}</div>
                   <h2 class="section__title" data-continent={c.id}>{enLabel(c.id) || c.label}</h2>
                 </div>
               </div>

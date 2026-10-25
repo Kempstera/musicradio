@@ -3,6 +3,7 @@ import { listFavorites, subscribe, toggleFavorite, initFavorites, favoriteCount,
 import { getCurrentUrl, isPlaying, play, stop, subscribe as subscribeAudio } from '../lib/audio';
 import { getTranslation, getInitialLang, LANG_CHANGE_EVENT } from '../lib/i18n';
 import type { Lang } from '../lib/i18n';
+import { localizedCountryName } from '../lib/apply-lang';
 
 function HeartIcon({ filled }: { filled: boolean }) {
   return (
@@ -88,7 +89,9 @@ export default function MyFavorites() {
                   {f.country && (
                     <div className="fav-item__country">
                       {f.countrySlug ? (
-                        <a href={`/countries/${f.countrySlug}`}>{f.country}</a>
+                        <a href={`/countries/${f.countrySlug}`}>
+                          {localizedCountryName(lang, f.countrySlug, f.country)}
+                        </a>
                       ) : (
                         <span>{f.country}</span>
                       )}

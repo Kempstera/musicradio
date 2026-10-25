@@ -23,6 +23,9 @@ const totalRadios = allCountries.reduce((sum, c) => {
   const fetched = c.radioMode === 'notable-only' ? 0 : (radios[c.iso] || []).length;
   return sum + notable + fetched;
 }, 0);
+
+// 柱高归一化用：取国家数最多的那个洲当满刻度
+const maxCount = Math.max(...CONTINENTS.map((c) => countriesByContinent(c.id).length), 1);
 ---
 
 <Base>
@@ -74,28 +77,37 @@ const totalRadios = allCountries.reduce((sum, c) => {
         </div>
         <p class="home-continents__meta">
           <b>{allCountries.length}</b> <span data-i18n="regionUnit">{t0.regionUnit}</span>
+          <i aria-hidden="true"></i>
+          <b>{totalRadios}</b> <span data-i18n="favCountUnit">{t0.favCountUnit}</span>
         </p>
       </div>
 
-      {/* 目次：序号由 CSS 计数器生成，中间用点线把名称与数目连起来。
-          data-reveal 放在整个列表上而非每一行 —— 行元素本身有 hover 过渡，
-          若在其上设 transition-delay，悬停响应也会被一起延迟。 */}
+      {/* 六大洲：一排柱子，柱高就是该洲的国家数。数据本身即版式。
+          --h 在构建期算好写进内联样式，CSS 不猜数字。 */}
       <div class="regions" data-reveal>
         {
-          CONTINENTS.map((c) => {
+          CONTINENTS.map((c, i) => {
             const n = countriesByContinent(c.id).length;
             const subs = SUBREGIONS.filter((s) => s.continent === c.id);
             return (
-              <a class="region-card" href={`/explore#${c.id}`} data-region={c.id}>
-                <span class="region-card__title">
-                  <span class="region-card__name" data-continent={c.id}>{enLabel(c.id) || c.label}</span>
-                  <span class="region-card__en">{c.en}</span>
+              <a
+                class="plate"
+                href={`/explore#${c.id}`}
+                data-region={c.id}
+                style={`--h:${Math.round(96 + (n / maxCount) * 224)}px;--w:${Math.round((n / maxCount) * 100)}%`}
+              >
+                {/* 数值钉在柱顶：柱有多高，数字就浮多高，这一列本身就是刻度 */}
+                <span class="plate__value">
+                  <b>{n}</b>
+                  <span data-i18n="regionUnit">{t0.regionUnit}</span>
                 </span>
-                <span class="region-card__leader" aria-hidden="true"></span>
-                <span class="region-card__count">
-                  {n} <span data-i18n="regionUnit">{t0.regionUnit}</span> · {subs.length} <span data-i18n="subdivisionUnit">{t0.subdivisionUnit}</span>
+                <span class="plate__base">
+                  <span class="plate__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="plate__name" data-continent={c.id}>{enLabel(c.id) || c.label}</span>
+                  <span class="plate__sub">
+                    {subs.length} <span data-i18n="subdivisionUnit">{t0.subdivisionUnit}</span>
+                  </span>
                 </span>
-                <span class="region-card__arrow" aria-hidden="true">→</span>
               </a>
             );
           })
