@@ -25,40 +25,90 @@
    设计变量
    -------------------------------------------------------------------------- */
 :root {
-  /* 色彩 —— 纸墨金 */
-  --paper: #f6f1e7;
-  --paper-2: #efe8d8;
-  --surface: #fcfaf4;
-  --surface-deep: #ece4d0;
-  --ink: #211d15;
-  --ink-soft: #544c3c;
-  --ink-faint: #8a8070;
-  --line: #ddd2ba;
-  --line-soft: #e7dfcc;
+  color-scheme: light;
 
+  /* ── 色彩：桌面 / 纸面 双层 ─────────────────────────────────────────
+     参考 hugo-theme-epistle 的 --color-desk / --color-paper 分层：
+     页面是一张「桌面」，卡片是摆在桌上的「纸」。
+     两者必须拉开明度差，卡片才会被读成实体，而不是同一片色块里的边框。
+     明度阶梯（由深到浅）：
+       --desk  <  --surface-deep  <  --paper-2  <  --surface
+     ------------------------------------------------------------------ */
+  --desk: #e5d9bd; /* 桌面：整页底色 */
+  --desk-deep: #d8caa6; /* 更深的桌面：页脚「封底」 */
+  --paper: #fdfaf1; /* 纸面：卡片、纸页（同时用作深底上的浅色文字） */
+  --paper-2: #f3ebd9; /* 次级纸面：页脚、次级色带 */
+  --surface: var(--paper);
+  --surface-deep: #efe6d0; /* 凹陷面：标签、胶囊、切换器底槽 */
+
+  /* ── 墨阶 ─────────────────────────────────────────────────────────── */
+  --ink: #211d15;
+  --ink-soft: #4f4838;
+  --ink-faint: #7b7060; /* 原 #8a8070 在桌面底上对比不足，压深一档 */
+  --line: #d8cbb0;
+  --line-soft: #e4d9c1;
+
+  /* ── 金与强调色 ───────────────────────────────────────────────────── */
   --gold: #b0893a;
   --gold-deep: #8a6724;
-  --gold-pale: #eadcc0;
+  --gold-ink: #7a5a1c; /* 金色用于「文字」时的对比度达标档 */
+  --gold-pale: #ecdfc2;
+  --grout: rgba(176, 137, 58, 0.22); /* 圆点纹理的墨色 */
+  --grid-line: rgba(122, 104, 68, 0.055); /* 经纬网格线 */
+
   --verde: #35604f;
   --wine: #7e3b33;
   --indigo: #4a4a8c;
   --terra: #a95c3c;
+  --vermilion: #a8402c; /* 原样式引用了但从未定义，补上 */
 
-  /* 字体 */
+  /* ── 字体 ─────────────────────────────────────────────────────────── */
   --font-display: 'Fraunces', 'Songti SC', 'STSong', 'Noto Serif SC', 'SimSun', Georgia, serif;
   --font-body: 'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
   --font-serif: 'Songti SC', 'STSong', 'Noto Serif SC', 'SimSun', 'Fraunces', Georgia, serif;
 
-  /* 尺寸 */
-  --measure: 72ch;
-  --gutter: clamp(1.25rem, 4vw, 3rem);
-  --radius: 14px;
-  --radius-sm: 8px;
+  /* ── 字号音阶（流体）─────────────────────────────────────────────────
+     参考 modern-fluid-typography-editor 的做法：用 clamp() 让字号随视口
+     平滑变化，且每一档的**增长速率不同**——标题涨得比正文快。
+     这样窄屏不会挤，宽屏不会空，中间也没有断点跳变。
+     ------------------------------------------------------------------ */
+  --step--2: clamp(0.72rem, 0.71rem + 0.05vw, 0.76rem);
+  --step--1: clamp(0.82rem, 0.80rem + 0.10vw, 0.89rem);
+  --step-0: clamp(1rem, 0.96rem + 0.20vw, 1.08rem);
+  --step-1: clamp(1.13rem, 1.06rem + 0.34vw, 1.30rem);
+  --step-2: clamp(1.35rem, 1.22rem + 0.58vw, 1.62rem);
+  --step-3: clamp(1.62rem, 1.40rem + 0.98vw, 2.08rem);
+  --step-4: clamp(1.96rem, 1.60rem + 1.60vw, 2.68rem);
+  --step-5: clamp(2.40rem, 1.78rem + 2.72vw, 3.60rem);
 
-  /* 阴影 */
-  --shadow-sm: 0 1px 2px rgba(33, 29, 21, 0.06), 0 2px 8px rgba(33, 29, 21, 0.05);
-  --shadow-md: 0 6px 24px -6px rgba(33, 29, 21, 0.16), 0 2px 8px rgba(33, 29, 21, 0.06);
-  --shadow-lg: 0 24px 60px -20px rgba(33, 29, 21, 0.3);
+  /* 行高 */
+  --lh-tight: 1.16;
+  --lh-snug: 1.45;
+  --lh-body: 1.78;
+  --lh-loose: 1.95;
+
+  /* 布局 */
+  --measure: 68ch;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --header-h: 68px;
+  --radius: 12px;
+  --radius-sm: 7px;
+  --radius-xs: 4px;
+
+  /* 缓动与时长：全站统一，避免各处 ease 各写各的 */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.32, 0.64, 1);
+  --dur-1: 140ms;
+  --dur-2: 220ms;
+  --dur-3: 380ms;
+
+  /* 阴影：贴近现实的两段式（接触阴影 + 环境阴影） */
+  --shadow-sm: 0 1px 1px rgba(63, 50, 26, 0.05), 0 1px 3px rgba(63, 50, 26, 0.06);
+  --shadow-md: 0 2px 3px rgba(63, 50, 26, 0.05), 0 6px 18px -6px rgba(63, 50, 26, 0.16);
+  --shadow-lg: 0 4px 8px rgba(63, 50, 26, 0.06), 0 26px 56px -20px rgba(63, 50, 26, 0.32);
+  /* 纸张上缘的那一道极细高光 —— 活字印刷「压痕」的观感来源 */
+  --press: inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 /* 区域强调色 */
@@ -81,19 +131,46 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  /* 桌面底色。网格放在 body::before 里，见下 */
+  background-color: var(--desk);
 }
 
 body {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 17px;
-  line-height: 1.8;
+  font-size: var(--step-0);
+  line-height: var(--lh-body);
   color: var(--ink);
-  background-color: var(--paper);
-  background-image: radial-gradient(rgba(176, 137, 58, 0.045) 1px, transparent 1px);
-  background-size: 26px 26px;
+  background: transparent;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* 中英混排自动留白（支持的浏览器生效，不支持的只是没有，不会变差） */
+  text-spacing-trim: space-first;
+}
+
+/* ── 底纹：一张固定的「桌面」────────────────────────────────────────────
+   思路来自 tailwindcss-bg-patterns —— 图案不必是图片，多重 gradient 叠出来
+   反而更锐利、更轻。这里三层：
+     ① 经纬网格：账本纸的暗纹，给大块留白一个尺度感；
+     ② 顶部金色天光：光从页面顶端打下来，是整站唯一的「光源」；
+     ③ 右上靛蓝 + 底部赭石：两个反向冷/暖角，避免整片暖黄发闷。
+   固定在视口上（fixed），底纹不随内容滚动 —— 读起来像印在一张不动的纸上。
+   -------------------------------------------------------------------- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px),
+    radial-gradient(132% 62% at 50% -16%, rgba(176, 137, 58, 0.18), transparent 62%),
+    radial-gradient(64% 46% at 97% 0%, rgba(74, 74, 140, 0.07), transparent 66%),
+    radial-gradient(104% 52% at 50% 114%, rgba(169, 92, 60, 0.08), transparent 68%);
+  background-size: 64px 64px, 64px 64px, 100% 100%, 100% 100%, 100% 100%;
+  background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat;
 }
 
 img,
@@ -104,9 +181,9 @@ video {
 }
 
 a {
-  color: var(--gold-deep);
+  color: var(--gold-ink);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color var(--dur-2) var(--ease-out);
 }
 a:hover {
   color: var(--ink);
@@ -115,20 +192,57 @@ a:hover {
 h1, h2, h3, h4, h5 {
   font-family: var(--font-display);
   font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: 0.01em;
+  line-height: var(--lh-tight);
+  /* 拉丁字距略收紧更好看；中文若也收紧会粘连，故按语言分开（见下方 [lang] 规则） */
+  letter-spacing: -0.008em;
   color: var(--ink);
   margin: 0 0 0.5em;
   text-wrap: balance;
 }
 
+/* 中文界面：字距回正、略放松。宋体在大字号下需要这个呼吸感。
+   首屏标题另分两档字号 —— 中文主标语只有 7 个字，可以放到超大；
+   而英/威/法/德/意/西 的标语是整句（最长的近 40 字符），
+   用同一档会瞬间爆版，所以降到次级字号并限制行长。 */
+html[lang='zh-CN'] h1,
+html[lang='zh-CN'] h2,
+html[lang='zh-TW'] h1,
+html[lang='zh-TW'] h2 {
+  letter-spacing: 0.03em;
+}
+html[lang='zh-CN'] .hero__title,
+html[lang='zh-TW'] .hero__title {
+  font-size: var(--step-5);
+  letter-spacing: 0.05em;
+  max-width: none;
+}
+
 p {
   margin: 0 0 1.1em;
+  /* 避免段末孤字（支持的浏览器生效） */
+  text-wrap: pretty;
 }
 
 ::selection {
   background: var(--gold-pale);
   color: var(--ink);
+}
+
+/* 全站数字等宽：统计数、计数、时长在切换语言/滚动时不会左右跳动 */
+b,
+.num,
+.subregion__count,
+.region-card__count,
+.explore-jump__item small,
+.now-playing__status,
+.visitor-counter b {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 锚点跳转时不被 sticky 头部盖住 —— 统一在这里兜一次，
+   各页面原有的 scroll-margin-top 仍可覆盖 */
+:where([id]) {
+  scroll-margin-top: calc(var(--header-h) + 1.4rem);
 }
 
 /* 容器 */
@@ -149,17 +263,36 @@ p {
   position: sticky;
   top: 0;
   z-index: 50;
+  /* 比桌面亮一档的纸 + 模糊：头部像一片压在页面上的薄纸，而不是一条色带。
+     只写标准属性：同时写 -webkit- 前缀会被构建时的 CSS 压缩合并成只剩前缀版，
+     反而让 Chrome 用不上（实测计算值为 none）。 */
   background: color-mix(in srgb, var(--paper) 88%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px) saturate(115%);
   border-bottom: 1px solid var(--line-soft);
+}
+/* 头部下缘的金色细线：中间实、两端虚，收口干净 */
+.site-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--gold) 42%, transparent) 18%,
+    color-mix(in srgb, var(--gold) 42%, transparent) 82%,
+    transparent
+  );
+  pointer-events: none;
 }
 .site-header__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  height: 68px;
+  height: var(--header-h);
 }
 .brand {
   display: inline-flex;
@@ -171,15 +304,21 @@ p {
   letter-spacing: 0.02em;
   color: var(--ink);
 }
+/* 标识：金底唱片，外加一圈纸色留白，像一枚贴在纸上的印章 */
 .brand__mark {
   display: grid;
   place-items: center;
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, var(--gold), var(--gold-deep));
+  background: radial-gradient(circle at 32% 28%, var(--gold), var(--gold-deep));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--gold-deep) 30%, transparent), var(--press);
   color: var(--paper);
   flex: none;
+  transition: transform var(--dur-3) var(--ease-spring);
+}
+.brand:hover .brand__mark {
+  transform: rotate(-12deg);
 }
 .brand__sub {
   display: block;
@@ -195,23 +334,46 @@ p {
   align-items: center;
   gap: 0.35rem;
 }
+/* 导航：编辑式下划线，而不是一排药丸按钮。
+   下划线用 currentColor→金 的渐变，hover 时从中心向两端长出来 */
 .site-nav a,
 .site-nav button {
+  position: relative;
   font-size: 0.92rem;
   font-weight: 500;
   color: var(--ink-soft);
-  padding: 0.45rem 0.85rem;
-  border-radius: 999px;
+  padding: 0.45rem 0.7rem;
+  border-radius: var(--radius-sm);
   border: none;
   background: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition:
+    color var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out);
+}
+.site-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0.7rem;
+  right: 0.7rem;
+  bottom: 0.2rem;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--dur-3) var(--ease-out);
 }
 .site-nav a:hover,
-.site-nav button:hover,
+.site-nav button:hover {
+  color: var(--ink);
+}
+.site-nav a:hover::after,
+.site-nav a.is-active::after {
+  transform: scaleX(1);
+}
 .site-nav a.is-active {
   color: var(--ink);
-  background: var(--gold-pale);
+  font-weight: 600;
 }
 .lang-switcher {
   display: inline-flex;
@@ -354,32 +516,54 @@ html.mr-lang-fresh .lang-switcher {
 .hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(3.5rem, 9vw, 7rem) 0 clamp(3rem, 7vw, 5rem);
+  padding: clamp(3.6rem, 8.5vw, 7rem) 0 clamp(2.4rem, 4.6vw, 3.4rem);
   text-align: center;
+  /* 取消原来的 ::before 光晕：光源已经统一收到 body::before 里，
+     这里只留一道极淡的边界，把首屏和下面的内容分开 */
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 34%, transparent);
 }
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(60% 90% at 50% -10%, rgba(176, 137, 58, 0.14), transparent 60%),
-    radial-gradient(50% 70% at 85% 15%, rgba(74, 74, 140, 0.06), transparent 60%);
+  background: radial-gradient(58% 78% at 50% 6%, rgba(253, 250, 241, 0.62), transparent 68%);
   pointer-events: none;
 }
+.hero > .container {
+  position: relative; /* 压在光晕之上 */
+}
+/* 眉题：两侧自动生长的细金线，构成书籍题头的双线框 */
 .hero__eyebrow {
-  font-size: 0.8rem;
-  letter-spacing: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  font-size: var(--step--1);
+  letter-spacing: 0.44em;
+  text-indent: 0.44em; /* 抵消末字多出的字距，让文字视觉居中 */
   text-transform: uppercase;
-  color: var(--gold-deep);
-  margin-bottom: 1.4rem;
+  color: var(--gold-ink);
+  margin-bottom: 1.5rem;
+}
+.hero__eyebrow::before,
+.hero__eyebrow::after {
+  content: '';
+  flex: 1 1 auto;
+  max-width: 5.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+.hero__eyebrow::after {
+  background: linear-gradient(90deg, var(--gold), transparent);
 }
 .hero__title {
-  font-size: clamp(2.6rem, 8vw, 5.2rem);
+  font-size: clamp(2.05rem, 1.48rem + 2.25vw, 3.1rem);
   font-weight: 600;
-  line-height: 1.08;
-  letter-spacing: 0.04em;
-  margin-bottom: 0.55rem;
-  background: linear-gradient(180deg, var(--ink) 30%, var(--gold-deep));
+  line-height: 1.14;
+  letter-spacing: -0.012em;
+  max-width: 20ch; /* 拉丁长句限行长，避免一行拉满整屏 */
+  margin: 0 auto 0.55rem;
+  background: linear-gradient(172deg, var(--ink) 18%, var(--ink) 46%, var(--gold-deep) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -387,15 +571,15 @@ html.mr-lang-fresh .lang-switcher {
 .hero__subtitle {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(1.05rem, 2.6vw, 1.5rem);
+  font-size: var(--step-1);
   color: var(--ink-soft);
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.7rem;
 }
 .hero__desc {
-  max-width: 62ch;
-  margin: 0 auto 2.6rem;
+  max-width: 56ch;
+  margin: 0 auto 2.7rem;
   color: var(--ink-soft);
-  font-size: 1.02rem;
+  font-size: var(--step-0);
 }
 .hero__actions {
   display: flex;
@@ -438,42 +622,60 @@ html.mr-lang-fresh .lang-switcher {
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  padding: 0.72rem 1.5rem;
+  padding: 0.72rem 1.55rem;
   border-radius: 999px;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: all 0.2s ease;
   text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    color var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out),
+    transform var(--dur-1) var(--ease-out);
+}
+/* 统一的按压反馈：真的往下沉 1px，而不是只变颜色 */
+.btn:active {
+  transform: translateY(1px);
 }
 .btn--primary {
   background: var(--ink);
   color: var(--paper);
+  box-shadow: var(--shadow-sm);
 }
 .btn--primary:hover {
   background: var(--gold-deep);
-  color: var(--paper);
-}
-.btn--gold {
-  background: var(--gold);
   color: #fff;
+  box-shadow: 0 2px 4px rgba(63, 50, 26, 0.12), 0 10px 24px -8px rgba(138, 103, 36, 0.5);
+}
+/* .btn--gold 原先是 #fff on --gold（对比度约 2.9:1，不达标）。
+   改为深一档的金，白字对比度提到 5.3:1 */
+.btn--gold {
+  background: var(--gold-deep);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
 }
 .btn--gold:hover {
-  background: var(--gold-deep);
+  background: #6f5219;
   color: #fff;
 }
 .btn--ghost {
-  background: transparent;
+  background: color-mix(in srgb, var(--paper) 55%, transparent);
   color: var(--ink);
   border-color: var(--line);
 }
 .btn--ghost:hover {
   border-color: var(--gold);
-  color: var(--gold-deep);
+  color: var(--gold-ink);
+  background: var(--paper);
+  box-shadow: var(--shadow-sm);
 }
 .btn--sm {
   padding: 0.45rem 1rem;
@@ -484,35 +686,57 @@ html.mr-lang-fresh .lang-switcher {
    区块标题
    -------------------------------------------------------------------------- */
 .section {
-  padding: clamp(2.5rem, 6vw, 4.5rem) 0;
+  padding: clamp(3rem, 6.5vw, 5.2rem) 0;
 }
 .section__head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.2rem;
   flex-wrap: wrap;
 }
 .section__title {
-  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  font-size: var(--step-3);
   margin: 0;
+  line-height: 1.18;
 }
+/* 小标题：前缀一道金色短线，和后文形成「题—文」的层级关系 */
 .section__kicker {
-  font-size: 0.78rem;
-  letter-spacing: 0.4em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: var(--step--2);
+  font-weight: 700;
+  letter-spacing: 0.34em;
   text-transform: uppercase;
-  color: var(--region, var(--gold-deep));
-  margin-bottom: 0.5rem;
+  color: var(--region, var(--gold-ink));
+  margin-bottom: 0.6rem;
+}
+.section__kicker::before {
+  content: '';
+  width: 1.65rem;
+  height: 1px;
+  flex: none;
+  background: currentColor;
+  opacity: 0.65;
 }
 
 /* --------------------------------------------------------------------------
    区域导航
+   —— 首页只有 6 张卡，不必挤成一行。三列两行留出呼吸，也让每张卡的文字
+      （「44 countries/regions · 5 subregions」）能落在一行内不折行。
    -------------------------------------------------------------------------- */
 .regions {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 0.9rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+@media (max-width: 860px) {
+  .regions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 420px) {
+  .regions { grid-template-columns: minmax(0, 1fr); }
 }
 .region-card {
   position: relative;
@@ -520,34 +744,61 @@ html.mr-lang-fresh .lang-switcher {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.4rem;
-  padding: 1.2rem 1.15rem;
+  padding: 1.25rem 1.15rem;
   border-radius: var(--radius);
-  background: var(--surface);
+  background: linear-gradient(180deg, #fffefa 0%, var(--paper) 62%);
   border: 1px solid var(--line-soft);
   text-align: left;
-  transition: all 0.22s ease;
+  box-shadow: var(--press), var(--shadow-sm);
+  overflow: hidden;
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out);
+}
+/* 顶部强调色短记号：静置时就带着大洲色（六张卡正好排成一条色谱），
+   悬停时这道短线横向展开成完整的分隔线 */
+.region-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1.15rem;
+  width: 2.2rem;
+  height: 2px;
+  border-radius: 0 0 2px 2px;
+  background: var(--region, var(--gold));
+  opacity: 0.75;
+  transition:
+    width var(--dur-3) var(--ease-out),
+    opacity var(--dur-2) var(--ease-out);
 }
 .region-card:hover {
   transform: translateY(-3px);
-  border-color: var(--region);
-  box-shadow: var(--shadow-md);
+  border-color: color-mix(in srgb, var(--region, var(--gold)) 34%, var(--line-soft));
+  box-shadow: var(--press), var(--shadow-md);
+}
+.region-card:hover::before {
+  width: calc(100% - 2.3rem);
+  opacity: 1;
 }
 .region-card__name {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.15rem;
+  font-size: var(--step-1);
   color: var(--ink);
+  line-height: 1.25;
 }
 .region-card__en {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 0.85rem;
+  font-size: var(--step--1);
   color: var(--ink-faint);
 }
 .region-card__count {
-  font-size: 0.75rem;
-  color: var(--region, var(--gold-deep));
-  letter-spacing: 0.05em;
+  margin-top: 0.15rem;
+  font-size: var(--step--2);
+  color: color-mix(in srgb, var(--region, var(--gold-deep)) 88%, var(--ink));
+  letter-spacing: 0.04em;
 }
 
 /* --------------------------------------------------------------------------
@@ -561,28 +812,32 @@ html.mr-lang-fresh .lang-switcher {
   align-items: baseline;
   gap: 0.7rem;
   padding-bottom: 0.7rem;
-  margin-bottom: 0.9rem;
-  border-bottom: 1px solid var(--line-soft);
+  margin-bottom: 1rem;
+  /* 分组线：左侧实、右侧渐隐，比一条通栏细线更轻 */
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(90deg, var(--line), transparent 88%) 1;
 }
 .subregion__title {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: var(--step-2);
   font-weight: 600;
   color: var(--ink);
+  line-height: 1.2;
 }
 .subregion__en {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 0.85rem;
+  font-size: var(--step--1);
   color: var(--ink-faint);
 }
 .subregion__count {
   margin-left: auto;
-  font-size: 0.78rem;
+  font-size: var(--step--2);
   color: var(--ink-faint);
   background: var(--surface-deep);
   padding: 0.1rem 0.6rem;
   border-radius: 999px;
+  white-space: nowrap;
 }
 
 /* --------------------------------------------------------------------------
@@ -600,11 +855,16 @@ html.mr-lang-fresh .lang-switcher {
   gap: 0.6rem;
   padding: 1.4rem 1.4rem 1.3rem;
   border-radius: var(--radius);
-  background: var(--surface);
+  background: linear-gradient(180deg, #fffefa 0%, var(--paper) 56%);
   border: 1px solid var(--line-soft);
-  transition: all 0.22s ease;
+  box-shadow: var(--press), var(--shadow-sm);
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out);
   overflow: hidden;
 }
+/* 左侧强调色竖条：常驻但很淡，悬停时加深 —— 卡片静置时也能看出属于哪个大洲 */
 .country-card::before {
   content: '';
   position: absolute;
@@ -613,13 +873,13 @@ html.mr-lang-fresh .lang-switcher {
   bottom: 0;
   width: 3px;
   background: var(--region, var(--gold));
-  opacity: 0;
-  transition: opacity 0.22s ease;
+  opacity: 0.28;
+  transition: opacity var(--dur-2) var(--ease-out);
 }
 .country-card:hover {
   transform: translateY(-4px);
-  border-color: var(--line);
-  box-shadow: var(--shadow-md);
+  border-color: color-mix(in srgb, var(--region, var(--gold)) 30%, var(--line));
+  box-shadow: var(--press), var(--shadow-md);
 }
 .country-card:hover::before {
   opacity: 1;
@@ -627,34 +887,48 @@ html.mr-lang-fresh .lang-switcher {
 .country-card__flag {
   font-size: 2rem;
   line-height: 1;
+  /* 国旗 emoji 在部分平台偏艳，压一点饱和度让它和纸墨色系相处 */
+  filter: saturate(0.92);
 }
 .country-card__name {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: var(--step-1);
   color: var(--ink);
+  line-height: 1.3;
 }
 .country-card__en {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 0.86rem;
+  font-size: var(--step--1);
   color: var(--ink-faint);
 }
 .country-card__intro {
   font-size: 0.88rem;
   color: var(--ink-soft);
-  line-height: 1.6;
+  line-height: 1.62;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+/* 「查看电台」：右移的箭头是这张卡唯一的动态提示 */
 .country-card__more {
   margin-top: auto;
-  font-size: 0.82rem;
+  padding-top: 0.2rem;
+  font-size: var(--step--1);
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: var(--region, var(--gold-deep));
+  color: color-mix(in srgb, var(--region, var(--gold-ink)) 85%, var(--ink));
+}
+.country-card__more::after {
+  content: '→';
+  display: inline-block;
+  margin-left: 0.35em;
+  transition: transform var(--dur-2) var(--ease-out);
+}
+.country-card:hover .country-card__more::after {
+  transform: translateX(4px);
 }
 
 /* --------------------------------------------------------------------------
@@ -667,13 +941,14 @@ html.mr-lang-fresh .lang-switcher {
   border-bottom: 1px solid var(--line);
 }
 .country-hero__flag {
-  font-size: clamp(3.5rem, 10vw, 6rem);
+  font-size: clamp(3rem, 9vw, 5.2rem);
   line-height: 1;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
 }
 .country-hero__title {
-  font-size: clamp(2.4rem, 7vw, 4.5rem);
-  margin-bottom: 0.1rem;
+  font-size: clamp(1.95rem, 1.35rem + 3.3vw, 4rem);
+  line-height: 1.12;
+  margin-bottom: 0.15rem;
 }
 .country-hero__en {
   font-family: var(--font-display);
@@ -715,14 +990,15 @@ html.mr-lang-fresh .lang-switcher {
   border: 1px solid var(--line-soft);
 }
 
-/* 正文编排 */
+/* 正文编排：衬线行文 + 宽松行距，接近纸书的阅读密度 */
 .prose {
-  font-size: 1.04rem;
-  line-height: 2;
+  font-family: var(--font-serif);
+  font-size: var(--step-0);
+  line-height: 1.92;
   color: var(--ink);
 }
 .prose h2 {
-  font-size: 1.7rem;
+  font-size: var(--step-2);
   margin: 2.6em 0 0.9em;
   padding-bottom: 0.5em;
   border-bottom: 1px solid var(--line-soft);
@@ -862,14 +1138,22 @@ html[lang='es'] .musician__en {
   align-items: center;
   padding: 1.1rem 1.25rem;
   border-radius: var(--radius);
-  background: var(--surface);
+  background: linear-gradient(180deg, #fffefa 0%, var(--paper) 60%);
   border: 1px solid var(--line-soft);
-  transition: all 0.22s ease;
+  box-shadow: var(--press), var(--shadow-sm);
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out);
+}
+.radio-card:hover {
+  border-color: var(--line);
+  box-shadow: var(--press), var(--shadow-md);
 }
 .radio-card.is-playing {
   border-color: var(--gold);
-  box-shadow: var(--shadow-md);
-  background: linear-gradient(180deg, #fffdf7, var(--surface));
+  box-shadow: var(--press), 0 0 0 1px color-mix(in srgb, var(--gold) 40%, transparent), var(--shadow-md);
+  background: linear-gradient(180deg, #fffdf7, var(--paper));
 }
 /* 生日彩蛋注入的「🎂 Marie's 1946 Jukebox」：金色描边 + 暖色柔光，明显区别于普通电台卡 */
 .radio-card--marie {
@@ -940,19 +1224,30 @@ html[lang='es'] .musician__en {
   height: 46px;
   border-radius: 50%;
   border: 1.5px solid var(--gold);
-  background: var(--surface);
-  color: var(--gold-deep);
+  background: var(--paper);
+  color: var(--gold-ink);
   cursor: pointer;
   display: grid;
   place-items: center;
-  transition: all 0.2s ease;
+  box-shadow: var(--press);
+  transition:
+    background-color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    color var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-spring);
 }
 .radio-card__play:hover {
   background: var(--gold);
+  border-color: var(--gold);
   color: #fff;
+  transform: scale(1.06);
+}
+.radio-card__play:active {
+  transform: scale(0.95);
 }
 .radio-card.is-playing .radio-card__play {
   background: var(--gold);
+  border-color: var(--gold);
   color: #fff;
 }
 .radio-card__body {
@@ -1424,12 +1719,23 @@ html[lang='es'] .musician__en {
    页脚
    -------------------------------------------------------------------------- */
 .site-footer {
-  margin-top: 3rem;
-  border-top: 1px solid var(--line);
-  padding: 3rem 0 3.5rem;
-  background: var(--paper-2);
+  position: relative;
+  margin-top: 4rem;
+  padding: 3.2rem 0 3.5rem;
+  background: var(--desk-deep);
   color: var(--ink-soft);
   font-size: 0.9rem;
+  /* 封底上缘：中间实、两端虚的金线，替代一条通栏硬线 */
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(
+      90deg,
+      transparent,
+      var(--line) 20%,
+      var(--gold) 50%,
+      var(--line) 80%,
+      transparent
+    )
+    1;
 }
 .site-footer__grid {
   display: grid;
@@ -1437,8 +1743,8 @@ html[lang='es'] .musician__en {
   gap: 2rem;
 }
 .site-footer h4 {
-  font-size: 0.85rem;
-  letter-spacing: 0.12em;
+  font-size: var(--step--2);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--ink);
   margin-bottom: 0.9rem;
@@ -1569,7 +1875,7 @@ html[lang='es'] .musician__en {
    响应式
    -------------------------------------------------------------------------- */
 @media (max-width: 720px) {
-  body { font-size: 16px; line-height: 1.75; }
+  /* 字号交给 --step-* 音阶自己流体缩放，这里只调版式，不再覆盖字号 */
 
   /* 顶部导航：手机一行放不下 brand + 链接 + 语言 + 登录，改为换行两段式 */
   .site-header__inner {
@@ -1589,25 +1895,22 @@ html[lang='es'] .musician__en {
     padding: 0.35rem 0.7rem;
     font-size: 0.85rem;
   }
+  /* 手机上导航是换行铺开的，下划线会显得零碎，关掉 */
+  .site-nav a::after {
+    display: none;
+  }
   .lang-switcher { padding: 0.24rem 0.5rem 0.24rem 0.6rem; }
   /* 窄屏导航一行放不下太多胶囊：🎂 按钮只留图标，提示条贴左侧避免溢出屏幕 */
   .marie-replay__text { display: none; }
   .lang-switcher__tip { right: auto; left: 0; }
   .lang-switcher__tip-arrow { right: auto; left: 16px; }
 
-  /* Hero 与国别标题适度缩小，避免长文案/长国名溢出 */
-  .hero { padding: 3rem 0 2.4rem; }
-  .hero__title { font-size: clamp(2.1rem, 11vw, 3.2rem); letter-spacing: 0.02em; }
-  .hero__eyebrow { letter-spacing: 0.3em; }
-  .hero__desc { font-size: 0.98rem; }
+  .hero { padding: 2.8rem 0 2.4rem; }
+  .hero__eyebrow { letter-spacing: 0.26em; gap: 0.7rem; }
   .country-hero { padding: 2.4rem 0 2rem; }
-  .country-hero__title { font-size: clamp(1.9rem, 9vw, 3rem); }
-  .country-hero__flag { font-size: 3.2rem; }
 
-  .section { padding: 2.2rem 0; }
-  .section__title { font-size: clamp(1.5rem, 5vw, 2rem); }
+  .section { padding: 2.4rem 0; }
 
-  .regions { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
   .country-grid, .radio-grid, .musician-list { grid-template-columns: 1fr; }
   .prose p:first-of-type::first-letter { font-size: 2.8em; }
 
@@ -1618,12 +1921,12 @@ html[lang='es'] .musician__en {
 }
 
 @media (max-width: 480px) {
-  body { font-size: 15.5px; }
-
-  .hero { padding: 2.4rem 0 2rem; }
-  .hero__title { font-size: 1.95rem; }
-  .hero__subtitle { font-size: 1rem; }
-  .hero__desc { font-size: 0.95rem; margin-bottom: 2rem; }
+  .hero { padding: 2.2rem 0 2rem; }
+  .hero__desc { margin-bottom: 2rem; }
+  /* 窄屏下眉题本身就会折行，两侧的金线只剩一截，反而更碎——收起，只留文字 */
+  .hero__eyebrow::before,
+  .hero__eyebrow::after { display: none; }
+  .hero__eyebrow { letter-spacing: 0.2em; text-indent: 0.2em; }
 
   .brand { font-size: 1.05rem; }
   .brand__sub { letter-spacing: 0.24em; }
@@ -1632,17 +1935,8 @@ html[lang='es'] .musician__en {
   .site-nav button { font-size: 0.82rem; padding: 0.3rem 0.55rem; }
   .lang-switcher select { max-width: 84px; font-size: 0.8rem; }
 
-  .country-hero__title { font-size: 1.8rem; }
-  .country-hero__en { font-size: 1rem; }
-
-  .prose { font-size: 1rem; }
-  .prose h2 { font-size: 1.45rem; }
-  .section__title { font-size: 1.45rem; }
   .region-card { padding: 1rem 0.85rem; }
-  .region-card__name { font-size: 1.05rem; }
-
   .radio-card { padding: 1rem; }
-  .radio-card__name { font-size: 1rem; }
   .musician { padding: 1.2rem; }
 
   .modal-backdrop { padding: 1rem; }
@@ -1657,6 +1951,83 @@ html[lang='es'] .musician__en {
     transition-duration: 0.001ms !important;
   }
   html { scroll-behavior: auto; }
+}
+
+/* --------------------------------------------------------------------------
+   统一交互层
+   —— 焦点、按压、纸张高光。此前全站只有语言切换器有焦点样式，
+      键盘用户几乎无法判断焦点在哪；这里一次性补齐。
+   -------------------------------------------------------------------------- */
+
+/* 焦点环：仅 :focus-visible 生效，鼠标点击不会看到多余的环 */
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:not([tabindex='-1']):focus-visible {
+  outline: 2px solid var(--gold-deep);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+/* 输入框原本写了 .field input:focus { outline: none }，这里给键盘用户补回来 */
+.field input:focus-visible,
+.field textarea:focus-visible {
+  outline: 2px solid var(--gold-deep);
+  outline-offset: 2px;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--gold) 16%, transparent);
+}
+/* 深色浮层内的焦点环改用浅金，否则在近黑底上看不见 */
+.now-playing :focus-visible,
+.bd-egg :focus-visible {
+  outline-color: var(--gold-pale);
+}
+
+/* 卡片类元素统一获得纸张高光，避免逐条重复 */
+.fav-item,
+.message,
+.message-form,
+.explore-jump__item {
+  box-shadow: var(--press);
+}
+.fav-item {
+  background: linear-gradient(180deg, #fffefa 0%, var(--paper) 60%);
+  transition:
+    border-color var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out);
+}
+.fav-item:hover {
+  border-color: var(--line);
+  box-shadow: var(--press), var(--shadow-sm);
+}
+.message,
+.message-form {
+  background: linear-gradient(180deg, #fffefa 0%, var(--paper) 62%);
+}
+
+/* 胶囊标签：内描边比纯色底更有纸感 */
+.chip,
+.radio-tag {
+  border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+}
+
+/* 英文界面下，这些「英文名 / 英文子区域名 / 大洲英文眉题」与主标题是同一个词，
+   并排显示就是两遍同样的字——属于纯噪音，直接收起。
+   其余语言里它们是有用的英文对照，保留。 */
+html[lang='en'] .country-card__en,
+html[lang='en'] .region-card__en,
+html[lang='en'] .subregion__en,
+html[lang='en'] .country-hero__en,
+html[lang='en'] .section__kicker--region {
+  display: none;
+}
+
+/* 细滚动条，避免默认滚动条打断整体色调 */
+@supports (scrollbar-width: thin) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+  }
 }
 
 /* --------------------------------------------------------------------------
