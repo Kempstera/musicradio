@@ -1,12 +1,12 @@
 ---
-// 大洲巡礼 —— 电台总览页
+// 大洲巡礼 —— 电台总览页（NIGHT FREQUENCY）
 //
-// 从首页迁移过来的内容：
-//   · 我的最爱电台列表 + 播放按钮（MyFavorites）
+// 内容与上一版完全一致：
 //   · 生日彩蛋精选集（MarieJukebox，仅彩蛋触发后渲染）
+//   · 我的最爱电台列表 + 播放按钮（MyFavorites）
 //   · 六大洲 → 子区域 → 国家卡片完整清单
 //
-// 首页只保留核心视觉与大洲入口，这一页承接全部「电台列表与播放器」。
+// 新增的只有交互层：吸附式频率调谐条 + 国家检索框（195 张卡片，没有检索不好用）。
 import Base from '../layouts/Base.astro';
 import MarieJukebox from '../components/MarieJukebox.tsx';
 import MyFavorites from '../components/MyFavorites.tsx';
@@ -35,7 +35,7 @@ const totalRadios = allCountries.reduce((sum, c) => {
 <Base title={t0.navExplore}>
   <script type="application/json" id="content-blob" is:inline set:html={compactJson}></script>
 
-  <section class="section explore-head">
+  <section class="explore-head">
     <div class="container">
       <div class="explore-head__inner">
         <div class="section__kicker" data-i18n="exploreKicker">{t0.exploreKicker}</div>
@@ -43,18 +43,17 @@ const totalRadios = allCountries.reduce((sum, c) => {
         <p class="explore-head__desc" data-i18n="heroDesc">{t0.heroDesc}</p>
         <div class="explore-head__stats">
           <span><b>{allCountries.length}</b> <span data-i18n="regionUnit">{t0.regionUnit}</span></span>
-          <span class="explore-head__sep" aria-hidden="true">·</span>
-          <span><b>{totalRadios}</b> <span data-i18n="footerStats2">{t0.footerStats2}</span></span>
+          <span class="explore-head__sep" aria-hidden="true">/</span>
+          <span><b>{totalRadios}</b> <span data-i18n="favCountUnit">{t0.favCountUnit}</span></span>
         </div>
       </div>
     </div>
   </section>
 
-  {/* 大洲快捷跳转：桌面端吸附在顶部导航下方，滚到任何位置都能一键换洲。
-      必须放在 .explore-head 之外 —— position:sticky 的吸附范围受父容器限制，
-      放在 section 内部只会在该 section 的高度内生效。 */}
+  {/* 调谐条：桌面端吸附在顶部导航下方，滚到任何深度都能换洲或直接检索。
+      必须放在 .explore-head 之外 —— position:sticky 的吸附范围受父容器限制。 */}
   <div class="explore-jumpbar">
-    <div class="container">
+    <div class="container explore-jumpbar__inner">
       <nav class="explore-jump" aria-label="Continents">
         {
           CONTINENTS.map((c) => (
@@ -65,6 +64,12 @@ const totalRadios = allCountries.reduce((sum, c) => {
           ))
         }
       </nav>
+      <div class="explore-filter">
+        <svg class="explore-filter__icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" /><path d="m20 20-3.6-3.6" />
+        </svg>
+        <input type="search" class="explore-filter__input" data-i18n="searchPlaceholder" placeholder={t0.searchPlaceholder} aria-label={t0.searchPlaceholder} autocomplete="off" spellcheck="false" />
+      </div>
     </div>
   </div>
 
@@ -74,20 +79,23 @@ const totalRadios = allCountries.reduce((sum, c) => {
   <MyFavorites client:load />
 
   {
-    CONTINENTS.map((c) => {
+    CONTINENTS.map((c, ci) => {
       const continentCountries = countriesByContinent(c.id);
       if (!continentCountries.length) return null;
       const subs = SUBREGIONS.filter((s) => s.continent === c.id);
       return (
-        <section class="section" id={c.id} data-region={c.id} style="padding-top: 1.6rem;">
+        <section class="section explore-sec" id={c.id} data-region={c.id}>
           <div class="container">
-            <div class="section__head">
-              <div>
-                {/* 英文界面下大洲英文名与标题重复，由 CSS 收起（见 global.css） */}
-                <div class="section__kicker section__kicker--region">{c.en}</div>
-                <h2 class="section__title" data-continent={c.id}>{enLabel(c.id) || c.label}</h2>
+            <div class="section__head" data-reveal>
+              <div class="explore-sec__lead">
+                <span class="explore-sec__num" aria-hidden="true">{String(ci + 1).padStart(2, '0')}</span>
+                <div>
+                  {/* 英文界面下大洲英文名与标题重复，由 CSS 收起（见 global.css） */}
+                  <div class="section__kicker section__kicker--region">{c.en}</div>
+                  <h2 class="section__title" data-continent={c.id}>{enLabel(c.id) || c.label}</h2>
+                </div>
               </div>
-              <span style="color: var(--ink-faint);">{continentCountries.length} <span data-i18n="regionUnit">{t0.regionUnit}</span></span>
+              <span class="explore-sec__count">{continentCountries.length} <span data-i18n="regionUnit">{t0.regionUnit}</span></span>
             </div>
 
             {
@@ -95,7 +103,7 @@ const totalRadios = allCountries.reduce((sum, c) => {
                 const list = countriesBySubregion(s.id);
                 if (!list.length) return null;
                 return (
-                  <div class="subregion" id={s.id} style="margin-top: 1.6rem;">
+                  <div class="subregion" id={s.id}>
                     <div class="subregion__head">
                       <h3 class="subregion__title" data-subregion={s.id}>{subLabel(s.id) || s.label}</h3>
                       <span class="subregion__en">{s.en}</span>
@@ -123,112 +131,266 @@ const totalRadios = allCountries.reduce((sum, c) => {
       );
     })
   }
+
+  {/* 检索无结果时的提示：比一个孤零零的破折号清楚得多 */}
+  <p class="explore-empty" data-i18n="noResults" hidden>{t0.noResults}</p>
 </Base>
 
+<script is:inline>
+  // 国家检索：只在当前 DOM 上按可见文本过滤，不引入任何数据依赖。
+  // 大小写与变音符号一并归一化，这样搜 "peru" 也能命中 "Perú"。
+  (function () {
+    var input = document.querySelector('.explore-filter__input');
+    if (!input) return;
+
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.country-card'));
+    var subs = Array.prototype.slice.call(document.querySelectorAll('.subregion'));
+    var secs = Array.prototype.slice.call(document.querySelectorAll('.explore-sec'));
+    var empty = document.querySelector('.explore-empty');
+
+    function norm(s) {
+      return (s || '')
+        .toString()
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function textOf(el, sel) {
+      var n = el.querySelector(sel);
+      return n ? n.textContent : '';
+    }
+
+    // 预先算好每张卡的检索文本，输入时不必反复读 DOM
+    var haystack = cards.map(function (card) {
+      return norm(textOf(card, '.country-card__name') + ' ' + textOf(card, '.country-card__en'));
+    });
+
+    function run() {
+      var q = norm(input.value).trim();
+      var shown = 0;
+
+      for (var i = 0; i < cards.length; i++) {
+        var hit = !q || haystack[i].indexOf(q) >= 0;
+        cards[i].classList.toggle('is-filtered-out', !hit);
+        if (hit) shown++;
+      }
+
+      for (var j = 0; j < subs.length; j++) {
+        subs[j].classList.toggle(
+          'is-filtered-out',
+          !subs[j].querySelector('.country-card:not(.is-filtered-out)')
+        );
+      }
+
+      for (var k = 0; k < secs.length; k++) {
+        secs[k].classList.toggle(
+          'is-filtered-out',
+          !secs[k].querySelector('.country-card:not(.is-filtered-out)')
+        );
+      }
+
+      if (empty) empty.hidden = shown !== 0;
+    }
+
+    input.addEventListener('input', run);
+    input.addEventListener('search', run);
+  })();
+</script>
+
 <style is:global>
-  .explore-head { padding-top: clamp(2.2rem, 5vw, 3.4rem); padding-bottom: 0.4rem; }
-  .explore-head__inner { max-width: 46rem; }
+  .explore-head {
+    padding: clamp(3rem, 7vw, 5.5rem) 0 clamp(1.6rem, 3vw, 2.4rem);
+  }
+  .explore-head__inner { max-width: 52rem; }
   .explore-head__title {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 5.5vw, 3.1rem);
-    line-height: 1.14;
-    letter-spacing: -0.02em;
+    font-family: var(--f-display);
+    font-size: clamp(2.2rem, 6vw, 4.4rem);
+    font-weight: 900;
+    line-height: 0.98;
+    letter-spacing: -0.03em;
     color: var(--ink);
-    margin: 0.5rem 0 0.8rem;
+    margin: 0.7rem 0 1.1rem;
+    text-shadow: 0 0 80px rgba(255, 180, 58, 0.25);
   }
   .explore-head__desc {
-    color: var(--ink-soft);
-    font-size: 1rem;
-    line-height: 1.75;
+    color: var(--ink-2);
+    font-size: var(--t-0);
+    line-height: 1.8;
     margin: 0;
+    max-width: 58ch;
   }
   .explore-head__stats {
     display: flex;
     align-items: baseline;
-    gap: 0.55rem;
-    margin-top: 1rem;
-    font-size: 0.86rem;
-    color: var(--ink-faint);
+    gap: 0.7rem;
+    margin-top: 1.6rem;
+    font-family: var(--f-mono);
+    font-size: var(--t--2);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
     flex-wrap: wrap;
   }
   .explore-head__stats b {
-    font-family: var(--font-display);
-    font-size: 1.06rem;
-    color: var(--gold-deep);
-    font-variant-numeric: tabular-nums;
+    color: var(--amber);
+    font-size: var(--t--1);
+    font-weight: 700;
+    text-shadow: 0 0 14px rgba(255, 180, 58, 0.5);
   }
-  .explore-head__sep { color: var(--line); }
+  .explore-head__sep { opacity: 0.35; }
 
-  /* 吸附条：滚到页面任何深度都能一键换洲 */
+  /* ── 吸附调谐条 ────────────────────────────────────────────── */
   .explore-jumpbar {
     position: sticky;
     top: var(--header-h);
-    z-index: 30;
-    background: color-mix(in srgb, var(--desk) 90%, transparent);
-    backdrop-filter: blur(12px) saturate(112%);
-    border-bottom: 1px solid color-mix(in srgb, var(--line) 42%, transparent);
+    z-index: 60;
+    background: color-mix(in srgb, var(--void) 78%, transparent);
+    backdrop-filter: blur(18px) saturate(150%);
+    border-bottom: 1px solid var(--hair-2);
+  }
+  .explore-jumpbar__inner {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding-block: 0.6rem;
   }
   .explore-jump {
     display: flex;
-    gap: 0.5rem;
-    padding: 0.6rem 0;
+    gap: 0.4rem;
     overflow-x: auto;
     scrollbar-width: none;
+    flex: 1 1 auto;
+    min-width: 0;
   }
   .explore-jump::-webkit-scrollbar { display: none; }
   .explore-jump__item {
     flex: 1 1 0;
-    min-width: 6.6rem;
+    min-width: 6.4rem;
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    gap: 0.4rem;
-    padding: 0.55rem 0.75rem;
-    border: 1px solid var(--line-soft);
-    border-radius: var(--radius-sm);
-    background: linear-gradient(180deg, #fffefa 0%, var(--paper) 60%);
-    color: var(--ink-soft);
-    font-size: 0.82rem;
+    gap: 0.45rem;
+    padding: 0.5rem 0.7rem;
+    border: 1px solid var(--hair-2);
+    border-radius: var(--radius-xs);
+    background: rgba(244, 241, 234, 0.02);
+    color: var(--ink-2);
+    font-family: var(--f-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     text-decoration: none;
     white-space: nowrap;
-    box-shadow: var(--press);
     transition:
       border-color var(--dur-2) var(--ease-out),
       color var(--dur-2) var(--ease-out),
-      background-color var(--dur-2) var(--ease-out),
-      transform var(--dur-1) var(--ease-out);
+      background-color var(--dur-2) var(--ease-out);
   }
   .explore-jump__item small {
-    color: var(--ink-faint);
-    font-variant-numeric: tabular-nums;
-    font-size: 0.72rem;
+    color: var(--ink-3);
+    font-size: 0.62rem;
   }
   .explore-jump__item:hover {
-    border-color: color-mix(in srgb, var(--region, var(--gold)) 45%, var(--line-soft));
+    border-color: var(--region, var(--amber));
     color: var(--ink);
+    background: rgba(255, 180, 58, 0.06);
   }
-  .explore-jump__item:active {
-    transform: translateY(1px);
+
+  .explore-filter {
+    position: relative;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.42rem 0.75rem;
+    border: 1px solid var(--hair-2);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.35);
+    color: var(--ink-3);
+    transition: border-color var(--dur-2) var(--ease-out);
+  }
+  .explore-filter:focus-within {
+    border-color: var(--amber-line);
+    box-shadow: 0 0 0 3px rgba(255, 180, 58, 0.1);
+  }
+  .explore-filter__input {
+    width: 11rem;
+    border: none;
+    background: transparent;
+    color: var(--ink);
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    outline: none;
+  }
+  .explore-filter__input::placeholder {
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .explore-filter__input::-webkit-search-cancel-button { filter: invert(0.6); }
+
+  /* ── 大洲分区 ──────────────────────────────────────────────── */
+  .explore-sec { padding-top: clamp(2.6rem, 5vw, 4.5rem); }
+  .explore-sec__lead {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(0.8rem, 2vw, 1.6rem);
+  }
+  /* 分区大序号：一个压得很低的水印数字 */
+  .explore-sec__num {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: clamp(2.4rem, 5.4vw, 4.2rem);
+    line-height: 0.8;
+    color: var(--region, var(--amber));
+    opacity: 0.32;
+    text-shadow: 0 0 40px var(--region-glow, rgba(255, 180, 58, 0.5));
+    flex: none;
+  }
+  .explore-sec__count {
+    font-family: var(--f-mono);
+    font-size: var(--t--2);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    white-space: nowrap;
+  }
+
+  /* 检索命中/未命中 */
+  .is-filtered-out { display: none !important; }
+  .explore-empty {
+    text-align: center;
+    padding: 6rem 1rem 8rem;
+    font-family: var(--f-mono);
+    font-size: var(--t--1);
+    letter-spacing: 0.3em;
+    color: var(--ink-3);
+  }
+
+  @media (max-width: 900px) {
+    .explore-jumpbar__inner { flex-wrap: wrap; }
+    .explore-filter { width: 100%; }
+    .explore-filter__input { width: 100%; }
   }
 
   @media (max-width: 720px) {
-    /* 手机端顶部导航会折成两行、高度不固定，吸附条难以对齐，
-       改为跟随内容滚走；横向滚动仍然可用。 */
+    /* 手机端顶部导航会折行、高度不固定，吸附条难以对齐，改为跟随内容滚走 */
     .explore-jumpbar {
       position: static;
       background: transparent;
       backdrop-filter: none;
       border-bottom: 0;
     }
-    .explore-jump {
-      padding: 0 0 0.9rem;
-      margin-top: -0.4rem;
-    }
+    .explore-jumpbar__inner { padding-block: 0 1rem; }
     .explore-jump__item { min-width: 5.4rem; flex: 0 0 auto; }
+    .explore-sec { padding-top: 2rem; }
   }
 
   /* 从国家页面包屑跳进来时，别让 sticky 头部盖住标题 */
-  .explore-head,
-  section[id],
-  .subregion[id] { scroll-margin-top: 5.2rem; }
+  :where(section[id], .subregion[id]) {
+    scroll-margin-top: calc(var(--header-h) + 3.6rem);
+  }
 </style>

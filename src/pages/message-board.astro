@@ -8,17 +8,18 @@ const description = t0.boardPageDesc;
 ---
 
 <Base title={title} description={description}>
-  <section class="section" style="padding-top: clamp(2.5rem, 6vw, 4rem);">
-    <div class="container container--narrow">
-      <div class="section__head">
-        <div>
-          <div class="section__kicker">Guestbook</div>
-          <h1 class="section__title" data-i18n="navGuestbook">{t0.navGuestbook}</h1>
-          <p style="color: var(--ink-soft); margin-top: 0.5rem;" data-i18n="boardPageDesc">
-            {t0.boardPageDesc}
-          </p>
-        </div>
+  <section class="explore-head">
+    <div class="container">
+      <div class="explore-head__inner">
+        <div class="section__kicker">Guestbook</div>
+        <h1 class="explore-head__title" data-i18n="navGuestbook">{t0.navGuestbook}</h1>
+        <p class="explore-head__desc" data-i18n="boardPageDesc">{t0.boardPageDesc}</p>
       </div>
+    </div>
+  </section>
+
+  <section class="board-body">
+    <div class="container container--narrow">
       <MessageBoard client:load />
     </div>
   </section>

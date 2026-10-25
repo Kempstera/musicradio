@@ -138,7 +138,7 @@ const stationNotesBlobJson = JSON.stringify(stationNotesBlob).replace(/</g, '\\u
             ? <span class="chip">🌍 {country.groupCountries?.join('、')}</span>
             : <span class="chip" data-subregion={country.subregion}>{subregionLabel}</span>}
         </div>
-        <p class="country-hero__intro" style="max-width: 62ch; margin-top: 1.4rem; font-size: 1.05rem; color: var(--ink-soft);" data-ct="intro" data-slug={country.slug}>
+        <p class="country-hero__intro" data-ct="intro" data-slug={country.slug}>
           {enIntro}
         </p>
       </div>
@@ -153,7 +153,7 @@ const stationNotesBlobJson = JSON.stringify(stationNotesBlob).replace(/</g, '\\u
         {country.music.map((p, i) => <p data-ct="music" data-idx={i} data-slug={country.slug} set:html={pick(enContent?.music, country.music, i)} />)}
       </div>
 
-      <h2 class="section__title" style="margin-top: 2.4rem; font-size: 1.7rem;" data-i18n="musiciansSection">{t0.musiciansSection}</h2>
+      <h2 class="section__title section__title--sub" data-i18n="musiciansSection">{t0.musiciansSection}</h2>
       <div class="musician-list">
         {musicians.map((m, i) => (
           <div class="musician">
@@ -171,7 +171,7 @@ const stationNotesBlobJson = JSON.stringify(stationNotesBlob).replace(/</g, '\\u
         ))}
       </div>
 
-      <h2 class="section__title" style="margin-top: 2.8rem; font-size: 1.7rem;" data-i18n="radiosSection">{t0.radiosSection}</h2>
+      <h2 class="section__title section__title--sub" data-i18n="radiosSection">{t0.radiosSection}</h2>
 
       <RadioPlayer client:load stations={playable} countryName={enName} flag={country.flag} emptyNote={enContent?.radioNote || country.radioNote} slug={country.slug} />
 

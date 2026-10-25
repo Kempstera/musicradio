@@ -31,6 +31,8 @@ export interface Translation {
   start: string;
   guestbookBtn: string;
   exploreKicker: string;
+  searchPlaceholder: string;
+  noResults: string;
   exploreTitle: string;
   exploreCount: string;
   continentsTitle: string;
@@ -124,6 +126,8 @@ const zhCN: Translation = {
   start: '开始巡礼',
   guestbookBtn: '去留言板',
   exploreKicker: '探索',
+  searchPlaceholder: '搜索国家或地区…',
+  noResults: '没有匹配的国家或地区',
   exploreTitle: '按大洲巡礼',
   exploreCount: '个国家与地区',
   continentsTitle: '按大洲巡礼',
@@ -211,6 +215,8 @@ const zhTW: Translation = {
   start: '開始巡禮',
   guestbookBtn: '去留言板',
   exploreKicker: '探索',
+  searchPlaceholder: '搜尋國家或地區…',
+  noResults: '沒有匹配的國家或地區',
   exploreTitle: '按大洲巡禮',
   exploreCount: '個國家與地區',
   continentsTitle: '按大洲巡禮',
@@ -298,6 +304,8 @@ const en: Translation = {
   start: 'Start the journey',
   guestbookBtn: 'Guestbook',
   exploreKicker: 'Explore',
+  searchPlaceholder: 'Search a country…',
+  noResults: 'No country matched that search',
   exploreTitle: 'Explore by Continent',
   exploreCount: 'countries & regions',
   continentsTitle: 'Explore by Continent',
@@ -385,6 +393,8 @@ const cy: Translation = {
   start: 'Dechrau\'r daith',
   guestbookBtn: 'Llyfr ymwelwyr',
   exploreKicker: 'Archwilio',
+  searchPlaceholder: 'Chwilio gwlad…',
+  noResults: 'Dim gwlad yn cyfateb i\'r chwiliad',
   exploreTitle: 'Archwilio yn ôl Cyfandir',
   exploreCount: 'gwlad a rhanbarth',
   continentsTitle: 'Archwilio yn ôl Cyfandir',
@@ -472,6 +482,8 @@ const fr: Translation = {
   start: 'Commencer le voyage',
   guestbookBtn: 'Livre d\'or',
   exploreKicker: 'Explorer',
+  searchPlaceholder: 'Rechercher un pays…',
+  noResults: 'Aucun pays ne correspond',
   exploreTitle: 'Explorer par continent',
   exploreCount: 'pays et régions',
   continentsTitle: 'Explorer par continent',
@@ -559,6 +571,8 @@ const de: Translation = {
   start: 'Reise beginnen',
   guestbookBtn: 'Gästebuch',
   exploreKicker: 'Entdecken',
+  searchPlaceholder: 'Land suchen…',
+  noResults: 'Kein Land gefunden',
   exploreTitle: 'Nach Kontinent entdecken',
   exploreCount: 'Länder & Regionen',
   continentsTitle: 'Nach Kontinent entdecken',
@@ -646,6 +660,8 @@ const it: Translation = {
   start: 'Inizia il viaggio',
   guestbookBtn: 'Libro degli ospiti',
   exploreKicker: 'Esplora',
+  searchPlaceholder: 'Cerca un paese…',
+  noResults: 'Nessun paese trovato',
   exploreTitle: 'Esplora per continente',
   exploreCount: 'paesi e regioni',
   continentsTitle: 'Esplora per continente',
@@ -733,6 +749,8 @@ const es: Translation = {
   start: 'Empezar el viaje',
   guestbookBtn: 'Libro de visitas',
   exploreKicker: 'Explorar',
+  searchPlaceholder: 'Buscar un país…',
+  noResults: 'Ningún país coincide',
   exploreTitle: 'Explorar por continente',
   exploreCount: 'países y regiones',
   continentsTitle: 'Explorar por continente',

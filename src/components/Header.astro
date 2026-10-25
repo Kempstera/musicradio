@@ -4,6 +4,12 @@ import { t0 } from '../lib/i18n';
 import AuthWidget from './AuthWidget.tsx';
 import LanguageSwitcher from './LanguageSwitcher.tsx';
 import MarieReplayButton from './MarieReplayButton.tsx';
+
+// 当前路径：用于导航项的「正在收听这个频段」状态
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isHome = path === '/';
+const isExplore = path === '/explore' || path.startsWith('/countries/');
+const isBoard = path === '/message-board';
 ---
 
 <header class="site-header">
@@ -20,9 +26,9 @@ import MarieReplayButton from './MarieReplayButton.tsx';
       </span>
     </a>
     <nav class="site-nav" aria-label="Main navigation">
-      <a href="/" data-i18n="navHome">{t0.navHome}</a>
-      <a href="/explore" data-i18n="navExplore">{t0.navExplore}</a>
-      <a href="/message-board" data-i18n="navGuestbook">{t0.navGuestbook}</a>
+      <a href="/" class:list={[{ 'is-active': isHome }]} aria-current={isHome ? 'page' : undefined} data-i18n="navHome">{t0.navHome}</a>
+      <a href="/explore" class:list={[{ 'is-active': isExplore }]} aria-current={isExplore ? 'page' : undefined} data-i18n="navExplore">{t0.navExplore}</a>
+      <a href="/message-board" class:list={[{ 'is-active': isBoard }]} aria-current={isBoard ? 'page' : undefined} data-i18n="navGuestbook">{t0.navGuestbook}</a>
       <LanguageSwitcher client:load />
       <MarieReplayButton client:load />
       <AuthWidget client:load />

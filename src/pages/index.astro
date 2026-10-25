@@ -1,23 +1,51 @@
 ---
-// 极简首页
+// 极简首页 —— NIGHT FREQUENCY
 //
 // 只保留三件事：
-//   1. 核心视觉（开场诗句 + 一句站点定位 + 两个入口按钮）
-//   2. 六大洲导航入口（点进去才是完整的电台清单）
+//   1. 核心视觉：一台在黑暗中被点亮的调谐面板（辉光 + 频率刻度 + 指针）
+//   2. 六大洲调谐列表（点进去才是完整的电台清单）
 //   3. 页脚（站点简介、关于、统计、声明，由 Footer 组件承担）
 //
-// 电台列表、播放器、国家卡片全部迁到 /explore，首页不再加载 content-blob，
-// 因此首屏 HTML 从 300KB 级别降到几十 KB。
+// 电台列表、播放器、国家卡片全部在 /explore，首页不加载 content-blob，
+// 首屏 HTML 保持在几十 KB。
 import Base from '../layouts/Base.astro';
 import { CONTINENTS, SUBREGIONS } from '../lib/country';
 import { allCountries, countriesByContinent } from '../data';
 import { t0, CONTINENT_LABELS } from '../lib/i18n';
+import radiosData from '../data/radios.json';
 
 const enLabel = (id: string) => (CONTINENT_LABELS['en'] as Record<string, string>)?.[id];
+
+// 可在线收听的电台总数（与页脚统计口径一致）
+const radios = radiosData as Record<string, any[]>;
+const totalRadios = allCountries.reduce((sum, c) => {
+  const notable = (c.notableRadios || []).filter((r) => r.url).length;
+  const fetched = c.radioMode === 'notable-only' ? 0 : (radios[c.iso] || []).length;
+  return sum + notable + fetched;
+}, 0);
+
+// 频率刻度：从 88.0 起每档 0.9，共 24 档，正好铺满 FM 波段
+const dialTicks = Array.from({ length: 24 }, (_, i) => (88 + i * 0.9).toFixed(1));
 ---
 
 <Base>
   <section class="hero">
+    <div class="hero__glow" aria-hidden="true"></div>
+
+    {/* 频率刻度盘：两组完全相同的内容首尾相接，位移 50% 即无缝循环 */}
+    <div class="hero__dial" aria-hidden="true">
+      <div class="hero__scale">
+        <div class="hero__scale-grp">
+          {dialTicks.map((f) => <span>{f}</span>)}
+        </div>
+        <div class="hero__scale-grp">
+          {dialTicks.map((f) => <span>{f}</span>)}
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__needle" aria-hidden="true"></div>
+
     <div class="container">
       <div class="wave" aria-hidden="true">
         <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
@@ -32,12 +60,21 @@ const enLabel = (id: string) => (CONTINENT_LABELS['en'] as Record<string, string
         <a class="btn btn--primary" href="#continents" data-i18n="start">{t0.start}</a>
         <a class="btn btn--ghost" href="/message-board" data-i18n="guestbookBtn">{t0.guestbookBtn}</a>
       </div>
+
+      {/* 读数条：像仪表一样把整站的规模报出来 */}
+      <div class="hero__readout">
+        <span><b>{allCountries.length}</b> <span data-i18n="regionUnit">{t0.regionUnit}</span></span>
+        <i aria-hidden="true">/</i>
+        <span><b>{totalRadios}</b> <span data-i18n="favCountUnit">{t0.favCountUnit}</span></span>
+        <i aria-hidden="true">/</i>
+        <span>FM 88.0 – 108.0</span>
+      </div>
     </div>
   </section>
 
   <section class="section home-continents" id="continents">
     <div class="container">
-      <div class="section__head">
+      <div class="section__head" data-reveal>
         <div>
           <div class="section__kicker" data-i18n="exploreKicker">{t0.exploreKicker}</div>
           <h2 class="section__title" data-i18n="exploreTitle">{t0.exploreTitle}</h2>
@@ -47,7 +84,10 @@ const enLabel = (id: string) => (CONTINENT_LABELS['en'] as Record<string, string
         </p>
       </div>
 
-      <div class="regions">
+      {/* 六条横贯的频段：序号由 CSS 计数器生成，右侧箭头只在悬停时滑入。
+          data-reveal 放在整个列表上而非每一行 —— 行元素本身有 hover 过渡，
+          若在其上设 transition-delay，悬停响应也会被一起延迟。 */}
+      <div class="regions" data-reveal>
         {
           CONTINENTS.map((c) => {
             const n = countriesByContinent(c.id).length;
@@ -59,6 +99,7 @@ const enLabel = (id: string) => (CONTINENT_LABELS['en'] as Record<string, string
                 <span class="region-card__count">
                   {n} <span data-i18n="regionUnit">{t0.regionUnit}</span> · {subs.length} <span data-i18n="subdivisionUnit">{t0.subdivisionUnit}</span>
                 </span>
+                <span class="region-card__arrow" aria-hidden="true">→</span>
               </a>
             );
           })
@@ -69,18 +110,25 @@ const enLabel = (id: string) => (CONTINENT_LABELS['en'] as Record<string, string
 </Base>
 
 <style is:global>
-  .home-continents { padding-top: clamp(1.6rem, 3.2vw, 2.4rem); scroll-margin-top: 5.2rem; }
+  .home-continents { padding-top: clamp(2.5rem, 5vw, 4rem); scroll-margin-top: 5rem; }
 
   .home-continents__meta {
-    color: var(--ink-faint);
-    font-size: 0.86rem;
+    color: var(--ink-3);
+    font-size: var(--t--2);
     white-space: nowrap;
   }
   .home-continents__meta b {
-    font-family: var(--font-display);
-    font-size: 1.02rem;
-    color: var(--gold-ink);
-    font-variant-numeric: tabular-nums;
+    color: var(--amber);
+    font-size: var(--t--1);
+    font-weight: 700;
+    text-shadow: 0 0 14px rgba(255, 180, 58, 0.5);
+  }
+
+  /* 刻度盘容器：两组内容首尾相接，整体位移 50% 即完成一次无缝循环 */
+  .hero__scale-grp {
+    display: flex;
+    gap: 96px;
+    padding-right: 96px;
   }
 
   @media (max-width: 560px) {

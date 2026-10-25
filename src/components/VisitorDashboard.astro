@@ -66,31 +66,31 @@
 </section>
 
 <style is:global>
-  .vd { max-width: 1180px; margin: 0 auto; padding: 2.4rem var(--gutter) 4rem; color: var(--ink-soft); }
-  .vd h2 { font-family: var(--font-display); font-size: 1.5rem; color: var(--ink); margin: 0 0 0.3rem; }
+  .vd { max-width: 1180px; margin: 0 auto; padding: 2.4rem var(--gutter) 4rem; color: var(--ink-2); }
+  .vd h2 { font-family: var(--f-display); font-size: 1.5rem; color: var(--ink); margin: 0 0 0.3rem; }
   .vd__sub { font-size: 0.78rem; color: var(--ink-faint); margin: 0; }
 
   .vd__gate { display: flex; justify-content: center; padding: 6vh 0 10vh; }
   /* hidden 属性会被上面的 display 覆盖，必须显式压回去 */
   .vd__gate[hidden], .vd__body[hidden] { display: none !important; }
   .vd__gate-card {
-    background: var(--surface); border: 1px solid var(--line-soft); border-radius: var(--radius);
+    background: var(--panel); border: 1px solid var(--line-soft); border-radius: var(--radius);
     padding: 2rem 2rem 1.6rem; max-width: 420px; width: 100%; box-shadow: var(--shadow-sm);
   }
   .vd__gate-card p { font-size: 0.86rem; color: var(--ink-faint); margin: 0.4rem 0 1.2rem; line-height: 1.7; }
   .vd__gate-row { display: flex; gap: 0.5rem; }
   .vd__gate-row input {
-    flex: 1; min-width: 0; padding: 0.6rem 0.8rem; font-size: 0.9rem; font-family: var(--font-body);
-    background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-sm); color: var(--ink);
+    flex: 1; min-width: 0; padding: 0.6rem 0.8rem; font-size: 0.9rem; font-family: var(--f-body);
+    background: var(--deep); border: 1px solid var(--hair); border-radius: var(--radius-sm); color: var(--ink);
   }
-  .vd__gate-row input:focus { outline: 2px solid var(--gold-pale); border-color: var(--gold); }
+  .vd__gate-row input:focus { outline: 2px solid var(--amber-line); border-color: var(--amber); }
   .vd__gate-row button, .vd__btn {
-    background: var(--ink); color: var(--paper); border: none; border-radius: var(--radius-sm);
-    padding: 0.6rem 1.2rem; font-size: 0.86rem; font-family: var(--font-body); cursor: pointer;
+    background: var(--amber); color: #100c04; font-weight: 700; border: none; border-radius: var(--radius-sm);
+    padding: 0.6rem 1.2rem; font-size: 0.86rem; font-family: var(--f-body); cursor: pointer;
   }
-  .vd__gate-row button:hover { background: #3a3225; }
-  .vd__btn--ghost { background: transparent; color: var(--gold-deep); border: 1px solid var(--line); }
-  .vd__btn--ghost:hover { background: var(--paper-2); }
+  .vd__gate-row button:hover { background: var(--amber-hi); }
+  .vd__btn--ghost { background: transparent; color: var(--ink-2); border: 1px solid var(--hair); }
+  .vd__btn--ghost:hover { background: rgba(244,241,234,.06); color: var(--ink); }
   .vd__msg { font-size: 0.78rem !important; color: var(--wine) !important; margin: 0.8rem 0 0 !important; min-height: 1.1em; }
   .vd__msg.ok { color: var(--verde) !important; }
 
@@ -99,7 +99,7 @@
 
   .vd__kpis { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.8rem; margin-bottom: 1.2rem; }
   .vd__kpi { background: var(--surface); border: 1px solid var(--line-soft); border-radius: var(--radius-sm); padding: 0.9rem 1rem; }
-  .vd__kpi b { display: block; font-family: var(--font-display); font-size: 1.5rem; color: var(--ink); font-variant-numeric: tabular-nums; line-height: 1.2; }
+  .vd__kpi b { display: block; font-family: var(--f-display); font-size: 1.5rem; color: var(--ink); font-variant-numeric: tabular-nums; line-height: 1.2; }
   .vd__kpi b small { font-size: 0.72rem; font-weight: 400; color: var(--ink-faint); margin-left: 2px; }
   .vd__kpi span { font-size: 0.72rem; color: var(--ink-faint); }
 
@@ -117,7 +117,7 @@
   .vd__bars .n { grid-area: name; color: var(--ink-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .vd__bars .c { grid-area: num; text-align: right; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
   .vd__bars .b { grid-area: bar; height: 3px; background: var(--line-soft); border-radius: 2px; overflow: hidden; }
-  .vd__bars .b i { display: block; height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-pale)); border-radius: 2px; }
+  .vd__bars .b i { display: block; height: 100%; background: linear-gradient(90deg, var(--amber), var(--amber-hi)); border-radius: 2px; }
   .vd__empty { color: var(--ink-faint); font-size: 0.76rem; padding: 0.3rem 0; }
 
   .vd__feed { display: grid; gap: 1px; background: var(--line-soft); border-radius: 6px; overflow: hidden; font-size: 0.78rem; }

@@ -88,8 +88,13 @@ function applyUI(lang: Lang) {
   document.documentElement.setAttribute('lang', lang);
   document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
     const key = el.getAttribute('data-i18n');
-    if (key && key in t) {
-      el.textContent = (t as unknown as Record<string, string>)[key];
+    if (!key || !(key in t)) return;
+    const v = (t as unknown as Record<string, string>)[key];
+    // 输入框没有「文本内容」可言，同样的键要落到 placeholder 上
+    if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
+      el.placeholder = v;
+    } else {
+      el.textContent = v;
     }
   });
   // 更新 og:locale（若存在）
