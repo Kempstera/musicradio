@@ -49,6 +49,8 @@ export interface Translation {
   footerIncluded: string;
   footerStats: string;
   footerStats2: string;
+  /** 「全部洲」—— 单洲模式下的复位入口 */
+  allRegions: string;
   regionUnit: string;
   subregionUnit: string;
   subdivisionUnit: string;
@@ -146,6 +148,7 @@ const zhCN: Translation = {
   footerIncluded: '已收录',
   footerStats: '个国家与地区，',
   footerStats2: '个可在线收听的音乐电台。',
+  allRegions: '全部',
   regionUnit: '个国家/地区',
   subregionUnit: '国',
   subdivisionUnit: '个分区',
@@ -235,6 +238,7 @@ const zhTW: Translation = {
   footerIncluded: '已收錄',
   footerStats: '個國家與地區，',
   footerStats2: '個可線上收聽的音樂電台。',
+  allRegions: '全部',
   regionUnit: '個國家／地區',
   subregionUnit: '國',
   subdivisionUnit: '個分區',
@@ -324,6 +328,7 @@ const en: Translation = {
   footerIncluded: 'Catalogued',
   footerStats: 'countries and regions, with',
   footerStats2: 'music stations you can listen to online.',
+  allRegions: 'All',
   regionUnit: 'countries/regions',
   subregionUnit: 'countries',
   subdivisionUnit: 'subregions',
@@ -414,6 +419,7 @@ const cy: Translation = {
   footerIncluded: 'Wedi\'u catalogio',
   footerStats: 'o wledydd a rhanbarthau, gyda',
   footerStats2: 'o orsafoedd cerddoriaeth i wrando arnynt ar-lein.',
+  allRegions: 'Oll',
   regionUnit: 'gwledydd/rhanbarthau',
   subregionUnit: 'gwledydd',
   subdivisionUnit: 'isranbarth',
@@ -503,6 +509,7 @@ const fr: Translation = {
   footerIncluded: 'Répertorié',
   footerStats: 'pays et régions, avec',
   footerStats2: 'stations musicales à écouter en ligne.',
+  allRegions: 'Tout',
   regionUnit: 'pays/régions',
   subregionUnit: 'pays',
   subdivisionUnit: 'sous-régions',
@@ -593,6 +600,7 @@ const de: Translation = {
   footerIncluded: 'Erfasst',
   footerStats: 'Länder und Regionen mit',
   footerStats2: 'online hörbaren Musiksendern.',
+  allRegions: 'Alle',
   regionUnit: 'Länder/Regionen',
   subregionUnit: 'Länder',
   subdivisionUnit: 'Subregionen',
@@ -683,6 +691,7 @@ const it: Translation = {
   footerIncluded: 'Catalogati',
   footerStats: 'paesi e regioni, con',
   footerStats2: 'stazioni musicali ascoltabili online.',
+  allRegions: 'Tutti',
   regionUnit: 'paesi/regioni',
   subregionUnit: 'paesi',
   subdivisionUnit: 'sottoregioni',
@@ -773,6 +782,7 @@ const es: Translation = {
   footerIncluded: 'Catalogado',
   footerStats: 'países y regiones, con',
   footerStats2: 'emisoras musicales para escuchar en línea.',
+  allRegions: 'Todos',
   regionUnit: 'países/regiones',
   subregionUnit: 'países',
   subdivisionUnit: 'subregiones',

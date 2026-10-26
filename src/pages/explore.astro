@@ -54,10 +54,16 @@ const totalRadios = allCountries.reduce((sum, c) => {
       必须放在 .explore-head 之外 —— position:sticky 的吸附范围受父容器限制。 */}
   <div class="explore-jumpbar">
     <div class="container explore-jumpbar__inner">
+      {/* 调谐条不再是「锚点索引」，而是一个洲过滤器：点哪个就只剩哪个洲。
+          href 里同时带上 ?c= 与 #id —— 万一 JS 没跑起来，原生锚点也还能跳到位。 */}
       <nav class="explore-jump" aria-label="Continents">
+        <a class="explore-jump__item explore-jump__all" href="/explore" data-region="">
+          <span data-i18n="allRegions">{t0.allRegions}</span>
+          <small>{allCountries.length}</small>
+        </a>
         {
           CONTINENTS.map((c) => (
-            <a class="explore-jump__item" href={`#${c.id}`} data-region={c.id}>
+            <a class="explore-jump__item" href={`/explore?c=${c.id}#${c.id}`} data-region={c.id}>
               <span data-continent={c.id}>{enLabel(c.id) || c.label}</span>
               <small>{countriesByContinent(c.id).length}</small>
             </a>
@@ -135,16 +141,22 @@ const totalRadios = allCountries.reduce((sum, c) => {
 </Base>
 
 <script is:inline>
-  // 国家检索：只在当前 DOM 上按可见文本过滤，不引入任何数据依赖。
-  // 大小写与变音符号一并归一化，这样搜 "peru" 也能命中 "Perú"。
+  // 洲过滤 + 国家检索。
+  // 两者共用同一个「隐藏」开关（.is-filtered-out），所以必须写在同一个 apply() 里 ——
+  // 拆成两套的话，先跑的那套刚隐藏完，后跑的那套就会把它重新打开。
   (function () {
-    var input = document.querySelector('.explore-filter__input');
-    if (!input) return;
+    var secs = Array.prototype.slice.call(document.querySelectorAll('.explore-sec'));
+    if (!secs.length) return;
 
     var cards = Array.prototype.slice.call(document.querySelectorAll('.country-card'));
     var subs = Array.prototype.slice.call(document.querySelectorAll('.subregion'));
-    var secs = Array.prototype.slice.call(document.querySelectorAll('.explore-sec'));
+    var jumps = Array.prototype.slice.call(document.querySelectorAll('.explore-jump__item'));
+    var input = document.querySelector('.explore-filter__input');
     var empty = document.querySelector('.explore-empty');
+    var root = document.documentElement;
+
+    var ids = secs.map(function (s) { return s.id; });
+    var active = ''; // '' = 六洲全开
 
     function norm(s) {
       return (s || '')
@@ -153,45 +165,180 @@ const totalRadios = allCountries.reduce((sum, c) => {
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '');
     }
-
     function textOf(el, sel) {
       var n = el.querySelector(sel);
       return n ? n.textContent : '';
     }
-
     // 预先算好每张卡的检索文本，输入时不必反复读 DOM
     var haystack = cards.map(function (card) {
       return norm(textOf(card, '.country-card__name') + ' ' + textOf(card, '.country-card__en'));
     });
 
-    function run() {
-      var q = norm(input.value).trim();
+    function apply() {
+      var q = norm(input ? input.value : '').trim();
       var shown = 0;
+      var i;
 
-      for (var i = 0; i < cards.length; i++) {
-        var hit = !q || haystack[i].indexOf(q) >= 0;
+      for (i = 0; i < cards.length; i++) {
+        var hit =
+          (!q || haystack[i].indexOf(q) >= 0) &&
+          (!active || cards[i].getAttribute('data-region') === active);
         cards[i].classList.toggle('is-filtered-out', !hit);
         if (hit) shown++;
       }
 
-      for (var j = 0; j < subs.length; j++) {
-        subs[j].classList.toggle(
+      for (i = 0; i < subs.length; i++) {
+        subs[i].classList.toggle(
           'is-filtered-out',
-          !subs[j].querySelector('.country-card:not(.is-filtered-out)')
+          !subs[i].querySelector('.country-card:not(.is-filtered-out)')
         );
       }
 
-      for (var k = 0; k < secs.length; k++) {
-        secs[k].classList.toggle(
+      for (i = 0; i < secs.length; i++) {
+        secs[i].classList.toggle(
           'is-filtered-out',
-          !secs[k].querySelector('.country-card:not(.is-filtered-out)')
+          Boolean(active && secs[i].id !== active) ||
+            !secs[i].querySelector('.country-card:not(.is-filtered-out)')
         );
       }
+
+      // 条上高亮当前所在 —— 「全部」那条的 data-region 是空串，正好与 active=='' 对上
+      for (i = 0; i < jumps.length; i++) {
+        jumps[i].classList.toggle('is-on', (jumps[i].getAttribute('data-region') || '') === active);
+      }
+      // 把「现在处于单洲模式」写到 html 上，样式与别处脚本都能据此判断
+      root.classList.toggle('explore-single', Boolean(active));
 
       if (empty) empty.hidden = shown !== 0;
     }
 
-    input.addEventListener('input', run);
-    input.addEventListener('search', run);
+    // ── 落点自己算，不交给浏览器 ────────────────────────────────
+    // 原因有二：
+    //   1. 过滤会把目标洲上方的整段内容抽掉，浏览器按过滤前算出来的锚点位置当场作废，
+    //      结果停在「上一个洲」的位置，要再往下滑一下才看见 —— 这就是用户报的那个 bug；
+    //   2. --header-h 是运行时回写的（窄屏导航折两行时不再是 66px），
+    //      CSS 里的 scroll-margin-top 是静态值，算出来的落点本来就会偏。
+    // 所以这里量实际的「导航 + 吸附条」高度，自己算、自己滚。
+    function barHeight() {
+      var hdr = document.querySelector('.site-header');
+      var bar = document.querySelector('.explore-jumpbar');
+      return (hdr ? hdr.offsetHeight : 0) + (bar ? bar.offsetHeight : 0);
+    }
+
+    function land(el) {
+      var y = 0;
+      if (el) {
+        y = el.getBoundingClientRect().top + (window.pageYOffset || 0) - barHeight() - 18;
+        if (y < 0) y = 0;
+      }
+      // html 上有 scroll-behavior: smooth。不按住它的话，这一下会变成一段动画：
+      // 首次进入时能看见页面自己往下滚，复位时又要等一秒才归零。
+      var prev = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      try {
+        window.scrollTo({ top: y, left: 0, behavior: 'instant' });
+      } catch (e) {
+        window.scrollTo(0, y);
+      }
+      root.style.scrollBehavior = prev;
+    }
+
+    // 从 URL 读出「要显示哪个洲、要落到哪个元素」
+    function read() {
+      var c = '';
+      try {
+        c = new URLSearchParams(location.search).get('c') || '';
+      } catch (e) {}
+      if (ids.indexOf(c) < 0) c = '';
+
+      var h = (location.hash || '').replace(/^#/, '');
+      var target = h ? document.getElementById(h) : null;
+      var sec = target && target.closest ? target.closest('.explore-sec') : null;
+
+      // 老式的 /explore#africa、以及国家页面包屑的 /explore#southern-europe，
+      // 都顺带当成单洲模式：它们想看的其实也只是那一个洲。
+      if (!c && sec && ids.indexOf(sec.id) >= 0) c = sec.id;
+      if (target && !sec) target = null; // 认不出来的 hash，忽略
+      // ?c= 与 # 打架时以 ?c= 为准，否则会跳到一个已经被隐藏的元素上（落点变成 0）
+      if (target && c && sec && sec.id !== c) target = null;
+
+      return { c: c, target: target };
+    }
+
+    function sync() {
+      var p = read();
+      active = p.c;
+      apply();
+      return p.target || (active ? document.getElementById(active) : null);
+    }
+
+    // ── 首次进入：按 URL 定洲，然后反复校正落点 ──────────────────
+    // frozen 一旦立起来，后面几次校正就全部作废 —— 否则用户已经自己换洲了，
+    // 定时器还拿着加载时那个 target 把人往回拽。
+    var frozen = false;
+    var target = sync();
+
+    // 窄屏上这条调谐带是横向滚动的（带右缘渐隐）。落在最后一个洲时，
+    // 高亮的那一颗默认在屏幕外 —— 得把它推回可见范围，否则「当前是哪个洲」看不出来。
+    var nav = document.querySelector('.explore-jump');
+    var on = document.querySelector('.explore-jump__item.is-on');
+    if (nav && on && nav.scrollWidth > nav.clientWidth + 4) {
+      var nr = nav.getBoundingClientRect();
+      var or = on.getBoundingClientRect();
+      if (or.left < nr.left || or.right > nr.right) nav.scrollLeft += or.left - nr.left - 12;
+    }
+
+    if (target) {
+      var settle = function () {
+        if (!frozen) land(target);
+      };
+      settle();
+      requestAnimationFrame(settle);
+      // 字体、React 岛水合、语言岛回写 --header-h 都可能再改变上方的高度
+      window.addEventListener('load', settle);
+      setTimeout(settle, 260);
+      setTimeout(settle, 900);
+      // 用户一旦自己动了手，就别再把他往回拽
+      ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (ev) {
+        window.addEventListener(
+          ev,
+          function () {
+            frozen = true;
+          },
+          { passive: true, once: true }
+        );
+      });
+    }
+
+    // ── 条上点击：换洲，不刷新页面 ──────────────────────────────
+    jumps.forEach(function (a) {
+      a.addEventListener('click', function (ev) {
+        if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+        ev.preventDefault();
+        frozen = true;
+
+        var id = a.getAttribute('data-region') || '';
+        active = ids.indexOf(id) >= 0 ? id : '';
+        apply();
+
+        var url = active ? '?c=' + active : location.pathname;
+        try {
+          history.pushState({ c: active }, '', url);
+        } catch (e) {}
+
+        land(active ? document.getElementById(active) : null);
+      });
+    });
+
+    // 前进 / 后退也要跟着换
+    window.addEventListener('popstate', function () {
+      frozen = true;
+      land(sync());
+    });
+
+    if (input) {
+      input.addEventListener('input', apply);
+      input.addEventListener('search', apply);
+    }
   })();
 </script>

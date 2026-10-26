@@ -184,7 +184,7 @@ const globeData = JSON.stringify(GLOBE_POINTS);
               const subs = SUBREGIONS.filter((s) => s.continent === c.id);
               return (
                 <li>
-                  <a class="atlas__row" href={`/explore#${c.id}`} data-region={c.id}>
+                  <a class="atlas__row" href={`/explore?c=${c.id}#${c.id}`} data-region={c.id}>
                     <span class="atlas__mark" aria-hidden="true" />
                     <span class="atlas__num" aria-hidden="true">
                       {String(i + 1).padStart(2, '0')}

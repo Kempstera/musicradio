@@ -1257,6 +1257,23 @@ html[lang='zh-TW'] .hero__title {
 .explore-jump__item:hover::before {
   opacity: 1;
 }
+/* 「全部」与六个洲之间留一道呼吸，暗示它是复位而不是第七个洲 */
+.explore-jump__all {
+  margin-right: 0.45rem;
+}
+/* 当前只显示这一个洲：像键被按下去 —— 纸色翻白，压一道极细的内描边 */
+.explore-jump__item.is-on {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: inset 0 0 0 1px var(--rule-2);
+}
+.explore-jump__item.is-on::before {
+  opacity: 1;
+}
+.explore-jump__item.is-on small {
+  color: var(--accent);
+  opacity: 0.9;
+}
 
 /* 检索：一条下划线，不是一个胶囊 */
 .explore-filter {
