@@ -1321,7 +1321,40 @@ html[lang='zh-TW'] .hero__title {
 
 /* 章节 */
 .explore-sec {
+  position: relative;
   scroll-margin-top: calc(var(--header-h) + 80px);
+  /* 建一层独立的叠放上下文：背景图用 z-index:-1 时才会落在「本节所有内容之下、
+     纸面之上」，否则会跑到 body 底纹后面去，什么都看不见 */
+  isolation: isolate;
+}
+
+/* 景点淡背景：一条贴着章节标题的宽幅带。
+   为什么不是整节铺满 —— 卡片自己是不透明的纸色，铺满之后照片真正露出来的
+   也就只有标题这 200 多像素，剩下的全被卡片盖住；而照片的主体（山峰、瀑布）
+   恰好在画面中下部，正好落在被盖住的那一段。所以裁成一条，把主体对齐到标题。 */
+.explore-sec__bg {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  width: 100%;
+  height: min(32vh, 300px);
+  object-fit: cover;
+  object-position: 50% 62%;
+  opacity: 0.16;
+  /* 压掉彩度：不压的话热带那几张（大堡礁、伊瓜苏）会抢过纸色，
+     压过之后才像「印在纸上的一张旧照片」，而不是贴上去的图 */
+  filter: saturate(0.66) contrast(0.92);
+  /* 上下都从 0 起，中段才是实的：两端不留硬边，照片像从纸里化出来 */
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.9) 18%,
+    #000 42%,
+    rgba(0, 0, 0, 0.55) 76%,
+    transparent 100%
+  );
+  pointer-events: none;
+  user-select: none;
 }
 .explore-sec__lead {
   display: flex;
@@ -1358,6 +1391,46 @@ html[lang='zh-TW'] .hero__title {
   font-family: var(--f-display);
   font-size: clamp(1.2rem, 2.4vw, 1.7rem);
   color: var(--ink-3);
+}
+
+/* 景点照片的 CC 署名。放在最末、最小的那一级字号上 ——
+   法务上需要它，视觉上不该被它打断。 */
+.explore-credits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.5rem;
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding: clamp(3rem, 6vw, 4.5rem) var(--gutter) clamp(2.5rem, 5vw, 4rem);
+  font-family: var(--f-mono);
+  font-size: 0.58rem;
+  line-height: 1.95;
+  letter-spacing: 0.05em;
+  color: var(--ink-3);
+}
+.explore-credits > span:first-child {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  opacity: 0.7;
+  margin-right: 0.15rem;
+}
+.explore-credits a {
+  color: var(--ink-3);
+  border-bottom: 1px solid var(--rule-3);
+  transition:
+    color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out);
+}
+.explore-credits a:hover {
+  color: var(--ink-2);
+  border-bottom-color: var(--rule);
+}
+.explore-credits__dot {
+  opacity: 0.45;
+}
+.explore-credits__lic {
+  opacity: 0.75;
 }
 
 /* --------------------------------------------------------------------------
@@ -1422,12 +1495,22 @@ html[lang='zh-TW'] .hero__title {
   overflow: hidden;
   transition: background-color var(--dur-2) var(--ease-out);
 }
+/* 国名这一行：国旗 + 名字。国旗不再单独占一行 ——
+   悬在卡片顶上太靠上，容易被当成一块装饰色，读者根本不会把它和国名连起来。 */
+.country-card__lead {
+  display: flex;
+  align-items: baseline;
+  gap: 0.42rem;
+  min-width: 0;
+}
 .country-card__flag {
-  font-size: 1.15rem;
-  line-height: 1.4;
-  opacity: 0.9;
+  flex: none;
+  font-size: 0.98rem;
+  line-height: 1;
+  opacity: 0.92;
 }
 .country-card__name {
+  min-width: 0;
   font-family: var(--f-display);
   font-weight: 500;
   font-size: 1.06rem;

@@ -30,6 +30,50 @@ const totalRadios = allCountries.reduce((sum, c) => {
   const fetched = c.radioMode === 'notable-only' ? 0 : (radios[c.iso] || []).length;
   return sum + notable + fetched;
 }, 0);
+
+// 每个洲配一张最知名的景点，压在章节顶部当淡背景（见 .explore-sec__bg）。
+// 全部来自 Wikimedia Commons 的自由授权作品，署名见页脚那行小字。
+// 已统一压成 1600×668 的 webp、质量 50 —— 它最终只以 ~14% 的不透明度出现，
+// 再高的画质是白付流量。
+const SCENERY: Record<string, { name: string; by: string; lic: string; page: string }> = {
+  asia: {
+    name: 'Everest',
+    by: 'Nir B. Gurung',
+    lic: 'CC BY-SA 4.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Sunset_view_of_Everest.jpg',
+  },
+  europe: {
+    name: 'Geirangerfjord',
+    by: 'Ximonic',
+    lic: 'CC BY-SA 3.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Geirangerfjord_from_%C3%98rnesvingen,_2013_June.jpg',
+  },
+  africa: {
+    name: 'Victoria Falls',
+    by: 'Diego Delso',
+    lic: 'CC BY-SA 4.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Cataratas_Victoria,_Zambia-Zimbabue,_2018-07-27,_DD_30-34_PAN.jpg',
+  },
+  'north-america': {
+    name: 'Grand Canyon',
+    by: 'Mgimelfarb',
+    lic: 'CC0',
+    page: 'https://commons.wikimedia.org/wiki/File:Grand_Canyon_South_Rim_at_Sunset.jpg',
+  },
+  'south-america': {
+    name: 'Iguazu Falls',
+    by: 'Geographer',
+    lic: 'CC BY-SA 4.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Iguazu_Falls_Brazilian_Side_2019.jpg',
+  },
+  oceania: {
+    name: 'Great Barrier Reef',
+    by: 'Ank Kumar',
+    lic: 'CC BY-SA 4.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Aerial_View_of_Great_Barrier_Reef_(Ank_Kumar)_01.jpg',
+  },
+};
+const sceneryList = CONTINENTS.map((c) => SCENERY[c.id]).filter(Boolean);
 ---
 
 <Base title={t0.navExplore}>
@@ -91,6 +135,21 @@ const totalRadios = allCountries.reduce((sum, c) => {
       const subs = SUBREGIONS.filter((s) => s.continent === c.id);
       return (
         <section class="section explore-sec" id={c.id} data-region={c.id}>
+          {/* 景点背景：纯装饰，所以 alt 留空、aria-hidden，并交给浏览器懒加载 */}
+          {
+            SCENERY[c.id] && (
+              <img
+                class="explore-sec__bg"
+                src={`/img/continents/${c.id}.webp`}
+                alt=""
+                aria-hidden="true"
+                width="1600"
+                height="668"
+                loading="lazy"
+                decoding="async"
+              />
+            )
+          }
           <div class="container">
             <div class="section__head" data-reveal>
               <div class="explore-sec__lead">
@@ -117,8 +176,12 @@ const totalRadios = allCountries.reduce((sum, c) => {
                       {
                         list.map((country) => (
                           <a class="country-card" href={`/countries/${country.slug}`} data-region={c.id}>
-                            <span class="country-card__flag" aria-hidden="true">{country.flag}</span>
-                            <div class="country-card__name" data-ct="name" data-slug={country.slug}>{en[country.slug]?.name || country.name}</div>
+                            <div class="country-card__lead">
+                              {/* 国旗用 emoji：零字节、Apple 平台上就是一枚正经的小旗子。
+                                  放独立一行太靠上、容易被当成装饰，所以并进国名这一行。 */}
+                              <span class="country-card__flag" aria-hidden="true">{country.flag}</span>
+                              <div class="country-card__name" data-ct="name" data-slug={country.slug}>{en[country.slug]?.name || country.name}</div>
+                            </div>
                             <div class="country-card__en">{country.nameEn}</div>
                             <p class="country-card__intro" data-ct="intro" data-slug={country.slug}>{en[country.slug]?.intro || country.intro}</p>
                             <span class="country-card__more" data-i18n="listenRadio">{t0.listenRadio}</span>
@@ -138,6 +201,23 @@ const totalRadios = allCountries.reduce((sum, c) => {
 
   {/* 检索无结果时的提示：比一个孤零零的破折号清楚得多 */}
   <p class="explore-empty" data-i18n="noResults" hidden>{t0.noResults}</p>
+
+  {/* CC 署名：只写作者 / 景点 / 许可，名字链到 Commons 原图页。
+      拉丁文小字放在页面最末，任何语言下都读得通，不必翻译八遍。 */}
+  <p class="explore-credits">
+    <span>Scenery</span>
+    {
+      sceneryList.map((s, i) => (
+        <>
+          {i > 0 && <span class="explore-credits__dot" aria-hidden="true">·</span>}
+          <a href={s.page} target="_blank" rel="noopener noreferrer">
+            {s.name} — {s.by}
+          </a>
+        </>
+      ))
+    }
+    <span class="explore-credits__lic">Wikimedia Commons, CC BY-SA 4.0 / 3.0 / CC0</span>
+  </p>
 </Base>
 
 <script is:inline>

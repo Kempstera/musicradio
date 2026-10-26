@@ -97,9 +97,12 @@ const desc = description || t0.heroDesc;
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {/* 站点图标：朱地上一道对称的声波。SVG 给现代浏览器，PNG 兜底，
+        apple-touch-icon 是不带圆角的全幅红块 —— iOS 自己会切圆角，图里再切一层会露出缺口。 */}
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#f6f2e9" />
     <link rel="canonical" href={SITE_URL} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
