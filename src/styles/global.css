@@ -2625,6 +2625,131 @@ textarea:focus-visible,
   }
 }
 
+/* ==========================================================================
+   首访过场：宇宙 → 桌面
+   --------------------------------------------------------------------------
+   只在第一次打开首页时走一次。`html.mr-intro` 由 Base 的 <head> 内联脚本在
+   首帧之前加上，所以这里要担保「加上那一刻就已经是黑的」：
+   把 html 的纸色换掉、body 让透明、纸纹关掉、内容全部压到 0 —— 否则会先
+   闪一下米色纸面再切黑，那一下比没有过场更难看。
+
+   内容不是渐显出来的，是被夜幕「揭开」的：.intro 是一整块不透明的暗场盖在
+   最上面，它淡出的过程就是页面显影的过程。所以内容只需要在揭开的那一刻
+   从 0 跳到 1（mr-intro-out 负责让它带上过渡）。脚本一旦失手，head 里
+   4 秒的兜底会把 mr-intro 摘掉，内容照常出现。
+   ========================================================================== */
+html.mr-intro {
+  background: #080706;
+  overflow: hidden;
+}
+html.mr-intro body {
+  background: transparent;
+}
+html.mr-intro body::before,
+html.mr-intro body::after {
+  opacity: 0;
+}
+html.mr-intro body > :not(.intro) {
+  opacity: 0;
+}
+/* 揭开那一刻挂上，只活 0.9s，别让 body 的每个孩子长期背着一个 transition */
+html.mr-intro-out body > :not(.intro) {
+  opacity: 1;
+  transition: opacity 0.75s var(--ease-out);
+}
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  overflow: hidden;
+  pointer-events: none;
+  /* 底子不是纯黑：中心偏暖一点，像远处有一团光，球体才浮得起来 */
+  background:
+    radial-gradient(120% 90% at 50% 46%, rgba(255, 198, 140, 0.055), transparent 62%),
+    radial-gradient(140% 140% at 50% 50%, #14100c 0%, #0a0806 55%, #050403 100%);
+}
+.intro__stars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  display: block;
+}
+.intro__stars circle {
+  fill: #fdf7ea;
+}
+/* 球后面的一团暖光，散场时先退，免得球缩小以后还留着一团亮 */
+.intro__glow {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 150vmax;
+  height: 150vmax;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  background: radial-gradient(
+    circle,
+    rgba(255, 206, 152, 0.13) 0%,
+    rgba(255, 186, 120, 0.05) 26%,
+    transparent 52%
+  );
+}
+.intro__stage {
+  position: absolute;
+  inset: 0;
+}
+.intro__globe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.intro__globe .globe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+  touch-action: auto;
+}
+/* 夜空里的地球 —— 纸上的墨线在暗底上等于没画，这里整套换成浅色。
+   线宽同时收细：开场球体被放大到两倍多，不收回来的话海岸线会粗得像圆珠笔。 */
+.intro__globe .globe__sea {
+  fill: rgba(255, 246, 228, 0.03);
+}
+.intro__globe .globe__grid path {
+  stroke: rgba(255, 246, 228, 0.08);
+  stroke-width: 0.55;
+}
+.intro__globe .globe__land path {
+  stroke: rgba(255, 246, 228, 0.5);
+  stroke-width: 0.5;
+}
+.intro__globe .globe__isles path {
+  fill: rgba(255, 246, 228, 0.13);
+}
+.intro__globe .globe__limb {
+  stroke: rgba(255, 246, 228, 0.15);
+  stroke-width: 0.7;
+}
+/* 球面的明暗：左上暖光、右下压暗。viewBox 500 里球半径占 230/500，
+   正好内切于这个方框，所以 50% 圆角就是球的轮廓。 */
+.intro__shade {
+  position: absolute;
+  inset: 4%;
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    radial-gradient(72% 62% at 34% 26%, rgba(255, 226, 186, 0.1), transparent 46%),
+    radial-gradient(96% 92% at 74% 84%, rgba(0, 0, 0, 0.5), transparent 62%);
+}
+.intro__globe .globe__sheen {
+  opacity: 0.26;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -42,6 +42,33 @@ const globeData = JSON.stringify(GLOBE_POINTS);
 ---
 
 <Base>
+  {/* 首访过场的第一推动：必须在首帧之前决定「要不要藏内容、要不要变黑」，
+      所以只能内联在 head 里，不能等打包的模块。判定一次、记一笔，之后不再走。 */}
+  <script slot="head" is:inline>
+    (function () {
+      try {
+        var KEY = 'mr_intro_v1';
+        if (window.localStorage.getItem(KEY)) return;
+        // 系统里关掉了动效就别演了，直接给正常页面
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        document.documentElement.classList.add('mr-intro');
+        // 记在「开场」而不是「结束」：中途刷新也不该再看第二遍
+        window.localStorage.setItem(KEY, '1');
+        // 兜底：过场脚本没接上（网络/解析出错）也要把内容放出来，不能扣住
+        setTimeout(function () {
+          var el = document.documentElement;
+          if (el.classList.contains('mr-intro')) {
+            el.classList.remove('mr-intro');
+            el.classList.add('mr-intro-out');
+            setTimeout(function () {
+              el.classList.remove('mr-intro-out');
+            }, 900);
+          }
+        }, 4000);
+      } catch (e) {}
+    })();
+  </script>
+
   <section class="hero">
     <div class="container hero__wrap">
       {/* 竖排书脊：只在宽屏出现，给左边缘一条可以「读」的线 */}
@@ -193,5 +220,8 @@ const globeData = JSON.stringify(GLOBE_POINTS);
 </Base>
 
 <script>
+  // 顺序有意义：过场要在 globe 第一次重绘之前把 SVG 克隆走，
+  // 这样克隆和真身都是 INITIAL_YAW，交接时不会跳。
+  import '../scripts/intro';
   import '../scripts/globe';
 </script>

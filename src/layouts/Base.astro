@@ -106,6 +106,8 @@ const desc = description || t0.heroDesc;
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:locale" content="en_US" />
+    {/* 页面可以往 head 里塞「必须在首帧之前跑」的内联脚本（如首页的首访过场） */}
+    <slot name="head" />
   </head>
   <body>
     <Header />
