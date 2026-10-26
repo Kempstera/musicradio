@@ -15,10 +15,11 @@ import { GLOBE_POINTS } from '../data/globe-points';
 import { graticule, project, CX, CY, R, VIEWBOX, INITIAL_YAW } from '../lib/globe';
 import { parseLand, landPaths } from '../lib/land';
 import { LAND, ISLES } from '../data/land';
-import { t0, CONTINENT_LABELS } from '../lib/i18n';
+import { t0, DEFAULT_LANG, CONTINENT_LABELS } from '../lib/i18n';
 import radiosData from '../data/radios.json';
 
-const enLabel = (id: string) => (CONTINENT_LABELS['en'] as Record<string, string>)?.[id];
+// 首屏文案用默认语言；切换语言后由 apply-lang 覆盖
+const label0 = (id: string) => (CONTINENT_LABELS[DEFAULT_LANG] as Record<string, string>)?.[id];
 
 // 可在线收听的电台总数（与页脚统计口径一致）
 const radios = radiosData as Record<string, any[]>;
@@ -191,7 +192,7 @@ const globeData = JSON.stringify(GLOBE_POINTS);
                     </span>
                     <span class="atlas__body">
                       <span class="atlas__name" data-continent={c.id}>
-                        {enLabel(c.id) || c.label}
+                        {label0(c.id) || c.label}
                       </span>
                       <span class="atlas__sub">
                         {subs.length}{' '}

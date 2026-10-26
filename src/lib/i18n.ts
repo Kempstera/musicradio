@@ -940,13 +940,19 @@ export const SUBREGION_LABELS: Record<Lang, Record<SubregionId, string>> = {
 const STORAGE_KEY = 'mr_lang';
 
 /**
- * 站点默认语言：**英语**。
+ * 站点默认语言：**简体中文**。
  *
- * 无论访客来自哪里、浏览器/系统是什么语言，首次进入看到的界面都是英语；
+ * 无论访客来自哪里、浏览器/系统是什么语言，首次进入看到的界面都是简体中文；
  * 只有当访客**主动**在语言切换器里选过语言之后，才会按 localStorage 记住的选择显示。
  * （静态 HTML 也已用同一语言预渲染，见下方的 `t0`，因此首屏不会出现语言闪烁。）
+ *
+ * 换这个值时，下面三处硬编码的 'en' 必须一起改，否则「预渲染语言」与「运行时判定」
+ * 会对不上，首屏会闪一次：
+ *   · `layouts/Base.astro` 的 `<html lang>` 与内联脚本里的 DEFAULT
+ *   · `layouts/Base.astro` 里 `s === 'en'` 那个「不必遮屏」的短路
+ *   · 各页面取 `compact[...]` / `CONTINENT_LABELS[...]` 的键
  */
-export const DEFAULT_LANG: Lang = 'en';
+export const DEFAULT_LANG: Lang = 'zh-CN';
 
 /** 静态 HTML 预渲染所用文案（即默认语言）；.astro 模板里的初始文案统一取自它 */
 export const t0: Translation = TRANSLATIONS[DEFAULT_LANG];

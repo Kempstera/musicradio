@@ -13,15 +13,17 @@ import MyFavorites from '../components/MyFavorites.tsx';
 import { CONTINENTS, SUBREGIONS } from '../lib/country';
 import { allCountries, countriesByContinent, countriesBySubregion } from '../data';
 import { getAllCompact } from '../data/i18n';
-import { t0, CONTINENT_LABELS, SUBREGION_LABELS } from '../lib/i18n';
+import { t0, DEFAULT_LANG, CONTINENT_LABELS, SUBREGION_LABELS } from '../lib/i18n';
 import radiosData from '../data/radios.json';
 
 const compact = getAllCompact();
 const compactJson = JSON.stringify(compact).replace(/</g, '\\u003c');
 
-const en = compact['en'] || {};
-const enLabel = (id: string) => (CONTINENT_LABELS['en'] as Record<string, string>)?.[id];
-const subLabel = (id: string) => (SUBREGION_LABELS['en'] as Record<string, string>)?.[id];
+// 首屏（未水合前）用默认语言的文案；用户切过语言后由 apply-lang 覆盖。
+// 简体中文没有独立的内容文件（它就是原文本身），所以这些取值会回落到数据源里的中文字段。
+const d0 = compact[DEFAULT_LANG] || {};
+const label0 = (id: string) => (CONTINENT_LABELS[DEFAULT_LANG] as Record<string, string>)?.[id];
+const subLabel = (id: string) => (SUBREGION_LABELS[DEFAULT_LANG] as Record<string, string>)?.[id];
 
 // 可在线收听的电台总数（与页脚统计口径一致）
 const radios = radiosData as Record<string, any[]>;
@@ -108,7 +110,7 @@ const sceneryList = CONTINENTS.map((c) => SCENERY[c.id]).filter(Boolean);
         {
           CONTINENTS.map((c) => (
             <a class="explore-jump__item" href={`/explore?c=${c.id}#${c.id}`} data-region={c.id}>
-              <span data-continent={c.id}>{enLabel(c.id) || c.label}</span>
+              <span data-continent={c.id}>{label0(c.id) || c.label}</span>
               <small>{countriesByContinent(c.id).length}</small>
             </a>
           ))
@@ -155,7 +157,7 @@ const sceneryList = CONTINENTS.map((c) => SCENERY[c.id]).filter(Boolean);
               <div class="explore-sec__lead">
                 <span class="explore-sec__num" aria-hidden="true">{String(ci + 1).padStart(2, '0')}</span>
                 <div>
-                  <h2 class="section__title" data-continent={c.id}>{enLabel(c.id) || c.label}</h2>
+                  <h2 class="section__title" data-continent={c.id}>{label0(c.id) || c.label}</h2>
                 </div>
               </div>
               <span class="explore-sec__count">{continentCountries.length} <span data-i18n="regionUnit">{t0.regionUnit}</span></span>
@@ -180,10 +182,10 @@ const sceneryList = CONTINENTS.map((c) => SCENERY[c.id]).filter(Boolean);
                               {/* 国旗用 emoji：零字节、Apple 平台上就是一枚正经的小旗子。
                                   放独立一行太靠上、容易被当成装饰，所以并进国名这一行。 */}
                               <span class="country-card__flag" aria-hidden="true">{country.flag}</span>
-                              <div class="country-card__name" data-ct="name" data-slug={country.slug}>{en[country.slug]?.name || country.name}</div>
+                              <div class="country-card__name" data-ct="name" data-slug={country.slug}>{d0[country.slug]?.name || country.name}</div>
                             </div>
                             <div class="country-card__en">{country.nameEn}</div>
-                            <p class="country-card__intro" data-ct="intro" data-slug={country.slug}>{en[country.slug]?.intro || country.intro}</p>
+                            <p class="country-card__intro" data-ct="intro" data-slug={country.slug}>{d0[country.slug]?.intro || country.intro}</p>
                             <span class="country-card__more" data-i18n="listenRadio">{t0.listenRadio}</span>
                           </a>
                         ))

@@ -10,7 +10,7 @@ import type { Country } from '../../lib/country';
 import radiosData from '../../data/radios.json';
 import { STATION_NOTES } from '../../data/station-notes';
 import { capitalEn, languageEn } from '../../data/i18n/geo-en';
-import { t0, CONTINENT_LABELS, SUBREGION_LABELS } from '../../lib/i18n';
+import { t0, DEFAULT_LANG, CONTINENT_LABELS, SUBREGION_LABELS } from '../../lib/i18n';
 import type { Lang } from '../../lib/i18n';
 
 export function getStaticPaths() {
@@ -22,21 +22,23 @@ const continent = CONTINENT_MAP[country.continent];
 const subregion = SUBREGION_MAP[country.subregion];
 const radios = radiosData as Record<string, any[]>;
 
-// —— 静态 HTML 以默认语言（英语）预渲染 ————————————————
-// data-ct 元素上的多语言 blob 负责用户切换语言后的覆盖；首屏（未水合前）则一律显示英语，
-// 与 i18n 的 DEFAULT_LANG 对齐，任何人首次进入看到的都是英语且不会闪烁。
+// —— 静态 HTML 以默认语言（简体中文）预渲染 ————————————————
+// data-ct 元素上的多语言 blob 负责用户切换语言后的覆盖；首屏（未水合前）则一律显示默认语言。
+// 注意：简体中文没有独立译文文件 —— 它就是原文本身，所以 baseContent 是 undefined，
+// 下面每处 fallback 都要落到数据源里的中文字段（country.name / country.intro / m.name），
+// 而不是 nameEn。
 const allLangs = getCountryAllLangs(country.slug);
-const enContent = allLangs.en;
-const enName = enContent?.name || country.nameEn || country.name;
-const enIntro = enContent?.intro || country.intro;
-/** 取英语译文数组的第 i 项，缺失则回退中文原文 */
+const baseContent = allLangs[DEFAULT_LANG];
+const name0 = baseContent?.name || country.name;
+const intro0 = baseContent?.intro || country.intro;
+/** 取默认语言译文数组的第 i 项，缺失则回退中文原文 */
 const pick = (a: string[] | undefined, b: string[], i: number): string =>
   a && i < a.length ? a[i] : b[i];
 
-const continentLabel = (CONTINENT_LABELS['en'] as Record<string, string>)[country.continent] || continent.label;
-const subregionLabel = (SUBREGION_LABELS['en'] as Record<string, string>)[country.subregion] || subregion.label;
+const continentLabel = (CONTINENT_LABELS[DEFAULT_LANG] as Record<string, string>)[country.continent] || continent.label;
+const subregionLabel = (SUBREGION_LABELS[DEFAULT_LANG] as Record<string, string>)[country.subregion] || subregion.label;
 
-const pageTitle = enName === country.nameEn ? enName : `${enName} · ${country.nameEn}`;
+const pageTitle = name0 === country.nameEn ? name0 : `${name0} · ${country.nameEn}`;
 
 // 拉丁转写行：本地名与英文名相同时（France / France）不重复显示成「FRANCE · FRANCE」
 const heroLatin =
@@ -55,7 +57,7 @@ const fetchedStations: Station[] = (radios[country.iso] || []).map((s, i) => {
     bitrate: s.bitrate,
     tags: s.tags,
     homepage: s.homepage,
-    note: sn?.['en'] || sn?.['zh-CN'],
+    note: sn?.[DEFAULT_LANG] || sn?.['en'],
     noteKey: sn ? s.url : undefined,
   };
 });
@@ -69,10 +71,10 @@ const notablePlayable: Station[] = (country.notableRadios || [])
     url: r.url as string,
     hls: !!r.hls,
     codec: r.hls ? 'HLS' : 'MP3',
-    // 流派标签是中文数据，静态 HTML 用英语预渲染；切回中文时由 content-blob 覆盖
-    tags: enContent?.radios?.[i]?.genre || r.genre,
+    // 流派标签是中文数据，静态 HTML 直接用默认语言预渲染；切到别的语言时由 content-blob 覆盖
+    tags: baseContent?.radios?.[i]?.genre || r.genre,
     homepage: r.homepage,
-    note: enContent?.radios?.[i]?.note || r.note,
+    note: baseContent?.radios?.[i]?.note || r.note,
     noteIdx: i,
     genreIdx: i,
   }));
@@ -85,12 +87,11 @@ const notableDescriptive = (country.notableRadios || [])
 const playable = country.radioMode === 'notable-only' ? notablePlayable : [...notablePlayable, ...fetchedStations];
 
 // 音乐家维基百科链接：优先使用手动指定，否则用英文名自动生成英文维基链接
-// nameEn 存在时，英语界面下直接把它当作主名字（避免英文页里出现中文名）
 const musicians = country.musicians.map((m, i) => ({
   ...m,
-  name: enContent?.musicians?.[i]?.name || m.nameEn || m.name,
-  role: enContent?.musicians?.[i]?.role || m.role,
-  desc: enContent?.musicians?.[i]?.desc || m.desc,
+  name: baseContent?.musicians?.[i]?.name || m.name,
+  role: baseContent?.musicians?.[i]?.role || m.role,
+  desc: baseContent?.musicians?.[i]?.desc || m.desc,
   wikiUrl:
     m.wikiUrl || (m.nameEn ? `https://en.wikipedia.org/wiki/${encodeURIComponent(m.nameEn.replace(/\s+/g, '_'))}` : undefined),
 }));
@@ -117,7 +118,7 @@ for (const [url, notes] of Object.entries(STATION_NOTES)) {
 const stationNotesBlobJson = JSON.stringify(stationNotesBlob).replace(/</g, '\\u003c');
 ---
 
-<Base title={pageTitle} description={enIntro}>
+<Base title={pageTitle} description={intro0}>
   <script type="application/json" id="content-blob" is:inline set:html={contentBlobJson}></script>
   <script type="application/json" id="station-notes-blob" is:inline set:html={stationNotesBlobJson}></script>
   <article data-region={country.continent}>
@@ -127,10 +128,10 @@ const stationNotesBlobJson = JSON.stringify(stationNotesBlob).replace(/</g, '\\u
           <a href="/" data-i18n="navHome">{t0.navHome}</a><span class="sep">/</span>
           <a href={`/explore?c=${country.continent}#${country.continent}`} data-continent={country.continent}>{continentLabel}</a><span class="sep">/</span>
           <a href={`/explore?c=${country.continent}#${country.subregion}`} data-subregion={country.subregion}>{subregionLabel}</a><span class="sep">/</span>
-          <span data-ct="name" data-slug={country.slug}>{enName}</span>
+          <span data-ct="name" data-slug={country.slug}>{name0}</span>
         </nav>
         <div class="country-hero__flag" aria-hidden="true">{country.flag}</div>
-        <h1 class="country-hero__title" data-ct="name" data-slug={country.slug}>{enName}</h1>
+        <h1 class="country-hero__title" data-ct="name" data-slug={country.slug}>{name0}</h1>
         <div class="country-hero__en">{heroLatin}</div>
         <div class="country-hero__meta">
           <span class="chip">📍 <span data-i18n="capitalLabel">{t0.capitalLabel}</span> <span data-geo-zh={country.capital} data-geo-en={capitalEn(country.capital)}>{capitalEn(country.capital)}</span></span>
@@ -145,7 +146,7 @@ const stationNotesBlobJson = JSON.stringify(stationNotesBlob).replace(/</g, '\\u
             : <span class="chip" data-subregion={country.subregion}>{subregionLabel}</span>}
         </div>
         <p class="country-hero__intro" data-ct="intro" data-slug={country.slug}>
-          {enIntro}
+          {intro0}
         </p>
       </div>
     </header>
@@ -153,10 +154,10 @@ const stationNotesBlobJson = JSON.stringify(stationNotesBlob).replace(/</g, '\\u
     <div class="container container--narrow" style="padding-top: 2.5rem;">
       <div class="prose">
         <h2><span class="num">I.</span><span data-i18n="histSection">{t0.histSection}</span></h2>
-        {country.history.map((p, i) => <p data-ct="history" data-idx={i} data-slug={country.slug} set:html={pick(enContent?.history, country.history, i)} />)}
+        {country.history.map((p, i) => <p data-ct="history" data-idx={i} data-slug={country.slug} set:html={pick(baseContent?.history, country.history, i)} />)}
 
         <h2><span class="num">II.</span><span data-i18n="musicSection">{t0.musicSection}</span></h2>
-        {country.music.map((p, i) => <p data-ct="music" data-idx={i} data-slug={country.slug} set:html={pick(enContent?.music, country.music, i)} />)}
+        {country.music.map((p, i) => <p data-ct="music" data-idx={i} data-slug={country.slug} set:html={pick(baseContent?.music, country.music, i)} />)}
       </div>
 
       <h2 class="section__title section__title--sub" data-i18n="musiciansSection">{t0.musiciansSection}</h2>
@@ -179,7 +180,7 @@ const stationNotesBlobJson = JSON.stringify(stationNotesBlob).replace(/</g, '\\u
 
       <h2 class="section__title section__title--sub" data-i18n="radiosSection">{t0.radiosSection}</h2>
 
-      <RadioPlayer client:load stations={playable} countryName={enName} flag={country.flag} emptyNote={enContent?.radioNote || country.radioNote} slug={country.slug} />
+      <RadioPlayer client:load stations={playable} countryName={name0} flag={country.flag} emptyNote={baseContent?.radioNote || country.radioNote} slug={country.slug} />
 
       {notableDescriptive.length > 0 && (
         <>
@@ -194,10 +195,10 @@ const stationNotesBlobJson = JSON.stringify(stationNotesBlob).replace(/</g, '\\u
                 <div class="radio-card__body">
                   <div class="radio-card__name">{r.name}</div>
                   <div class="radio-card__meta">
-                    <span class="radio-tag" data-ct="r-genre" data-idx={i} data-slug={country.slug}>{enContent?.radios?.[i]?.genre || r.genre}</span>
+                    <span class="radio-tag" data-ct="r-genre" data-idx={i} data-slug={country.slug}>{baseContent?.radios?.[i]?.genre || r.genre}</span>
                     <span class="radio-tag radio-tag--muted" data-i18n="radioNoStreamTag">{t0.radioNoStreamTag}</span>
                   </div>
-                  {r.note && <div style="font-size: 0.82rem; color: var(--ink-faint); line-height: 1.6; margin-top: 0.4rem;" data-ct="r-note" data-idx={i} data-slug={country.slug}>{enContent?.radios?.[i]?.note || r.note}</div>}
+                  {r.note && <div style="font-size: 0.82rem; color: var(--ink-faint); line-height: 1.6; margin-top: 0.4rem;" data-ct="r-note" data-idx={i} data-slug={country.slug}>{baseContent?.radios?.[i]?.note || r.note}</div>}
                 </div>
               </div>
             ))}

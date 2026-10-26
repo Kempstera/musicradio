@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import BirthdayEgg from '../components/BirthdayEgg.tsx';
 import { SITE_NAME, SITE_URL } from '../lib/config';
-import { t0 } from '../lib/i18n';
+import { DEFAULT_LANG, t0 } from '../lib/i18n';
 
 interface Props {
   title?: string;
@@ -14,14 +14,14 @@ interface Props {
 }
 
 const { title, description, noindex = false } = Astro.props;
-// 静态 HTML 一律以**默认语言（英语）**预渲染，与 i18n 的 DEFAULT_LANG 保持一致：
-// 首屏不会出现「先中文再跳英语」的闪烁，任何人从任何地方首次进入看到的都是英语。
+// 静态 HTML 一律以**默认语言（简体中文）**预渲染，与 i18n 的 DEFAULT_LANG 保持一致：
+// 首屏不会出现「先英文再跳中文」的闪烁，任何人从任何地方首次进入看到的都是简体中文。
 const fullTitle = title ? `${title} · ${SITE_NAME}` : `${SITE_NAME} · World Music Radio`;
 const desc = description || t0.heroDesc;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={DEFAULT_LANG}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -32,14 +32,15 @@ const desc = description || t0.heroDesc;
       document.documentElement.classList.add('js');
 
       // ② 语言初始化 + 「水合竞速」防护：
-      //    尽早按 localStorage 设置 <html lang>，避免 SSR 英语 → 用户已选语言的错位与闪烁；
-      //    没有存过语言（首次来访）就保持默认的 en。
+      //    尽早按 localStorage 设置 <html lang>，避免 SSR 默认语言 → 用户已选语言的错位与闪烁；
+      //    没有存过语言（首次来访）就保持默认的 zh-CN。
+      //    注意：DEFAULT 必须与 i18n 的 DEFAULT_LANG 一致。
       // ③ React 岛（LanguageSwitcher）水合完成之前，用户若已在切换器里选了语言，
       //    原生 change 监听器会先把选择落盘并暂存 —— 否则这次选择会被水合时的
       //    初始 state 静默覆盖（表现为：切换器显示新语言，但页面文案没跟着变）。
       (function () {
         var LANGS = ['en', 'cy', 'zh-CN', 'zh-TW', 'fr', 'de', 'it', 'es'];
-        var DEFAULT = 'en';
+        var DEFAULT = 'zh-CN';
         var saved = null;
         try {
           saved = window.localStorage.getItem('mr_lang');
@@ -72,9 +73,9 @@ const desc = description || t0.heroDesc;
       })();
     </script>
     <style is:inline>
-      /* 老访客带着「非英语」的选择进来时，HTML 里预渲染的仍是英语。
+      /* 老访客带着「非默认语言」的选择进来时，HTML 里预渲染的仍是默认语言。
          先把内容压住（body 占位不变、不会跳动），等语言落地再由脚本撤掉，
-         否则打开任何一页都会先闪一大片英文。脚本失效时下面有 2.5s 兜底。 */
+         否则打开任何一页都会先闪一大片另一种语言。脚本失效时下面有 2.5s 兜底。 */
       html.mr-i18n-pending body {
         opacity: 0;
       }
@@ -86,7 +87,8 @@ const desc = description || t0.heroDesc;
       (function () {
         try {
           var s = window.localStorage.getItem('mr_lang');
-          if (!s || s === 'en') return;
+          // 没存过语言、或者存的就是默认语言 —— 预渲染的内容本来就是对的，不必遮屏
+          if (!s || s === 'zh-CN') return;
           document.documentElement.classList.add('mr-i18n-pending');
           window.__mrI18nTimer = setTimeout(function () {
             document.documentElement.classList.remove('mr-i18n-pending');
@@ -108,7 +110,7 @@ const desc = description || t0.heroDesc;
     <meta property="og:description" content={desc} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE_NAME} />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content="zh_CN" />
     {/* 页面可以往 head 里塞「必须在首帧之前跑」的内联脚本（如首页的首访过场） */}
     <slot name="head" />
   </head>

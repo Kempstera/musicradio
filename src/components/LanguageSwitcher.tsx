@@ -48,7 +48,7 @@ export default function LanguageSwitcher() {
     // ⚠️ 这里**故意不调 saveLang(initial)**：
     // 只有「用户主动选过语言」才把 mr_lang 落盘。落盘与否同时是「这位访客是否用过语言
     // 切换器」的判据 —— Base.astro 的 <head> 脚本据此决定要不要显示「可切换」呼吸标识
-    // （首次来访的英语界面 + 一次轻提示）。若在首访就写入 mr_lang='en'，
+    // （首次来访的默认语言界面 + 一次轻提示）。若在首访就写入 mr_lang，
     // 第二次打开任意页面就会被误判成「老访客」，标识与提示都会消失。
     applyLang(initial);
     window.__mrLangReady = true;
