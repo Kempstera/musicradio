@@ -2652,10 +2652,10 @@ html.mr-intro body::after {
 html.mr-intro body > :not(.intro) {
   opacity: 0;
 }
-/* 揭开那一刻挂上，只活 0.9s，别让 body 的每个孩子长期背着一个 transition */
+/* 揭开那一刻挂上，只活 1.1s，别让 body 的每个孩子长期背着一个 transition */
 html.mr-intro-out body > :not(.intro) {
   opacity: 1;
-  transition: opacity 0.75s var(--ease-out);
+  transition: opacity 1s var(--ease-out);
 }
 
 .intro {

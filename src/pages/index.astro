@@ -54,7 +54,8 @@ const globeData = JSON.stringify(GLOBE_POINTS);
         document.documentElement.classList.add('mr-intro');
         // 记在「开场」而不是「结束」：中途刷新也不该再看第二遍
         window.localStorage.setItem(KEY, '1');
-        // 兜底：过场脚本没接上（网络/解析出错）也要把内容放出来，不能扣住
+        // 兜底：过场脚本没接上（网络/解析出错）也要把内容放出来，不能扣住。
+        // 整段过场约 6.2s，所以兜底放在 8s —— 太早会在动画中途把幕布抽掉。
         setTimeout(function () {
           var el = document.documentElement;
           if (el.classList.contains('mr-intro')) {
@@ -62,9 +63,9 @@ const globeData = JSON.stringify(GLOBE_POINTS);
             el.classList.add('mr-intro-out');
             setTimeout(function () {
               el.classList.remove('mr-intro-out');
-            }, 900);
+            }, 1100);
           }
-        }, 4000);
+        }, 8000);
       } catch (e) {}
     })();
   </script>

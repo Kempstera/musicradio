@@ -20,14 +20,23 @@
 const SVGNS = 'http://www.w3.org/2000/svg';
 
 // 时间轴（毫秒，相对开场那一帧）
-const T_EMERGE_A = 120; // 开始浮现
-const T_EMERGE_B = 980; // 完全显形
-const T_FLY_A = 1020; // 开始缩小、下落
-const T_FLY_B = 2580; // 落到位
-const T_VEIL_A = 2400; // 夜幕开始揭开
-const T_VEIL_B = 3000; // 揭开完毕
-const T_REVEAL = 2450; // 页面内容开始显影
-const T_END = 3060; // 收工
+//
+// 节奏比数字重要：先黑 0.3s 让人定神，再用 2.0s 把球从黑里「浮」出来；
+// 停半秒让它悬在那儿；然后 2.7s 一边收小一边往下落。
+//
+// 关键在最后那一段的编排：地球的家在首屏之外（大洲巡礼区在 1313px 处），
+// 所以它大约在 4.1s 就会走出画面下缘。如果等它落完才揭幕，中间会空出
+// 一秒多的黑屏 —— 那才是「慌张」的真正来源。所以夜幕在它快出画时就开始揭，
+// 页面是「一边把球送下去、一边浮上来」的。
+const T_EMERGE_A = 300; // 开始浮现
+const T_EMERGE_B = 2300; // 完全显形
+const T_FLY_A = 2900; // 开始缩小、下落
+const T_FLY_B = 5600; // 落到位
+const T_STARS_OUT = 4200; // 星子先退，天先空出来
+const T_VEIL_A = 4300; // 夜幕开始揭开（球已经大半出了画）
+const T_VEIL_B = 5500; // 揭开完毕
+const T_REVEAL = 4400; // 页面内容开始显影
+const T_END = 5850; // 收工
 
 const root = document.documentElement;
 
@@ -103,11 +112,16 @@ function boot() {
   const frame = () => {
     const t = performance.now() - t0;
 
-    const e = easeOutCubic(clamp((t - T_EMERGE_A) / (T_EMERGE_B - T_EMERGE_A)));
-    const f = easeInOutCubic(clamp((t - T_FLY_A) / (T_FLY_B - T_FLY_A)));
+    // 三段时间，各自缓动：
+    //   e —— 浮现：从黑里浮上来，用正弦进出，两头都不突兀
+    //   a —— 靠近：从出现那一刻起一直缓慢收拢，直到起飞
+    //   f —— 下落：落到页面上它真正的位置
+    const e = easeInOutSine(clamp((t - T_EMERGE_A) / (T_EMERGE_B - T_EMERGE_A)));
+    const a = easeInOutSine(clamp((t - T_EMERGE_A) / (T_FLY_A - T_EMERGE_A)));
+    const f = easeInOutSine(clamp((t - T_FLY_A) / (T_FLY_B - T_FLY_A)));
 
-    // 浮现阶段再收一点点，像从远处慢慢靠近
-    const s = lerp(s0, 1, f) * (1 + 0.05 * (1 - e));
+    // 浮现阶段球是「大一号」的，随着靠近慢慢收到 s0；起飞那一刻两者正好接上
+    const s = lerp(s0 * (1 + 0.09 * (1 - a)), 1, f);
     const cx = lerp(c0x, c1x, f);
     const cy = lerp(c0y, c1y, f);
 
@@ -119,9 +133,10 @@ function boot() {
     // 落地前淡出：真身已经在同一个位置上了，这一下等于交接
     holder.style.opacity = (e * (1 - smoothstep(0.86, 1, f))).toFixed(3);
 
-    stars.style.opacity = (0.85 * easeOutCubic(clamp(t / 900))).toFixed(3);
-    glow.style.opacity = (e * (1 - smoothstep(0.15, 0.75, f))).toFixed(3);
-    layer.style.opacity = (1 - clamp((t - T_VEIL_A) / (T_VEIL_B - T_VEIL_A))).toFixed(3);
+    // 星子比球慢得多地亮起来，又先一步退干净 —— 天先空，页才出来
+    stars.style.opacity = (0.85 * easeInOutSine(clamp((t - 120) / 2100)) * (1 - clamp((t - T_STARS_OUT) / 700))).toFixed(3);
+    glow.style.opacity = (e * (1 - smoothstep(0.1, 0.7, f))).toFixed(3);
+    layer.style.opacity = (1 - easeInOutSine(clamp((t - T_VEIL_A) / (T_VEIL_B - T_VEIL_A)))).toFixed(3);
 
     if (!revealed && t >= T_REVEAL) reveal();
 
@@ -143,7 +158,7 @@ function boot() {
     reveal();
     layer.remove();
     // mr-intro-out 只负责那一段淡入，留久了会一直给 body 的每个孩子挂着 transition
-    window.setTimeout(() => root.classList.remove('mr-intro-out'), 900);
+    window.setTimeout(() => root.classList.remove('mr-intro-out'), 1100);
   }
 }
 
@@ -151,7 +166,7 @@ function boot() {
 function handoff() {
   root.classList.remove('mr-intro');
   root.classList.add('mr-intro-out');
-  window.setTimeout(() => root.classList.remove('mr-intro-out'), 600);
+  window.setTimeout(() => root.classList.remove('mr-intro-out'), 1100);
 }
 
 /** 星场：位置由固定种子算出来，每次一样；低不透明度的一堆点，不闪才像远处。 */
@@ -187,9 +202,8 @@ function clamp(v: number) {
   return v < 0 ? 0 : v > 1 ? 1 : v;
 }
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
-const easeInOutCubic = (t: number) =>
-  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+/** 最温和的进出缓动：两头都几乎没有加速度，所以看起来「不着急」 */
+const easeInOutSine = (t: number) => -(Math.cos(Math.PI * t) - 1) / 2;
 const smoothstep = (a: number, b: number, v: number) => {
   const t = clamp((v - a) / (b - a));
   return t * t * (3 - 2 * t);
