@@ -10,6 +10,7 @@ import type { Country } from '../../lib/country';
 import radiosData from '../../data/radios.json';
 import { STATION_NOTES } from '../../data/station-notes';
 import { capitalEn, languageEn } from '../../data/i18n/geo-en';
+import { sortStations, healthOf } from '../../lib/stream-health';
 import { t0, DEFAULT_LANG, CONTINENT_LABELS, SUBREGION_LABELS } from '../../lib/i18n';
 import type { Lang } from '../../lib/i18n';
 
@@ -84,7 +85,16 @@ const notableDescriptive = (country.notableRadios || [])
   .map((r, i) => ({ r, i }))
   .filter(({ r }) => !r.url);
 
-const playable = country.radioMode === 'notable-only' ? notablePlayable : [...notablePlayable, ...fetchedStations];
+// —— 播放列表排序：国内能直连、延迟低的排最前 ————————————————
+// 数据来自 src/data/stream-health.json（2026-10-28 全量实测）。
+// 精选（notable）台享一点容差，但不保证置顶 —— 关键指标是「点了能不能响」。
+const playable = sortStations(
+  country.radioMode === 'notable-only' ? notablePlayable : [...notablePlayable, ...fetchedStations],
+  (s) => s.id.startsWith('notable-'),
+).map((s) => ({ ...s, tier: healthOf(s.url).tier }));
+
+/** 该国所有台在国内都直连不通时，在列表上方给一句说明（不删除，只后置） */
+const allLimited = playable.length > 0 && playable.every((s) => s.tier !== 0);
 
 // 音乐家维基百科链接：优先使用手动指定，否则用英文名自动生成英文维基链接
 const musicians = country.musicians.map((m, i) => ({
@@ -179,6 +189,10 @@ const stationNotesBlobJson = JSON.stringify(stationNotesBlob).replace(/</g, '\\u
       </div>
 
       <h2 class="section__title section__title--sub" data-i18n="radiosSection">{t0.radiosSection}</h2>
+
+      {allLimited && (
+        <p class="radio-limited-note" data-i18n="radioAllBlocked">{t0.radioAllBlocked}</p>
+      )}
 
       <RadioPlayer client:load stations={playable} countryName={name0} flag={country.flag} emptyNote={baseContent?.radioNote || country.radioNote} slug={country.slug} />
 

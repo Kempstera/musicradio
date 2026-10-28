@@ -12,6 +12,7 @@ import MarieJukebox from '../components/MarieJukebox.tsx';
 import MyFavorites from '../components/MyFavorites.tsx';
 import { CONTINENTS, SUBREGIONS } from '../lib/country';
 import { allCountries, countriesByContinent, countriesBySubregion } from '../data';
+import { sortByPlayability } from '../data/playability';
 import { getAllCompact } from '../data/i18n';
 import { t0, DEFAULT_LANG, CONTINENT_LABELS, SUBREGION_LABELS } from '../lib/i18n';
 import radiosData from '../data/radios.json';
@@ -165,7 +166,9 @@ const sceneryList = CONTINENTS.map((c) => SCENERY[c.id]).filter(Boolean);
 
             {
               subs.map((s) => {
-                const list = countriesBySubregion(s.id);
+                // 同一子区域内：国内可直连台数多的国家排在前面
+                // （西欧第一个于是成了英国，北美第一个是美国 —— 点开就有声）
+                const list = sortByPlayability(countriesBySubregion(s.id));
                 if (!list.length) return null;
                 return (
                   <div class="subregion" id={s.id}>

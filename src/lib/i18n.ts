@@ -74,6 +74,14 @@ export interface Translation {
   radioPause: string;
   // 播放器状态与 HTTP 流标签
   httpTagHint: string;
+  /** 国内网络受限（海外可播）标签与说明 */
+  streamLimitedTag: string;
+  streamLimitedHint: string;
+  /** 实测死链标签与说明 */
+  streamDeadTag: string;
+  streamDeadHint: string;
+  /** 某国全部电台均难以直连时的说明 */
+  radioAllBlocked: string;
   streamConnecting: string;
   streamLost: string;
   streamLostHint: string;
@@ -164,6 +172,11 @@ const zhCN: Translation = {
   wikiTitle: '维基百科',
   radioEmptyFallback: '暂未收录该地区的在线电台流，敬请期待。',
   httpTagHint: '该电台仅提供 HTTP 协议流，本站已自动经边缘转发，让它可在安全页面播放。',
+  streamLimitedTag: '海外流',
+  streamLimitedHint: '该流在国内网络通常无法直连，海外可正常收听；已排在列表靠后位置。',
+  streamDeadTag: '暂不可用',
+  streamDeadHint: '实测该流地址已失效（海外亦无法打开），仅作收录参考。',
+  radioAllBlocked: '该国电台在当前网络环境下均难以直连，以下按可收听程度排列，仍可点开试试。',
   streamConnecting: '正在连线…',
   streamLost: '电波暂歇，歌声飘散在风里。',
   streamLostHint: '稍候再试一次，或换个电台。',
@@ -254,6 +267,11 @@ const zhTW: Translation = {
   wikiTitle: '維基百科',
   radioEmptyFallback: '暫未收錄該地區的線上電台串流，敬請期待。',
   httpTagHint: '該電台僅提供 HTTP 協定串流，本站已自動經邊緣轉發，讓它能在安全頁面播放。',
+  streamLimitedTag: '海外串流',
+  streamLimitedHint: '該串流在國內網路通常無法直連，海外可正常收聽；已排在列表靠後位置。',
+  streamDeadTag: '暫不可用',
+  streamDeadHint: '實測該串流網址已失效（海外亦無法開啟），僅作收錄參考。',
+  radioAllBlocked: '該國電台在當前網路環境下均難以直連，以下按可收聽程度排列，仍可點開試試。',
   streamConnecting: '正在連線…',
   streamLost: '電波暫歇，歌聲飄散在風裡。',
   streamLostHint: '稍候再試一次，或換個電台。',
@@ -349,6 +367,11 @@ const en: Translation = {
   radioPlay: 'Play',
   radioPause: 'Pause',
   httpTagHint: 'This station only offers an HTTP stream; it is relayed through our edge so it can play on this secure page.',
+  streamLimitedTag: 'Overseas',
+  streamLimitedHint: 'This stream is usually unreachable on mainland Chinese networks; it plays fine abroad, so it sits lower in this list.',
+  streamDeadTag: 'Unavailable',
+  streamDeadHint: 'Testing could not reach this stream from home or abroad; it is kept for reference only.',
+  radioAllBlocked: 'None of this country\'s streams are reliably reachable from the current network. They are ordered by how likely they are to play — still worth a try.',
   streamConnecting: 'Connecting…',
   streamLost: 'The signal has drifted — the song cannot reach us right now.',
   streamLostHint: 'Wait a moment and try again, or pick another station.',
@@ -439,6 +462,11 @@ const cy: Translation = {
   radioPlay: 'Chwarae',
   radioPause: 'Seibio',
   httpTagHint: 'Dim ond ffrwd HTTP sydd gan yr orsaf hon; caiff ei throsglwyddo trwy ein hymyl er mwyn iddi allu chwarae ar y dudalen ddiogel hon.',
+  streamLimitedTag: 'Tramor',
+  streamLimitedHint: 'Yn aml nid yw\'r ffrwd hon ar gael ar rwydweithiau tir mawr Tsieina; mae\'n chwarae\'n iawn dramor, felly fe\'i rhestri\'n is yma.',
+  streamDeadTag: 'Ddim ar gael',
+  streamDeadHint: 'Methodd y profion gyrraedd y gyfeiriad ffrwd hon gartref na thramor; cedwir hi er gwybodaeth yn unig.',
+  radioAllBlocked: 'Nid oes modd cyrraedd ffrwd unrhyw orsaf yn y wlad hon yn ddibynadwy o\'r rhwydwaith presennol. Maent wedi\'u trefnu yn ôl pa mor debygol ydynt o chwarae — mae\'n werth rhoi cynnig arni.',
   streamConnecting: 'Yn cysylltu…',
   streamLost: 'Mae\'r signal wedi crwydro — ni all y gân ein cyrraedd ar hyn o bryd.',
   streamLostHint: 'Arhoswch funud a cheisiwch eto, neu dewiswch orsaf arall.',
@@ -530,6 +558,11 @@ const fr: Translation = {
   radioPlay: 'Écouter',
   radioPause: 'Pause',
   httpTagHint: 'Cette station ne propose qu\'un flux HTTP ; il est relayé via notre périphérie pour être lu sur cette page sécurisée.',
+  streamLimitedTag: 'Hors réseau',
+  streamLimitedHint: 'Ce flux est généralement inaccessible depuis la Chine continentale ; il fonctionne à l\'étranger, d\'où sa place plus bas dans la liste.',
+  streamDeadTag: 'Indisponible',
+  streamDeadHint: 'Cette adresse de flux a échoué aux tests en Chine comme à l\'étranger ; conservée à titre indicatif.',
+  radioAllBlocked: 'Aucun flux de ce pays n\'est fiable depuis le réseau actuel. Ils sont classés selon leur probabilité de lecture — cela vaut tout de même un essai.',
   streamConnecting: 'Connexion…',
   streamLost: 'Le signal s\'est estompé — la chanson ne nous atteint plus pour l\'instant.',
   streamLostHint: 'Patientez un instant puis réessayez, ou choisissez une autre station.',
@@ -621,6 +654,11 @@ const de: Translation = {
   radioPlay: 'Abspielen',
   radioPause: 'Pause',
   httpTagHint: 'Dieser Sender bietet nur einen HTTP-Stream an; er wird über unsere Edge weitergeleitet, damit er auf dieser sicheren Seite abspielbar ist.',
+  streamLimitedTag: 'Ausland',
+  streamLimitedHint: 'Dieser Stream ist in Festlandchina meist nicht erreichbar; im Ausland läuft er, daher steht er hier weiter hinten.',
+  streamDeadTag: 'Nicht verfügbar',
+  streamDeadHint: 'Diese Stream-Adresse war bei Tests im In- und Ausland nicht erreichbar; nur als Referenz behalten.',
+  radioAllBlocked: 'Kein Stream dieses Landes ist im aktuellen Netz zuverlässig erreichbar. Sie sind nach Abspielwahrscheinlichkeit sortiert — ein Versuch lohnt sich.',
   streamConnecting: 'Verbinde…',
   streamLost: 'Das Signal ist verweht — das Lied erreicht uns gerade nicht.',
   streamLostHint: 'Warten Sie kurz und versuchen Sie es erneut, oder wählen Sie einen anderen Sender.',
@@ -712,6 +750,11 @@ const it: Translation = {
   radioPlay: 'Riproduci',
   radioPause: 'Pausa',
   httpTagHint: 'Questa emittente offre solo un flusso HTTP; viene inoltrato attraverso il nostro edge per poterlo ascoltare su questa pagina sicura.',
+  streamLimitedTag: 'Estero',
+  streamLimitedHint: 'Questo flusso di solito non è raggiungibile dalla Cina continentale; all\'estero funziona, quindi è elencato più in basso.',
+  streamDeadTag: 'Non disponibile',
+  streamDeadHint: 'Questo indirizzo di flusso non è risultato raggiungibile né in Cina né all\'estero; mantenuto solo come riferimento.',
+  radioAllBlocked: 'Nessun flusso di questo paese è raggiungibile in modo affidabile dalla rete attuale. Sono ordinati per probabilità di riproduzione: vale comunque un tentativo.',
   streamConnecting: 'Connessione…',
   streamLost: 'Il segnale si è affievolito — la canzone non ci raggiunge in questo momento.',
   streamLostHint: 'Attendi un attimo e riprova, oppure scegli un\'altra emittente.',
@@ -803,6 +846,11 @@ const es: Translation = {
   radioPlay: 'Reproducir',
   radioPause: 'Pausar',
   httpTagHint: 'Esta emisora solo ofrece un flujo HTTP; se retransmite a través de nuestro edge para que suene en esta página segura.',
+  streamLimitedTag: 'Exterior',
+  streamLimitedHint: 'Este flujo suele no ser accesible desde China continental; en el extranjero funciona, por eso aparece más abajo.',
+  streamDeadTag: 'No disponible',
+  streamDeadHint: 'Esta dirección de flujo falló en las pruebas tanto dentro como fuera de China; se conserva solo como referencia.',
+  radioAllBlocked: 'Ningún flujo de este país es fiable desde la red actual. Están ordenados según su probabilidad de reproducirse, así que vale la pena probar.',
   streamConnecting: 'Conectando…',
   streamLost: 'La señal se ha desvanecido — la canción no nos alcanza ahora mismo.',
   streamLostHint: 'Espera un momento y vuelve a intentarlo, o elige otra emisora.',

@@ -36,6 +36,8 @@ export interface Station {
   genreIdx?: number;
   /** 采集电台简介的索引键（流地址 url，用于 station-notes-blob 的多语言对齐） */
   noteKey?: string;
+  /** 国内网络实测分档：0 可播 · 1 受限（海外可播）· 2 死链。服务端排好序后带下来 */
+  tier?: 0 | 1 | 2;
 }
 
 interface Props {
@@ -181,7 +183,7 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
             .split(',')
             .map((t) => t.trim())
             .filter(Boolean)
-            .slice(0, 3);
+            .slice(0, 2);
           return (
             <div
               key={s.id}
@@ -234,6 +236,16 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
                   ))}
                   {s.url.startsWith('http://') && (
                     <span className="radio-tag radio-tag--http" title={t.httpTagHint}>HTTP</span>
+                  )}
+                  {s.tier === 1 && (
+                    <span className="radio-tag radio-tag--slow" title={t.streamLimitedHint}>
+                      {t.streamLimitedTag}
+                    </span>
+                  )}
+                  {s.tier === 2 && (
+                    <span className="radio-tag radio-tag--dead" title={t.streamDeadHint}>
+                      {t.streamDeadTag}
+                    </span>
                   )}
                 </div>
                 {isMarie && (
