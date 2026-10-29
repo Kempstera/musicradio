@@ -123,7 +123,7 @@ export const asia: Country[] = [
       { name: '久石让', nameEn: 'Joe Hisaishi', role: '作曲家', desc: '宫崎骏动画的御用配乐大师，《天空之城》《千与千寻》旋律深入人心。' },
     ],
     notableRadios: [
-      { name: 'NHK-FM', genre: '古典 / 爵士', note: '日本放送协会的 FM 频道，以高水准的古典与爵士节目著称。' },
+      { name: 'NHK-FM', genre: '古典 / 爵士', note: '日本放送协会的 FM 频道，以高水准的古典与爵士节目著称。', url: 'http://mnet.x10.mx/nhkfm.m3u8', hls: true },
       { name: 'Otto', genre: '古典 / 爵士', note: '日本知名的高品质音乐电台。' },
     ],
   },
@@ -154,7 +154,7 @@ export const asia: Country[] = [
       { name: 'BTS', nameEn: '防弹少年团', role: '偶像组合', desc: '全球现象级 K-pop 组合，多次登顶美国 Billboard 榜单。' },
     ],
     notableRadios: [
-      { name: 'KBS Classic FM (1FM)', genre: '古典', note: '韩国放送公社的古典音乐频道。', url: 'https://radio.bsod.kr/stream/?stn=kbs&ch=1fm', hls: true },
+      { name: 'KBS Classic FM (1FM)', genre: '古典', note: '韩国放送公社的古典音乐频道。', url: 'https://1fm.gscdn.kbs.co.kr/1fm_192_2.m3u8?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly8xZm0uZ3NjZG4ua2JzLmNvLmtyLyoiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTMzMTcxOTF9fX1dfQ__&Key-Pair-Id=APKAICDSGT3Y7IXGJ3TA&Signature=KYTA6GqidG4yA5Np1e0jstAaewl6emPSOQcjgiEnkY~R8et7wD~w1nfdV5LejR1i7Lsu8eqdR-mYxdgvGLWov9tYxT~BlCTthg80UDKwgjexvfeP4zN33foNkSmLio1zBYTdiIn4aJKLpblid8YIUT2cnV8X-RD2JRR5EMML9XGC4WlNajzsAKlgHXhJqBI2ccvXfGKntBrEZjmeaSaULn8E2R2ZbSyW9KSpMe8--8r2py1w1gNMbz729SYFO6O3QSnIm64DBJ9wdzICRtfJrheef~cyWMLnYHKDv0XyKZx6xFZvZD9BVcGrCnvpyXWPNyxBQuSs8PbUEvVohQ1kjQ__', hls: true },
       { name: 'EBS FM', genre: '教育 / 文化', note: '韩国教育广播，兼播古典与文化节目。', url: 'https://ebsonairiosaod.ebs.co.kr/fmradiobandiaod/bandiappaac/playlist.m3u8', hls: true},
     ],
   },
@@ -297,7 +297,7 @@ export const asia: Country[] = [
     musicians: [
       { name: '越南国家音乐学院民乐团', nameEn: 'Vietnam National Academy of Music Ensemble', role: '民族乐团', desc: '传承独弦琴、官贺等越南传统音乐的国家机构。' },
     ],
-    notableRadios: [{ name: 'VOV3 (音乐)', genre: '综合 / 民族', note: '越南之声广播的音乐频道，播放本土音乐。' }],
+    notableRadios: [{ name: 'VOV3 (音乐)', genre: '综合 / 民族', note: '越南之声广播的音乐频道，播放本土音乐。', url: 'https://audio-lss.vov.vn/live/vov3.m3u8', hls: true }],
   },
   {
     slug: 'indonesia',
@@ -372,7 +372,7 @@ export const asia: Country[] = [
       { name: '莱亚·萨隆加', nameEn: 'Lea Salonga', role: '歌手 / 演员', desc: '音乐剧巨星，以《西贡小姐》和《阿拉丁》《花木兰》的配音享誉世界。' },
       { name: '菲律宾马德里加尔歌手', nameEn: 'Philippine Madrigal Singers', role: '合唱团', desc: '世界顶级合唱团之一，多次赢得国际合唱比赛冠军。' },
     ],
-    notableRadios: [{ name: 'DZFE 98.7 The Master\'s Touch', genre: '古典', note: '马尼拉的老牌古典音乐电台。' }],
+    notableRadios: [{ name: 'DZFE 98.7 The Master\'s Touch', genre: '古典', note: '马尼拉的老牌古典音乐电台。', url: 'http://sg-icecast.eradioportal.com:8000/febc_dzfe', hls: false }],
   },
   {
     slug: 'singapore',
@@ -746,7 +746,7 @@ export const asia: Country[] = [
     notableRadios: [
       { name: 'MBC Mood', genre: '舒缓 / 阿拉伯', note: 'MBC 集团的舒缓音乐频道，播放柔和的阿拉伯与当代曲目。', url: 'https://radio-mbc-mood.mbc.net/radio-mbc-mood.m3u8', hls: true },
       { name: 'MBC Loud', genre: 'Top 40 / 流行', note: 'MBC 集团的流行音乐频道，播放阿拉伯与国际 Top 40 金曲。', url: 'https://radio-loud-fm.mbc.net/radio-loud-fm.m3u8', hls: true },
-      { name: 'MBC FM', genre: '阿拉伯流行', note: 'MBC 集团的旗舰阿拉伯语音乐电台。' },
+      { name: 'MBC FM', genre: '阿拉伯流行', note: 'MBC 集团的旗舰阿拉伯语音乐电台。', url: 'https://radio-mbcfm.mbc.net/radio-mbcfm_1.m3u8', hls: true },
     ],
   },
   {
@@ -859,7 +859,7 @@ export const asia: Country[] = [
     notableRadios: [
       { name: 'Radio Olive 106.3', genre: '印度 / 亚洲流行', note: '卡塔尔的印度语音乐电台。', url: 'https://osrnstream.olivesuno.com/olive1063.mp3', hls: false },
       { name: 'Qabayan Radio 94.3', genre: '菲律宾 / 综合', note: '卡塔尔的菲律宾社区电台。', url: 'https://c2.radioboss.fm:8478/live', hls: false },
-      { name: 'Qatar Radio / QBS', genre: '综合 / 传统', note: '卡塔尔广播，播放阿拉伯与传统音乐。' },
+      { name: 'Qatar Radio / QBS', genre: '综合 / 传统', note: '卡塔尔广播，播放阿拉伯与传统音乐。', url: 'https://live.kwikmotion.com/qmcqatarradiolive/qatarradio/playlist.m3u8', hls: true },
     ],
   },
   {
@@ -1153,7 +1153,7 @@ export const asia: Country[] = [
     ],
     notableRadios: [
       { name: 'Radio Foorti', genre: '流行', note: '孟加拉国最大的商业音乐电台网络。', url: 'https://radiofoorti.fm/api/stream', hls: false },
-      { name: 'Bangladesh Betar', genre: '综合 / 罗宾德拉', note: '孟加拉国家广播，播放罗宾德拉音乐与民间音乐。' },
+      { name: 'Bangladesh Betar', genre: '综合 / 罗宾德拉', note: '孟加拉国家广播，播放罗宾德拉音乐与民间音乐。', url: 'http://as3.digitalsynapsebd.com:8582/stream', hls: false },
     ],
   },
   {

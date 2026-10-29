@@ -30,8 +30,8 @@ export const europe1: Country[] = [
       { name: '切斯克·扎代亚', nameEn: 'Çesk Zadeja', role: '作曲家', desc: '被誉为「阿尔巴尼亚古典音乐之父」，将浓郁的民族音乐元素与交响乐结构结合，奠定该国现代古典音乐的基础。' },
     ],
     notableRadios: [
-      { name: 'Radio Tirana 3 (RTSH Klasik)', genre: '古典 / 歌剧 / 爵士', note: '阿尔巴尼亚国家广播电视台旗下官方古典频道，探索巴尔干小众古典的绝佳窗口。' },
-      { name: 'Radio Tirana 1', genre: '综合 / 民族', note: 'RTSH 主频，播放大量阿尔巴尼亚民歌与传统音乐。' },
+      { name: 'Radio Tirana 3 (RTSH Klasik)', genre: '古典 / 歌剧 / 爵士', note: '阿尔巴尼亚国家广播电视台旗下官方古典频道，探索巴尔干小众古典的绝佳窗口。', url: 'http://79.106.48.2:8000/radiotirana3', hls: false },
+      { name: 'Radio Tirana 1', genre: '综合 / 民族', note: 'RTSH 主频，播放大量阿尔巴尼亚民歌与传统音乐。', url: 'http://79.106.48.2:8000/radiotirana1', hls: false },
     ],
   },
   {
@@ -530,7 +530,7 @@ export const europe1: Country[] = [
       { name: '奥拉维尔·阿纳尔兹', nameEn: 'Ólafur Arnalds', role: '作曲家 / 制作人', desc: '融合古典、电子与氛围音乐的代表，作品清冷而治愈。' },
     ],
     notableRadios: [
-      { name: 'Rás 1', genre: '文化 / 古典', note: '冰岛国家广播的文化频道，播放古典与冰岛本土音乐。' },
+      { name: 'Rás 1', genre: '文化 / 古典', note: '冰岛国家广播的文化频道，播放古典与冰岛本土音乐。', url: 'http://netradio.ruv.is/ras1.aac', hls: false },
       { name: 'Rás 2', genre: '流行 / 综合', note: '冰岛国家广播的音乐频道。' },
     ],
   },
@@ -622,7 +622,7 @@ export const europe1: Country[] = [
       { name: '吉顿·克莱默', nameEn: 'Gidon Kremer', role: '小提琴家', desc: '以深邃的诠释与对现代音乐的推广著称，创办克莱默室内乐团。' },
       { name: '米沙·麦斯基', nameEn: 'Mischa Maisky', role: '大提琴家', desc: '拉脱维亚出生的大提琴大师，罗斯特罗波维奇的学生，演奏充满激情与歌唱性。' },
     ],
-    notableRadios: [{ name: 'Latvijas Radio 3 - Klasika', genre: '古典', note: '拉脱维亚广播的古典频道。' }],
+    notableRadios: [{ name: 'Latvijas Radio 3 - Klasika', genre: '古典', note: '拉脱维亚广播的古典频道。', url: 'https://60766ff53d5e6.streamlock.net/liveALR3/mp4:klasika/playlist.m3u8', hls: true }],
   },
   {
     slug: 'lithuania',

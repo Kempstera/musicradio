@@ -93,7 +93,7 @@ export const americas: Country[] = [
     ],
     notableRadios: [
       { name: 'Radio UNAM', genre: '古典 / 文化', note: '墨西哥国立自治大学的古典与文化电台。', url: 'https://tv.radiohosting.online:9484/stream', hls: false},
-      { name: 'Opus 94 (IMER)', genre: '古典', note: '墨西哥的古典音乐电台。' },
+      { name: 'Opus 94 (IMER)', genre: '古典', note: '墨西哥的古典音乐电台。', url: 'https://securestreams7.autopo.st/?uri=https://s2.mexside.net/8016/stream', hls: false },
     ],
   },
   {
@@ -185,7 +185,7 @@ export const americas: Country[] = [
     ],
     notableRadios: [
       { name: 'Radio Beethoven', genre: '古典', note: '圣地亚哥的古典音乐电台。', url: 'https://unlimited5-us.dps.live/beethovenfm/gotardis/audio/now/livestream1.m3u8', hls: true},
-      { name: 'Radio Universidad de Chile', genre: '文化 / 古典', note: '智利大学的文化电台。' },
+      { name: 'Radio Universidad de Chile', genre: '文化 / 古典', note: '智利大学的文化电台。', url: 'http://streamuchile.teslati.com/liveruch', hls: false },
     ],
   },
   {
@@ -214,7 +214,7 @@ export const americas: Country[] = [
       { name: '托托·拉蒙帕', nameEn: 'Totó la Momposina', role: '民谣歌手', desc: '哥伦比亚民间音乐的守护者，以昆比亚与沿海传统闻名。' },
     ],
     notableRadios: [
-      { name: 'Señal Clásica', genre: '古典', note: '哥伦比亚的公共古典电台。' },
+      { name: 'Señal Clásica', genre: '古典', note: '哥伦比亚的公共古典电台。', url: 'https://stream-284.surfernetwork.com/vbp236a2qzzuv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJ2YnAyMzZhMnF6enV2IiwiaG9zdCI6InN0cmVhbS0yODQuc3VyZmVybmV0d29yay5jb20iLCJ0bSI6ZmFsc2UsInJ0dGwiOjUsImp0aSI6IjlkR3huajVtUlBteUxDb0tZd0V6SGciLCJpYXQiOjE3OTMxMDQ3MjYsImV4cCI6MTc5MzEwNDc4Nn0.yJJBtbbk8UwEGT_2UPsEscBD5cPGJ2NbXtnJ1MP0fC8', hls: false },
       { name: 'Radiónica', genre: '多元 / 本土', note: '哥伦比亚公共广播，播放本土与独立音乐。', url: 'https://streaming.rtvc.gov.co/Radio_Radionica/Radionica.stream/playlist.m3u8', hls: true},
     ],
   },
@@ -244,7 +244,7 @@ export const americas: Country[] = [
     ],
     notableRadios: [
       { name: 'Radio Filarmonía', genre: '古典', note: '利马的古典音乐电台。', url: 'https://c22.radioboss.fm:8100/stream', hls: false},
-      { name: 'Radio Nacional del Perú', genre: '综合 / 安第斯', note: '秘鲁国家广播，播放安第斯与本土音乐。' },
+      { name: 'Radio Nacional del Perú', genre: '综合 / 安第斯', note: '秘鲁国家广播，播放安第斯与本土音乐。', url: 'https://cdnhd.iblups.com/hls/0773874174fd4eba8bb9eff741d190dc.m3u8', hls: true },
     ],
   },
   {

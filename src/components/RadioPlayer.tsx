@@ -242,11 +242,6 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
                       {t.streamLimitedTag}
                     </span>
                   )}
-                  {s.tier === 2 && (
-                    <span className="radio-tag radio-tag--dead" title={t.streamDeadHint}>
-                      {t.streamDeadTag}
-                    </span>
-                  )}
                 </div>
                 {isMarie && (
                   <div className="radio-card__blurb">{marieBlurb(s as MarieStation, lang)}</div>

@@ -12,7 +12,7 @@ export const africa: Country[] = [
       { name: '纳赛尔·吉瓦内乐团', nameEn: 'Nass El Ghiwane', role: '乐队', desc: '被称为「摩洛哥的滚石」，把格纳瓦与民间音乐带入现代语境。' },
       { name: '莉拉·唐吉', nameEn: 'Laila Lalami', role: '文化人物', desc: '摩洛哥裔作家，其文字中流淌着马格里布的声音记忆。' },
     ],
-    notableRadios: [{ name: 'Radio 2M / Médi 1', genre: '阿拉伯 / 流行', note: '摩洛哥主流电台，播放本土与阿拉伯流行音乐。' }],
+    notableRadios: [{ name: 'Radio 2M / Médi 1', genre: '阿拉伯 / 流行', note: '摩洛哥主流电台，播放本土与阿拉伯流行音乐。', url: 'https://cdn.live.easybroadcast.io/live/83_medi1radio-maghreb_8s9i4bn/playlist.m3u8', hls: true }],
   },
   {
     slug: 'algeria', name: '阿尔及利亚', nameEn: 'Algeria', nameLocal: 'الجزائر',
@@ -267,7 +267,7 @@ export const africa: Country[] = [
     history: ['肯尼亚是东非的经济与文化中心，内罗毕是联合国非洲总部所在地。斯瓦希里语把东非海岸连接成一个文化世界，从蒙巴萨到内陆，音乐、语言与商贸在此交汇。'],
     music: ['肯尼亚的招牌是「本加」（Benga）——以跳跃的吉他旋律为特征的舞曲，风靡整个东非；此外，斯瓦希里流行乐（如「Taarab」的海岸变体）与当代的「Kapuka」也在年轻人中盛行。'],
     musicians: [{ name: '法迪利·威廉', nameEn: 'Fadhili William', role: '歌手 / 吉他手', desc: '本加音乐的先驱之一，其《Malaika》成为斯瓦希里经典。' }],
-    notableRadios: [{ name: 'Radio Citizen / Kiss FM', genre: '本加 / 流行', note: '内罗毕的主流音乐电台。' }],
+    notableRadios: [{ name: 'Radio Citizen / Kiss FM', genre: '本加 / 流行', note: '内罗毕的主流音乐电台。', url: 'https://radiocitizen-atunwadigital.streamguys1.com/radiocitizen/playlist.m3u8', hls: true }],
   },
   {
     slug: 'tanzania', name: '坦桑尼亚', nameEn: 'Tanzania',
@@ -336,7 +336,7 @@ export const africa: Country[] = [
     history: ['厄立特里亚位于红海西岸，阿斯马拉保留着意大利殖民时期的精美建筑，提格里尼亚、提格雷与阿拉伯文化在此交织。'],
     music: ['厄立特里亚的音乐融合了提格里尼亚传统、埃塞俄比亚音阶与阿拉伯旋律，弦乐器克拉尔（krar）与鼓是节庆的主角，其流行音乐在东非也有广泛听众。'],
     musicians: [{ name: '厄立特里亚民间乐团', nameEn: 'Eritrean Folk Ensemble', role: '传统乐团', desc: '传承提格里尼亚音乐传统的团体。' }],
-    notableRadios: [{ name: 'Eri-TV Radio', genre: '非洲 / 传统', note: '厄立特里亚国家广播。' }],
+    notableRadios: [{ name: 'Eri-TV Radio', genre: '非洲 / 传统', note: '厄立特里亚国家广播。', url: 'https://jmc-live.ercdn.net/eritreatv/eritreatv.m3u8', hls: true }],
   },
   {
     slug: 'south-sudan', name: '南苏丹', nameEn: 'South Sudan',
@@ -516,8 +516,8 @@ export const africa: Country[] = [
     musicians: [{ name: '茨瓦纳合唱团', nameEn: 'Tswana Choir', role: '合唱团', desc: '传承茨瓦纳和声与舞蹈传统的团体。' }],
     notableRadios: [
       { name: 'Gabz FM 96.2', genre: '流行 / 成人当代', note: '哈博罗内的商业音乐电台，播放当代流行与怀旧金曲。', url: 'https://stream.zeno.fm/wsk9q9tfy4zuv', hls: false },
-      { name: 'Duma FM', genre: '非洲 / 流行', note: '博茨瓦纳的音乐电台。', url: 'https://stream.zeno.fm/v735v8sfy4zuv', hls: false },
-      { name: 'Yarona FM', genre: '流行 / 音乐', note: '博茨瓦纳的流行音乐电台。', url: 'https://stream.zeno.fm/025sdegbz4zuv', hls: false },
+      { name: 'Duma FM', genre: '非洲 / 流行', note: '博茨瓦纳的音乐电台。', url: 'http://s3.voscast.com:10076/stream', hls: false },
+      { name: 'Yarona FM', genre: '流行 / 音乐', note: '博茨瓦纳的流行音乐电台。', url: 'http://capeant.antfarm.co.za:8000/yarona', hls: false },
     ],
   },
   {

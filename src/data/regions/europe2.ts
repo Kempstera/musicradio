@@ -119,7 +119,7 @@ export const europe2: Country[] = [
     musicians: [
       { name: '蒙特卡洛爱乐乐团', nameEn: 'Orchestre Philharmonique de Monte-Carlo', role: '管弦乐团', desc: '摩纳哥宫廷乐团，常年与顶级独奏家合作，演出季极富声望。' },
     ],
-    notableRadios: [{ name: 'Riviera Radio', genre: '综合 / 爵士', note: '覆盖摩纳哥与蔚蓝海岸的英语电台，播放大量爵士与轻松音乐。' }],
+    notableRadios: [{ name: 'Riviera Radio', genre: '综合 / 爵士', note: '覆盖摩纳哥与蔚蓝海岸的英语电台，播放大量爵士与轻松音乐。', url: 'https://media-ice.musicradio.com/RivieraRadio', hls: false }],
   },
   {
     slug: 'montenegro',
@@ -318,7 +318,7 @@ export const europe2: Country[] = [
       { name: '乔治·赞菲尔', nameEn: 'Gheorghe Zamfir', role: '排箫演奏家', desc: '「排箫之王」，把罗马尼亚帕纳长笛带到世界舞台。' },
     ],
     notableRadios: [
-      { name: 'Radio România Muzical', genre: '古典', note: '罗马尼亚广播的古典音乐频道。' },
+      { name: 'Radio România Muzical', genre: '古典', note: '罗马尼亚广播的古典音乐频道。', url: 'http://stream2.srr.ro:8020/listen.pls', hls: false },
       { name: 'Radio România Cultural', genre: '文化 / 古典', note: '罗马尼亚广播的文化频道。', url: 'https://stream4.srr.ro:8443/romania-cultural', hls: false},
     ],
   },
