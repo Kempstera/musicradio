@@ -6,6 +6,11 @@ import radiosData from '../data/radios.json';
 import VisitorCounter from './VisitorCounter.tsx';
 import MoreMenu from './MoreMenu.astro';
 
+// 「返回首页」只在**不是首页**的页面上出现：
+// 在首页它指向的就是当前页 —— 一个点了哪儿也不去的链接，占位置还稀释了同列其它入口。
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isHome = path === '/';
+
 // 统计页面上实际可在线收听的音乐电台总数：
 // = 各国精选可播放电台（notableRadios 带 url）+ 自动采集的在线流（radios.json，notable-only 国家不叠加）
 const radios = radiosData as Record<string, any[]>;
@@ -40,7 +45,7 @@ const totalRadios = allCountries.reduce((sum, c) => {
         </details>
         <ul>
           <li><a href="/explore" data-i18n="footerIndex">{t0.footerIndex}</a></li>
-          <li><a href="/" data-i18n="footerHome">{t0.footerHome}</a></li>
+          {!isHome && <li><a href="/" data-i18n="footerHome">{t0.footerHome}</a></li>}
         </ul>
         <MoreMenu variant="footer" />
       </div>
