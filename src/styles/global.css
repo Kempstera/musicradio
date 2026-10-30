@@ -2445,16 +2445,20 @@ html[lang='en'] .country-hero__en {
   text-transform: uppercase;
   color: var(--ink-3);
   list-style: none;
+  transition: color var(--dur-2) var(--ease-out);
 }
+/* 与页脚下方的「更多」保持一致：不加任何符号（+ / − / 三角），
+   就是一行普通文字 —— 同列里两个可展开项都靠「点一下」发现，靠 hover 变色提示。 */
 .footer-about summary::-webkit-details-marker {
   display: none;
 }
-.footer-about summary::after {
-  content: ' +';
-  color: var(--ai);
+.footer-about summary::marker {
+  content: '';
 }
-.footer-about[open] summary::after {
-  content: ' −';
+/* 没有符号了，就靠变色告诉人「这行能点」——与「更多」同一套反馈 */
+.footer-about summary:hover,
+.footer-about[open] summary {
+  color: var(--ink);
 }
 .footer-about__line {
   margin: 0.6rem 0 0;
