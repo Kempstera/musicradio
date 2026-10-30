@@ -86,6 +86,11 @@ export interface Translation {
   streamLost: string;
   streamLostHint: string;
   streamRetry: string;
+  /** 跨站矩阵：更多站点（页眉/页脚的折叠菜单） */
+  moreSites: string;
+  siteAmbient: string;
+  siteEthnic: string;
+  siteClassic: string;
   // 登录 / 注册
   authLoginRegister: string;
   authLogout: string;
@@ -146,6 +151,10 @@ const zhCN: Translation = {
   navHome: '首页',
   navExplore: '大洲巡礼',
   navGuestbook: '留言板',
+  moreSites: '更多',
+  siteAmbient: '氛围',
+  siteEthnic: '民族',
+  siteClassic: '经典',
   footerAbout: '关于',
   footerAboutLine: '跨越时区与语言，将散落在全球的优质电台一一打捞 @Jeff 2026.09',
   footerExplore: '巡礼',
@@ -241,6 +250,10 @@ const zhTW: Translation = {
   navHome: '首頁',
   navExplore: '大洲巡禮',
   navGuestbook: '留言板',
+  moreSites: '更多',
+  siteAmbient: '氛圍',
+  siteEthnic: '民族',
+  siteClassic: '經典',
   footerAbout: '關於',
   footerAboutLine: '跨越時區與語言，將散落在全球的優質電台一一打撈 @Jeff 2026.09',
   footerExplore: '巡禮',
@@ -336,6 +349,10 @@ const en: Translation = {
   navHome: 'Home',
   navExplore: 'Continents',
   navGuestbook: 'Guestbook',
+  moreSites: 'More',
+  siteAmbient: 'Ambient',
+  siteEthnic: 'Ethnic',
+  siteClassic: 'Classical',
   footerAbout: 'About',
   footerAboutLine: 'Across time zones and languages, gathering the world\'s finest radio stations one by one — @Jeff 2026.09',
   footerExplore: 'Journey',
@@ -432,6 +449,10 @@ const cy: Translation = {
   navHome: 'Hafan',
   navExplore: 'Cyfandiroedd',
   navGuestbook: 'Llyfr ymwelwyr',
+  moreSites: 'Mwy',
+  siteAmbient: 'Awyrgylch',
+  siteEthnic: 'Ethnig',
+  siteClassic: 'Clasurol',
   footerAbout: 'Amdanom',
   footerAboutLine: 'Ar draws parthau amser ac ieithoedd, gan gasglu gorsafoedd radio gorau\'r byd fesul un — @Jeff 2026.09',
   footerExplore: 'Taith',
@@ -527,6 +548,10 @@ const fr: Translation = {
   navHome: 'Accueil',
   navExplore: 'Continents',
   navGuestbook: 'Livre d\'or',
+  moreSites: 'Plus',
+  siteAmbient: 'Ambiance',
+  siteEthnic: 'Ethnique',
+  siteClassic: 'Classique',
   footerAbout: 'À propos',
   footerAboutLine: 'À travers les fuseaux horaires et les langues, rassembler une à une les plus belles radios du monde — @Jeff 2026.09',
   footerExplore: 'Voyage',
@@ -623,6 +648,10 @@ const de: Translation = {
   navHome: 'Startseite',
   navExplore: 'Kontinente',
   navGuestbook: 'Gästebuch',
+  moreSites: 'Mehr',
+  siteAmbient: 'Ambient',
+  siteEthnic: 'Ethnisch',
+  siteClassic: 'Klassisch',
   footerAbout: 'Über',
   footerAboutLine: 'Über Zeitzonen und Sprachen hinweg, die schönsten Radiosender der Welt einen nach dem anderen zusammentragen — @Jeff 2026.09',
   footerExplore: 'Reise',
@@ -719,6 +748,10 @@ const it: Translation = {
   navHome: 'Home',
   navExplore: 'Continenti',
   navGuestbook: 'Libro degli ospiti',
+  moreSites: 'Altro',
+  siteAmbient: 'Ambiente',
+  siteEthnic: 'Etnico',
+  siteClassic: 'Classico',
   footerAbout: 'Informazioni',
   footerAboutLine: 'Attraverso i fusi orari e le lingue, raccogliere una a una le migliori radio del mondo — @Jeff 2026.09',
   footerExplore: 'Viaggio',
@@ -815,6 +848,10 @@ const es: Translation = {
   navHome: 'Inicio',
   navExplore: 'Continentes',
   navGuestbook: 'Libro de visitas',
+  moreSites: 'Más',
+  siteAmbient: 'Ambiente',
+  siteEthnic: 'Étnico',
+  siteClassic: 'Clásico',
   footerAbout: 'Acerca de',
   footerAboutLine: 'A través de husos horarios e idiomas, reuniendo una a una las mejores emisoras del mundo — @Jeff 2026.09',
   footerExplore: 'Viaje',

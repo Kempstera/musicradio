@@ -3066,3 +3066,152 @@ textarea {
 html {
   overflow-x: clip;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   跨站矩阵：「更多」折叠菜单（页眉向下展开 / 页脚向上浮现）
+   平时就是两个字，没有箭头、图标、边框或按钮底 —— 与普通文本无异。
+   开合交给原生 <details>，脚本只负责「点空白处收起」。
+   ───────────────────────────────────────────────────────────── */
+.site-header__end {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.more-menu {
+  position: relative;
+  display: inline-block;
+  flex: none;
+}
+
+.more-menu > summary {
+  list-style: none; /* Firefox / 标准 */
+  cursor: pointer;
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--ink-3);
+  padding: 0.35rem 0.1rem;
+  background: none;
+  border: 0;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.16s ease;
+}
+/* 去掉 Safari / Chrome 的原生三角 */
+.more-menu > summary::-webkit-details-marker {
+  display: none;
+}
+.more-menu > summary::marker {
+  content: '';
+}
+.more-menu > summary::after {
+  content: none; /* 不要任何附加符号 */
+}
+.more-menu[open] > summary,
+.more-menu > summary:hover {
+  color: var(--ink);
+}
+
+/* 展开面板：一根发丝线 + 极淡投影，只为了让文字在正文上读得清 */
+.more-menu__panel {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 90;
+  display: flex;
+  flex-direction: column; /* 纵向单列，绝不横排 */
+  min-width: 6.4rem;
+  padding: 0.3rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+  border-radius: 10px;
+  box-shadow: 0 18px 42px -30px rgba(31, 27, 22, 0.6);
+  animation: more-menu-drop 0.14s ease-out both;
+}
+
+.more-menu__panel a {
+  display: block;
+  padding: 10px 0.95rem; /* 上下 10px，手机上更好点 */
+  font-size: 0.74rem;
+  line-height: 1.2;
+  color: var(--ink);
+  opacity: 0.75; /* 比「更多」本身弱一档 */
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.14s ease;
+}
+.more-menu__panel a:hover {
+  opacity: 1;
+}
+
+@keyframes more-menu-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* —— 页脚那份：向上浮现，绝不撑开页脚把内容顶出屏幕 —— */
+.more-menu--footer {
+  margin-top: 0.15rem;
+}
+.more-menu--footer > summary {
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--ink-2);
+  padding: 0.15rem 0;
+}
+.more-menu--footer .more-menu__panel {
+  top: auto;
+  bottom: calc(100% + 0.4rem);
+  left: 0;
+  right: auto;
+  animation-name: more-menu-rise;
+}
+@keyframes more-menu-rise {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* 触屏：把「更多」与每个子项都撑到 44px 触控高度 */
+@media (pointer: coarse) {
+  .more-menu > summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .more-menu__panel a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* 手机页头：导航占满剩余宽度横滑，「更多」钉在右侧不参与滚动 */
+@media (max-width: 620px) {
+  .site-header__end {
+    width: 100%;
+    gap: 0.35rem;
+  }
+  .site-header__end .site-nav {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .more-menu__panel {
+    min-width: 6rem;
+  }
+}

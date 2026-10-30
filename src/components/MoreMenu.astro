@@ -1,0 +1,35 @@
+---
+// 跨站矩阵：一个「更多」即可展开的极简折叠菜单（页眉 / 页脚各一份）
+//
+// 刻意不用 <select>、不用 JS 驱动的弹层：
+//   <details> 自带开合、自带键盘可访问（Enter/Space 切换）、不依赖 React 水合，
+//   脚本挂了也能用 —— 这是全站「脚本失效也要能看」的一贯做法。
+//
+// 页眉向下展开、页脚向上展开（bottom: 100%），后者避免把内容顶到屏幕底缘之外。
+import { t0 } from '../lib/i18n';
+
+interface Props {
+  /** header：向下展开；footer：向上浮现 */
+  variant?: 'header' | 'footer';
+}
+const { variant = 'header' } = Astro.props;
+
+const links = [
+  { key: 'siteAmbient', label: t0.siteAmbient, href: 'https://music-radio.signupeverywhere.cc' },
+  { key: 'siteEthnic', label: t0.siteEthnic, href: 'https://ethnic.signupeverywhere.cc' },
+  { key: 'siteClassic', label: t0.siteClassic, href: 'https://radio.signupeverywhere.cc' },
+];
+---
+
+<details class:list={['more-menu', `more-menu--${variant}`]}>
+  <summary data-i18n="moreSites">{t0.moreSites}</summary>
+  <div class="more-menu__panel">
+    {
+      links.map((l) => (
+        <a href={l.href} target="_blank" rel="noopener noreferrer" data-i18n={l.key}>
+          {l.label}
+        </a>
+      ))
+    }
+  </div>
+</details>

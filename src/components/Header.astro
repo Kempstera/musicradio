@@ -4,6 +4,7 @@ import { t0 } from '../lib/i18n';
 import AuthWidget from './AuthWidget.tsx';
 import LanguageSwitcher from './LanguageSwitcher.tsx';
 import MarieReplayButton from './MarieReplayButton.tsx';
+import MoreMenu from './MoreMenu.astro';
 
 // 当前路径：用于导航项的「正在收听这个频段」状态
 const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
@@ -22,13 +23,18 @@ const isBoard = path === '/message-board';
         <span class="brand__sub">World Music Radio</span>
       </span>
     </a>
-    <nav class="site-nav" aria-label="Main navigation">
-      <a href="/" class:list={[{ 'is-active': isHome }]} aria-current={isHome ? 'page' : undefined} data-i18n="navHome">{t0.navHome}</a>
-      <a href="/explore" class:list={[{ 'is-active': isExplore }]} aria-current={isExplore ? 'page' : undefined} data-i18n="navExplore">{t0.navExplore}</a>
-      <a href="/message-board" class:list={[{ 'is-active': isBoard }]} aria-current={isBoard ? 'page' : undefined} data-i18n="navGuestbook">{t0.navGuestbook}</a>
-      <LanguageSwitcher client:load />
-      <MarieReplayButton client:load />
-      <AuthWidget client:load />
-    </nav>
+    <div class="site-header__end">
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="/" class:list={[{ 'is-active': isHome }]} aria-current={isHome ? 'page' : undefined} data-i18n="navHome">{t0.navHome}</a>
+        <a href="/explore" class:list={[{ 'is-active': isExplore }]} aria-current={isExplore ? 'page' : undefined} data-i18n="navExplore">{t0.navExplore}</a>
+        <a href="/message-board" class:list={[{ 'is-active': isBoard }]} aria-current={isBoard ? 'page' : undefined} data-i18n="navGuestbook">{t0.navGuestbook}</a>
+        <LanguageSwitcher client:load />
+        <MarieReplayButton client:load />
+        <AuthWidget client:load />
+      </nav>
+      {/* 「更多」放在 .site-nav 之外：手机上 nav 是横向滚动容器（overflow-x:auto），
+          绝对定位的下拉面板会被它裁掉，所以挂到滚动区外面。 */}
+      <MoreMenu variant="header" />
+    </div>
   </div>
 </header>

@@ -219,6 +219,50 @@ const desc = description || t0.heroDesc;
       })();
     </script>
 
+    <!-- 跨站矩阵（「更多」）：开合由原生 <details> 负责，这里只管三件事 ——
+         ① 点页面空白处收起 ② 同一时刻只留一个展开 ③ Esc 收起。
+         全部用捕获阶段监听：React 岛那些处理器不会把它吞掉。 -->
+    <script is:inline>
+      (function () {
+        var menus = document.querySelectorAll('details.more-menu');
+        if (!menus.length) return;
+
+        function closeAll(except) {
+          for (var i = 0; i < menus.length; i++) {
+            if (menus[i] !== except && menus[i].open) menus[i].open = false;
+          }
+        }
+
+        document.addEventListener(
+          'click',
+          function (ev) {
+            for (var i = 0; i < menus.length; i++) {
+              var d = menus[i];
+              if (!d.open) continue;
+              // 点在面板里的链接上：跳转的同时收起来
+              if (ev.target && ev.target.closest && ev.target.closest('.more-menu__panel a')) {
+                d.open = false;
+                continue;
+              }
+              // 点在别处（含页面空白）：收起
+              if (!d.contains(ev.target)) d.open = false;
+            }
+          },
+          true
+        );
+
+        for (var i = 0; i < menus.length; i++) {
+          menus[i].addEventListener('toggle', function () {
+            if (this.open) closeAll(this);
+          });
+        }
+
+        document.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Escape' || ev.key === 'Esc') closeAll(null);
+        });
+      })();
+    </script>
+
     <!-- 访客埋点：页面浏览 / 停留 / 点击 / 播放（详见 public/js/track.js）
          采集是静默的，页面不展示任何访客数据；查看入口在 /visits（仅站长持有口令） -->
     <script is:inline src="/js/track.js" defer></script>
