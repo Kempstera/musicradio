@@ -3,7 +3,6 @@ import { SITE_NAME } from '../lib/config';
 import { t0 } from '../lib/i18n';
 import AuthWidget from './AuthWidget.tsx';
 import LanguageSwitcher from './LanguageSwitcher.tsx';
-import MarieReplayButton from './MarieReplayButton.tsx';
 import MoreMenu from './MoreMenu.astro';
 
 // 当前路径：用于导航项的「正在收听这个频段」状态
@@ -29,12 +28,12 @@ const isBoard = path === '/message-board';
         <a href="/explore" class:list={[{ 'is-active': isExplore }]} aria-current={isExplore ? 'page' : undefined} data-i18n="navExplore">{t0.navExplore}</a>
         <a href="/message-board" class:list={[{ 'is-active': isBoard }]} aria-current={isBoard ? 'page' : undefined} data-i18n="navGuestbook">{t0.navGuestbook}</a>
         <LanguageSwitcher client:load />
-        <MarieReplayButton client:load />
         <AuthWidget client:load />
       </nav>
       {/* 「更多」放在 .site-nav 之外：手机上 nav 是横向滚动容器（overflow-x:auto），
-          绝对定位的下拉面板会被它裁掉，所以挂到滚动区外面。 */}
-      <MoreMenu variant="header" />
+          绝对定位的下拉面板会被它裁掉，所以挂到滚动区外面。
+          首页额外给它一个「跳一下」的提示（nudge）—— 新入口躲在导航末尾，容易看不见。 */}
+      <MoreMenu variant="header" nudge={isHome} />
     </div>
   </div>
 </header>

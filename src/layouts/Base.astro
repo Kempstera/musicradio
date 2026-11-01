@@ -2,7 +2,6 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import BirthdayEgg from '../components/BirthdayEgg.tsx';
 import { SITE_NAME, SITE_URL } from '../lib/config';
 import { DEFAULT_LANG, t0 } from '../lib/i18n';
 
@@ -134,7 +133,6 @@ const desc = description || t0.heroDesc;
         } catch (e) {}
       })();
     </script>
-    <BirthdayEgg client:load />
     <slot />
     <Footer />
 
@@ -253,7 +251,13 @@ const desc = description || t0.heroDesc;
 
         for (var i = 0; i < menus.length; i++) {
           menus[i].addEventListener('toggle', function () {
-            if (this.open) closeAll(this);
+            if (this.open) {
+              closeAll(this);
+              // 用户已经找到并打开过「更多」→ 以后不再用首页那一下「跳动」提醒他
+              try {
+                window.localStorage.setItem('mr_more_opened', '1');
+              } catch (e) {}
+            }
           });
         }
 

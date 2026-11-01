@@ -11,23 +11,12 @@
 const ALLOWED = new Set([
   // Radio Tengri FM —— 哈萨克斯坦（仅提供 http 流，128kbps MP3）
   'http://91.201.214.229:8000/tengrifm',
-  // The UK 1940s Radio Station —— 生日彩蛋「Marie's 1946 Jukebox」默认台（官网公布的官方流，仅 http）
-  'http://solid2.streamupsolutions.com:24929/stream',
-  // Swing Street Radio —— 生日彩蛋备选台（美国摇摆乐/大乐队，仅提供 http 流，128kbps MP3）
-  // 列表里以带结尾斜杠的形式出现，这里两种写法都登记，避免末尾斜杠差异导致 403
-  'http://s6.voscast.com:11312/',
-  'http://s6.voscast.com:11312',
-  // Serenade Radio UK —— 生日彩蛋备选台（英国 easy listening / 40-60 年代标准曲，192kbps MP3）
-  // 实测：https 在 8284 端口上握手失败（SSL_ERROR_SYSCALL），只有 http 可用
-  'http://4534.cloudrad.io:8284/',
-  'http://4534.cloudrad.io:8284',
 ]);
 
-// ⚠️ UA 必须用「媒体播放器」而非浏览器 UA。
-// 原因：SHOUTcast v2（如 Swing Street Radio 的 s6.voscast.com）会检测浏览器 UA，
-// 对浏览器直接返回 302 → 服务器状态页（HTML），而不是音频流；
-// 换成播放器 UA 才会返回 200 + audio/mpeg。
-// 已实测：Winamp / VLC / curl 均可正常取流，Icecast 系（streamupsolutions、Tengri FM）不受影响。
+// ⚠️ UA 用「媒体播放器」而不是浏览器 UA：
+// 部分 SHOUTcast 服务端会检测浏览器 UA 并返回 302 → 状态页（HTML）而不是音频流，
+// 播放器 UA 才会拿到 200 + audio/mpeg。当前的 Icecast 系（Tengri FM）不受影响，
+// 但以后往白名单里加 http 流时，这个默认值能少踩一次坑。
 const UA = 'WinampMPEG/5.09';
 
 export async function onRequestGet({ request }) {

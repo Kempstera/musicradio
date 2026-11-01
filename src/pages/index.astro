@@ -71,6 +71,31 @@ const globeData = JSON.stringify(GLOBE_POINTS);
     })();
   </script>
 
+  {/* 「更多」的第一眼提示：首页才有，且只跳给「还没打开过它」的人看。
+      判定必须赶在首帧之前（head 内联），否则会先看见一下跳动再被收回。
+      三条否决：① 已经打开过（一次都不用再提醒）② 本次会话已经跳过
+      ③ 系统里关掉了动效。 */}
+  <script slot="head" is:inline>
+    (function () {
+      var root = document.documentElement;
+      try {
+        var opened = window.localStorage.getItem('mr_more_opened') === '1';
+        var nudged = window.sessionStorage.getItem('mr_more_nudged') === '1';
+        var calm =
+          window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (opened || nudged || calm) {
+          root.classList.add('mr-no-nudge');
+        } else {
+          // 记一次就够：同一会话里再回首页不再重复跳
+          window.sessionStorage.setItem('mr_more_nudged', '1');
+        }
+      } catch (e) {
+        // 隐私模式读不到存储：宁可不跳，也别每页都跳
+        root.classList.add('mr-no-nudge');
+      }
+    })();
+  </script>
+
   <section class="hero">
     <div class="container hero__wrap">
       {/* 竖排书脊：只在宽屏出现，给左边缘一条可以「读」的线 */}

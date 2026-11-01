@@ -3,18 +3,6 @@ import { getCurrentUrl, getStatus, isPlaying, play, retry, stop, subscribe, type
 import { isFavorite, subscribe as subscribeFavs } from '../lib/favorites';
 import { getTranslation, getInitialLang, LANG_CHANGE_EVENT } from '../lib/i18n';
 import type { Lang } from '../lib/i18n';
-import {
-  MARIE_JUKEBOX_ID,
-  MARIE_STATIONS,
-  isJukeboxActive,
-  isMarieId,
-  isMarieLang,
-  isMarieStationCurrent,
-  marieBlurb,
-  subscribe as subscribeMarie,
-  toggleMarieStation,
-  type MarieStation,
-} from '../lib/marie';
 import FavoriteButton from './FavoriteButton';
 
 export interface Station {
@@ -28,8 +16,6 @@ export interface Station {
   homepage?: string;
   /** 电台简介（精选电台的客观介绍，可选） */
   note?: string;
-  /** 一句话推荐语（仅生日彩蛋精选集使用，不参与 content-blob 多语言机制） */
-  blurb?: string;
   /** note 在 notableRadios 中的原始下标（用于 content-blob 的多语言对齐） */
   noteIdx?: number;
   /** genre 在 notableRadios 中的原始下标（用于 content-blob 的多语言对齐） */
@@ -107,8 +93,6 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
   const [status, setStatus] = useState<PlaybackStatus>(() => getStatus());
   const [favTick, setFavTick] = useState(0);
   const [lang, setLang] = useState<Lang>(() => getInitialLang());
-  // 生日彩蛋注入的「1946 Jukebox」是否已激活（会话级）
-  const [jukeboxOn, setJukeboxOn] = useState(false);
   const t = getTranslation(lang);
 
   useEffect(() => {
@@ -133,13 +117,6 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
     return () => window.removeEventListener(LANG_CHANGE_EVENT, onLang);
   }, []);
 
-  // 「1946 Jukebox」是会话级开关，激活后常驻于列表最顶部
-  useEffect(() => {
-    const refresh = () => setJukeboxOn(isJukeboxActive());
-    refresh();
-    return subscribeMarie(refresh);
-  }, []);
-
   // 收藏的电台排在最前（居于顶端）
   const ordered = [...stations].sort((a, b) => {
     const af = isFavorite(a.url) ? 1 : 0;
@@ -148,11 +125,7 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
   });
   void favTick;
 
-  // 生日彩蛋注入的精选集插在**最顶部**（不再参与收藏排序）：
-  // 第 1 张是默认台，其余 5 张是给 Marie 的备选推荐。
-  // 语言门控：只在英语 / 威尔士语下出现（与首页 MarieJukebox 区块一致）。
-  const marieStations: Station[] = MARIE_STATIONS;
-  const list: Station[] = jukeboxOn && isMarieLang(lang) ? [...marieStations, ...ordered] : ordered;
+  const list = ordered;
 
   if (!list.length) {
     return (
@@ -162,10 +135,7 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
     );
   }
 
-  const isCurrentStation = (s: Station) =>
-    isMarieId(s.id)
-      ? isMarieStationCurrent(s as MarieStation, currentUrl)
-      : s.url === currentUrl;
+  const isCurrentStation = (s: Station) => s.url === currentUrl;
 
   const current = list.find(isCurrentStation);
 
@@ -173,9 +143,6 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
     <>
       <div className="radio-grid">
         {list.map((s) => {
-          const isMarie = isMarieId(s.id);
-          // 精选集首张 = 默认台：保留金色呼吸光晕；其余备选卡用收敛版本，避免一屏多张同时发光
-          const isMariePrimary = s.id === MARIE_JUKEBOX_ID;
           const isCurrent = isCurrentStation(s);
           const isPlayingNow = isCurrent && playing;
           const rawTags = resolveGenre(lang, slug, s) || '';
@@ -187,17 +154,14 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
           return (
             <div
               key={s.id}
-              className={`radio-card${isPlayingNow ? ' is-playing' : ''}${isMarie ? ' radio-card--marie' : ''}${
-                isMarie && !isMariePrimary ? ' radio-card--marie-alt' : ''
-              }`}
+              className={`radio-card${isPlayingNow ? ' is-playing' : ''}`}
             >
               <button
                 className="radio-card__play"
                 onClick={() => {
                   // 广播播放行为，供访客埋点记录「哪个电台被点了」（public/js/track.js 监听）
                   window.dispatchEvent(new CustomEvent('mr:play', { detail: { name: s.name, id: s.id } }));
-                  if (isMarie) void toggleMarieStation(s as MarieStation);
-                  else play(s.url, s.hls);
+                  play(s.url, s.hls);
                 }}
                 aria-label={isPlayingNow ? `${t.radioPause} ${s.name}` : `${t.radioPlay} ${s.name}`}
                 title={isPlayingNow ? t.radioPause : t.radioPlay}
@@ -243,9 +207,6 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
                     </span>
                   )}
                 </div>
-                {isMarie && (
-                  <div className="radio-card__blurb">{marieBlurb(s as MarieStation, lang)}</div>
-                )}
                 {s.note && (
                   <div
                     className="radio-card__note"
@@ -263,9 +224,8 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
                   url: s.url,
                   name: s.name,
                   genre: rawTags,
-                  // 生日彩蛋注入的台不属于任何国家，避免被误标成当前国家
-                  country: isMarie ? 'Marie · 80' : countryName,
-                  countrySlug: isMarie ? undefined : slug,
+                  country: countryName,
+                  countrySlug: slug,
                   hls: s.hls,
                 }}
               />

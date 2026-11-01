@@ -2,13 +2,11 @@
 // 大洲巡礼 —— 电台总览页（NIGHT FREQUENCY）
 //
 // 内容与上一版完全一致：
-//   · 生日彩蛋精选集（MarieJukebox，仅彩蛋触发后渲染）
 //   · 我的最爱电台列表 + 播放按钮（MyFavorites）
 //   · 六大洲 → 子区域 → 国家卡片完整清单
 //
 // 新增的只有交互层：吸附式频率调谐条 + 国家检索框（195 张卡片，没有检索不好用）。
 import Base from '../layouts/Base.astro';
-import MarieJukebox from '../components/MarieJukebox.tsx';
 import MyFavorites from '../components/MyFavorites.tsx';
 import { CONTINENTS, SUBREGIONS } from '../lib/country';
 import { allCountries, countriesByContinent, countriesBySubregion } from '../data';
@@ -125,9 +123,6 @@ const sceneryList = CONTINENTS.map((c) => SCENERY[c.id]).filter(Boolean);
       </div>
     </div>
   </div>
-
-  {/* 生日彩蛋：切到威尔士语后被注入的「Marie's 1946 Jukebox」出现在这里（未激活时不渲染） */}
-  <MarieJukebox client:load />
 
   <MyFavorites client:load />
 

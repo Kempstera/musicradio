@@ -11,8 +11,10 @@ import { t0 } from '../lib/i18n';
 interface Props {
   /** header：向下展开；footer：向上浮现 */
   variant?: 'header' | 'footer';
+  /** 首页专用：给「更多」加一次「跳一下」的提示动画（详见 global.css 的 more-nudge） */
+  nudge?: boolean;
 }
-const { variant = 'header' } = Astro.props;
+const { variant = 'header', nudge = false } = Astro.props;
 
 const links = [
   { key: 'siteAmbient', label: t0.siteAmbient, href: 'https://music-radio.signupeverywhere.cc' },
@@ -21,7 +23,7 @@ const links = [
 ];
 ---
 
-<details class:list={['more-menu', `more-menu--${variant}`]}>
+<details class:list={['more-menu', `more-menu--${variant}`, { 'more-menu--nudge': nudge }]}>
   <summary data-i18n="moreSites">{t0.moreSites}</summary>
   <div class="more-menu__panel">
     {
