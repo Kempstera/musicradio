@@ -13,8 +13,8 @@
 --
 -- 执行方式：Supabase Dashboard → SQL Editor → 整段粘贴执行（幂等，可重复跑）。
 --
--- 口令：见本次交付说明（一串 28 位随机字符）。想换成自己的，只需把下面的
---   admin_gate 那一行换成 md5('你的新口令') 再执行一次即可。
+-- 口令：明文**不写进本文件**（仓库是公开的），这里只存它的 md5。
+--   站长口令由站长另行保管；想换，把下面的 admin_gate 换成 md5('新口令') 再执行一次即可。
 --   —— md5 在这里只做「等值比对」，不做密码存储，配合长随机串足够。
 -- ============================================================================
 
@@ -38,7 +38,7 @@ alter table private.admin_gate enable row level security;
 --   把下面 values(...) 里的串换成它，整段再执行一次即可。
 --   仓库是公开的，所以这里只放 md5、不放明文；28 位以上的随机串做 md5 是安全的。
 insert into private.admin_gate (id, key_md5, updated_at)
-values (1, 'a6f7331cd93f83682c39d0ec44fc49de', now())
+values (1, 'e8eee9bc634675af50d40eae9064e7c3', now())
 on conflict (id) do update set key_md5 = excluded.key_md5, updated_at = now();
 
 -- ---------------------------------------------------------------------------
