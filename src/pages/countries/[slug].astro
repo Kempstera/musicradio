@@ -9,7 +9,8 @@ import { CONTINENT_MAP, SUBREGION_MAP } from '../../lib/country';
 import type { Country } from '../../lib/country';
 import radiosData from '../../data/radios.json';
 import logosData from '../../data/logos.json';
-import { STATION_NOTES } from '../../data/station-notes';
+import { noteOf } from '../../data/station-notes';
+import type { StationNote } from '../../data/station-notes';
 import { capitalEn, languageEn } from '../../data/i18n/geo-en';
 import { sortStations, healthOf } from '../../lib/stream-health';
 import { t0, DEFAULT_LANG, CONTINENT_LABELS, SUBREGION_LABELS } from '../../lib/i18n';
@@ -51,22 +52,38 @@ const heroLatin =
     ? `${country.nameEn} · ${country.nameLocal}`
     : country.nameEn;
 
-const fetchedStations: Station[] = (radios[country.iso] || []).map((s, i) => {
-  const sn = STATION_NOTES[s.url];
-  return {
-    id: `${country.iso}-${i}`,
-    name: s.name,
-    url: s.url,
-    hls: !!s.hls,
-    codec: s.codec,
-    bitrate: s.bitrate,
-    tags: s.tags,
-    homepage: s.homepage,
-    logo: logoOf(s.url),
-    note: sn?.[DEFAULT_LANG] || sn?.['en'],
-    noteKey: sn ? s.url : undefined,
-  };
-});
+/** 台名归一：去多余空白 + 小写，用来判断「是不是同一家」 */
+const normName = (s: string) => s.toLowerCase().replace(/\s+/g, ' ').trim();
+/** 精选台里已经出现过的名字 —— 采集来的同家台不再重复出一张卡（英国页曾出现两个 BBC Radio 3） */
+const curatedNames = new Set((country.notableRadios || []).map((r) => normName(r.name)));
+
+/** 本页出现的「采集台」简介（含品牌匹配得到的），供多语言 blob 使用 */
+const noteMap = new Map<string, StationNote>();
+
+const fetchedStations: Station[] = (radios[country.iso] || [])
+  .filter((s, i, arr) => {
+    const k = normName(s.name);
+    if (curatedNames.has(k)) return false;
+    // 采集台内部也去重：同一国家同名只留先出现的那条
+    return arr.findIndex((x) => normName(x.name) === k) === i;
+  })
+  .map((s, i) => {
+    const sn = noteOf(s.url, s.name, country.iso);
+    if (sn) noteMap.set(s.url, sn);
+    return {
+      id: `${country.iso}-${i}`,
+      name: s.name,
+      url: s.url,
+      hls: !!s.hls,
+      codec: s.codec,
+      bitrate: s.bitrate,
+      tags: s.tags,
+      homepage: s.homepage,
+      logo: logoOf(s.url),
+      note: sn?.[DEFAULT_LANG] || sn?.['en'],
+      noteKey: sn ? s.url : undefined,
+    };
+  });
 
 const notablePlayable: Station[] = (country.notableRadios || [])
   .map((r, i) => ({ r, i }))
@@ -125,7 +142,7 @@ const contentBlobJson = JSON.stringify(contentBlob).replace(/</g, '\\u003c');
 const STATION_NOTE_LANGS: Lang[] = ['zh-CN', 'zh-TW', 'en', 'cy', 'fr', 'de', 'it', 'es'];
 const stationNotesBlob: Record<string, Record<string, string>> = {};
 for (const lang of STATION_NOTE_LANGS) stationNotesBlob[lang] = {};
-for (const [url, notes] of Object.entries(STATION_NOTES)) {
+for (const [url, notes] of noteMap) {
   for (const lang of STATION_NOTE_LANGS) {
     const t = notes[lang] || notes['zh-CN'];
     if (t) stationNotesBlob[lang][url] = t;

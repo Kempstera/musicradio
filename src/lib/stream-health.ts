@@ -9,9 +9,13 @@
 //   1 = 国内不通（海外可播，或从未测过的地址 —— 保守归此类）
 //   2 = 死链（海外也打不开）
 //
-// 排序策略：先按分级，再按延迟；精选（notable）台享 1.2 秒容差 ——
-// 同一档里编辑推荐优先，但真正快得多的采集台仍可反超。
-// 这样既满足「能播的、快的排前面」，又不至于把手工挑选的经典台全部挤到后面。
+// 排序策略（2026-10 调整）：
+//   ① 编辑精选台（notableRadios）自成一组，**按编辑给的顺序**排在最前 ——
+//      用户打开英国页就是想找 BBC Radio 3，而不是「此刻延迟最低的那个采集流」。
+//      精选台大多是新加的 HLS 地址，压根没进过体检表（tier 默认 1），
+//      上一版按 tier 排就把它们全埋到几十个采集台下面去了。
+//   ② 其余采集台先按国内可播性分档（0 能播 / 1 受限 / 2 死链），再按首字节延迟。
+//   ③ 同档里「有简介」的优先 —— 有介绍说明这台的资料是站里认真核过的。
 
 import RAW from '../data/stream-health.json';
 
@@ -28,8 +32,8 @@ export interface StreamHealth {
 
 const MAP = RAW as unknown as Record<string, [number, number]>;
 
-/** 精选台在排序时获得的延迟容差（毫秒） */
-const CURATED_BONUS = 1200;
+/** 「有简介」在同档里折算成的延迟优势（毫秒）：比任何实测延迟都大 */
+const NOTE_PENALTY = 20000;
 
 export function healthOf(url: string): StreamHealth {
   const v = MAP[url];
@@ -37,18 +41,32 @@ export function healthOf(url: string): StreamHealth {
   return { tier: (v[0] === 0 ? 0 : v[0] === 2 ? 2 : 1) as StreamTier, ms: v[1] || 0, known: true };
 }
 
-/** 排序键：越小越靠前 */
+/** 排序键：越小越靠前（保留给需要单点比较的场景） */
 export function stationOrder(url: string, curated: boolean): number {
   const h = healthOf(url);
-  const ms = Math.max(0, h.ms - (curated ? CURATED_BONUS : 0));
-  // 分档为主序（每档 1000 万偏移，远超任何延迟差），延迟为次序
-  return h.tier * 1e7 + ms;
+  const top = curated && h.tier !== 2 ? 0 : 1;
+  return top * 1e9 + h.tier * 1e7 + Math.min(h.ms, 19999);
 }
 
-/** 按国内可播性排序（稳定：同键保持原相对顺序） */
-export function sortStations<T extends { url: string }>(list: T[], isCurated: (s: T) => boolean): T[] {
+/**
+ * 按「知名 → 能播 → 有简介」排序（稳定）。
+ *
+ * @param isCurated 该台是否来自编辑精选（notableRadios）
+ */
+export function sortStations<T extends { url: string; note?: string }>(
+  list: T[],
+  isCurated: (s: T) => boolean,
+): T[] {
   return list
-    .map((s, i) => ({ s, i, k: stationOrder(s.url, isCurated(s)) }))
-    .sort((a, b) => a.k - b.k || a.i - b.i)
+    .map((s, i) => {
+      const h = healthOf(s.url);
+      // 死链的精选台不享受置顶，掉到最后一档，免得点开一片寂静
+      const curated = isCurated(s) && h.tier !== 2;
+      const band = curated ? 0 : h.tier === 0 ? 1 : h.tier === 1 ? 2 : 3;
+      // 精选档用原下标当键 → 完全保留编辑顺序
+      const key = band === 0 ? i : h.ms + (s.note ? 0 : NOTE_PENALTY);
+      return { s, i, band, key };
+    })
+    .sort((a, b) => a.band - b.band || a.key - b.key || a.i - b.i)
     .map((x) => x.s);
 }

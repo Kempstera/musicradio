@@ -1,15 +1,20 @@
 // 国家层面的「可播性」统计：一个国家有多少台在国内能直接打开
 //
-// 用途：大洲巡礼页里，同一子区域的国家按「可播台数量」从多到少排 ——
-// 于是西欧第一个就是英国，东亚第一个是中国/日本，北美第一个是美国。
-// 访客（绝大多数在国内）点开列表，先看到的就是真能听的。
+// 用途两处：
+//   ① 大洲巡礼页里，同一子区域的国家排序（sortByPlayability）
+//   ② 全站「可播 X 台 / 共 Y 台」的合计数字
 //
-// 口径必须与 [slug].astro 的播放列表一致：
+// 排序口径（用户 2026-10 定）：大国在前，同档再按可播台数从多到少。
+// 光按台数排的问题是位置随每次扩库漂移 —— 英国曾经因为荷兰多抓了几十台而掉到第二，
+// 用户第一眼就找不到它。所以分量由 src/data/country-weight.ts 固定，数量只做次序。
+//
+// 可播台数的口径必须与 [slug].astro 的播放列表一致：
 //   notableRadios 里有 url 的 + （非 notable-only 时）radios.json 里该国的采集台。
 
 import { allCountries } from './index';
 import radiosData from './radios.json';
 import { healthOf } from '../lib/stream-health';
+import { weightOf } from './country-weight';
 import type { Country } from '../lib/country';
 
 const radios = radiosData as unknown as Record<string, { url: string }[]>;
@@ -42,13 +47,13 @@ export function playabilityOf(c: Country): Playability {
 }
 
 /**
- * 同一子区域内排序：可播台多的国家在前。
- * 数量相同则保持数据源里的原顺序（stable），避免列表看起来像被打乱了。
+ * 同一子区域内排序：先看国家分量（大国在前），再看可播台数。
+ * 两项都相同则保持数据源里的原顺序（stable），避免列表看起来像被打乱了。
  */
 export function sortByPlayability<T extends Country>(list: T[]): T[] {
   return list
-    .map((c, i) => ({ c, i, p: playabilityOf(c).playable }))
-    .sort((a, b) => b.p - a.p || a.i - b.i)
+    .map((c, i) => ({ c, i, w: weightOf(c.iso), p: playabilityOf(c).playable }))
+    .sort((a, b) => b.w - a.w || b.p - a.p || a.i - b.i)
     .map((x) => x.c);
 }
 
