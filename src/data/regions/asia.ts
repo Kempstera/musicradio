@@ -552,7 +552,7 @@ export const asia: Country[] = [
       { name: '蒙古国家马头琴乐团', nameEn: 'Mongolian State Morin Khuur Ensemble', role: '民族乐团', desc: '传承马头琴与呼麦传统的国家级乐团，音色辽阔苍凉。' },
       { name: 'The HU', nameEn: 'The HU', role: '摇滚乐队', desc: '把蒙古呼麦、马头琴与重金属结合的乐队，风靡全球。' },
     ],
-    notableRadios: [{ name: 'MNB 蒙古国家广播', genre: '综合 / 长调', note: '蒙古国家广播电视，播放长调与本土音乐节目。' }],
+    notableRadios: [{ name: 'MNB 蒙古国家广播', genre: '综合 / 长调', note: '蒙古国家广播电视，播放长调与本土音乐节目。', url: 'https://live.mnb.mn/hls/mnb.stream.m3u8', hls: true }],
   },
   {
     slug: 'north-korea',
