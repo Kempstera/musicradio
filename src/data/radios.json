@@ -27459,17 +27459,6 @@
    "countrycode": "ID"
   },
   {
-   "name": "Radio Rodja 756 AM",
-   "url": "https://radioislamindonesia.com/rodja.mp3?_=2",
-   "homepage": "https://www.radiorodja.com/",
-   "codec": "MP3",
-   "bitrate": 256,
-   "hls": false,
-   "tags": "classical",
-   "votes": 1600,
-   "countrycode": "ID"
-  },
-  {
    "name": "Prambors FM",
    "url": "https://stream.rcs.revma.com/h77wwp48kxcwv",
    "homepage": "",
@@ -39704,39 +39693,6 @@
    "countrycode": "DZ"
   },
   {
-   "name": ".صور من حياة الصحابة",
-   "url": "https://qurango.net/radio/sahabah",
-   "homepage": "",
-   "codec": "MP3",
-   "bitrate": 128,
-   "hls": false,
-   "tags": "classical",
-   "votes": 6385,
-   "countrycode": "DZ"
-  },
-  {
-   "name": ".مختصر السيرة",
-   "url": "https://qurango.net/radio/almukhtasar_fi_alsiyra",
-   "homepage": "",
-   "codec": "MP3",
-   "bitrate": 128,
-   "hls": false,
-   "tags": "classical",
-   "votes": 3723,
-   "countrycode": "DZ"
-  },
-  {
-   "name": ".القارئ محمد أيوب",
-   "url": "https://qurango.net/radio/mohammed_ayyub",
-   "homepage": "",
-   "codec": "MP3",
-   "bitrate": 128,
-   "hls": false,
-   "tags": "classical",
-   "votes": 2815,
-   "countrycode": "DZ"
-  },
-  {
    "name": "Radio Algerienne -  El Bahdja",
    "url": "https://webradio3.tda.dz:8001/ElBahdja_64K.mp3",
    "homepage": "",
@@ -40324,28 +40280,6 @@
  ],
  "EG": [
   {
-   "name": "إذاعة مشاري العفاسي",
-   "url": "https://qurango.net/radio/mishary_alafasi",
-   "homepage": "http://www.phantomsw.com/",
-   "codec": "MP3",
-   "bitrate": 128,
-   "hls": false,
-   "tags": "",
-   "votes": 11130,
-   "countrycode": "EG"
-  },
-  {
-   "name": "إذاعة مصطفى إسماعيل",
-   "url": "https://qurango.net/radio/mustafa_ismail",
-   "homepage": "http://www.phantomsw.com/",
-   "codec": "MP3",
-   "bitrate": 128,
-   "hls": false,
-   "tags": "",
-   "votes": 9975,
-   "countrycode": "EG"
-  },
-  {
    "name": "Amr Diab Radio",
    "url": "https://stream-40.zeno.fm/xa4yhh4k838uv?zs=gojgaFRaRrK1wgGIwdv6xA",
    "homepage": "",
@@ -40354,39 +40288,6 @@
    "hls": false,
    "tags": "pop",
    "votes": 9753,
-   "countrycode": "EG"
-  },
-  {
-   "name": "---تراتيل قصيرة متميزة---",
-   "url": "https://qurango.net/radio/tarateel",
-   "homepage": "http://www.phantomsw.com/",
-   "codec": "MP3",
-   "bitrate": 128,
-   "hls": false,
-   "tags": "قران كريم",
-   "votes": 9511,
-   "countrycode": "EG"
-  },
-  {
-   "name": "إذاعة ياسر الدوسري",
-   "url": "https://qurango.net/radio/yasser_aldosari",
-   "homepage": "http://www.phantomsw.com/",
-   "codec": "MP3",
-   "bitrate": 128,
-   "hls": false,
-   "tags": "",
-   "votes": 9261,
-   "countrycode": "EG"
-  },
-  {
-   "name": "Abdulrasheed Soufi",
-   "url": "https://qurango.net/radio/abdulrasheed_soufi_assosi.mp3",
-   "homepage": "https://qurango.net/radio",
-   "codec": "MP3",
-   "bitrate": 128,
-   "hls": false,
-   "tags": "",
-   "votes": 7981,
    "countrycode": "EG"
   },
   {

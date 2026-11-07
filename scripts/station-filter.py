@@ -101,7 +101,7 @@ BAD_SUBSTR = (
     'قرآن', 'قران', 'القران', 'إسلام', 'اسلام', 'اسلامی', 'دين', 'ديني', 'سنة',
     'دعاء', 'تلاوة', 'خطبة', 'مكة', 'المدينة', 'الحرم', 'مسجد', 'جامع', 'شيخ',
     'أناشيد', 'نشيد', 'حديث', 'فتوى', 'أذان', 'اذان', 'رمضان', 'عمرة', 'دعوة',
-    'سلف', 'تفسير', 'تجويد', 'كريم', 'اهل البيت',
+    'سلف', 'تفسير', 'تجويد', 'كريم', 'اهل البيت', 'صحابة', 'تراتيل', 'سيرة', 'قراء', 'تلاوات', 'خطب',
     'কুরআন', 'কোরআন', 'ইসলাম', 'দ্বীন', 'নামাজ', 'ওয়াজ',
     'भजन', 'कीर्तन', 'गीता', 'धार्मिक', 'आरती', 'भागवत', 'मंदिर',
     'יהדות', 'תורה', 'תפילה',
@@ -116,6 +116,19 @@ BAD_URL_HOSTS = (
 )
 
 
+# 流地址里的关键词：台名可以叫「伊斯兰 XX 电台」但写成拉丁字母，也可以直接叫
+# 某位诵经者的名字（qurango.net 上一个诵经者一个频道），名字层认不出来，
+# 地址层却一定露馅
+BAD_URL_WORDS = (
+    'quran', 'qur-an', 'qoran', 'koran', 'kuran', 'islam', 'muslim', 'masjid',
+    'mosque', 'qari', 'tilawat', 'tajweed', 'sunnah', 'dawah', 'hadith',
+    'tarateel', 'sahabah', 'seerah', 'gospel', 'christian', 'church', 'bible',
+    'worship', 'sermon', 'radiomaria', 'radio-maria', 'radio_maria', 'ewtn',
+    'vatican', 'bhajan', 'kirtan', 'mandir', 'gurbani', 'torah', 'yeshiva',
+    'dhamma', 'buddha', 'monastery',
+)
+
+
 def bad_url(url):
     """短链跳板一律不进库（返回命中的域名，否则 None）。"""
     host = re.sub(r'^https?://', '', (url or '').lower()).split('/')[0]
@@ -123,6 +136,10 @@ def bad_url(url):
     for h in BAD_URL_HOSTS:
         if host == h or host.endswith('.' + h):
             return h
+    low = (url or '').lower()
+    for w in BAD_URL_WORDS:
+        if w in low:
+            return f'地址含「{w}」'
     return None
 
 
@@ -196,7 +213,7 @@ def audit(radios):
         for s in lst:
             r = classify(s['name'], s.get('tags', ''), [])
             if not r and bad_url(s['url']):
-                r = ('url', f'短链地址:{bad_url(s["url"])}')
+                r = ('url', bad_url(s['url']))
             if r:
                 hits.append((cc, s, r))
     return hits
