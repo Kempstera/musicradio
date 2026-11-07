@@ -233,7 +233,7 @@ const zhCN: Translation = {
   radioVisitSite: '访问官网',
   radioPlay: '播放',
   radioPause: '暂停',
-  radioShowMore: '再显示 36 台',
+  radioShowMore: '再显示',
   radioShowAll: '显示全部',
 };
 
@@ -334,7 +334,7 @@ const zhTW: Translation = {
   radioVisitSite: '造訪官網',
   radioPlay: '播放',
   radioPause: '暫停',
-  radioShowMore: '再顯示 36 台',
+  radioShowMore: '再顯示',
   radioShowAll: '顯示全部',
 };
 
