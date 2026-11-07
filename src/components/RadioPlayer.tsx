@@ -96,11 +96,16 @@ function Eq() {
  */
 const FALLBACK_LOGO = '/favicon.svg';
 
+/** 首屏先渲染多少台、每次再放多少台 */
+const INITIAL_VISIBLE = 24;
+const REVEAL_STEP = 36;
+
 export default function RadioPlayer({ stations, countryName, flag, emptyNote, slug }: Props) {
   const [currentUrl, setCurrentUrl] = useState<string | null>(null);
   const [playing, setPlaying] = useState<boolean>(false);
   const [status, setStatus] = useState<PlaybackStatus>(() => getStatus());
   const [favTick, setFavTick] = useState(0);
+  const [reveal, setReveal] = useState(INITIAL_VISIBLE);
   const [lang, setLang] = useState<Lang>(() => getInitialLang());
   const t = getTranslation(lang);
 
@@ -136,6 +141,17 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
 
   const list = ordered;
 
+  /**
+   * 渐进展开。
+   *
+   * 英国一个国家的可播台已经过百（从 onlineradiobox 抓来的一千多条流里筛出来的），
+   * 一次铺满会让首屏塞进上百个 <img> 和十几个弹性布局行，手机上直接卡住。
+   * 所以默认只渲染前 24 台，剩下的按 36 台一批手动放出来 —— 想看的人点两下就有，
+   * 不想翻的人也不会被一屏噪音劝退。
+   */
+  const shown = list.slice(0, reveal);
+  const remaining = list.length - shown.length;
+
   if (!list.length) {
     return (
       <p className="empty" style={{ marginTop: '1.4rem' }} data-ct="radioNote" data-slug={slug} data-i18n="radioEmptyFallback">
@@ -151,7 +167,7 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
   return (
     <>
       <div className="radio-grid">
-        {list.map((s) => {
+        {shown.map((s) => {
           const isCurrent = isCurrentStation(s);
           const isPlayingNow = isCurrent && playing;
           const rawTags = resolveGenre(lang, slug, s) || '';
@@ -261,6 +277,18 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
           );
         })}
       </div>
+
+      {remaining > 0 && (
+        <div className="radio-more">
+          <button className="radio-more__btn" onClick={() => setReveal((n) => n + REVEAL_STEP)}>
+            {t.radioShowMore}
+            <span className="radio-more__count">+{Math.min(REVEAL_STEP, remaining)}</span>
+          </button>
+          <button className="radio-more__btn radio-more__btn--ghost" onClick={() => setReveal(list.length)}>
+            {t.radioShowAll} · {list.length}
+          </button>
+        </div>
+      )}
 
       {current && (
         <div className="now-playing" role="status">

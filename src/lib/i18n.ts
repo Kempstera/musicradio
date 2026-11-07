@@ -72,6 +72,8 @@ export interface Translation {
   radioVisitSite: string;
   radioPlay: string;
   radioPause: string;
+  radioShowMore: string;
+  radioShowAll: string;
   // 播放器状态与 HTTP 流标签
   httpTagHint: string;
   /** 国内网络受限（海外可播）标签与说明 */
@@ -231,6 +233,8 @@ const zhCN: Translation = {
   radioVisitSite: '访问官网',
   radioPlay: '播放',
   radioPause: '暂停',
+  radioShowMore: '再显示 36 台',
+  radioShowAll: '显示全部',
 };
 
 const zhTW: Translation = {
@@ -330,6 +334,8 @@ const zhTW: Translation = {
   radioVisitSite: '造訪官網',
   radioPlay: '播放',
   radioPause: '暫停',
+  radioShowMore: '再顯示 36 台',
+  radioShowAll: '顯示全部',
 };
 
 const en: Translation = {
@@ -383,6 +389,8 @@ const en: Translation = {
   radioVisitSite: 'Visit the official site',
   radioPlay: 'Play',
   radioPause: 'Pause',
+  radioShowMore: 'Show more',
+  radioShowAll: 'Show all',
   httpTagHint: 'This station only offers an HTTP stream; it is relayed through our edge so it can play on this secure page.',
   streamLimitedTag: 'Overseas',
   streamLimitedHint: 'This stream is usually unreachable on mainland Chinese networks; it plays fine abroad, so it sits lower in this list.',
@@ -482,6 +490,8 @@ const cy: Translation = {
   radioVisitSite: 'Ewch i\'r wefan swyddogol',
   radioPlay: 'Chwarae',
   radioPause: 'Seibio',
+  radioShowMore: 'Dangos mwy',
+  radioShowAll: 'Dangos popeth',
   httpTagHint: 'Dim ond ffrwd HTTP sydd gan yr orsaf hon; caiff ei throsglwyddo trwy ein hymyl er mwyn iddi allu chwarae ar y dudalen ddiogel hon.',
   streamLimitedTag: 'Tramor',
   streamLimitedHint: 'Yn aml nid yw\'r ffrwd hon ar gael ar rwydweithiau tir mawr Tsieina; mae\'n chwarae\'n iawn dramor, felly fe\'i rhestri\'n is yma.',
@@ -582,6 +592,8 @@ const fr: Translation = {
   radioVisitSite: 'Visiter le site officiel',
   radioPlay: 'Écouter',
   radioPause: 'Pause',
+  radioShowMore: 'Afficher plus',
+  radioShowAll: 'Tout afficher',
   httpTagHint: 'Cette station ne propose qu\'un flux HTTP ; il est relayé via notre périphérie pour être lu sur cette page sécurisée.',
   streamLimitedTag: 'Hors réseau',
   streamLimitedHint: 'Ce flux est généralement inaccessible depuis la Chine continentale ; il fonctionne à l\'étranger, d\'où sa place plus bas dans la liste.',
@@ -682,6 +694,8 @@ const de: Translation = {
   radioVisitSite: 'Offizielle Website besuchen',
   radioPlay: 'Abspielen',
   radioPause: 'Pause',
+  radioShowMore: 'Mehr anzeigen',
+  radioShowAll: 'Alle anzeigen',
   httpTagHint: 'Dieser Sender bietet nur einen HTTP-Stream an; er wird über unsere Edge weitergeleitet, damit er auf dieser sicheren Seite abspielbar ist.',
   streamLimitedTag: 'Ausland',
   streamLimitedHint: 'Dieser Stream ist in Festlandchina meist nicht erreichbar; im Ausland läuft er, daher steht er hier weiter hinten.',
@@ -782,6 +796,8 @@ const it: Translation = {
   radioVisitSite: 'Visita il sito ufficiale',
   radioPlay: 'Riproduci',
   radioPause: 'Pausa',
+  radioShowMore: 'Mostra di più',
+  radioShowAll: 'Mostra tutto',
   httpTagHint: 'Questa emittente offre solo un flusso HTTP; viene inoltrato attraverso il nostro edge per poterlo ascoltare su questa pagina sicura.',
   streamLimitedTag: 'Estero',
   streamLimitedHint: 'Questo flusso di solito non è raggiungibile dalla Cina continentale; all\'estero funziona, quindi è elencato più in basso.',
@@ -882,6 +898,8 @@ const es: Translation = {
   radioVisitSite: 'Visitar el sitio oficial',
   radioPlay: 'Reproducir',
   radioPause: 'Pausar',
+  radioShowMore: 'Mostrar más',
+  radioShowAll: 'Mostrar todo',
   httpTagHint: 'Esta emisora solo ofrece un flujo HTTP; se retransmite a través de nuestro edge para que suene en esta página segura.',
   streamLimitedTag: 'Exterior',
   streamLimitedHint: 'Este flujo suele no ser accesible desde China continental; en el extranjero funciona, por eso aparece más abajo.',

@@ -1794,6 +1794,53 @@ html[lang='en'] .country-hero__en {
   border-top: 1px solid var(--rule-2);
   border-left: 1px solid var(--rule-2);
 }
+
+/* 列表渐进展开：默认 24 台，其余按批放出。
+   网格自己的 border-bottom 已经收边，这里不再画线，只把「还有多少」用等宽小字
+   摆在列表正下方，视线上仍是这张白纸的延续。 */
+.radio-more {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0 0;
+}
+.radio-more__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 38px;
+  padding: 0 0.9rem;
+  border: 1px solid var(--rule);
+  background: var(--sheet);
+  color: var(--ink-2);
+  font-family: var(--f-mono);
+  font-size: var(--t--2);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color var(--dur-1) var(--ease-out), border-color var(--dur-1) var(--ease-out),
+    background-color var(--dur-1) var(--ease-out);
+}
+.radio-more__btn:hover {
+  color: var(--ai);
+  border-color: var(--ai-line);
+  background: var(--ai-soft);
+}
+.radio-more__count {
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+}
+.radio-more__btn--ghost {
+  border-color: transparent;
+  background: none;
+  color: var(--ink-3);
+}
+.radio-more__btn--ghost:hover {
+  border-color: transparent;
+  background: none;
+  color: var(--ai);
+}
 .radio-card {
   position: relative;
   display: flex;
