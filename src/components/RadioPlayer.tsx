@@ -14,6 +14,8 @@ export interface Station {
   bitrate?: number;
   tags?: string;
   homepage?: string;
+  /** 台标（本地文件，见 src/data/logos.json）；缺省时列表退回首字母块 */
+  logo?: string;
   /** 电台简介（精选电台的客观介绍，可选） */
   note?: string;
   /** note 在 notableRadios 中的原始下标（用于 content-blob 的多语言对齐） */
@@ -86,6 +88,13 @@ function Eq() {
     </span>
   );
 }
+
+/**
+ * 没有台标时的兜底：用本站自己的标识（public/favicon.svg）。
+ * 之前用的是「首字母块」，但一屏里十几种字母块反而更花；统一成同一枚品牌贴片，
+ * 一眼就能看出「这台没有台标」，也不会跟真有台标的台抢注意力。
+ */
+const FALLBACK_LOGO = '/favicon.svg';
 
 export default function RadioPlayer({ stations, countryName, flag, emptyNote, slug }: Props) {
   const [currentUrl, setCurrentUrl] = useState<string | null>(null);
@@ -166,7 +175,26 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
                 aria-label={isPlayingNow ? `${t.radioPause} ${s.name}` : `${t.radioPlay} ${s.name}`}
                 title={isPlayingNow ? t.radioPause : t.radioPlay}
               >
-                {isPlayingNow ? <PauseIcon /> : <PlayIcon />}
+                <span className={`radio-card__art${s.logo ? '' : ' radio-card__art--fallback'}`}>
+                  {s.logo ? (
+                    <img className="radio-card__logo" src={s.logo} alt="" width={40} height={40} loading="lazy" decoding="async" />
+                  ) : (
+                    <img
+                      className="radio-card__logo radio-card__logo--fallback"
+                      src={FALLBACK_LOGO}
+                      alt=""
+                      width={40}
+                      height={40}
+                      decoding="async"
+                    />
+                  )}
+                  <span className="radio-card__veil" aria-hidden>
+                    {isPlayingNow ? <PauseIcon /> : <PlayIcon />}
+                  </span>
+                </span>
+                <span className="radio-card__badge" aria-hidden>
+                  {isPlayingNow ? <PauseIcon /> : <PlayIcon />}
+                </span>
               </button>
               <div className="radio-card__body">
                 {s.homepage ? (
@@ -239,6 +267,13 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
           <button className="now-playing__btn" onClick={() => stop()} aria-label={t.radioPause}>
             <PauseIcon />
           </button>
+          <img
+            className={`now-playing__logo${current.logo ? '' : ' now-playing__logo--fallback'}`}
+            src={current.logo ?? FALLBACK_LOGO}
+            alt=""
+            width={30}
+            height={30}
+          />
           <div className="now-playing__info">
             <div className="now-playing__name">{flag} {current.name}</div>
             {status === 'error' ? (

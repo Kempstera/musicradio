@@ -1,0 +1,35 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Electric Cyan/Blue Gradient for the Circle -->
+    <linearGradient id="blueGradient" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#22d3ee" /> <!-- Cyan-400 -->
+      <stop offset="100%" stop-color="#2563eb" /> <!-- Blue-600 -->
+    </linearGradient>
+    
+    <!-- Primary Gold Gradient for the Play Icon -->
+    <linearGradient id="goldGradient" x1="150" y1="100" x2="400" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#facc15" /> <!-- Yellow-400 -->
+      <stop offset="100%" stop-color="#ea580c" /> <!-- Orange-600 -->
+    </linearGradient>
+    
+    <!-- Shadow for depth -->
+    <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="10" stdDeviation="15" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Main Circle Body -->
+  <circle cx="256" cy="256" r="240" fill="url(#blueGradient)" filter="url(#dropShadow)" />
+  
+  <!-- Glossy Highlight (Top) -->
+  <ellipse cx="256" cy="130" rx="160" ry="80" fill="white" fill-opacity="0.15" />
+
+  <!-- Play Triangle (Rounded) -->
+  <path d="M360.5 237.5C372.5 245.5 372.5 266.5 360.5 274.5L205.5 378.5C192.5 387.2 175.5 377.5 175.5 362L175.5 150C175.5 134.5 192.5 124.8 205.5 133.5L360.5 237.5Z" 
+        fill="url(#goldGradient)" 
+        stroke="#ffffff" 
+        stroke-width="8" 
+        stroke-opacity="0.2"
+        filter="url(#dropShadow)"
+  />
+</svg>
