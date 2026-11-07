@@ -228,7 +228,7 @@ export const europe1: Country[] = [
       { name: '马克西姆·姆尔维察', nameEn: 'Maksim Mrvica', role: '钢琴家', desc: '「跨界钢琴王子」，以《克罗地亚狂想曲》《出埃及记》等作品风靡亚洲。' },
       { name: '2CELLOS', nameEn: 'Luka Šulić & Stjepan Hauser', role: '大提琴二人组', desc: '把大提琴摇滚化的现象级组合，让古典乐器走进全球流行视野。' },
     ],
-    notableRadios: [{ name: 'HRT HR3', genre: '古典 / 爵士', note: '克罗地亚国家广播电视的第三频道，专注古典、爵士与文化节目。' }],
+    notableRadios: [{ name: 'HRT HR3', genre: '古典 / 爵士', note: '克罗地亚国家广播电视的第三频道，专注古典、爵士与文化节目。', url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/PROGRAM3_ADP.aac', hls: false }],
   },
   {
     slug: 'cyprus',
@@ -253,7 +253,7 @@ export const europe1: Country[] = [
       { name: '塞浦路斯交响乐团', nameEn: 'Cyprus Symphony Orchestra', role: '管弦乐团', desc: '岛内最主要的古典音乐机构，常年在尼科西亚与利马索尔演出。' },
       { name: '米哈利斯·哈吉扬尼斯', nameEn: 'Michalis Hatzigiannis', role: '流行歌手', desc: '希腊语世界最受欢迎的流行歌手之一，出身塞浦路斯。' },
     ],
-    notableRadios: [{ name: 'RIK Triton / RIK Classic', genre: '古典 / 综合', note: '塞浦路斯广播公司（RIK）频道，兼顾古典与本土音乐。' }],
+    notableRadios: [{ name: 'RIK Triton / RIK Classic', genre: '古典 / 综合', note: '塞浦路斯广播公司（RIK）频道，兼顾古典与本土音乐。', url: 'http://r1.cloudskep.com/cybcr/cybc3/icecast.audio', hls: false }],
   },
   {
     slug: 'czech-republic',
@@ -531,7 +531,7 @@ export const europe1: Country[] = [
     ],
     notableRadios: [
       { name: 'Rás 1', genre: '文化 / 古典', note: '冰岛国家广播的文化频道，播放古典与冰岛本土音乐。', url: 'http://netradio.ruv.is/ras1.aac', hls: false },
-      { name: 'Rás 2', genre: '流行 / 综合', note: '冰岛国家广播的音乐频道。' },
+      { name: 'Rás 2', genre: '流行 / 综合', note: '冰岛国家广播的音乐频道。', url: 'http://netradio.ruv.is/ras2.aac', hls: false },
     ],
   },
   {

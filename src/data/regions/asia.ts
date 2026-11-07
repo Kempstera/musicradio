@@ -272,7 +272,7 @@ export const asia: Country[] = [
       { name: '泰国皇家宫廷乐团', nameEn: 'Thai Royal Court Ensemble', role: '宫廷乐团', desc: '传承皮帕特合奏传统的宫廷音乐团体。' },
       { name: '蓬普拉帕·普拉帕西里', nameEn: 'Phum Viphurit', role: '独立音乐人', desc: '泰国新生代独立音乐代表，以清新的卧室流行（bedroom pop）走向国际。' },
     ],
-    notableRadios: [{ name: 'Thai PBS Radio / MCOT', genre: '综合 / 卢克通', note: '泰国公共广播，播放卢克通与本土音乐。' }],
+    notableRadios: [{ name: 'Thai PBS Radio / MCOT', genre: '综合 / 卢克通', note: '泰国公共广播，播放卢克通与本土音乐。', url: 'http://rstream.mcot.net:8000/fm1005', hls: false }],
   },
   {
     slug: 'vietnam',
@@ -448,7 +448,7 @@ export const asia: Country[] = [
     musicians: [
       { name: '皇家高棉宫廷乐团', nameEn: 'Royal Khmer Court Ensemble', role: '宫廷乐团', desc: '传承皮恩皮特合奏与阿普萨拉舞乐的柬埔寨皇家音乐团体。' },
     ],
-    notableRadios: [{ name: 'National Radio of Cambodia', genre: '综合 / 传统', note: '柬埔寨国家广播，播放传统音乐。' }],
+    notableRadios: [{ name: 'National Radio of Cambodia', genre: '综合 / 传统', note: '柬埔寨国家广播，播放传统音乐。', url: 'http://119.82.252.6:8080/broadwave.mp3', hls: false }],
   },
   {
     slug: 'laos',
@@ -1033,7 +1033,7 @@ export const asia: Country[] = [
       { name: 'Radio Dahab', genre: '阿拉伯 / 经典', note: '约旦的阿拉伯音乐电台。', url: 'https://dahab.ice.infomaniak.ch/dahab-192.mp3', hls: false },
       { name: 'Mood FM', genre: '流行', note: '安曼的流行音乐电台。', url: 'https://securestreams2.autopo.st:1241/live', hls: false },
       { name: 'Beat FM', genre: '流行 / 舞曲', note: '安曼的流行音乐电台。', url: 'https://securestreams2.autopo.st:1242/live', hls: false },
-      { name: 'Jordan Radio', genre: '综合 / 贝都因', note: '约旦广播电视，播放贝都因与阿拉伯音乐。' },
+      { name: 'Jordan Radio', genre: '综合 / 贝都因', note: '约旦广播电视，播放贝都因与阿拉伯音乐。', url: 'https://jrtv-live.ercdn.net/jrradio/englishradiovideo.m3u8', hls: true },
     ],
   },
   {

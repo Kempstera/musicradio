@@ -23,7 +23,7 @@ export const europe2: Country[] = [
     musicians: [
       { name: '列支敦士登铜管乐队', nameEn: 'Liechtenstein Brass Bands', role: '铜管乐', desc: '阿尔卑斯地区传统的铜管乐队，是列支敦士登节庆与宗教活动的音乐支柱。' },
     ],
-    notableRadios: [{ name: 'Radio Liechtenstein', genre: '综合 / 文化', note: '列支敦士登国家广播电台，播放本土新闻与音乐节目。' }],
+    notableRadios: [{ name: 'Radio Liechtenstein', genre: '综合 / 文化', note: '列支敦士登国家广播电台，播放本土新闻与音乐节目。', url: 'https://radio-liechtenstein.api.radiosphere.io/audio/23cb58a5-aea2-44c7-9bdc-4d535fb2c572/stream.mp3', hls: false }],
   },
   {
     slug: 'luxembourg',
@@ -71,7 +71,7 @@ export const europe2: Country[] = [
     musicians: [
       { name: '约瑟夫·卡列加', nameEn: 'Joseph Calleja', role: '男高音', desc: '马耳他国宝级男高音，以华丽而富有金属光泽的嗓音闻名，是大都会与科文特花园的常客。' },
     ],
-    notableRadios: [{ name: 'PBS Radju Malta', genre: '综合 / 文化', note: '马耳他公共广播，兼顾古典与本土音乐。' }],
+    notableRadios: [{ name: 'PBS Radju Malta', genre: '综合 / 文化', note: '马耳他公共广播，兼顾古典与本土音乐。', url: 'https://s38.myradiostream.com:6982/;', hls: false }],
   },
   {
     slug: 'moldova',
@@ -143,7 +143,7 @@ export const europe2: Country[] = [
     musicians: [
       { name: '科托尔艺术节', nameEn: 'KotorArt Festival', role: '音乐节', desc: '在科托尔古城举办的国际艺术节，涵盖古典音乐、戏剧与视觉艺术。' },
     ],
-    notableRadios: [{ name: 'Radio Crne Gore', genre: '综合 / 民族', note: '黑山国家广播，播放民族音乐与文化节目。' }],
+    notableRadios: [{ name: 'Radio Crne Gore', genre: '综合 / 民族', note: '黑山国家广播，播放民族音乐与文化节目。', url: 'https://rtcgradio-live.morescreens.com/RTCG_2_005/playlist.m3u8', hls: true }],
   },
   {
     slug: 'netherlands',
@@ -661,7 +661,7 @@ export const europe2: Country[] = [
       { name: '吉万·加斯帕良', nameEn: 'Djivan Gasparyan', role: '杜杜克演奏家', desc: '杜杜克笛的传奇大师，把这一古老乐器带给全世界的听众。' },
       { name: '查尔斯·阿兹纳沃尔', nameEn: 'Charles Aznavour', role: '香颂歌手', desc: '亚美尼亚裔法国香颂巨匠，其歌声是法语世界的永恒记忆。' },
     ],
-    notableRadios: [{ name: 'Public Radio of Armenia', genre: '综合 / 杜杜克', note: '亚美尼亚公共广播，播放古典与杜杜克音乐。' }],
+    notableRadios: [{ name: 'Public Radio of Armenia', genre: '综合 / 杜杜克', note: '亚美尼亚公共广播，播放古典与杜杜克音乐。', url: 'https://eu1.stream4cast.com/proxy/publicra/stream', hls: false }],
   },
   {
     slug: 'azerbaijan',

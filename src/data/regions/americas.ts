@@ -295,7 +295,7 @@ export const americas: Country[] = [
       { name: '阿尔弗雷多·西塔罗萨', nameEn: 'Alfredo Zitarrosa', role: '歌手', desc: '乌拉圭最受爱戴的民谣歌手，其深情低沉的歌声深入人心。' },
       { name: '海梅·罗斯', nameEn: 'Jaime Roos', role: '唱作人', desc: '把坎东贝、探戈与摇滚融合的乌拉圭音乐大师。' },
     ],
-    notableRadios: [{ name: 'Radio Clásica SODRE', genre: '古典', note: '乌拉圭的公共古典电台。' }],
+    notableRadios: [{ name: 'Radio Clásica SODRE', genre: '古典', note: '乌拉圭的公共古典电台。', url: 'https://radios.iwstreaming.uy/8032/stream', hls: false }],
   },
   {
     slug: 'ecuador',
@@ -368,7 +368,7 @@ export const americas: Country[] = [
       { name: '阿古斯丁·巴里奥斯', nameEn: 'Agustín Barrios (Mangoré)', role: '吉他作曲家', desc: '拉丁美洲最伟大的古典吉他作曲家，《大教堂》《最后的颤音》感人至深。' },
       { name: '何塞·阿松森·弗洛雷斯', nameEn: 'José Asunción Flores', role: '作曲家', desc: '瓜拉尼亚体裁的创立者，其音乐成为巴拉圭的灵魂。' },
     ],
-    notableRadios: [{ name: 'Radio Nacional del Paraguay', genre: '综合 / 竖琴', note: '巴拉圭国家广播，播放竖琴与瓜拉尼亚音乐。' }],
+    notableRadios: [{ name: 'Radio Nacional del Paraguay', genre: '综合 / 竖琴', note: '巴拉圭国家广播，播放竖琴与瓜拉尼亚音乐。', url: 'http://audio.radionacional.gov.py:8085/920', hls: false }],
   },
   {
     slug: 'belize',
@@ -415,7 +415,7 @@ export const americas: Country[] = [
     musicians: [
       { name: '国家交响乐团', nameEn: 'Orquesta Sinfónica Nacional', role: '管弦乐团', desc: '哥斯达黎加的国家交响乐团，是中美地区古典音乐的重镇。' },
     ],
-    notableRadios: [{ name: 'Radio Universidad de Costa Rica', genre: '古典 / 文化', note: '哥斯达黎加大学的文化电台。' }],
+    notableRadios: [{ name: 'Radio Universidad de Costa Rica', genre: '古典 / 文化', note: '哥斯达黎加大学的文化电台。', url: 'https://r90.letio.com/io/?gs=8120&gsm=8120&type=live.m3u8', hls: true }],
   },
   {
     slug: 'el-salvador',
@@ -582,7 +582,7 @@ export const americas: Country[] = [
     musicians: [
       { name: '胡安·路易斯·格拉', nameEn: 'Juan Luis Guerra', role: '歌手 / 作曲家', desc: '多米尼加最著名的音乐家，把梅伦格与巴恰塔推向世界。' },
     ],
-    notableRadios: [{ name: 'Radio Clásica / Quisqueya FM', genre: '综合 / 梅伦格', note: '多米尼加的古典与流行电台。' }],
+    notableRadios: [{ name: 'Radio Clásica / Quisqueya FM', genre: '综合 / 梅伦格', note: '多米尼加的古典与流行电台。', url: 'https://protvradiostream.com:8620/stream', hls: false }],
   },
   {
     slug: 'haiti',

@@ -24,7 +24,7 @@ export const africa: Country[] = [
       { name: '切布·哈立德', nameEn: 'Cheb Khaled', role: '拉伊歌手', desc: '「拉伊之王」，以《Aïcha》《Didi》把阿尔及利亚流行乐带向全球。' },
       { name: '拉希德·塔哈', nameEn: 'Rachid Taha', role: '音乐人', desc: '把拉伊与摇滚、电子融合的先锋。' },
     ],
-    notableRadios: [{ name: 'Radio Algérie Chaine 3', genre: '阿拉伯 / 拉伊', note: '阿尔及利亚国家广播，播放拉伊与传统音乐。' }],
+    notableRadios: [{ name: 'Radio Algérie Chaine 3', genre: '阿拉伯 / 拉伊', note: '阿尔及利亚国家广播，播放拉伊与传统音乐。', url: 'https://webradio1.tda.dz:8001/Chaine3_64K.mp3', hls: false }],
   },
   {
     slug: 'tunisia', name: '突尼斯', nameEn: 'Tunisia', nameLocal: 'تونس',
@@ -35,7 +35,7 @@ export const africa: Country[] = [
     musicians: [
       { name: '阿努阿尔·布拉赫姆', nameEn: 'Anouar Brahem', role: '乌德琴大师', desc: '世界级乌德琴演奏家，以融合爵士与阿拉伯古典的 ECM 录音闻名。' },
     ],
-    notableRadios: [{ name: 'Radio Tunis Chaîne Internationale', genre: '阿拉伯 / 古典', note: '突尼斯国家广播的国际频道。' }],
+    notableRadios: [{ name: 'Radio Tunis Chaîne Internationale', genre: '阿拉伯 / 古典', note: '突尼斯国家广播的国际频道。', url: 'https://radio.radiotunisienne.tn/rtci', hls: false }],
   },
   {
     slug: 'libya', name: '利比亚', nameEn: 'Libya', nameLocal: 'ليبيا',
@@ -57,7 +57,7 @@ export const africa: Country[] = [
       { name: '阿卜杜勒·哈利姆·哈菲兹', nameEn: 'Abdel Halim Hafez', role: '歌手', desc: '埃及传奇歌手与演员，其深情歌声至今传唱。' },
       { name: '穆罕默德·阿卜杜勒·瓦哈卜', nameEn: 'Mohammed Abdel Wahab', role: '作曲家 / 歌手', desc: '把西方乐器引入阿拉伯古典音乐的开创者。' },
     ],
-    notableRadios: [{ name: 'Nile FM / Radio Masr', genre: '阿拉伯 / 流行', note: '开罗的主流音乐电台。' }],
+    notableRadios: [{ name: 'Nile FM / Radio Masr', genre: '阿拉伯 / 流行', note: '开罗的主流音乐电台。', url: 'https://audio.nrpstream.com/listen/nile_fm/radio.mp3', hls: false }],
   },
   {
     slug: 'sudan', name: '苏丹', nameEn: 'Sudan', nameLocal: 'السودان',
@@ -104,7 +104,7 @@ export const africa: Country[] = [
       { name: '尤索·恩杜尔', nameEn: "Youssou N'Dour", role: '歌手', desc: '姆巴拉克音乐的旗手，塞内加尔最具国际影响力的声音。' },
       { name: '巴巴·马尔', nameEn: 'Baaba Maal', role: '歌手 / 吉他手', desc: '沃洛夫传统与现代融合的代表。' },
     ],
-    notableRadios: [{ name: 'RFM / Zik FM Dakar', genre: 'Mbalax / 流行', note: '达喀尔的主流音乐电台。' }],
+    notableRadios: [{ name: 'RFM / Zik FM Dakar', genre: 'Mbalax / 流行', note: '达喀尔的主流音乐电台。', url: 'https://stream.zeno.fm/z97k8ry9sxquv', hls: false }],
   },
   {
     slug: 'mali', name: '马里', nameEn: 'Mali',
@@ -177,7 +177,7 @@ export const africa: Country[] = [
     history: ['多哥是西非狭长的海岸国家，洛美是其政治经济中心，埃维（Ewe）族群的鼓乐与口传传统尤为丰富。'],
     music: ['多哥的埃维鼓乐（agbadza 等）节奏复杂、气势磅礴，是西非打击乐的重要一脉；贝拉·贝洛（Bella Bellow）是多哥最受爱戴的歌手，其深情嗓音至今传唱。'],
     musicians: [{ name: '贝拉·贝洛', nameEn: 'Bella Bellow', role: '歌手', desc: '多哥最具代表性的女歌手。' }],
-    notableRadios: [{ name: 'Radio Lomé', genre: '非洲 / 传统', note: '多哥国家广播。' }],
+    notableRadios: [{ name: 'Radio Lomé', genre: '非洲 / 传统', note: '多哥国家广播。', url: 'https://stream.zeno.fm/2rhc424mb', hls: false }],
   },
   {
     slug: 'sierra-leone', name: '塞拉利昂', nameEn: 'Sierra Leone',
@@ -243,7 +243,7 @@ export const africa: Country[] = [
     notableRadios: [
       { name: 'Salam FM', genre: '阿拉伯 / 音乐', note: '毛里塔尼亚的音乐电台。', url: 'https://stream.zeno.fm/ydsz0gx0gm0uv', hls: false },
       { name: 'RADIOMA', genre: '阿拉伯 / 流行', note: '毛里塔尼亚的流行音乐电台。', url: 'https://stream.zeno.fm/du2izs2nmquvv', hls: false },
-      { name: 'Radio Mauritanie', genre: '阿拉伯 / 沙漠音乐', note: '毛里塔尼亚国家广播。' },
+      { name: 'Radio Mauritanie', genre: '阿拉伯 / 沙漠音乐', note: '毛里塔尼亚国家广播。', url: 'https://ec6.yesstreaming.net:2760/stream', hls: false },
     ],
   },
 
@@ -354,7 +354,7 @@ export const africa: Country[] = [
     history: ['塞舌尔是印度洋上的 115 座岛屿组成的国家，克里奥尔文化融合了非洲、欧洲与亚洲的血脉，维多利亚是非洲最小的首都。'],
     music: ['塞舌尔的音乐以「赛加」（Sega）与「穆蒂亚」（Moutia）为特色——前者是轻松的克里奥尔舞曲，后者源自非洲的仪式舞蹈，节奏热烈；让-马克·沃尔西等音乐人让群岛之声远扬。'],
     musicians: [{ name: '让-马克·沃尔西', nameEn: 'Jean-Marc Volcy', role: '音乐人', desc: '塞舌尔最具代表性的音乐人之一。' }],
-    notableRadios: [{ name: 'SBC Radio', genre: '赛加 / 克里奥尔', note: '塞舌尔国家广播。' }],
+    notableRadios: [{ name: 'SBC Radio', genre: '赛加 / 克里奥尔', note: '塞舌尔国家广播。', url: 'https://streaming.fabrik.fm/radyo-sesel/echocast/audio/index.m3u8', hls: true }],
   },
   {
     slug: 'comoros', name: '科摩罗', nameEn: 'Comoros', nameLocal: 'Komori',
@@ -399,7 +399,7 @@ export const africa: Country[] = [
       { name: '马努·迪班戈', nameEn: 'Manu Dibango', role: '萨克斯手', desc: '喀麦隆传奇，《Soul Makossa》影响了全球流行乐。' },
       { name: '理查德·博纳', nameEn: 'Richard Bona', role: '贝斯手 / 歌手', desc: '世界级贝斯大师，爵士与非洲音乐的桥梁。' },
     ],
-    notableRadios: [{ name: 'CRTV Radio', genre: '马科萨 / 流行', note: '喀麦隆国家广播。' }],
+    notableRadios: [{ name: 'CRTV Radio', genre: '马科萨 / 流行', note: '喀麦隆国家广播。', url: 'https://10gb1.acangroup.org:8000/postenational', hls: false }],
   },
   {
     slug: 'dr-congo', name: '刚果（金）', nameEn: 'DR Congo', nameLocal: 'RDC',
@@ -459,7 +459,7 @@ export const africa: Country[] = [
     history: ['赤道几内亚是非洲唯一以西班牙语为官方语言的国家，由大陆部分与比奥科等岛屿组成，石油资源使其成为非洲人均收入较高的国家之一。'],
     music: ['赤道几内亚的音乐融合了西班牙殖民遗产与芳（Fang）、布比等族群的传统，鼓乐与吉他弹唱是节庆的主角。'],
     musicians: [{ name: '赤道几内亚民间乐团', nameEn: 'Equatoguinean Ensemble', role: '传统乐团', desc: '传承芳族鼓乐与西班牙-非洲融合音乐的团体。' }],
-    notableRadios: [{ name: 'Radio Nacional', genre: '非洲 / 传统', note: '赤道几内亚国家广播。' }],
+    notableRadios: [{ name: 'Radio Nacional', genre: '非洲 / 传统', note: '赤道几内亚国家广播。', url: 'https://rpn.bozztv.com/ses/tvge/tvgeradio/playlist.m3u8', hls: true }],
   },
   {
     slug: 'sao-tome', name: '圣多美和普林西比', nameEn: 'São Tomé and Príncipe', nameLocal: 'São Tomé e Príncipe',
@@ -481,7 +481,7 @@ export const africa: Country[] = [
     history: ['安哥拉是葡语非洲最大的国家，石油资源丰富，历经长期内战后迅速重建，罗安达是非洲最繁华的都市之一。'],
     music: ['安哥拉贡献了非洲最具影响力的舞曲：「森巴」（Semba）、浪漫的「基宗巴」（Kizomba）与电子化的「库杜鲁」（Kuduro）都风靡葡语世界乃至全球；邦加（Bonga）则是安哥拉音乐的传奇。'],
     musicians: [{ name: '邦加', nameEn: 'Bonga', role: '歌手', desc: '安哥拉森巴与民间音乐的传奇之声。' }],
-    notableRadios: [{ name: 'RNA / Luanda Antena', genre: '森巴 / 基宗巴', note: '罗安达的主流电台。' }],
+    notableRadios: [{ name: 'RNA / Luanda Antena', genre: '森巴 / 基宗巴', note: '罗安达的主流电台。', url: 'https://live.paineldj.com.br/proxy/rnangola?mp=/stream', hls: false }],
   },
 
   // ===== 南部非洲 =====
@@ -529,7 +529,7 @@ export const africa: Country[] = [
     musicians: [{ name: '塞索托合唱团', nameEn: 'Sesotho Choir', role: '合唱团', desc: '传承塞索托和声传统的团体。' }],
     notableRadios: [
       { name: 'MoAfrika FM', genre: '塞索托 / 音乐', note: '马塞卢的音乐电台，播放塞索托语与本地流行。', url: 'https://stream.zeno.fm/2ab34hwatckvv', hls: false },
-      { name: 'Radio Lesotho', genre: '非洲 / 传统', note: '莱索托国家广播。' },
+      { name: 'Radio Lesotho', genre: '非洲 / 传统', note: '莱索托国家广播。', url: 'https://stream.zeno.fm/iipjmkbq4eeuv', hls: false },
     ],
   },
   {
@@ -563,7 +563,7 @@ export const africa: Country[] = [
     history: ['赞比亚以维多利亚瀑布（莫西奥图尼亚）与赞比西河闻名，曾是北罗得西亚，本巴、恩戈尼等众多族群在此生息。'],
     music: ['赞比亚的音乐以本巴、恩戈尼等族群的鼓乐、吟唱与舞蹈为核心，当代「扎姆洛克」（Zamrock）摇滚乐也曾一度风靡，是非洲音乐的独特篇章。'],
     musicians: [{ name: '赞比亚民间乐团', nameEn: 'Zambian Ensemble', role: '传统乐团', desc: '传承本巴与恩戈尼音乐传统的团体。' }],
-    notableRadios: [{ name: 'ZNBC Radio', genre: '非洲 / 传统', note: '赞比亚国家广播。' }],
+    notableRadios: [{ name: 'ZNBC Radio', genre: '非洲 / 传统', note: '赞比亚国家广播。', url: 'https://eu6.fastcast4u.com/proxy/radio1?mp=/1', hls: false }],
   },
   {
     slug: 'malawi', name: '马拉维', nameEn: 'Malawi',
@@ -572,7 +572,7 @@ export const africa: Country[] = [
     history: ['马拉维以狭长的马拉维湖闻名，被称为「非洲温暖之心」，奇切瓦（Chewa）族群的文化（如古勒·瓦姆库鲁面具舞）被列入人类非物质文化遗产。'],
     music: ['马拉维的音乐以奇切瓦族群的鼓乐、吟唱与面具舞为特色，湖区的渔歌与村落合唱温暖动人，当代流行乐也汲取了南非与东非的影响。'],
     musicians: [{ name: '奇切瓦面具舞乐团', nameEn: 'Gule Wamkulu Ensemble', role: '传统乐团', desc: '传承马拉维古勒·瓦姆库鲁面具舞音乐的团体。' }],
-    notableRadios: [{ name: 'MBC Radio', genre: '非洲 / 传统', note: '马拉维国家广播。' }],
+    notableRadios: [{ name: 'MBC Radio', genre: '非洲 / 传统', note: '马拉维国家广播。', url: 'http://radiostream.mbc.mw:86/broadwavehigh.mp3?src=1', hls: false }],
   },
   {
     slug: 'mozambique', name: '莫桑比克', nameEn: 'Mozambique', nameLocal: 'Moçambique',
@@ -581,6 +581,6 @@ export const africa: Country[] = [
     history: ['莫桑比克是印度洋畔的葡语国家，马普托曾是殖民时代的重要港口，其音乐融合了非洲、葡萄牙与印度洋的多元血脉。'],
     music: ['莫桑比克的招牌是「马拉本塔」（Marrabenta）——一种欢快的都市舞曲，是其民族认同的声音符号；此外，传统的鼓乐与合唱在乡村节庆中依然鲜活。'],
     musicians: [{ name: '莫桑比克马拉本塔乐团', nameEn: 'Marrabenta Ensemble', role: '乐团', desc: '传承莫桑比克马拉本塔舞曲的音乐团体。' }],
-    notableRadios: [{ name: 'RM Radio', genre: '马拉本塔 / 流行', note: '马普托的主流电台。' }],
+    notableRadios: [{ name: 'RM Radio', genre: '马拉本塔 / 流行', note: '马普托的主流电台。', url: 'https://node.stream-africa.com:8443/RadioCidadeMaputo', hls: false }],
   },
 ];
