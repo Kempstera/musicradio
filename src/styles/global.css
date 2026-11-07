@@ -1899,21 +1899,24 @@ html[lang='en'] .country-hero__en {
   object-fit: contain;
   background: #fff;
 }
-/* 没有台标时：用本站标识兜底。
-   favicon.svg 自己就是一个品牌色圆角块，所以这里把白底和描边让开，避免双重边框；
-   透明度压到 0.6 —— 它是「默认占位」，不该和真有台标的台抢注意力。 */
+/* 没有台标时：用台名生成字母瓦片（组件里按名字取字、按名字哈希取色）。
+   瓦片自己带底色，所以这里把白底让开，避免底色被白框再包一圈。 */
 .radio-card__art--fallback {
   border-color: transparent;
   background: transparent;
 }
-.radio-card__logo--fallback {
-  padding: 0;
-  background: transparent;
-  opacity: 0.6;
-  transition: opacity var(--dur-2) var(--ease-out);
-}
-.radio-card:hover .radio-card__logo--fallback {
-  opacity: 0.85;
+.radio-card__tile {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  font-family: var(--f-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  user-select: none;
 }
 /* 悬停/播放中的遮罩：把「可点」这件事说清楚，又不挡平时看 logo */
 .radio-card__veil {
@@ -2091,12 +2094,19 @@ html[lang='en'] .country-hero__en {
   border: 1px solid var(--rule-2);
   object-fit: contain;
 }
-/* 播放条同理：没台标就用本站标识，别留一格空白 */
-.now-playing__logo--fallback {
-  padding: 0;
-  border-color: transparent;
-  background: transparent;
-  opacity: 0.7;
+/* 播放条同理：没台标就用同一套字母瓦片，别留一格空白 */
+.now-playing__tile {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  font-family: var(--f-display);
+  font-size: 0.62rem;
+  font-weight: 600;
+  line-height: 1;
+  user-select: none;
 }
 .now-playing__info {
   min-width: 0;

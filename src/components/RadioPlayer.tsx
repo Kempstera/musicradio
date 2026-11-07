@@ -90,11 +90,29 @@ function Eq() {
 }
 
 /**
- * 没有台标时的兜底：用本站自己的标识（public/favicon.svg）。
- * 之前用的是「首字母块」，但一屏里十几种字母块反而更花；统一成同一枚品牌贴片，
- * 一眼就能看出「这台没有台标」，也不会跟真有台标的台抢注意力。
+ * 没有台标时的兜底：按台名生成一块「字母瓦片」。
+ *
+ * 走过两条弯路：先是各自取首字母（一屏十几种颜色太花），
+ * 后来统一成同一枚站标 —— 但中国页有四十多个地方音乐台本来就没有独立台标，
+ * 全挂同一张图看着就像「几十个台是同一家」。折中：字用台名里的两个字/两首字母，
+ * 底色只给一点点色相偏移（低饱和），彼此能区分，又不会跟真有台标的台抢注意力。
  */
-const FALLBACK_LOGO = '/favicon.svg';
+function tileOf(name: string): { text: string; bg: string; fg: string } {
+  const cjk = name.match(/[\u4e00-\u9fff]/g) || [];
+  const words = name.replace(/[^\p{L}\p{N} ]+/gu, ' ').split(/\s+/).filter(Boolean);
+  let text: string;
+  if (cjk.length >= 2) text = cjk.slice(0, 2).join('');
+  // 以数字开头的台（1950 TICK TOCK RADIO、24/7 Lounge）取数字本身当记忆点
+  else if (/^\d/.test(name)) text = name.slice(0, 2);
+  else if (words.length >= 2) text = (words[0][0] + words[1][0]).toUpperCase();
+  else text = (words[0] || '·').slice(0, 2).toUpperCase();
+
+  // 稳定哈希：同一个台名在任何页面都是同一个色
+  let h = 0;
+  for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) >>> 0;
+  const hue = h % 360;
+  return { text, bg: `hsl(${hue}, 26%, 93%)`, fg: `hsl(${hue}, 32%, 38%)` };
+}
 
 /** 首屏先渲染多少台、每次再放多少台 */
 const INITIAL_VISIBLE = 24;
@@ -195,14 +213,14 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
                   {s.logo ? (
                     <img className="radio-card__logo" src={s.logo} alt="" width={40} height={40} loading="lazy" decoding="async" />
                   ) : (
-                    <img
-                      className="radio-card__logo radio-card__logo--fallback"
-                      src={FALLBACK_LOGO}
-                      alt=""
-                      width={40}
-                      height={40}
-                      decoding="async"
-                    />
+                    (() => {
+                      const tile = tileOf(s.name);
+                      return (
+                        <span className="radio-card__tile" style={{ background: tile.bg, color: tile.fg }} aria-hidden>
+                          {tile.text}
+                        </span>
+                      );
+                    })()
                   )}
                   <span className="radio-card__veil" aria-hidden>
                     {isPlayingNow ? <PauseIcon /> : <PlayIcon />}
@@ -295,13 +313,18 @@ export default function RadioPlayer({ stations, countryName, flag, emptyNote, sl
           <button className="now-playing__btn" onClick={() => stop()} aria-label={t.radioPause}>
             <PauseIcon />
           </button>
-          <img
-            className={`now-playing__logo${current.logo ? '' : ' now-playing__logo--fallback'}`}
-            src={current.logo ?? FALLBACK_LOGO}
-            alt=""
-            width={30}
-            height={30}
-          />
+          {current.logo ? (
+            <img className="now-playing__logo" src={current.logo} alt="" width={30} height={30} />
+          ) : (
+            (() => {
+              const tile = tileOf(current.name);
+              return (
+                <span className="now-playing__tile" style={{ background: tile.bg, color: tile.fg }} aria-hidden>
+                  {tile.text}
+                </span>
+              );
+            })()
+          )}
           <div className="now-playing__info">
             <div className="now-playing__name">{flag} {current.name}</div>
             {status === 'error' ? (

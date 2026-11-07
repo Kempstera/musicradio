@@ -24,8 +24,8 @@ export const COUNTRY_WEIGHT: Record<string, number> = {
   RU: 100, UA: 92, RO: 84, BG: 76, BY: 68, MD: 60,
 
   // —— 亚洲 ——
-  // 东亚
-  JP: 100, CN: 98, KR: 92, MN: 50, KP: 40,
+  // 东亚：中国第一
+  CN: 100, JP: 98, KR: 92, MN: 50, KP: 40,
   // 南亚
   IN: 100, PK: 92, BD: 88, LK: 78, NP: 72, AF: 56, BT: 48, MV: 40,
   // 东南亚
