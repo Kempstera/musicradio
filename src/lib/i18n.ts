@@ -1043,28 +1043,99 @@ export const SUBREGION_LABELS: Record<Lang, Record<SubregionId, string>> = {
 const STORAGE_KEY = 'mr_lang';
 
 /**
- * 站点默认语言：**简体中文**。
+ * 预渲染语言：**简体中文**。
  *
- * 无论访客来自哪里、浏览器/系统是什么语言，首次进入看到的界面都是简体中文；
- * 只有当访客**主动**在语言切换器里选过语言之后，才会按 localStorage 记住的选择显示。
- * （静态 HTML 也已用同一语言预渲染，见下方的 `t0`，因此首屏不会出现语言闪烁。）
+ * 这是「静态 HTML 里写死的那份文案」的语言，不等于访客最终看到的语言。
+ * 首次来访（localStorage 里没有 mr_lang）时会按浏览器/系统语言协商一次，
+ * 见 `detectLang()`；协商结果不是 zh-CN 时，Base.astro 会先把页面遮住再换文案，
+ * 所以不会出现「先看一眼中文再跳成英文」。
  *
- * 换这个值时，下面三处硬编码的 'en' 必须一起改，否则「预渲染语言」与「运行时判定」
+ * 换这个值时，下面三处硬编码的 'zh-CN' 必须一起改，否则「预渲染语言」与「运行时判定」
  * 会对不上，首屏会闪一次：
  *   · `layouts/Base.astro` 的 `<html lang>` 与内联脚本里的 DEFAULT
- *   · `layouts/Base.astro` 里 `s === 'en'` 那个「不必遮屏」的短路
+ *   · `layouts/Base.astro` 里 `L === 'zh-CN'` 那个「不必遮屏」的短路
  *   · 各页面取 `compact[...]` / `CONTINENT_LABELS[...]` 的键
  */
 export const DEFAULT_LANG: Lang = 'zh-CN';
 
+/**
+ * 协商不出来时的兜底语言：**英语**。
+ *
+ * 注意这和 `DEFAULT_LANG` 不是一回事 —— 前者是「预渲染用什么语言」，
+ * 后者是「一个说日语/俄语/葡萄牙语的访客该看什么」。给他中文他多半读不懂，
+ * 给英语至少还有机会。中文环境会命中 zh，走不到这里。
+ */
+export const FALLBACK_LANG: Lang = 'en';
+
 /** 静态 HTML 预渲染所用文案（即默认语言）；.astro 模板里的初始文案统一取自它 */
 export const t0: Translation = TRANSLATIONS[DEFAULT_LANG];
 
+const SUPPORTED_BASE: Record<string, Lang> = {
+  en: 'en',
+  cy: 'cy',
+  fr: 'fr',
+  de: 'de',
+  it: 'it',
+  es: 'es',
+};
+
+/**
+ * 把一个 BCP 47 语言标签折成本站 8 种语言之一；对不上返回 null。
+ *
+ * 中文要分简繁：单看 `zh` 判不出来，靠脚本子标签（Hans/Hant）或地区（TW/HK/MO）。
+ * 只看地区不看脚本会出错 —— `zh-Hans-HK` 是简体，`zh-Hant-CN` 是繁体。
+ */
+export function matchLang(tag: string): Lang | null {
+  if (!tag) return null;
+  const t = tag.toLowerCase().replace(/_/g, '-');
+  const parts = t.split('-');
+  if (parts[0] === 'zh') {
+    if (parts.includes('hant')) return 'zh-TW';
+    if (parts.includes('hans')) return 'zh-CN';
+    return parts.includes('tw') || parts.includes('hk') || parts.includes('mo') ? 'zh-TW' : 'zh-CN';
+  }
+  return SUPPORTED_BASE[parts[0]] ?? null;
+}
+
+/**
+ * 按「系统/浏览器语言偏好」协商出本站语言。
+ *
+ * 取 `navigator.languages` 里**第一个能对上**的，这是标准的语言协商顺序：
+ * 用户把英语排在中文前面，就该给他英语，而不是因为列表里有中文就选中文。
+ * 全对不上才退到 `FALLBACK_LANG`。
+ */
+export function detectLang(): Lang {
+  if (typeof navigator === 'undefined') return DEFAULT_LANG;
+  const list: string[] = [];
+  if (Array.isArray(navigator.languages)) list.push(...navigator.languages);
+  if (navigator.language) list.push(navigator.language);
+  if (!list.length) return DEFAULT_LANG; // 拿不到任何信息：按站点本来面貌显示
+  for (const tag of list) {
+    const hit = matchLang(tag);
+    if (hit) return hit;
+  }
+  return FALLBACK_LANG;
+}
+
+/**
+ * 当前该用的语言：**显式选择 > 首帧脚本的协商结果 > 现场协商 > 预渲染语言**。
+ *
+ * 优先级里第二项 `window.__mrLang` 是 Base.astro 的 `<head>` 内联脚本写下的 ——
+ * 它必须在首帧前算完（否则会闪），所以那段逻辑是内联复制的。这里优先读它，
+ * 保证「遮屏判定用的语言」和「真正应用的语言」一定是同一个。
+ */
 export function getInitialLang(): Lang {
   if (typeof window === 'undefined') return DEFAULT_LANG;
-  const saved = window.localStorage.getItem(STORAGE_KEY);
-  if (saved && saved in TRANSLATIONS) return saved as Lang;
-  return DEFAULT_LANG;
+  try {
+    const saved = window.localStorage.getItem(STORAGE_KEY);
+    // 只认「用户在切换器里主动选过」的语言；探测结果从不落盘
+    if (saved && saved in TRANSLATIONS) return saved as Lang;
+  } catch {
+    /* 隐私模式：当没存过 */
+  }
+  const pre = (window as unknown as { __mrLang?: string }).__mrLang;
+  if (pre && pre in TRANSLATIONS) return pre as Lang;
+  return detectLang();
 }
 
 export function saveLang(lang: Lang) {
@@ -1085,6 +1156,8 @@ export const LANG_USER_CHANGE_EVENT = 'mr:lang-user-changed';
 declare global {
   interface Window {
     __mrUserLangChange?: { lang: Lang; at: number };
+    /** Base.astro 的 <head> 内联脚本在首帧前算好的语言（显式选择或系统协商结果） */
+    __mrLang?: string;
   }
 }
 
@@ -1103,7 +1176,7 @@ export function readRecentUserLangChange(maxAgeMs = 15000): Lang | null {
   return r.lang;
 }
 
-/** 读取当前生效语言：优先 DOM 上的 lang 属性，其次 localStorage，最后默认语言（英语） */
+/** 读取当前生效语言：优先 DOM 上的 lang 属性，其次「已选 / 协商」的结果 */
 export function getCurrentLang(): Lang {
   if (typeof document !== 'undefined') {
     const dom = document.documentElement.getAttribute('lang') as Lang | null;

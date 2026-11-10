@@ -30,22 +30,57 @@ const desc = description || t0.heroDesc;
       //    脚本一旦失效，内容会以正常状态呈现，而不是永远透明。
       document.documentElement.classList.add('js');
 
-      // ② 语言初始化 + 「水合竞速」防护：
-      //    尽早按 localStorage 设置 <html lang>，避免 SSR 默认语言 → 用户已选语言的错位与闪烁；
-      //    没有存过语言（首次来访）就保持默认的 zh-CN。
-      //    注意：DEFAULT 必须与 i18n 的 DEFAULT_LANG 一致。
+      // ② 语言初始化：「访客选过的语言」优先，否则按系统/浏览器语言协商一次。
+      //    必须在首帧前算完 —— 静态 HTML 是按简体中文预渲染的，协商结果不是中文时
+      //    由下一段脚本先把页面遮住，等文案换好再淡入，否则会闪一下中文。
+      //    ⚠️ 这里的协商逻辑是 lib/i18n.ts 里 detectLang() 的内联副本（内联脚本不能 import）。
+      //       改那边务必同步改这里，否则「遮屏判定」与「实际应用」会打架。
       // ③ React 岛（LanguageSwitcher）水合完成之前，用户若已在切换器里选了语言，
       //    原生 change 监听器会先把选择落盘并暂存 —— 否则这次选择会被水合时的
       //    初始 state 静默覆盖（表现为：切换器显示新语言，但页面文案没跟着变）。
       (function () {
         var LANGS = ['en', 'cy', 'zh-CN', 'zh-TW', 'fr', 'de', 'it', 'es'];
         var DEFAULT = 'zh-CN';
+        var BASE = { en: 'en', cy: 'cy', fr: 'fr', de: 'de', it: 'it', es: 'es' };
+
+        function match(tag) {
+          if (!tag) return null;
+          var t = String(tag).toLowerCase().replace(/_/g, '-');
+          var p = t.split('-');
+          if (p[0] === 'zh') {
+            if (p.indexOf('hant') >= 0) return 'zh-TW';
+            if (p.indexOf('hans') >= 0) return 'zh-CN';
+            return p.indexOf('tw') >= 0 || p.indexOf('hk') >= 0 || p.indexOf('mo') >= 0
+              ? 'zh-TW'
+              : 'zh-CN';
+          }
+          return BASE[p[0]] || null;
+        }
+
+        // 取偏好列表里第一个能对上的；一个都对不上给英语（看不懂中文的访客更可能读英文）
+        function detect() {
+          var list = [];
+          try {
+            if (navigator.languages && navigator.languages.length) list = [].slice.call(navigator.languages);
+            if (navigator.language) list.push(navigator.language);
+          } catch (e) {}
+          if (!list.length) return DEFAULT;
+          for (var i = 0; i < list.length; i++) {
+            var hit = match(list[i]);
+            if (hit) return hit;
+          }
+          return 'en';
+        }
+
         var saved = null;
         try {
           saved = window.localStorage.getItem('mr_lang');
         } catch (e) {}
         var ok = saved && LANGS.indexOf(saved) >= 0;
-        document.documentElement.setAttribute('lang', ok ? saved : DEFAULT);
+        var lang = ok ? saved : detect();
+        // 留给 apply-lang / getInitialLang 复用，保证「遮屏判定」与「实际应用」是同一个值
+        window.__mrLang = lang;
+        document.documentElement.setAttribute('lang', lang);
         // 从没选过语言的访客：给语言切换器挂一个「可切换」的呼吸标识
         if (!ok) document.documentElement.classList.add('mr-lang-fresh');
 
@@ -72,9 +107,10 @@ const desc = description || t0.heroDesc;
       })();
     </script>
     <style is:inline>
-      /* 老访客带着「非默认语言」的选择进来时，HTML 里预渲染的仍是默认语言。
-         先把内容压住（body 占位不变、不会跳动），等语言落地再由脚本撤掉，
-         否则打开任何一页都会先闪一大片另一种语言。脚本失效时下面有 2.5s 兜底。 */
+      /* 页面语言和预渲染语言不一致时（老访客选了别的语言、或首访的访客系统语言不是中文），
+         HTML 里预渲染的仍是默认语言。先把内容压住（body 占位不变、不会跳动），
+         等语言落地再由脚本撤掉，否则打开任何一页都会先闪一大片另一种语言。
+         脚本失效时下面有 2.5s 兜底。 */
       html.mr-i18n-pending body {
         opacity: 0;
       }
@@ -85,9 +121,10 @@ const desc = description || t0.heroDesc;
     <script is:inline>
       (function () {
         try {
-          var s = window.localStorage.getItem('mr_lang');
-          // 没存过语言、或者存的就是默认语言 —— 预渲染的内容本来就是对的，不必遮屏
-          if (!s || s === 'zh-CN') return;
+          // __mrLang 由上一段脚本给出：「访客选过的」或「按系统语言协商的」
+          var L = window.__mrLang;
+          // 和预渲染语言一致 —— 内容本来就是对的，不必遮屏
+          if (!L || L === 'zh-CN') return;
           document.documentElement.classList.add('mr-i18n-pending');
           window.__mrI18nTimer = setTimeout(function () {
             document.documentElement.classList.remove('mr-i18n-pending');
@@ -122,11 +159,12 @@ const desc = description || t0.heroDesc;
       applySavedLang();
     </script>
     <script is:inline>
-      // 在 HTML 解析阶段就把切换器选中项对齐到已保存语言，
-      // 避免「HTML 已渲染 → React 水合完成」这段时间里下拉框显示错误的语言
+      // 在 HTML 解析阶段就把切换器选中项对齐到「这一页实际要显示的语言」，
+      // 避免「HTML 已渲染 → React 水合完成」这段时间里下拉框显示错误的语言。
+      // 用 __mrLang 而不是 localStorage：首访访客还没落盘，但语言已经按系统协商定了。
       (function () {
         try {
-          var s = window.localStorage.getItem('mr_lang');
+          var s = window.__mrLang;
           if (!s) return;
           var sel = document.querySelector('.lang-switcher select');
           if (sel && sel.querySelector('option[value="' + s + '"]')) sel.value = s;
