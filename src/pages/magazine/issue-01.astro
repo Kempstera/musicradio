@@ -6,10 +6,11 @@
 import Magazine from '../../layouts/Magazine.astro';
 
 // 两张都是 Wikimedia Commons 的实拍：主图是 Susana Baca 本人，插图是有人在台上打木箱鼓。
-// 授权 CC BY-SA，署名写在 figcaption 里。
-const hero = 'https://upload.wikimedia.org/wikipedia/commons/9/96/Susana_baca.jpg';
-const inline =
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Cajon_player_on_stage.jpg/1280px-Cajon_player_on_stage.jpg';
+// 授权 CC BY-SA，署名 + 许可证链接写在 figcaption 里。
+// 图自托管在 public/magazine/（1100×1650 / 1280×853，已压到 250KB 以内）：
+// Commons 的 upload.wikimedia.org 在部分网络下会间歇性超时，主图是首屏元素，不能赌它。
+const hero = '/magazine/susana-baca.jpg';
+const inline = '/magazine/cajon-player.jpg';
 
 // 四个台都逐条核过：流的 icy-name / icy-url 里带 Perú 或 .pe，且能拉到音频字节。
 // 「官网」这一行是给读者自证的 —— 光看 CDN 流地址谁也认不出这是秘鲁的台。
@@ -69,7 +70,7 @@ const watch = [
   <figure class="mag__hero" style="--hero-pos: 50% 10%">
     <img src={hero} alt="Susana Baca 在舞台上闭着眼演唱，手持麦克风，披着青绿色披肩" fetchpriority="high" decoding="async" />
     <figcaption>
-      Susana Baca · 摄影 <a href="https://commons.wikimedia.org/wiki/File:Susana_baca.jpg" target="_blank" rel="noopener noreferrer">Monocityjim</a> / CC BY-SA 3.0
+      Susana Baca · 摄影 <a href="https://commons.wikimedia.org/wiki/File:Susana_baca.jpg" target="_blank" rel="noopener noreferrer">Monocityjim</a> / <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>
     </figcaption>
   </figure>
 
@@ -104,7 +105,7 @@ const watch = [
   <figure class="mag__figure" style="--fig-pos: 50% 15%">
     <img src={inline} alt="一位演奏者在舞台上坐在木箱鼓上，双手拍击箱体" loading="lazy" decoding="async" />
     <figcaption>
-      木箱鼓 Cajón · 摄影 <a href="https://commons.wikimedia.org/wiki/File:Cajon_player_on_stage.jpg" target="_blank" rel="noopener noreferrer">PiRGoif</a> / CC BY-SA 4.0
+      木箱鼓 Cajón · 摄影 <a href="https://commons.wikimedia.org/wiki/File:Cajon_player_on_stage.jpg" target="_blank" rel="noopener noreferrer">PiRGoif</a> / <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>
     </figcaption>
   </figure>
 

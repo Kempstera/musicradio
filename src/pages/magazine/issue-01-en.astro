@@ -5,10 +5,11 @@
 import Magazine from '../../layouts/Magazine.astro';
 
 // Both photos are real: the hero is Susana Baca herself, the inline one is a player mid-stroke
-// on a cajón. CC BY-SA — attribution lives in the figcaption.
-const hero = 'https://upload.wikimedia.org/wikipedia/commons/9/96/Susana_baca.jpg';
-const inline =
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Cajon_player_on_stage.jpg/1280px-Cajon_player_on_stage.jpg';
+// on a cajón. CC BY-SA — the credit and the licence link live in the figcaption.
+// Self-hosted in public/magazine/ (1100×1650 / 1280×853, under 250KB each): upload.wikimedia.org
+// intermittently times out on some networks, and the hero is a first-paint element.
+const hero = '/magazine/susana-baca.jpg';
+const inline = '/magazine/cajon-player.jpg';
 
 // Every stream below was checked individually: its icy-name / icy-url carries either "Perú"
 // or a .pe domain, and the server actually returns audio bytes. The "site" line lets readers
@@ -73,7 +74,7 @@ const watch = [
       decoding="async"
     />
     <figcaption>
-      Susana Baca · photo by <a href="https://commons.wikimedia.org/wiki/File:Susana_baca.jpg" target="_blank" rel="noopener noreferrer">Monocityjim</a> / CC BY-SA 3.0
+      Susana Baca · photo by <a href="https://commons.wikimedia.org/wiki/File:Susana_baca.jpg" target="_blank" rel="noopener noreferrer">Monocityjim</a> / <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>
     </figcaption>
   </figure>
 
@@ -131,7 +132,7 @@ const watch = [
       decoding="async"
     />
     <figcaption>
-      Cajón · photo by <a href="https://commons.wikimedia.org/wiki/File:Cajon_player_on_stage.jpg" target="_blank" rel="noopener noreferrer">PiRGoif</a> / CC BY-SA 4.0
+      Cajón · photo by <a href="https://commons.wikimedia.org/wiki/File:Cajon_player_on_stage.jpg" target="_blank" rel="noopener noreferrer">PiRGoif</a> / <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>
     </figcaption>
   </figure>
 
