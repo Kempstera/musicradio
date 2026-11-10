@@ -197,6 +197,9 @@ const GF =
       width: 100%;
       height: clamp(230px, 42vw, 470px);
       object-fit: cover;
+      /* 主图是竖构图人像，横切时必须自己指定取景点，否则默认居中会把脸切掉一半。
+         页面通过 style="--hero-pos: 50% 18%" 传进来，不同版面比例都能落在脸上。 */
+      object-position: var(--hero-pos, center);
       /* 图没加载出来时也是这块暖色，不会塌成白洞 */
       background: linear-gradient(150deg, #3a3026, #1d1916);
     }
@@ -208,6 +211,19 @@ const GF =
       text-transform: uppercase;
       color: var(--mag-ink-3);
       text-align: right;
+    }
+    /* 图片是 CC 授权，署名必须可点回原页面 —— 这也是全文唯一的「合规」出口 */
+    .mag__hero figcaption a,
+    .mag__figure figcaption a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid var(--mag-rule);
+      transition: color var(--dur-2) var(--ease-out), border-color var(--dur-2) var(--ease-out);
+    }
+    .mag__hero figcaption a:hover,
+    .mag__figure figcaption a:hover {
+      color: var(--mag-gold-deep);
+      border-color: var(--mag-gold);
     }
 
     /* ── 正文 ───────────────────────────────────────────────────────────── */
@@ -351,6 +367,7 @@ const GF =
       width: 100%;
       height: clamp(180px, 30vw, 380px);
       object-fit: cover;
+      object-position: var(--fig-pos, center);
       background: linear-gradient(150deg, #3a3026, #1d1916);
     }
     .mag__figure figcaption {
@@ -428,6 +445,38 @@ const GF =
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--mag-ink-3);
+    }
+    /* 官网域名单独一行：流地址大多长在 CDN 上、看不出是哪国的，
+       把 radiohuancayo.com.pe 这类域名摆出来，读者一眼能确认「这是秘鲁的台」。 */
+    .mag__radio-site {
+      display: block;
+      margin-top: 0.3rem;
+      font-family: var(--f-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      color: var(--mag-gold-deep);
+      opacity: 0.75;
+    }
+    .mag__radio-site::before {
+      content: '↗ ';
+      opacity: 0.7;
+    }
+    /* 视频卡：把序号换成播放三角，和电台卡区分开，但沿用同一套 hover 语言 */
+    .mag__radio--watch .mag__radio-num {
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      border-radius: 50%;
+      color: var(--mag-gold-deep);
+      opacity: 1;
+      transition: background var(--dur-2) var(--ease-out),
+        border-color var(--dur-2) var(--ease-out);
+    }
+    .mag__radio--watch:hover .mag__radio-num {
+      background: rgba(212, 175, 55, 0.12);
+      border-color: var(--mag-gold);
     }
     .mag__radio-go {
       flex: none;

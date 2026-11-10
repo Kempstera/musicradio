@@ -4,8 +4,10 @@
 // 双语不用 JS：两套文案都写进 HTML，靠 html[lang] 用 CSS 显隐。
 // 好处是① 切换语言时立刻跟着变，不需要任何事件② 脚本挂掉也不会变成空白。
 // 非中文一律给英文版（专栏目前只有中英两版），所以判据写成「不是 zh 就是英文」。
-const hero =
-  'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=1400';
+//
+// 主图是 Susana Baca 的现场照（Wikimedia Commons，CC BY-SA 3.0）。
+// 竖构图切 16:9 必须自己指定取景点 —— 默认居中会正好切在鼻子下方。
+const hero = 'https://upload.wikimedia.org/wikipedia/commons/9/96/Susana_baca.jpg';
 ---
 
 <section class="spot" aria-label="Featured spotlight">
@@ -13,17 +15,25 @@ const hero =
     <a class="spot__card spot__card--zh" href="/magazine/issue-01/">
       <img class="spot__img" src={hero} alt="" loading="lazy" decoding="async" />
       <span class="spot__veil" aria-hidden="true"></span>
+      <span class="spot__credit">Susana Baca · Monocityjim / CC BY-SA 3.0</span>
       <span class="spot__content">
-        <span class="spot__tag">Vol. 01 | 南美洲之声</span>
+        <span class="spot__tag">
+          <span class="spot__badge">新栏目</span>
+          <span class="spot__series">音乐文化双周刊</span>
+          <span class="spot__vol">Vol. 01 | 南美洲之声</span>
+        </span>
         <span class="spot__title">秘鲁的隐秘回响：Susana Baca 与木箱鼓</span>
         <span class="spot__desc">
           跨越安第斯山脉，听这位国宝级歌者如何用沙哑的嗓音，唤醒被遗忘的黑人历史。
         </span>
-        <span class="spot__cta">
-          阅读中文版
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M5 12h13M12 5l7 7-7 7" />
-          </svg>
+        <span class="spot__foot">
+          <span class="spot__cta">
+            阅读中文版
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h13M12 5l7 7-7 7" />
+            </svg>
+          </span>
+          <span class="spot__meta">每两周更新 · 逢双周上线</span>
         </span>
       </span>
     </a>
@@ -31,18 +41,26 @@ const hero =
     <a class="spot__card spot__card--en" href="/magazine/issue-01-en/">
       <img class="spot__img" src={hero} alt="" loading="lazy" decoding="async" />
       <span class="spot__veil" aria-hidden="true"></span>
+      <span class="spot__credit">Susana Baca · Monocityjim / CC BY-SA 3.0</span>
       <span class="spot__content">
-        <span class="spot__tag">Vol. 01 | Voices of South America</span>
+        <span class="spot__tag">
+          <span class="spot__badge">New series</span>
+          <span class="spot__series">A Music-Culture Fortnightly</span>
+          <span class="spot__vol">Vol. 01 | Voices of South America</span>
+        </span>
         <span class="spot__title">Peru's Hidden Echoes: Susana Baca &amp; The Cajón</span>
         <span class="spot__desc">
           Beyond the Andes, listen to how this national treasure uses her soulful voice to awaken a
           forgotten Afro-Peruvian history.
         </span>
-        <span class="spot__cta">
-          Read in English
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M5 12h13M12 5l7 7-7 7" />
-          </svg>
+        <span class="spot__foot">
+          <span class="spot__cta">
+            Read in English
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h13M12 5l7 7-7 7" />
+            </svg>
+          </span>
+          <span class="spot__meta">Updated every two weeks</span>
         </span>
       </span>
     </a>
@@ -93,9 +111,25 @@ const hero =
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* 竖构图人像横切：默认居中会切在鼻梁下方。20% 处正好把脸放在上三分之一 */
+    object-position: 50% 20%;
     /* 图加载不出来时，这块暖褐渐变自己撑住版面 */
     background: linear-gradient(150deg, #4a3c2c, #1b1712 70%);
     transition: transform 900ms var(--ease-out);
+  }
+
+  /* CC 授权的图必须署名。压成极轻的一行放在右上角，不打扰画面 */
+  .spot__credit {
+    position: absolute;
+    top: 0.85rem;
+    right: 1rem;
+    z-index: 2;
+    font-family: var(--f-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.5);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+    pointer-events: none;
   }
 
   /* 遮罩：左下最暗保证文字可读，右上留一点照片的亮，别整张压死 */
@@ -127,13 +161,16 @@ const hero =
 
   .spot__tag {
     display: inline-flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.55rem;
+    gap: 0.45rem 0.7rem;
     font-family: var(--f-mono);
     font-size: 0.66rem;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: #e8c766;
+    /* 标签行有时会压在照片较亮的部分（肩线、麦克风），加一层极淡的晕影保底 */
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
   }
   .spot__tag::before {
     content: '';
@@ -141,6 +178,38 @@ const hero =
     height: 1px;
     background: currentColor;
     opacity: 0.8;
+  }
+  /* 「新栏目」小标：告诉读者这是个刚开张的系列，不是既有的老板块 */
+  .spot__badge {
+    flex: none;
+    padding: 0.14rem 0.42rem 0.18rem;
+    border: 1px solid rgba(232, 199, 102, 0.5);
+    border-radius: 2px;
+    background: rgba(212, 175, 55, 0.16);
+    font-size: 0.54rem;
+    letter-spacing: 0.16em;
+    color: #f7e7ae;
+  }
+  .spot__series {
+    /* 中文四个字撑开 0.22em 会显得散，0.14em 让中英两种文案都站得住 */
+    letter-spacing: 0.14em;
+    color: #f2d98a;
+  }
+  .spot__vol {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    letter-spacing: 0.12em;
+    color: rgba(240, 214, 150, 0.88);
+  }
+  /* 系列名和期号颜色接近，中间不加个点会读成一长串 */
+  .spot__vol::before {
+    content: '';
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.9;
   }
 
   .spot__title {
@@ -166,11 +235,18 @@ const hero =
     overflow: hidden;
   }
 
+  .spot__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.15rem;
+    margin-top: 0.55rem;
+  }
+
   .spot__cta {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    margin-top: 0.5rem;
     padding: 0.62rem 1.15rem;
     border: 1px solid rgba(212, 175, 55, 0.75);
     border-radius: 2px;
@@ -181,6 +257,24 @@ const hero =
     background: rgba(212, 175, 55, 0.06);
     transition: background var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out),
       border-color var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out);
+  }
+
+  /* 「每两周更新」：更新节奏要写在卡上，否则读者不知道该不该期待下一期 */
+  .spot__meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--f-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.58);
+  }
+  .spot__meta::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #d4af37;
   }
   .spot__cta svg {
     transition: transform var(--dur-2) var(--ease-out);
@@ -217,6 +311,22 @@ const hero =
     }
     .spot__desc {
       display: none;
+    }
+    /* 窄屏只保住「新栏目 + 音乐文化双周刊」这一层信息，期号跟更新节奏往下一行排 */
+    .spot__tag {
+      gap: 0.4rem 0.5rem;
+      font-size: 0.6rem;
+    }
+    .spot__badge {
+      font-size: 0.5rem;
+    }
+    .spot__series {
+      letter-spacing: 0.16em;
+    }
+    .spot__credit {
+      top: 0.7rem;
+      right: 0.8rem;
+      font-size: 0.5rem;
     }
   }
 
