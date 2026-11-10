@@ -348,6 +348,11 @@ const GF =
       margin-bottom: 0.85rem;
       background: var(--mag-gold);
     }
+    /* 段落是块的第一个孩子时，h2 的上边距会和 .mag__body 的 padding-top 叠在一起，
+       拉出 110px 的空档。靠按钮分隔的短区块（「直达电台」「延伸」）尤其明显。 */
+    .mag__body > h2:first-child {
+      margin-top: 0;
+    }
 
     /* ── 文中插图 ───────────────────────────────────────────────────────── */
     .mag__figure {
@@ -380,113 +385,47 @@ const GF =
       text-align: right;
     }
 
-    /* ── 电台卡片 ───────────────────────────────────────────────────────── */
-    .mag__radios {
-      /* 和正文同一栏宽：max-width 要把左右 gutter 加回来，手机上才不会被屏幕边缘切到 */
+    /* ── 行内链接按钮 ───────────────────────────────────────────────────── */
+    /* 电台不再列卡片 —— 四张卡片占地又不说明来历。只留一条通往国家页的链接，
+       YouTube 同理。做成「一枚小按钮」而不是裸文字链接：长文里的裸链接容易被划过去。 */
+    .mag__cta {
       max-width: calc(var(--mag-measure) + 2 * var(--gutter));
-      margin: clamp(1.6rem, 4vw, 2.4rem) auto 0;
+      margin: 0 auto;
       padding: 0 var(--gutter);
-      list-style: none;
-      display: grid;
-      gap: 0.7rem;
     }
-    .mag__radio {
-      display: flex;
+    .mag__more {
+      display: inline-flex;
       align-items: center;
-      gap: 1rem;
-      padding: 1.05rem 1.25rem;
+      gap: 0.6rem;
+      padding: 0.66rem 1.2rem;
       border: 1px solid var(--mag-rule);
-      border-radius: 3px;
+      border-radius: 2px;
       background: #fffefb;
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      line-height: 1.5;
+      color: var(--mag-ink);
       text-decoration: none;
-      color: inherit;
       transition: transform var(--dur-2) var(--ease-out),
         box-shadow var(--dur-3) var(--ease-out), border-color var(--dur-2) var(--ease-out),
         background var(--dur-2) var(--ease-out);
     }
-    /* hover：抬起 + 金色描边 + 暖影。位移只 3px —— 长文页面里跳太高会破坏阅读节奏 */
-    .mag__radio:hover,
-    .mag__radio:focus-visible {
-      transform: translateY(-3px);
+    .mag__more svg {
+      flex: none;
+      color: var(--mag-gold-deep);
+      transition: transform var(--dur-2) var(--ease-out);
+    }
+    /* hover 只抬 2px：长文页面里跳太高会打断阅读节奏 */
+    .mag__more:hover,
+    .mag__more:focus-visible {
+      transform: translateY(-2px);
       border-color: rgba(212, 175, 55, 0.65);
       background: #fff;
       box-shadow: 0 14px 30px -18px rgba(90, 74, 30, 0.45);
     }
-    .mag__radio:active {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px -12px rgba(90, 74, 30, 0.5);
-    }
-
-    .mag__radio-num {
-      flex: none;
-      font-family: var(--f-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      color: var(--mag-gold-deep);
-      opacity: 0.75;
-    }
-    .mag__radio-body {
-      flex: 1 1 auto;
-      min-width: 0;
-    }
-    .mag__radio-name {
-      display: block;
-      font-family: var(--mag-display);
-      font-size: 1.02rem;
-      font-weight: 600;
-      line-height: 1.4;
-      color: var(--mag-ink);
-    }
-    .mag__radio-genre {
-      display: block;
-      margin-top: 0.15rem;
-      font-family: var(--f-mono);
-      font-size: 0.66rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--mag-ink-3);
-    }
-    /* 官网域名单独一行：流地址大多长在 CDN 上、看不出是哪国的，
-       把 radiohuancayo.com.pe 这类域名摆出来，读者一眼能确认「这是秘鲁的台」。 */
-    .mag__radio-site {
-      display: block;
-      margin-top: 0.3rem;
-      font-family: var(--f-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.06em;
-      color: var(--mag-gold-deep);
-      opacity: 0.75;
-    }
-    .mag__radio-site::before {
-      content: '↗ ';
-      opacity: 0.7;
-    }
-    /* 视频卡：把序号换成播放三角，和电台卡区分开，但沿用同一套 hover 语言 */
-    .mag__radio--watch .mag__radio-num {
-      display: grid;
-      place-items: center;
-      width: 26px;
-      height: 26px;
-      border: 1px solid rgba(212, 175, 55, 0.5);
-      border-radius: 50%;
-      color: var(--mag-gold-deep);
-      opacity: 1;
-      transition: background var(--dur-2) var(--ease-out),
-        border-color var(--dur-2) var(--ease-out);
-    }
-    .mag__radio--watch:hover .mag__radio-num {
-      background: rgba(212, 175, 55, 0.12);
-      border-color: var(--mag-gold);
-    }
-    .mag__radio-go {
-      flex: none;
-      color: var(--mag-gold-deep);
-      opacity: 0.5;
-      transition: transform var(--dur-2) var(--ease-out), opacity var(--dur-2) var(--ease-out);
-    }
-    .mag__radio:hover .mag__radio-go {
+    .mag__more:hover svg {
       transform: translateX(3px);
-      opacity: 1;
     }
 
     /* ── 结尾与页脚 ─────────────────────────────────────────────────────── */
@@ -548,13 +487,13 @@ const GF =
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .mag__radio,
-      .mag__radio-go,
+      .mag__more,
+      .mag__more svg,
       .mag__back {
         transition: none;
       }
-      .mag__radio:hover,
-      .mag__radio:focus-visible,
+      .mag__more:hover,
+      .mag__more:focus-visible,
       .mag__back:hover {
         transform: none;
       }
