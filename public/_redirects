@@ -1,0 +1,11 @@
+# Cloudflare Pages 重定向
+#
+# 专栏约定的对外地址带 .html 后缀（/magazine/issue-01.html），
+# 但 Astro 默认输出目录式路径（/magazine/issue-01/index.html）。
+# 这里把两种写法接起来，外部链接怎么写都能到，且只保留一个规范地址。
+
+/magazine/issue-01.html     /magazine/issue-01/     301
+/magazine/issue-01-en.html  /magazine/issue-01-en/  301
+
+# 中文版是专栏的主地址，其它语言的访客直接给英文版
+/magazine/                  /magazine/issue-01/     301

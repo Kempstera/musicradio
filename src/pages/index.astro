@@ -1,14 +1,16 @@
 ---
 // 极简首页 —— MORNING WINDOW / 朝の窓辺
 //
-// 只保留三件事：
+// 只保留四件事：
 //   1. 核心视觉：清晨窗边的一张纸（晨光、毛笔题字、竖排书脊、读数行）
-//   2. 大洲巡礼：桌上的一颗地球 + 一份六行的索引
-//   3. 页脚（站点简介、关于、统计、声明，由 Footer 组件承担）
+//   2. 本期焦点：专栏《大洲巡礼 · 每月之声》的入口卡（中英双语，靠 html[lang] 切）
+//   3. 大洲巡礼：桌上的一颗地球 + 一份六行的索引
+//   4. 页脚（站点简介、关于、统计、声明，由 Footer 组件承担）
 //
 // 电台列表、播放器、国家卡片全部在 /explore，首页不加载 content-blob，
 // 首屏 HTML 保持在几十 KB。
 import Base from '../layouts/Base.astro';
+import MagazineSpotlight from '../components/MagazineSpotlight.astro';
 import { CONTINENTS, SUBREGIONS } from '../lib/country';
 import { allCountries, countriesByContinent } from '../data';
 import { GLOBE_POINTS } from '../data/globe-points';
@@ -131,6 +133,10 @@ const globeData = JSON.stringify(GLOBE_POINTS);
       </div>
     </div>
   </section>
+
+  {/* 本期焦点：专栏入口。放在题词与巡礼索引之间 —— 先看「这家站在做什么」，
+      再进「去哪儿听」，顺序比塞进索引里更顺。 */}
+  <MagazineSpotlight />
 
   <section class="section home-continents" id="continents">
     <div class="container">

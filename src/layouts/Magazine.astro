@@ -1,0 +1,535 @@
+---
+// 专栏版式：大洲巡礼 · 每月之声
+//
+// 中英文两期内页共用这一个 layout —— 文案不同、版式完全一致，改版时只改一处，
+// 不会出现「中文页改了、英文页忘了」的漂移。
+//
+// 为什么不用 Tailwind / 外部 UI 框架：专栏要的是长文阅读的排印控制（字距、行高、
+// 首字下沉、引文留白），这些恰恰是原子类最不擅长的地方；一页自带的 <style> 足够，
+// 也不给站点增加任何依赖。
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  /** 这一页正文的语言：决定 <article lang> 与字体栈的侧重 */
+  lang: 'zh' | 'en';
+  /** 另一语言版本的地址（右上角切换用） */
+  altHref: string;
+  /** 另一语言版本的按钮文案，如「English」 */
+  altLabel: string;
+  kicker: string;
+  headline: string;
+  standfirst?: string;
+  issue: string;
+  readTime: string;
+}
+
+const { title, description, lang, altHref, altLabel, kicker, headline, standfirst, issue, readTime } =
+  Astro.props;
+
+// Google Fonts 用 media="print" + onload 改成非阻塞：境内访问不到 Google CDN 时，
+// 这个请求不会把首屏渲染卡住，字体自动落回站内自托管的 Fraunces 与宋体栈。
+const GF =
+  'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Lora:ital,wght@0,400..600;1,400..600&family=Noto+Serif+SC:wght@300;400;600;700&display=swap';
+---
+
+<Base title={title} description={description}>
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com" />
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link slot="head" rel="stylesheet" href={GF} media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href={GF} />
+  </noscript>
+
+  <style is:global>
+    /* ==========================================================================
+       专栏版式 · 古典杂志
+       --------------------------------------------------------------------------
+       与全站「朝の窓辺」的分工：全站是浅米纸 + 藍，专栏是更暖的纸 + 金。
+       所以这里的颜色不复用 --paper / --ai，另立一套 --mag-*，互不干扰。
+       ========================================================================== */
+    :root {
+      --mag-paper: #faf9f6;
+      --mag-ink: #2c2c2c;
+      --mag-ink-2: #5b5651;
+      --mag-ink-3: #8c867f;
+      --mag-gold: #d4af37;
+      --mag-gold-deep: #a8862a;
+      --mag-rule: rgba(44, 44, 44, 0.13);
+      --mag-rule-soft: rgba(44, 44, 44, 0.07);
+    }
+
+    /* 专栏页整页换纸；页眉与页脚沿用全站样式，只把底色接过来 */
+    body {
+      background: var(--mag-paper);
+    }
+    body::before {
+      background: radial-gradient(120% 60% at 50% -16%, #fffefb, transparent 62%);
+    }
+
+    .mag {
+      /* 绝对宽度而不是 em：正文块与电台卡片块的字号不同，
+         用 em 算出来的栏宽会差 50px，两处就对不齐了。600px ≈ 中文 34 字/行 */
+      --mag-measure: 600px;
+      --mag-display: 'Playfair Display', 'Fraunces', 'Songti SC', 'Noto Serif SC', Georgia, serif;
+      --mag-body: 'Lora', 'Noto Serif SC', 'Songti SC', 'Noto Serif CJK SC', 'STSong', Georgia, serif;
+      color: var(--mag-ink);
+      padding-bottom: clamp(3rem, 8vw, 7rem);
+    }
+
+    /* ── 报头 ───────────────────────────────────────────────────────────── */
+    /* 注意：这些块都带左右 padding（--gutter），所以 max-width 要把 padding 加回来，
+       否则 1000px 的版心实际只剩 1000 - 2×66 ≈ 868px。 */
+    .mag__masthead {
+      max-width: calc(1000px + 2 * var(--gutter));
+      margin: 0 auto;
+      padding: clamp(2.4rem, 6vw, 5rem) var(--gutter) 0;
+    }
+
+    .mag__topline {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1.5rem;
+      border-bottom: 1px solid var(--mag-rule);
+      padding-bottom: 0.9rem;
+    }
+
+    .mag__series {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mag-ink-3);
+    }
+    .mag__series::before {
+      content: '';
+      width: 26px;
+      height: 1px;
+      background: var(--mag-gold);
+    }
+
+    .mag__alt {
+      flex: none;
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mag-ink-3);
+      text-decoration: none;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color var(--dur-2) var(--ease-out), border-color var(--dur-2) var(--ease-out);
+    }
+    .mag__alt:hover {
+      color: var(--mag-gold-deep);
+      border-color: var(--mag-gold);
+    }
+
+    .mag__kicker {
+      margin-top: clamp(1.8rem, 4vw, 3rem);
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--mag-gold-deep);
+    }
+
+    .mag__headline {
+      margin: 0.7rem 0 0;
+      font-family: var(--mag-display);
+      font-weight: 600;
+      font-size: clamp(1.85rem, 4.6vw, 3.15rem);
+      line-height: 1.24;
+      letter-spacing: -0.005em;
+      text-wrap: balance;
+      color: var(--mag-ink);
+    }
+    /* 中文标题用宋体更挺，Playfair 没有汉字，会自然落到下一个 */
+    .mag[lang='zh-CN'] .mag__headline {
+      letter-spacing: 0.01em;
+    }
+
+    .mag__standfirst {
+      margin: 1.1rem 0 0;
+      max-width: 40em;
+      font-family: var(--mag-body);
+      font-size: clamp(1.02rem, 1.5vw, 1.16rem);
+      line-height: 1.85;
+      color: var(--mag-ink-2);
+      font-style: italic;
+    }
+
+    .mag__byline {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem 1.1rem;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--mag-rule-soft);
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mag-ink-3);
+    }
+    .mag__byline i {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--mag-gold);
+      font-style: normal;
+    }
+
+    /* ── 主图 ───────────────────────────────────────────────────────────── */
+    .mag__hero {
+      max-width: calc(1000px + 2 * var(--gutter));
+      margin: clamp(1.8rem, 4vw, 2.8rem) auto 0;
+      padding: 0 var(--gutter);
+    }
+    .mag__hero img {
+      display: block;
+      width: 100%;
+      height: clamp(230px, 42vw, 470px);
+      object-fit: cover;
+      /* 图没加载出来时也是这块暖色，不会塌成白洞 */
+      background: linear-gradient(150deg, #3a3026, #1d1916);
+    }
+    .mag__hero figcaption {
+      margin-top: 0.75rem;
+      font-family: var(--f-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mag-ink-3);
+      text-align: right;
+    }
+
+    /* ── 正文 ───────────────────────────────────────────────────────────── */
+    .mag__body {
+      max-width: calc(var(--mag-measure) + 2 * var(--gutter));
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 3.4rem) var(--gutter) 0;
+      font-family: var(--mag-body);
+      font-size: clamp(1.06rem, 1.35vw, 1.1rem);
+      line-height: 1.8;
+      color: var(--mag-ink);
+    }
+    .mag__body > p {
+      margin: 0 0 1.55em;
+    }
+
+    /* 首字下沉：整篇只有第一个正文段落有，多了就俗了。
+       优先用原生的 initial-letter —— 它由浏览器算行盒，首字和首行基线自动对齐；
+       早先手写的 float + line-height 版本会让字母浮高半个字，第一行文字还会被挤出一个豁口。
+       Firefox 目前不支持 initial-letter，退回普通大写字母，不影响阅读。 */
+    .mag__body > p.mag__lead::first-letter {
+      font-family: var(--mag-display);
+      font-weight: 600;
+      color: var(--mag-gold-deep);
+    }
+    @supports (initial-letter: 2) {
+      .mag__body > p.mag__lead::first-letter {
+        -webkit-initial-letter: 2;
+        initial-letter: 2;
+        padding-right: 0.14em;
+      }
+    }
+    @supports not (initial-letter: 2) {
+      .mag__body > p.mag__lead::first-letter {
+        float: left;
+        font-size: 3.15em;
+        line-height: 0.82;
+        padding: 0.04em 0.1em 0 0;
+      }
+    }
+
+    /* 中文不做首字下沉：汉字是方块，浮起来会把第一行咬出一个不规则缺口，
+       和西文「首字压两行、正文紧贴其右」不是一回事。改用「首段稍大一号」区分。 */
+    .mag[lang='zh-CN'] .mag__body > p.mag__lead::first-letter {
+      float: none;
+      font-size: inherit;
+      line-height: inherit;
+      padding: 0;
+      color: inherit;
+      font-weight: inherit;
+      -webkit-initial-letter: normal;
+      initial-letter: normal;
+    }
+    .mag[lang='zh-CN'] .mag__body > p.mag__lead {
+      font-size: 1.05em;
+      color: var(--mag-ink);
+    }
+
+    /* ── 引文 ───────────────────────────────────────────────────────────── */
+    .mag blockquote {
+      /* 引文块和正文不在同一个容器里，必须自己带 gutter —
+         否则窄屏上会贴到屏幕两边（正文有 padding、它没有） */
+      max-width: calc(var(--mag-measure) + 2 * var(--gutter));
+      margin: clamp(2.4rem, 6vw, 3.6rem) auto;
+      padding: 0 var(--gutter);
+      text-align: center;
+    }
+    .mag blockquote p {
+      margin: 0 auto;
+      max-width: 26em;
+      font-family: var(--mag-display);
+      font-size: clamp(1.24rem, 2.3vw, 1.62rem);
+      line-height: 1.62;
+      font-style: italic;
+      color: var(--mag-ink);
+      text-wrap: pretty;
+    }
+    /* 引号用金色，单独一行，不抢文字 */
+    .mag blockquote p::before {
+      content: '“';
+      display: block;
+      font-family: var(--mag-display);
+      font-size: 3.2em;
+      line-height: 0.6;
+      color: var(--mag-gold);
+      opacity: 0.6;
+      margin-bottom: 0.28em;
+      font-style: normal;
+    }
+    .mag blockquote cite {
+      display: block;
+      margin-top: 1.1rem;
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-style: normal;
+      color: var(--mag-ink-3);
+    }
+    .mag blockquote cite::before {
+      content: '— ';
+    }
+
+    /* ── 小标题 ─────────────────────────────────────────────────────────── */
+    .mag__body h2 {
+      margin: clamp(2.6rem, 6vw, 3.6rem) 0 1.1rem;
+      font-family: var(--mag-display);
+      font-weight: 600;
+      font-size: clamp(1.24rem, 2.2vw, 1.6rem);
+      line-height: 1.45;
+      letter-spacing: 0.01em;
+      color: var(--mag-ink);
+      /* 这里不能用 balance：中文长标题下 balance 会缩窄断行宽度求「均匀」，
+         结果两行都只用了半栏，标题被截得比正文还短。pretty 只消孤字，不动宽度。 */
+      text-wrap: pretty;
+    }
+    .mag__body h2::before {
+      content: '';
+      display: block;
+      width: 34px;
+      height: 2px;
+      margin-bottom: 0.85rem;
+      background: var(--mag-gold);
+    }
+
+    /* ── 文中插图 ───────────────────────────────────────────────────────── */
+    .mag__figure {
+      margin: clamp(2.4rem, 6vw, 3.6rem) 0;
+      /* 突破正文栏宽，但不超出页面：负 margin 只在够宽时才给 */
+      width: auto;
+    }
+    @media (min-width: 900px) {
+      .mag__figure {
+        width: min(1000px, calc(100vw - 2 * var(--gutter)));
+        margin-left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+    .mag__figure img {
+      display: block;
+      width: 100%;
+      height: clamp(180px, 30vw, 380px);
+      object-fit: cover;
+      background: linear-gradient(150deg, #3a3026, #1d1916);
+    }
+    .mag__figure figcaption {
+      margin-top: 0.75rem;
+      font-family: var(--f-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mag-ink-3);
+      text-align: right;
+    }
+
+    /* ── 电台卡片 ───────────────────────────────────────────────────────── */
+    .mag__radios {
+      /* 和正文同一栏宽：max-width 要把左右 gutter 加回来，手机上才不会被屏幕边缘切到 */
+      max-width: calc(var(--mag-measure) + 2 * var(--gutter));
+      margin: clamp(1.6rem, 4vw, 2.4rem) auto 0;
+      padding: 0 var(--gutter);
+      list-style: none;
+      display: grid;
+      gap: 0.7rem;
+    }
+    .mag__radio {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.05rem 1.25rem;
+      border: 1px solid var(--mag-rule);
+      border-radius: 3px;
+      background: #fffefb;
+      text-decoration: none;
+      color: inherit;
+      transition: transform var(--dur-2) var(--ease-out),
+        box-shadow var(--dur-3) var(--ease-out), border-color var(--dur-2) var(--ease-out),
+        background var(--dur-2) var(--ease-out);
+    }
+    /* hover：抬起 + 金色描边 + 暖影。位移只 3px —— 长文页面里跳太高会破坏阅读节奏 */
+    .mag__radio:hover,
+    .mag__radio:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(212, 175, 55, 0.65);
+      background: #fff;
+      box-shadow: 0 14px 30px -18px rgba(90, 74, 30, 0.45);
+    }
+    .mag__radio:active {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px -12px rgba(90, 74, 30, 0.5);
+    }
+
+    .mag__radio-num {
+      flex: none;
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--mag-gold-deep);
+      opacity: 0.75;
+    }
+    .mag__radio-body {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .mag__radio-name {
+      display: block;
+      font-family: var(--mag-display);
+      font-size: 1.02rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--mag-ink);
+    }
+    .mag__radio-genre {
+      display: block;
+      margin-top: 0.15rem;
+      font-family: var(--f-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mag-ink-3);
+    }
+    .mag__radio-go {
+      flex: none;
+      color: var(--mag-gold-deep);
+      opacity: 0.5;
+      transition: transform var(--dur-2) var(--ease-out), opacity var(--dur-2) var(--ease-out);
+    }
+    .mag__radio:hover .mag__radio-go {
+      transform: translateX(3px);
+      opacity: 1;
+    }
+
+    /* ── 结尾与页脚 ─────────────────────────────────────────────────────── */
+    .mag__outro {
+      max-width: calc(var(--mag-measure) + 2 * var(--gutter));
+      margin: clamp(2.2rem, 5vw, 3rem) auto 0;
+      padding: 0 var(--gutter);
+      font-family: var(--mag-body);
+      font-size: clamp(1.06rem, 1.35vw, 1.1rem);
+      line-height: 1.8;
+      font-style: italic;
+      color: var(--mag-ink-2);
+    }
+
+    .mag__endmatter {
+      max-width: calc(1000px + 2 * var(--gutter));
+      margin: clamp(3rem, 7vw, 5rem) auto 0;
+      padding: 0 var(--gutter);
+    }
+    .mag__endmatter-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem 2rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid var(--mag-rule);
+    }
+    .mag__mark {
+      font-family: var(--f-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mag-ink-3);
+    }
+
+    /* 底部按钮：与卡片同一套浮动语言，但更克制 */
+    .mag__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.62rem 1.15rem;
+      border: 1px solid var(--mag-rule);
+      border-radius: 2px;
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mag-ink);
+      text-decoration: none;
+      background: #fffefb;
+      transition: transform var(--dur-2) var(--ease-out),
+        box-shadow var(--dur-3) var(--ease-out), border-color var(--dur-2) var(--ease-out);
+    }
+    .mag__back:hover {
+      transform: translateY(-2px);
+      border-color: rgba(212, 175, 55, 0.7);
+      box-shadow: 0 12px 26px -18px rgba(90, 74, 30, 0.5);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mag__radio,
+      .mag__radio-go,
+      .mag__back {
+        transition: none;
+      }
+      .mag__radio:hover,
+      .mag__radio:focus-visible,
+      .mag__back:hover {
+        transform: none;
+      }
+    }
+  </style>
+
+  <article class="mag" lang={lang === 'zh' ? 'zh-CN' : 'en'}>
+    <header class="mag__masthead">
+      <div class="mag__topline">
+        <span class="mag__series">{kicker}</span>
+        <a class="mag__alt" href={altHref} hreflang={lang === 'zh' ? 'en' : 'zh-CN'}>{altLabel}</a>
+      </div>
+
+      <div class="mag__kicker">{issue}</div>
+      <h1 class="mag__headline">{headline}</h1>
+      {standfirst && <p class="mag__standfirst">{standfirst}</p>}
+
+      <div class="mag__byline">
+        <span>{readTime}</span>
+        <i aria-hidden="true"></i>
+        <span>musicradio</span>
+      </div>
+    </header>
+
+    <slot />
+  </article>
+</Base>

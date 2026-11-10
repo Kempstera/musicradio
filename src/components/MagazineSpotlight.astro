@@ -1,0 +1,239 @@
+---
+// 首页「本期焦点」入口卡 —— 大洲巡礼 · 每月之声
+//
+// 双语不用 JS：两套文案都写进 HTML，靠 html[lang] 用 CSS 显隐。
+// 好处是① 切换语言时立刻跟着变，不需要任何事件② 脚本挂掉也不会变成空白。
+// 非中文一律给英文版（专栏目前只有中英两版），所以判据写成「不是 zh 就是英文」。
+const hero =
+  'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=1400';
+---
+
+<section class="spot" aria-label="Featured spotlight">
+  <div class="spot__inner">
+    <a class="spot__card spot__card--zh" href="/magazine/issue-01/">
+      <img class="spot__img" src={hero} alt="" loading="lazy" decoding="async" />
+      <span class="spot__veil" aria-hidden="true"></span>
+      <span class="spot__content">
+        <span class="spot__tag">Vol. 01 | 南美洲之声</span>
+        <span class="spot__title">秘鲁的隐秘回响：Susana Baca 与木箱鼓</span>
+        <span class="spot__desc">
+          跨越安第斯山脉，听这位国宝级歌者如何用沙哑的嗓音，唤醒被遗忘的黑人历史。
+        </span>
+        <span class="spot__cta">
+          阅读中文版
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h13M12 5l7 7-7 7" />
+          </svg>
+        </span>
+      </span>
+    </a>
+
+    <a class="spot__card spot__card--en" href="/magazine/issue-01-en/">
+      <img class="spot__img" src={hero} alt="" loading="lazy" decoding="async" />
+      <span class="spot__veil" aria-hidden="true"></span>
+      <span class="spot__content">
+        <span class="spot__tag">Vol. 01 | Voices of South America</span>
+        <span class="spot__title">Peru's Hidden Echoes: Susana Baca &amp; The Cajón</span>
+        <span class="spot__desc">
+          Beyond the Andes, listen to how this national treasure uses her soulful voice to awaken a
+          forgotten Afro-Peruvian history.
+        </span>
+        <span class="spot__cta">
+          Read in English
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h13M12 5l7 7-7 7" />
+          </svg>
+        </span>
+      </span>
+    </a>
+  </div>
+</section>
+
+<style>
+  /* 这张卡是全站唯一一块深色区域 —— 首页其余部分全是纸白，
+     压一块深色正好把「本期焦点」从巡礼索引里拎出来。 */
+  .spot {
+    padding: clamp(2.6rem, 6vw, 4.5rem) 0 clamp(0.5rem, 2vw, 1.2rem);
+  }
+
+  .spot__inner {
+    /* 把左右 gutter 加回来，卡片本身才是 1000px */
+    max-width: calc(1000px + 2 * var(--gutter));
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .spot__card {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 4px;
+    aspect-ratio: 16 / 9;
+    background: #1c1a17;
+    text-decoration: none;
+    color: #fff;
+    isolation: isolate;
+    transition: transform var(--dur-3) var(--ease-out), box-shadow var(--dur-3) var(--ease-out);
+  }
+
+  /* 双语显隐：不是中文就显示英文版 */
+  .spot__card--en {
+    display: none;
+  }
+  :global(html:not([lang^='zh'])) .spot__card--zh {
+    display: none;
+  }
+  :global(html:not([lang^='zh'])) .spot__card--en {
+    display: block;
+  }
+
+  .spot__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 图加载不出来时，这块暖褐渐变自己撑住版面 */
+    background: linear-gradient(150deg, #4a3c2c, #1b1712 70%);
+    transition: transform 900ms var(--ease-out);
+  }
+
+  /* 遮罩：左下最暗保证文字可读，右上留一点照片的亮，别整张压死 */
+  .spot__veil {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        to top,
+        rgba(12, 11, 9, 0.92) 0%,
+        rgba(12, 11, 9, 0.72) 34%,
+        rgba(12, 11, 9, 0.34) 62%,
+        rgba(12, 11, 9, 0.14) 100%
+      ),
+      linear-gradient(to right, rgba(12, 11, 9, 0.55), transparent 62%);
+  }
+
+  .spot__content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.55rem;
+    padding: clamp(1.2rem, 3.4vw, 2.6rem);
+  }
+
+  .spot__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--f-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #e8c766;
+  }
+  .spot__tag::before {
+    content: '';
+    width: 22px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.8;
+  }
+
+  .spot__title {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: clamp(1.16rem, 2.5vw, 1.85rem);
+    line-height: 1.32;
+    letter-spacing: 0.005em;
+    text-wrap: balance;
+    max-width: 26em;
+    text-shadow: 0 1px 18px rgba(0, 0, 0, 0.35);
+  }
+
+  .spot__desc {
+    max-width: 42ch;
+    font-size: clamp(0.86rem, 1.1vw, 0.96rem);
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.76);
+    /* 小屏只留两行，把空间让给标题 */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .spot__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.62rem 1.15rem;
+    border: 1px solid rgba(212, 175, 55, 0.75);
+    border-radius: 2px;
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: #f2d98a;
+    background: rgba(212, 175, 55, 0.06);
+    transition: background var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out),
+      border-color var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out);
+  }
+  .spot__cta svg {
+    transition: transform var(--dur-2) var(--ease-out);
+  }
+
+  /* hover：整卡抬起、图轻轻推近、按钮实心化 —— 三件事同时发生才像「一张纸被拿起来」 */
+  .spot__card:hover .spot__img,
+  .spot__card:focus-visible .spot__img {
+    transform: scale(1.035);
+  }
+  .spot__card:hover .spot__cta,
+  .spot__card:focus-visible .spot__cta {
+    background: #d4af37;
+    border-color: #d4af37;
+    color: #211d16;
+  }
+  .spot__card:hover .spot__cta svg,
+  .spot__card:focus-visible .spot__cta svg {
+    transform: translateX(3px);
+  }
+
+  @media (hover: hover) {
+    .spot__card:hover,
+    .spot__card:focus-visible {
+      transform: translateY(-5px);
+      box-shadow: 0 30px 60px -34px rgba(50, 40, 20, 0.65);
+    }
+  }
+
+  /* 竖屏手机：16:9 太扁，文字会挤成三行标题 + 一行按钮，改成 4:5 让版面立起来 */
+  @media (max-width: 620px) {
+    .spot__card {
+      aspect-ratio: 4 / 5;
+    }
+    .spot__desc {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spot__card,
+    .spot__img,
+    .spot__cta,
+    .spot__cta svg {
+      transition: none;
+    }
+    .spot__card:hover,
+    .spot__card:focus-visible {
+      transform: none;
+    }
+    .spot__card:hover .spot__img,
+    .spot__card:focus-visible .spot__img {
+      transform: none;
+    }
+  }
+</style>
