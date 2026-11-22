@@ -1,0 +1,74 @@
+---
+// 404 页。
+//
+// 之前项目里没有这个文件，Cloudflare Pages 对任何不存在的路径都返回
+// 「200 + 首页 HTML」——这是典型的软 404：搜索引擎会认为有无限多个
+// 内容相同的网址，抓取预算全浪费在这里。补上 404.html 后 Pages 会用
+// 这个文件并以 404 状态码响应，才是正确语义。
+//
+// 另外：不进 sitemap（gen-sitemap 只收 index.html），并加 noindex。
+import Base from '../layouts/Base.astro';
+import { SITE_URL } from '../lib/config';
+---
+
+<Base
+  title="这个频率上没有声音"
+  description="没有找到这一页。回到首页继续收听。"
+  noindex
+>
+  <main class="nf">
+    <p class="nf-dial">404</p>
+    <h1>这个频率上没有声音</h1>
+    <p class="nf-lead">
+      你访问的页面不存在，或者这首诗还没被电台播出来。
+    </p>
+    <p class="nf-lead nf-en">This page does not exist. <em>Dead air.</em></p>
+
+    <nav class="nf-links">
+      <a href="/">回到首页</a>
+      <a href="/explore/">按大洲找电台</a>
+      <a href="/magazine/issue-01/">双周刊</a>
+    </nav>
+  </main>
+
+  <style>
+    .nf {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 14vh 24px 18vh;
+      text-align: center;
+    }
+    .nf-dial {
+      font: 600 13px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .42em;
+      color: var(--mr-red, #b1503a);
+      margin: 0 0 26px;
+      text-indent: .42em;
+    }
+    .nf h1 {
+      font-size: clamp(24px, 4.4vw, 34px);
+      line-height: 1.4;
+      margin: 0 0 18px;
+      font-weight: 400;
+    }
+    .nf-lead {
+      color: var(--ink-2, #57534a);
+      margin: 0 0 6px;
+      font-size: 15px;
+    }
+    .nf-en { opacity: .7; font-size: 14px; }
+    .nf-links {
+      margin-top: 40px;
+      display: flex;
+      gap: 26px;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 15px;
+    }
+    .nf-links a {
+      color: var(--ink, #23211c);
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 2px;
+    }
+  </style>
+</Base>
