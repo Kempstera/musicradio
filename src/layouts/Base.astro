@@ -17,6 +17,23 @@ const { title, description, noindex = false } = Astro.props;
 // 首屏不会出现「先英文再跳中文」的闪烁，任何人从任何地方首次进入看到的都是简体中文。
 const fullTitle = title ? `${title} · ${SITE_NAME}` : `${SITE_NAME} · World Music Radio`;
 const desc = description || t0.heroDesc;
+
+// canonical 必须指向「这一页自己」。之前这里写死 SITE_URL，等于告诉搜索引擎
+// 195 个国家页和首页是同一份内容 —— 那它们基本不会被收录，排名也无从谈起。
+// 目录式输出统一补结尾斜杠，和 sitemap.xml 里写的地址保持一致。
+let canonPath = Astro.url.pathname;
+if (!/\.[a-z0-9]+$/i.test(canonPath) && !canonPath.endsWith('/')) canonPath += '/';
+const canon = SITE_URL + canonPath;
+const OG_IMAGE = `${SITE_URL}/img/og-cover.png`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE_NAME,
+  alternateName: 'World Music Radio',
+  url: `${SITE_URL}/`,
+  inLanguage: ['zh-CN', 'en'],
+  description: desc,
+};
 ---
 
 <!doctype html>
@@ -141,12 +158,19 @@ const desc = description || t0.heroDesc;
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#f6f2e9" />
-    <link rel="canonical" href={SITE_URL} />
+    <link rel="canonical" href={canon} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:locale" content="zh_CN" />
+    <meta property="og:url" content={canon} />
+    <meta property="og:image" content={OG_IMAGE} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={OG_IMAGE} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     {/* 页面可以往 head 里塞「必须在首帧之前跑」的内联脚本（如首页的首访过场） */}
     <slot name="head" />
   </head>

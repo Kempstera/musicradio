@@ -6,7 +6,7 @@
   "description": "如听仙乐耳暂明 · 世界音乐电台巡礼",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/gen-sitemap.mjs",
     "preview": "astro preview",
     "fetch:radios": "node scripts/fetch-radios.mjs"
   },

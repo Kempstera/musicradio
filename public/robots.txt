@@ -1,0 +1,7 @@
+# 音乐电台：全球电台在线收听
+# 允许所有搜索引擎抓取；站长自用的 /visits 统计页不收录
+User-agent: *
+Allow: /
+Disallow: /visits
+
+Sitemap: https://musicradio.signupeverywhere.cc/sitemap.xml
