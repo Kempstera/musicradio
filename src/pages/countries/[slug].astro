@@ -44,7 +44,7 @@ const pick = (a: string[] | undefined, b: string[], i: number): string =>
 const continentLabel = (CONTINENT_LABELS[DEFAULT_LANG] as Record<string, string>)[country.continent] || continent.label;
 const subregionLabel = (SUBREGION_LABELS[DEFAULT_LANG] as Record<string, string>)[country.subregion] || subregion.label;
 
-const pageTitle = name0 === country.nameEn ? name0 : `${name0} · ${country.nameEn}`;
+// 页面标题与 meta 描述在 playable 算出来之后再拼（要用到可播放台数），见下方。
 
 // 拉丁转写行：本地名与英文名相同时（France / France）不重复显示成「FRANCE · FRANCE」
 const heroLatin =
@@ -119,6 +119,26 @@ const playable = sortStations(
 /** 该国所有台在国内都直连不通时，在列表上方给一句说明（不删除，只后置） */
 const allLimited = playable.length > 0 && playable.every((s) => s.tier !== 0);
 
+// 标题是搜索结果里唯一能"抢"的东西，所以以搜索意图开头：
+// 用户搜的是「日本电台在线收听」「japan radio live」，不是这个站的名字。
+// 品牌名（如聽仙樂耳暫明）不出现在国家页标题里 —— 它是生僻古句，
+// 既不贡献关键词，还白占十来个字的位置。
+const nStations = playable.length;
+// 国名重复一遍会让标题超长（「波斯尼亚和黑塞哥维那…」重复两次到了 40 字，
+// 搜索结果只会显示前 30 个汉字）。名字长的就只出现一次。
+const longName = name0.length >= 7;
+const pageTitle =
+  nStations >= 3
+    ? longName
+      ? `${name0}电台在线收听 · ${nStations} 个在线直播电台`
+      : `${name0}电台在线收听 · ${nStations} 个${name0}音乐电台直播`
+    : `${name0}电台在线收听 · 直播与音乐类型一览`;
+
+// 描述是搜索结果第二行，同样影响点击率：说清有什么、有多少、要不要注册
+const metaDesc =
+  `在线收听${name0}电台：本站收录 ${nStations} 个可点开即播的${name0}音乐电台，` +
+  `涵盖古典、爵士、流行与民族音乐，附${name0}的音乐史与代表人物。无需注册。`;
+
 // 音乐家维基百科链接：优先使用手动指定，否则用英文名自动生成英文维基链接
 const musicians = country.musicians.map((m, i) => ({
   ...m,
@@ -151,7 +171,7 @@ for (const [url, notes] of noteMap) {
 const stationNotesBlobJson = JSON.stringify(stationNotesBlob).replace(/</g, '\\u003c');
 ---
 
-<Base title={pageTitle} description={intro0}>
+<Base title={pageTitle} exactTitle description={metaDesc}>
   <script type="application/json" id="content-blob" is:inline set:html={contentBlobJson}></script>
   <script type="application/json" id="station-notes-blob" is:inline set:html={stationNotesBlobJson}></script>
   <article data-region={country.continent}>
