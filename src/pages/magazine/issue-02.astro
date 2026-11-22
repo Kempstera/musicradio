@@ -15,6 +15,10 @@ import Magazine from '../../layouts/Magazine.astro';
 const hero = '/magazine/ethiopia-mulatu.jpg';
 const inline = '/magazine/ethiopia-krar.jpg';
 
+// 分享图另存一张 1200×630。hero 本身是 2.13:1，跟分享卡的 1.91:1 只差一点，
+// 但仍要单独出一张：让所有平台拿到固定尺寸，不必各自去猜怎么裁。
+const ogImage = '/magazine/og-issue-02.jpg';
+
 const ethiopiaHref = '/countries/ethiopia/';
 const wikiUrl = 'https://en.wikipedia.org/wiki/Mulatu_Astatke';
 ---
@@ -30,6 +34,7 @@ const wikiUrl = 'https://en.wikipedia.org/wiki/Mulatu_Astatke';
   headline="亚的斯亚贝巴的五声音阶：Mulatu Astatke 与被中断的爵士年代"
   readTime="阅读约 8 分钟"
   issueNav={{ href: '/magazine/issue-01/', label: '上一期 · Vol.01' }}
+  ogImage={ogImage}
 >
   <figure class="mag__hero" style="--hero-pos: 50% 45%">
     <img src={hero} alt="Mulatu Astatke 在舞台上手持麦克风演唱，身后是蓝色灯光下的乐队与康加鼓" fetchpriority="high" decoding="async" />

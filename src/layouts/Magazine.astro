@@ -8,6 +8,7 @@
 // 首字下沉、引文留白），这些恰恰是原子类最不擅长的地方；一页自带的 <style> 足够，
 // 也不给站点增加任何依赖。
 import Base from './Base.astro';
+import { SITE_URL } from '../lib/config';
 
 interface Props {
   title: string;
@@ -32,11 +33,28 @@ interface Props {
    * 语义由 label 决定，版式不必再分叉。
    */
   issueNav?: { href: string; label: string };
+  /**
+   * 这一期的头图，用作分享卡片的图（站内路径）。
+   * 不传就落回全站封面——那对文章页是明显的浪费，见 Base 里 ogImage 的说明。
+   */
+  ogImage?: string;
 }
 
 const { title, description, lang, altHref, altLabel, kicker, headline, standfirst, issue, readTime,
-  issueNav } =
+  issueNav, ogImage } =
   Astro.props;
+
+// hreflang 只在杂志这一块做得起来，原因是结构性的：全站其他板块（首页、195 个国家页）
+// 是中英共用**同一个 URL**、靠 JS 换文案，根本没有第二个地址可以指；杂志是唯一
+// 排出两套真实 URL 的地方（issue-02/ 与 issue-02-en/）。
+// 两个版本并存却不声明对应关系，搜索引擎只能自己猜：可能判成重复内容而压掉一个，
+// 也可能把中文读者送到英文版去。三行标签解决的就是这件事。
+const norm = (p: string) => (p.endsWith('/') ? p : p + '/');
+const SELF = SITE_URL + norm(Astro.url.pathname);
+const ALT = altHref.startsWith('http') ? altHref : SITE_URL + norm(altHref);
+// 页面是中文版时，自己就是中文那一份；否则另一份才是。
+const ZH_URL = lang === 'zh' ? SELF : ALT;
+const EN_URL = lang === 'zh' ? ALT : SELF;
 
 // Google Fonts 用 media="print" + onload 改成非阻塞：境内访问不到 Google CDN 时，
 // 这个请求不会把首屏渲染卡住，字体自动落回站内自托管的 Fraunces 与宋体栈。
@@ -44,7 +62,11 @@ const GF =
   'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Lora:ital,wght@0,400..600;1,400..600&family=Noto+Serif+SC:wght@300;400;600;700&display=swap';
 ---
 
-<Base title={title} description={description}>
+<Base title={title} description={description} ogImage={ogImage}>
+  <link slot="head" rel="alternate" hreflang="zh-CN" href={ZH_URL} />
+  <link slot="head" rel="alternate" hreflang="en" href={EN_URL} />
+  {/* 语言没匹配上时（比如日语、法语读者）落到中文版：本站的默认语言是中文 */}
+  <link slot="head" rel="alternate" hreflang="x-default" href={ZH_URL} />
   <link slot="head" rel="preconnect" href="https://fonts.googleapis.com" />
   <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link slot="head" rel="stylesheet" href={GF} media="print" onload="this.media='all'" />

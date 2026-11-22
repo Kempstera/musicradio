@@ -15,6 +15,9 @@ import Magazine from '../../layouts/Magazine.astro';
 const hero = '/magazine/ethiopia-mulatu.jpg';
 const inline = '/magazine/ethiopia-krar.jpg';
 
+// 固定尺寸的分享图，理由见中文版 issue-02.astro 的同一处注释。
+const ogImage = '/magazine/og-issue-02.jpg';
+
 const ethiopiaHref = '/countries/ethiopia/';
 const wikiUrl = 'https://en.wikipedia.org/wiki/Mulatu_Astatke';
 ---
@@ -30,6 +33,7 @@ const wikiUrl = 'https://en.wikipedia.org/wiki/Mulatu_Astatke';
   headline="The Pentatonic Nights of Addis Ababa: Mulatu Astatke and an Interrupted Jazz Age"
   readTime="8 min read"
   issueNav={{ href: '/magazine/issue-01-en/', label: 'Previous · Vol.01' }}
+  ogImage={ogImage}
 >
   <figure class="mag__hero" style="--hero-pos: 50% 45%">
     <img src={hero} alt="Mulatu Astatke singing into a microphone on stage, his band and congas lit in deep blue behind him" fetchpriority="high" decoding="async" />

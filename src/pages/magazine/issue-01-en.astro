@@ -11,6 +11,10 @@ import Magazine from '../../layouts/Magazine.astro';
 const hero = '/magazine/susana-baca.jpg';
 const inline = '/magazine/cajon-player.jpg';
 
+// 分享图用另裁的横条而不是 hero 本身。hero 是 1100×1650 的竖图，平台按 1.91:1
+// 中线裁切会切掉脸。裁切理由见中文版 issue-01.astro 的同一处注释。
+const ogImage = '/magazine/og-issue-01.jpg';
+
 // No station cards in the article any more — four hand-picked cards took up space and still
 // couldn't prove where they came from. One link to the country page instead: all 52 Peruvian
 // stations, sorted by genre and playability, for the reader to pick from.
@@ -29,6 +33,7 @@ const youtubeUrl = 'https://www.youtube.com/@susanabacaoficial';
   headline="Peru's Hidden Echoes: Susana Baca and the Black Africa Inside a Wooden Box"
   readTime="7 min read"
   issueNav={{ href: '/magazine/issue-02-en/', label: 'Latest · Vol.02' }}
+  ogImage={ogImage}
 >
   <figure class="mag__hero" style="--hero-pos: 50% 10%">
     <img

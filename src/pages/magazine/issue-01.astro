@@ -12,6 +12,11 @@ import Magazine from '../../layouts/Magazine.astro';
 const hero = '/magazine/susana-baca.jpg';
 const inline = '/magazine/cajon-player.jpg';
 
+// 分享图另存一张 1200×630：hero 是 1100×1650 的竖图，直接拿去当 og:image 会被平台
+// 按 1.91:1 中线裁切，只剩三成高度——脸正好被切掉。这里是从同一张原图裁的横条，
+// 焦点压在上三分之一，脸和麦克风都在画面里。
+const ogImage = '/magazine/og-issue-01.jpg';
+
 // 电台不再在正文里列卡片 —— 四个台的卡片既占地方又说不清来历，
 // 直接给一条通往国家页的链接，那边有秘鲁全部 52 个台，可按流派和可播性自己挑。
 const peruHref = '/countries/peru/';
@@ -29,6 +34,7 @@ const youtubeUrl = 'https://www.youtube.com/@susanabacaoficial';
   headline="秘鲁的隐秘回响：Susana Baca 与木箱里的黑非洲"
   readTime="阅读约 7 分钟"
   issueNav={{ href: '/magazine/issue-02/', label: '最新一期 · Vol.02' }}
+  ogImage={ogImage}
 >
   <figure class="mag__hero" style="--hero-pos: 50% 10%">
     <img src={hero} alt="Susana Baca 在舞台上闭着眼演唱，手持麦克风，披着青绿色披肩" fetchpriority="high" decoding="async" />

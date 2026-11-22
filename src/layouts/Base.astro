@@ -16,9 +16,18 @@ interface Props {
    * 而不是被一个生僻的古句品牌名占掉十来个字。
    */
   exactTitle?: boolean;
+  /**
+   * 这一页自己的分享图，站内路径（如 /magazine/ethiopia-mulatu.jpg）。
+   *
+   * 不传时用全站封面 og-cover.png：首页、国家页那种「一个入口」用通用图没问题，
+   * 但文章页不行——一篇文章分享到微信或群里，卡片上是站点通用图而不是文章自己的
+   * 照片，等于把最有效的那一块点击理由让掉了。传了之后也不再写死 1200×630，
+   * 因为各期头图比例不一样，声明错的尺寸会让部分抓取器按错误比例裁掉主体。
+   */
+  ogImage?: string;
 }
 
-const { title, description, noindex = false, exactTitle = false } = Astro.props;
+const { title, description, noindex = false, exactTitle = false, ogImage } = Astro.props;
 // 静态 HTML 一律以**默认语言（简体中文）**预渲染，与 i18n 的 DEFAULT_LANG 保持一致：
 // 首屏不会出现「先英文再跳中文」的闪烁，任何人从任何地方首次进入看到的都是简体中文。
 const fullTitle = exactTitle
@@ -32,7 +41,9 @@ const desc = description || t0.heroDesc;
 let canonPath = Astro.url.pathname;
 if (!/\.[a-z0-9]+$/i.test(canonPath) && !canonPath.endsWith('/')) canonPath += '/';
 const canon = SITE_URL + canonPath;
-const OG_IMAGE = `${SITE_URL}/img/og-cover.png`;
+const OG_IMAGE = ogImage
+  ? (ogImage.startsWith('http') ? ogImage : SITE_URL + ogImage)
+  : `${SITE_URL}/img/og-cover.png`;
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -175,8 +186,14 @@ const jsonLd = {
     <meta property="og:locale" content="zh_CN" />
     <meta property="og:url" content={canon} />
     <meta property="og:image" content={OG_IMAGE} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    {/* 尺寸只在用全站封面时声明：那张确实是 1200×630。文章头图各有各的比例，
+        写死会诱导抓取器按 1.91:1 裁切，容易切掉人脸或乐器。 */}
+    {!ogImage && (
+      <>
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+      </>
+    )}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={OG_IMAGE} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
