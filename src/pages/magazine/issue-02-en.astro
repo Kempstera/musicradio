@@ -1,0 +1,182 @@
+---
+// Continental Tour · Voice of the Month —— Vol. 02 (English)
+//
+// Shares layouts/Magazine.astro with the Chinese page: one layout, so the two
+// versions can never drift apart.
+//
+// Both photos are real Wikimedia Commons shots, self-hosted in public/magazine/:
+// - hero: Mulatu Astatke in Berkeley (2024), TurquoiseGoose / CC BY-SA 4.0
+//   original 4080×3072, cropped to the layout's 2.13:1 and squeezed to 1400×657 / 132KB
+// - inline: a krar player in Wolayta, Rod Waddington / CC BY-SA 2.0
+//   original 5530×4016, cropped to 2.2:1, 1280×581 / 80KB
+// upload.wikimedia.org times out on some networks, and the hero is a first-paint element.
+import Magazine from '../../layouts/Magazine.astro';
+
+const hero = '/magazine/ethiopia-mulatu.jpg';
+const inline = '/magazine/ethiopia-krar.jpg';
+
+const ethiopiaHref = '/countries/ethiopia/';
+const wikiUrl = 'https://en.wikipedia.org/wiki/Mulatu_Astatke';
+---
+
+<Magazine
+  title="The Pentatonic Nights of Addis Ababa: Mulatu Astatke and an Interrupted Jazz Age"
+  description="Beyond the images of the 1984 famine, Ethiopia once had a jazz age of its own. Listen to how Mulatu Astatke folded Latin rhythm, bebop and a highland memory into five notes — and called it Ethio-jazz. Continental Tour · Voice of the Month, Vol. 02."
+  lang="en"
+  altHref="/magazine/issue-02/"
+  altLabel="阅读中文版"
+  kicker="Continental Tour · Voice of the Month"
+  issue="Vol. 02 | Voices of the Horn"
+  headline="The Pentatonic Nights of Addis Ababa: Mulatu Astatke and an Interrupted Jazz Age"
+  readTime="8 min read"
+  issueNav={{ href: '/magazine/issue-01-en/', label: 'Previous · Vol.01' }}
+>
+  <figure class="mag__hero" style="--hero-pos: 50% 45%">
+    <img src={hero} alt="Mulatu Astatke singing into a microphone on stage, his band and congas lit in deep blue behind him" fetchpriority="high" decoding="async" />
+    <figcaption>
+      Mulatu Astatke · Photo <a href="https://commons.wikimedia.org/wiki/File:Mulatu_Astatke_Berkeley_2024.jpg" target="_blank" rel="noopener noreferrer">TurquoiseGoose</a> / <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>
+    </figcaption>
+  </figure>
+
+  <blockquote>
+    <p>When spider webs unite, they can tie up a lion.</p>
+    <cite>Ethiopian proverb</cite>
+  </blockquote>
+
+  <div class="mag__body">
+    <p class="mag__lead">
+      For most of the world, Ethiopia froze in 1984. That year the cameras reached the camps in the
+      north, and television audiences saw cracked earth and hungry children, followed by tens of
+      thousands singing together at Live Aid. Ever since, the country has carried a single word in
+      the international memory: famine.
+    </p>
+    <p>
+      Turn the dial back twenty years, though — to Addis Ababa in 1966 — and you hear something else
+      entirely. A highland city at 2,400 metres, cold at night, the air thin enough to make brass
+      sound unusually bright. On the stages of its bars and clubs there were bands in suits, drummers
+      playing Latin patterns, saxophones playing bebop. And behind the vibraphone, a young man was
+      folding all of it into a different mode.
+    </p>
+
+    <h2>The man who retuned jazz to the shape of Ethiopia — Mulatu Astatke</h2>
+    <p>
+      Mulatu Astatke was born in 1943 in Jimma, in the south-western valleys where coffee comes from.
+      His father wanted him to learn a useful trade and sent him to Wales to study engineering. There
+      he heard jazz for the first time, and put the engineering down.
+    </p>
+    <p>
+      He moved to Berklee in Boston, then a young school, and became one of its first African students.
+    </p>
+    <p>
+      At Berklee he ran into a problem nobody else regarded as a problem. Ethiopian traditional music
+      is pentatonic — five notes to the octave. Jazz harmony is built on twelve, with sevenths, ninths
+      and altered tones packed in densely. Set Western chords under an Ethiopian melody and it always
+      looks like a suit tailored over national dress.
+    </p>
+    <p>
+      His solution was to invert the question: don't fit chords to the melody, treat the Ethiopian
+      modes themselves as the harmony. Highland music has four qenet — tezeta (nostalgia), bati,
+      ambassel, anchi hoye. Change the mode under the same tune and longing turns into warning. Mulatu
+      laid those modes down as a bed of metallic vibraphone colour and let the horns and congas walk
+      over them. That is what came to be called Ethio-jazz.
+    </p>
+    <p>
+      He went home to Addis Ababa in 1966. The eight years that followed were the city's best, and
+      people later gave them a name: Swinging Addis. In 1973 Duke Ellington's tour reached Addis, and
+      Ellington stepped up to play with Mulatu's band — a man who had written jazz into the textbooks,
+      standing on a stage in the African highlands.
+    </p>
+  </div>
+
+  <figure class="mag__figure" style="--fig-pos: 50% 35%">
+    <img src={inline} alt="An Ethiopian musician playing a krar in backlight by a window" loading="lazy" decoding="async" />
+    <figcaption>
+      A krar player in Wolayta · Photo <a href="https://commons.wikimedia.org/wiki/File:Krar_Player,_Wolayta,_Ethiopia_(18547771378).jpg" target="_blank" rel="noopener noreferrer">Rod Waddington</a> / <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 2.0</a>
+    </figcaption>
+  </figure>
+
+  <div class="mag__body">
+    <h2>The instrument: the krar, and homesickness on five strings</h2>
+    <p>
+      To understand that five-note world, look at an instrument: the krar. A lyre with a bowl-shaped
+      wooden body covered in hide, five or six strings, played with a plectrum.
+    </p>
+    <p>
+      It is almost crude in its simplicity, and precisely because of that it shaped how an entire
+      plateau hears. No semitones, no modulations to speak of: melody can only move through timbre,
+      ornament and rhythm. A krar player will worry a single note — rubbing, bending, sliding — and
+      put the whole emotion into the gaps between those five notes.
+    </p>
+    <p>
+      Then there is the masenqo, a single-string bowed fiddle, thin and piercing, like someone crying
+      far away. Singers deliberately let the voice sit against the string until you cannot tell which
+      is the person and which is the instrument.
+    </p>
+    <p>
+      So when Mulatu put a vibraphone on stage, he was doing something quietly radical: using a Western,
+      metal, fixed-pitch instrument to take on the krar's role. Not replacing it — translating its
+      atmosphere into another material.
+    </p>
+
+    <h2>1974: the door closes</h2>
+    <p>
+      1974. Emperor Haile Selassie is overthrown and the Derg takes power. Curfews, censorship,
+      purges. The clubs close, the bands scatter, jazz is reclassified as Western decadence.
+    </p>
+    <p>
+      Musicians left in numbers. Mulatu went to the United States and made a living teaching and
+      arranging for twenty years. In those two decades his records sat in second-hand shops around
+      the world, un-reissued, unmentioned. Swinging Addis became a decade without an archive.
+    </p>
+    <p>
+      The turn came from a Frenchman. In the 1990s Francis Falceto began compiling a series for Buda
+      Musique called Éthiopiques, digging out Ethiopian recordings of the 1960s and 70s one track at
+      a time. Volume four was given over entirely to Mulatu.
+    </p>
+    <p>
+      Then in 2005 Jim Jarmusch used his music in <em>Broken Flowers</em>. That suspended, semitone-free
+      melody, set against Bill Murray's face on a sofa, let filmgoers everywhere hear an Addis Ababa
+      night for the first time. After that came Either/Orchestra and the Heliocentrics, festival
+      stages, tours starting again — including the one in the photograph: 2024, eighty-one years old,
+      still on stage.
+    </p>
+
+    <h2>Straight to the radio</h2>
+  </div>
+
+  <p class="mag__cta">
+    <a class="mag__more" href={ethiopiaHref}>
+      Hear every Ethiopian station
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12h13M12 5l7 7-7 7" />
+      </svg>
+    </a>
+  </p>
+
+  <div class="mag__body">
+    <h2>Further: follow the thread</h2>
+  </div>
+
+  <p class="mag__cta">
+    <a class="mag__more" href={wikiUrl} target="_blank" rel="noopener noreferrer">
+      Wikipedia · Mulatu Astatke (the fullest chronology and session list)
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12h13M12 5l7 7-7 7" />
+      </svg>
+    </a>
+  </p>
+
+  <p class="mag__outro">
+    Now open the Ethiopia page and pick any station. Odds are you will hear contemporary pop with no
+    connection to the sixties at all, and that is fine. But once in a while, on some late-night
+    programme, you will run into a melody hanging in mid-air: five notes, circling, refusing to land.
+    That is the fingerprint this highland country left on the world's music.
+  </p>
+
+  <div class="mag__endmatter">
+    <div class="mag__endmatter-inner">
+      <a class="mag__back" href="/">← Back to home</a>
+      <span class="mag__mark">Continental Tour · Voice of the Month · Vol. 02</span>
+    </div>
+  </div>
+</Magazine>

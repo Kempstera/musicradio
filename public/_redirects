@@ -6,6 +6,9 @@
 
 /magazine/issue-01.html     /magazine/issue-01/     301
 /magazine/issue-01-en.html  /magazine/issue-01-en/  301
+/magazine/issue-02.html     /magazine/issue-02/     301
+/magazine/issue-02-en.html  /magazine/issue-02-en/  301
 
-# 中文版是专栏的主地址，其它语言的访客直接给英文版
-/magazine/                  /magazine/issue-01/     301
+# 中文版是专栏的主地址，其它语言的访客直接给英文版。
+# 注意：这条要跟着「当期」走 —— 新一期上线时改成最新那一期。
+/magazine/                  /magazine/issue-02/     301

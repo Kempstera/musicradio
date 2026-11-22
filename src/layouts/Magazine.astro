@@ -23,9 +23,19 @@ interface Props {
   standfirst?: string;
   issue: string;
   readTime: string;
+  /**
+   * 与本篇相邻的另一期。放在页眉右上角、语言切换旁边。
+   *
+   * 为什么要显式传：新一期上线后 /magazine/ 会被 301 指到最新一期，
+   * 旧一期就只剩直接输入地址这一条路——必须给一个看得见的入口，
+   * 否则读者永远发现不了它还在。翻旧期和看新期都走这一个字段，
+   * 语义由 label 决定，版式不必再分叉。
+   */
+  issueNav?: { href: string; label: string };
 }
 
-const { title, description, lang, altHref, altLabel, kicker, headline, standfirst, issue, readTime } =
+const { title, description, lang, altHref, altLabel, kicker, headline, standfirst, issue, readTime,
+  issueNav } =
   Astro.props;
 
 // Google Fonts 用 media="print" + onload 改成非阻塞：境内访问不到 Google CDN 时，
@@ -128,6 +138,45 @@ const GF =
     .mag__alt:hover {
       color: var(--mag-gold-deep);
       border-color: var(--mag-gold);
+    }
+
+    /* 右上角：期次导航 + 语言切换。两者同级、同一套排印，
+       但期次那一个用金色下划线常驻，让人一眼看到「还有别的期」。 */
+    .mag__topright {
+      flex: none;
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.5rem 1.5rem;
+    }
+    .mag__issue-nav {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mag-ink-3);
+      text-decoration: none;
+      padding-bottom: 2px;
+      border-bottom: 1px solid var(--mag-gold);
+      transition: color var(--dur-2) var(--ease-out), border-color var(--dur-2) var(--ease-out);
+    }
+    .mag__issue-nav:hover {
+      color: var(--mag-gold-deep);
+      border-color: var(--mag-gold-deep);
+    }
+
+    /* 窄屏：右上角多了一个期次链接之后，一行放不下三样东西，
+       系列名会被挤成一条竖着排的字。改成上下两行，右组占满整行。 */
+    @media (max-width: 600px) {
+      .mag__topline {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.55rem;
+      }
+      .mag__topright {
+        width: 100%;
+        justify-content: space-between;
+      }
     }
 
     .mag__kicker {
@@ -504,7 +553,12 @@ const GF =
     <header class="mag__masthead">
       <div class="mag__topline">
         <span class="mag__series">{kicker}</span>
-        <a class="mag__alt" href={altHref} hreflang={lang === 'zh' ? 'en' : 'zh-CN'}>{altLabel}</a>
+        <span class="mag__topright">
+          {issueNav && (
+            <a class="mag__issue-nav" href={issueNav.href}>{issueNav.label}</a>
+          )}
+          <a class="mag__alt" href={altHref} hreflang={lang === 'zh' ? 'en' : 'zh-CN'}>{altLabel}</a>
+        </span>
       </div>
 
       <div class="mag__kicker">{issue}</div>

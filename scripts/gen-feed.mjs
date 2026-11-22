@@ -12,15 +12,29 @@ import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
 const SITE = 'https://musicradio.signupeverywhere.cc';
-const DIST = new URL('../dist/', import.meta.url).pathname;
+// 和 gen-sitemap.mjs 保持一致：尊重 MR_OUTDIR，否则预览产物里缺 feed。
+const DIST = process.env.MR_OUTDIR
+  ? new URL(`file://${process.env.MR_OUTDIR.replace(/\/$/, '')}/`).pathname
+  : new URL('../dist/', import.meta.url).pathname;
 
 // 一期 = 一个文件。中英各一页，算同一期的两个语言版本。
+// 顺序：最新一期放最前面（feed 的第一条就是读者看到的第一条）。
 const ISSUES = [
+  {
+    zh: { title: '亚的斯亚贝巴的五声音阶：Mulatu Astatke 与被中断的爵士年代', path: '/magazine/issue-02/' },
+    en: { title: 'The Pentatonic Nights of Addis Ababa: Mulatu Astatke and an Interrupted Jazz Age', path: '/magazine/issue-02-en/' },
+    vol: 'Vol. 02',
+    source: 'src/pages/magazine/issue-02.astro',
+    // 这一期还没提交进 git，取不到首次提交日期，就用上线当天兜底。
+    // 提交之后 git 里有了记录，会自动改用真实日期。
+    fallbackDate: '2026-11-22',
+  },
   {
     zh: { title: '秘鲁的隐秘回响：Susana Baca 与木箱里的黑非洲', path: '/magazine/issue-01/' },
     en: { title: 'A Hidden Echo of Peru: Susana Baca and the Black Africa in a Wooden Box', path: '/magazine/issue-01-en/' },
     vol: 'Vol. 01',
     source: 'src/pages/magazine/issue-01.astro',
+    fallbackDate: '2026-11-10',
   },
 ];
 
@@ -53,7 +67,7 @@ function esc(s) {
 
 const items = [];
 for (const it of ISSUES) {
-  const date = firstCommit(it.source);
+  const date = firstCommit(it.source, it.fallbackDate);
   for (const lang of ['zh', 'en']) {
     const v = it[lang];
     const url = SITE + v.path;

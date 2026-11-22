@@ -18,7 +18,11 @@ import { readdir, stat, writeFile } from 'node:fs/promises';
 import { join, relative, sep } from 'node:path';
 
 const SITE = 'https://musicradio.signupeverywhere.cc';
-const DIST = new URL('../dist/', import.meta.url).pathname;
+// 跟 astro.config.mjs 用同一个开关：本地预览时产物在 /var/tmp 下，
+// 这里如果写死 ../dist/，sitemap 会写到旧的 dist 里，预览站点上就没有它。
+const DIST = process.env.MR_OUTDIR
+  ? new URL(`file://${process.env.MR_OUTDIR.replace(/\/$/, '')}/`).pathname
+  : new URL('../dist/', import.meta.url).pathname;
 const SKIP = new Set(['visits']);          // 不收录的顶层目录
 const CHECK = process.argv.includes('--check');
 

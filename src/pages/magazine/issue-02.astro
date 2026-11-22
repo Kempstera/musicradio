@@ -1,0 +1,173 @@
+---
+// 大洲巡礼 · 每月之声 —— Vol. 02（中文版）
+//
+// 版面全部由 layouts/Magazine.astro 承担，这里只放文案，和第一期是同一种做法。
+// 第一期往南美走，这一期往非洲之角走：一个是"被压迫者造出的鼓"，
+// 一个是"只有五个音的世界"，放一起看正好是节奏与音阶的两端。
+import Magazine from '../../layouts/Magazine.astro';
+
+// 两张都是 Wikimedia Commons 的实拍，自托管在 public/magazine/：
+// - 主图：Mulatu Astatke 在伯克利（2024），TurquoiseGoose / CC BY-SA 4.0
+//   原图 4080×3072，按版面的 2.13:1 裁掉上沿的空黑，压到 1400×657 / 132KB
+// - 插图：Wolayta 的克拉琴手，Rod Waddington / CC BY-SA 2.0
+//   原图 5530×4016，裁成 2.2:1，1280×581 / 80KB
+// Commons 原站在部分网络下会间歇性超时，首屏主图不能赌它，所以一律自托管。
+const hero = '/magazine/ethiopia-mulatu.jpg';
+const inline = '/magazine/ethiopia-krar.jpg';
+
+const ethiopiaHref = '/countries/ethiopia/';
+const wikiUrl = 'https://en.wikipedia.org/wiki/Mulatu_Astatke';
+---
+
+<Magazine
+  title="亚的斯亚贝巴的五声音阶：Mulatu Astatke 与被中断的爵士年代"
+  description="在 1984 年的饥荒影像之外，埃塞俄比亚还有过一段被遗忘的爵士年代。听 Mulatu Astatke 如何用五个音，把拉丁节奏、比波普和一段高原记忆拧成 Ethio-jazz。大洲巡礼 · 每月之声 Vol. 02。"
+  lang="zh"
+  altHref="/magazine/issue-02-en/"
+  altLabel="Read in English"
+  kicker="大洲巡礼 · 每月之声"
+  issue="Vol. 02 | 非洲之角"
+  headline="亚的斯亚贝巴的五声音阶：Mulatu Astatke 与被中断的爵士年代"
+  readTime="阅读约 8 分钟"
+  issueNav={{ href: '/magazine/issue-01/', label: '上一期 · Vol.01' }}
+>
+  <figure class="mag__hero" style="--hero-pos: 50% 45%">
+    <img src={hero} alt="Mulatu Astatke 在舞台上手持麦克风演唱，身后是蓝色灯光下的乐队与康加鼓" fetchpriority="high" decoding="async" />
+    <figcaption>
+      Mulatu Astatke · 摄影 <a href="https://commons.wikimedia.org/wiki/File:Mulatu_Astatke_Berkeley_2024.jpg" target="_blank" rel="noopener noreferrer">TurquoiseGoose</a> / <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>
+    </figcaption>
+  </figure>
+
+  <blockquote>
+    <p>当蜘蛛网聚在一起，也能捆住一头狮子。</p>
+    <cite>埃塞俄比亚谚语</cite>
+  </blockquote>
+
+  <div class="mag__body">
+    <p class="mag__lead">
+      大多数人对埃塞俄比亚的印象，定格在 1984 年。那一年，摄像机的镜头对准北部的难民营，
+      全世界在电视里看见了干裂的土地和饥饿的孩子，随后是 Live Aid 上几万人一起唱的歌。
+      这个国家从此在国际记忆里只剩下一个词：饥荒。
+    </p>
+    <p>
+      但如果把调频旋钮往回拨二十年，拨到 1966 年的亚的斯亚贝巴，你会听到完全不同的东西。
+      那是一座海拔两千四百米的高原城市，夜里很凉，空气稀薄得让铜管乐器听起来格外亮。
+      酒吧和俱乐部的舞台上有穿西装的乐队，鼓手打着拉丁节奏，萨克斯吹着比波普——
+      而坐在颤音琴后面的那个年轻人，把这一切拧进了另一种调式里。
+    </p>
+
+    <h2>人物：把爵士乐调成埃塞俄比亚的形状 —— Mulatu Astatke</h2>
+    <p>
+      Mulatu Astatke 1943 年出生在西南部的 Jimma，那片山谷是咖啡的原产地。
+      父亲希望他学一门「有用」的手艺，把他送去威尔士读工程。他在那儿第一次听到爵士乐，
+      然后就把工程放下了。
+    </p>
+    <p>
+      他转去波士顿的伯克利音乐学院。那时这所学校才刚成立不久，他是那儿最早的非洲学生之一。
+    </p>
+    <p>
+      在伯克利，他遇到一个别人不会当成问题的问题。埃塞俄比亚的传统音乐是五声音阶的——
+      一个八度里只有五个音；而爵士乐的和声建立在十二个音上，七和弦、九和弦、变化音，
+      密密地铺满。用西方的和声去配埃塞的旋律，怎么配都像给一件民族服装套上西装。
+    </p>
+    <p>
+      他的解法是掉个头：不拿和声去套旋律，而是把埃塞俄比亚的调式本身当成和声。
+      高原上的传统音乐有四个 qenet（调式）——tezeta（乡愁）、bati、ambassel、anchi hoye。
+      同一段旋律换个调式，情绪就从思念变成警告。Mulatu 用颤音琴的金属音色把这些调式铺成底色，
+      再让铜管和康加鼓在上面走。这就是后来被叫作 Ethio-jazz 的东西。
+    </p>
+    <p>
+      1966 年他回到亚的斯亚贝巴。接下来的八年，是这座城市最好的时候，
+      人们后来给它起了个名字：Swinging Addis。1973 年，艾灵顿公爵随巡演来到亚的斯亚贝巴，
+      上台和 Mulatu 的乐队一起演奏——一个把爵士乐写进教科书的人，
+      站在了非洲高原的舞台上。
+    </p>
+  </div>
+
+  <figure class="mag__figure" style="--fig-pos: 50% 35%">
+    <img src={inline} alt="一位埃塞俄比亚乐手在窗边的逆光中弹奏克拉琴（krar）" loading="lazy" decoding="async" />
+    <figcaption>
+      克拉琴手，Wolayta · 摄影 <a href="https://commons.wikimedia.org/wiki/File:Krar_Player,_Wolayta,_Ethiopia_(18547771378).jpg" target="_blank" rel="noopener noreferrer">Rod Waddington</a> / <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 2.0</a>
+    </figcaption>
+  </figure>
+
+  <div class="mag__body">
+    <h2>乐器：Krar —— 五根弦上的乡愁</h2>
+    <p>
+      要理解那个「只有五个音」的世界，最好的办法是看一件乐器：Krar（克拉）。
+      它是一把里拉琴，木制的碗形共鸣箱蒙着皮，五到六根弦，用拨片弹。
+    </p>
+    <p>
+      它简单到近乎简陋。但正因为简单，它决定了整片高原的听觉习惯：没有半音，没有复杂的转调，
+      旋律只能靠音色、装饰和节奏来变化。一个 krar 手会在同一个音上反复揉、颤、滑，
+      把情绪全放进那五个音之间的缝隙里。
+    </p>
+    <p>
+      另一件是 masenqo，单弦的弓弦琴，声音尖细，像有人在很远的地方哭。
+      歌手用它伴唱时会刻意让嗓音和琴声贴在一起，分不清哪个是人、哪个是弦。
+    </p>
+    <p>
+      所以当 Mulatu 把颤音琴搬上舞台，他做的事其实很激进：用一件西方的、金属的、
+      有固定音高的乐器，去承担 krar 的角色。不是替代它，而是把它的「氛围」翻译成了另一种材质。
+    </p>
+
+    <h2>历史：1974 年，那扇门关上了</h2>
+    <p>
+      1974 年，海尔·塞拉西皇帝被推翻，军政府上台。宵禁、审查、清洗。俱乐部关了，乐队散了，
+      爵士乐被归为「西方的堕落」。
+    </p>
+    <p>
+      一大批音乐家离开。Mulatu 去了美国，靠教学和编曲为生，一待就是二十年。
+      那二十年里，他录过的东西散落在世界各地的二手唱片行，没人再版，也没人提起。
+      Swinging Addis 成了一段没有档案的年代。
+    </p>
+    <p>
+      转机来自一个法国人。1990 年代，Francis Falceto 开始为 Buda Musique 编一套叫
+      Éthiopiques 的合辑，把 1960—70 年代埃塞俄比亚的录音一首一首挖出来重发。
+      第四辑整张给了 Mulatu。
+    </p>
+    <p>
+      然后是 2005 年，Jim Jarmusch 的电影《破碎之花》用了他的曲子。那种「半音缺席、
+      悬在半空」的旋律，配上比尔·默瑞坐在沙发上的脸，让全世界的影迷第一次听见了
+      亚的斯亚贝巴的夜晚。此后是 Either/Orchestra、Heliocentrics，是音乐节，是重新开始的巡演——
+      包括照片里的这一场：2024 年，他八十一岁，还站在台上。
+    </p>
+
+    <h2>直达电台</h2>
+  </div>
+
+  <p class="mag__cta">
+    <a class="mag__more" href={ethiopiaHref}>
+      去埃塞俄比亚页听全部电台
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12h13M12 5l7 7-7 7" />
+      </svg>
+    </a>
+  </p>
+
+  <div class="mag__body">
+    <h2>延伸：顺着他往下挖</h2>
+  </div>
+
+  <p class="mag__cta">
+    <a class="mag__more" href={wikiUrl} target="_blank" rel="noopener noreferrer">
+      Wikipedia · Mulatu Astatke（英文，年表与合作名单最全）
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12h13M12 5l7 7-7 7" />
+      </svg>
+    </a>
+  </p>
+
+  <p class="mag__outro">
+    现在去埃塞俄比亚页随便点开一个台。你多半会听到跟六十年代毫无关系的当代流行，那也没关系。
+    但偶尔，在某个深夜节目里，你会突然撞见一段悬在半空的旋律：五个音，转来转去，就是不肯落地。
+    那就是这个高原国家留在世界音乐里的指纹。
+  </p>
+
+  <div class="mag__endmatter">
+    <div class="mag__endmatter-inner">
+      <a class="mag__back" href="/">← 回到首页</a>
+      <span class="mag__mark">大洲巡礼 · 每月之声 · Vol. 02</span>
+    </div>
+  </div>
+</Magazine>

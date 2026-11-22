@@ -5,27 +5,28 @@
 // 好处是① 切换语言时立刻跟着变，不需要任何事件② 脚本挂掉也不会变成空白。
 // 非中文一律给英文版（专栏目前只有中英两版），所以判据写成「不是 zh 就是英文」。
 //
-// 主图是 Susana Baca 的现场照（Wikimedia Commons，CC BY-SA 3.0，署名压在卡片右上角）。
-// 自托管在 public/magazine/：Commons 原站在部分网络下会间歇性超时，首屏主图不能赌它。
-// 竖构图切 16:9 必须自己指定取景点 —— 默认居中会正好切在鼻子下方。
-const hero = '/magazine/susana-baca.jpg';
+// 主图是 Mulatu Astatke 2024 年在伯克利的现场照（Wikimedia Commons，CC BY-SA 4.0，
+// 署名压在卡片右上角）。自托管在 public/magazine/：Commons 原站在部分网络下会间歇性超时，
+// 首屏主图不能赌它。宽构图按 2.13:1 裁过，--hero-pos 再把重心抬到人物身上。
+const hero = '/magazine/ethiopia-mulatu.jpg';
 ---
 
 <section class="spot" aria-label="Featured spotlight">
   <div class="spot__inner">
-    <a class="spot__card spot__card--zh" href="/magazine/issue-01/">
+    <a class="spot__card spot__card--zh" href="/magazine/issue-02/">
       <img class="spot__img" src={hero} alt="" loading="lazy" decoding="async" />
       <span class="spot__veil" aria-hidden="true"></span>
-      <span class="spot__credit">Susana Baca · Monocityjim / CC BY-SA 3.0</span>
+      <span class="spot__credit">Mulatu Astatke · TurquoiseGoose / CC BY-SA 4.0</span>
       <span class="spot__content">
         <span class="spot__tag">
-          <span class="spot__badge">新栏目</span>
+          <span class="spot__badge">最新一期</span>
           <span class="spot__series">音乐文化双周刊</span>
-          <span class="spot__vol">Vol. 01 | 南美洲之声</span>
+          <span class="spot__vol">Vol. 02 | 非洲之角</span>
         </span>
-        <span class="spot__title">秘鲁的隐秘回响：Susana Baca 与木箱鼓</span>
+        <span class="spot__title">亚的斯亚贝巴的五声音阶：Mulatu Astatke 与 Ethio-jazz</span>
         <span class="spot__desc">
-          跨越安第斯山脉，听这位国宝级歌者如何用沙哑的嗓音，唤醒被遗忘的黑人历史。
+          在 1984 年的饥荒影像之外，听这位八十一岁的音乐家如何用五个音，
+          把拉丁节奏与比波普拧成一段高原记忆。
         </span>
         <span class="spot__foot">
           <span class="spot__cta">
@@ -39,20 +40,20 @@ const hero = '/magazine/susana-baca.jpg';
       </span>
     </a>
 
-    <a class="spot__card spot__card--en" href="/magazine/issue-01-en/">
+    <a class="spot__card spot__card--en" href="/magazine/issue-02-en/">
       <img class="spot__img" src={hero} alt="" loading="lazy" decoding="async" />
       <span class="spot__veil" aria-hidden="true"></span>
-      <span class="spot__credit">Susana Baca · Monocityjim / CC BY-SA 3.0</span>
+      <span class="spot__credit">Mulatu Astatke · TurquoiseGoose / CC BY-SA 4.0</span>
       <span class="spot__content">
         <span class="spot__tag">
-          <span class="spot__badge">New series</span>
+          <span class="spot__badge">Latest issue</span>
           <span class="spot__series">A Music-Culture Fortnightly</span>
-          <span class="spot__vol">Vol. 01 | Voices of South America</span>
+          <span class="spot__vol">Vol. 02 | Voices of the Horn</span>
         </span>
-        <span class="spot__title">Peru's Hidden Echoes: Susana Baca &amp; The Cajón</span>
+        <span class="spot__title">The Pentatonic Nights of Addis Ababa: Mulatu &amp; Ethio-jazz</span>
         <span class="spot__desc">
-          Beyond the Andes, listen to how this national treasure uses her soulful voice to awaken a
-          forgotten Afro-Peruvian history.
+          Beyond the images of 1984, listen to how an eighty-one-year-old musician folded Latin
+          rhythm and bebop into five notes.
         </span>
         <span class="spot__foot">
           <span class="spot__cta">
@@ -112,8 +113,9 @@ const hero = '/magazine/susana-baca.jpg';
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* 竖构图人像横切：默认居中会切在鼻梁下方。20% 处正好把脸放在上三分之一 */
-    object-position: 50% 20%;
+    /* 这一期的主图是横构图的舞台照（已是 2.13:1），居中取景即可；
+       之前 Vol.01 是竖构图人像，必须抬到 20% 才不会切在鼻梁下方。 */
+    object-position: 50% 50%;
     /* 图加载不出来时，这块暖褐渐变自己撑住版面 */
     background: linear-gradient(150deg, #4a3c2c, #1b1712 70%);
     transition: transform 900ms var(--ease-out);
